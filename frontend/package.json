@@ -5,7 +5,10 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
-    "start": "next start",
+    "start": "next start -p 3000",
+    "pm2:start": "pm2 start npm --name 'frontend' -- start",
+    "pm2:stop": "pm2 stop frontend",
+    "pm2:restart": "pm2 restart frontend",
     "lint": "eslint"
   },
   "dependencies": {

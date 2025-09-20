@@ -1,0 +1,44 @@
+{
+    "slug": "game",
+    "name": "Oyun Geliştirme Takımı",
+    "description": "Unity, Unreal Engine ve indie game development odaklı takımımız.",
+    "icon": "faGamepad",
+    "leaderMessage": {
+      "title": "Takım Lideri Mesajı",
+      "content": "Oyun geliştirme takımı olarak Unity ve Unreal Engine kullanarak 2D ve 3D oyunlar geliştiriyoruz. Game design, programming ve art konularında multidisipliner bir yaklaşım benimsiyoruz. Takımımızda oyun geliştirme tutkusu olan herkesi bekliyoruz. Hem hobi hem de profesyonel projeler üzerinde çalışarak deneyim kazanıyoruz.",
+      "author": "Turan Akgün",
+      "role": "Oyun Geliştirme Takımı Lideri"
+    },
+    "members": [
+      {
+        "name": "Turan Akgün",
+        "role": "Takım Lideri",
+        "image": "/profile/teams/game/turan_akgun.jpeg",
+        "department": "Yazılım Mühendisliği",
+        "github": "https://github.com/turanak111",
+        "linkedin": "https://www.linkedin.com/in/turan-akgun/",
+        "skills": []
+      },
+      {
+        "name": "Sefa Selim Tura",
+        "role": "Yardımcı Lider",
+        "image": "/profile/teams/game/sefa_selim_tura.jpeg",
+        "department": "Yazılım Mühendisliği",
+        "github": "https://github.com/SefaSelim",
+        "linkedin": "https://www.linkedin.com/in/sefaselimtura/",
+        "skills": []
+      }
+    ],
+    "achievements": [],
+    "competitions": [],
+    "projects": [
+      {
+        "title": "Bullseye",
+        "description": "Üniversitemizin Hoş Geldiniz Haftası kapsamında, yeni öğrencilerin ilgisini çekmek için tasarlanmış küçük bir hedef atış oyunu geliştirdik.",
+        "technologies": ["Unity", "C#"],
+        "status": "Tamamlandı",
+        "github": "",
+        "demo": ""
+      }
+    ]
+  }

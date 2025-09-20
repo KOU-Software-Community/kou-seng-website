@@ -1,0 +1,84 @@
+{
+  "id": 1,
+  "submissionType": "general",
+  "slug": "general",
+  "title": "Genel Üyelik Başvurusu",
+  "description": "Yazılım Kulübü'ne üyelik için genel başvuru formu. Üye olmak için lütfen aşağıdaki bilgileri eksiksiz doldurunuz.",
+  "isOpen": true,
+  "deadline": "Belirtilmedi",
+  "type": "general",
+  "icon": "faUsers",
+  "fields": [
+    {
+      "id": "name",
+      "label": "Ad",
+      "type": "text",
+      "placeholder": "Adınızı giriniz",
+      "required": true
+    },
+    {
+      "id": "surname",
+      "label": "Soyad",
+      "type": "text",
+      "placeholder": "Soyadınızı giriniz",
+      "required": true
+    },
+    {
+      "id": "studentId",
+      "label": "Öğrenci Numarası",
+      "type": "text",
+      "placeholder": "Öğrenci numaranızı giriniz",
+      "required": true
+    },
+    {
+      "id": "email",
+      "label": "E-posta",
+      "type": "email",
+      "placeholder": "E-posta adresinizi giriniz",
+      "required": true
+    },
+    {
+      "id": "phone",
+      "label": "Telefon Numarası",
+      "type": "tel",
+      "placeholder": "Telefon numaranızı giriniz",
+      "required": true
+    },
+    {
+      "id": "faculty",
+      "label": "Fakülte",
+      "type": "text",
+      "placeholder": "Fakültenizi giriniz",
+      "required": true
+    },
+    {
+      "id": "department",
+      "label": "Bölüm",
+      "type": "text",
+      "placeholder": "Bölümünüzü giriniz",
+      "required": true
+    },
+    {
+      "id": "grade",
+      "label": "Sınıf",
+      "type": "select",
+      "required": true,
+      "options": [
+        { "value": "", "label": "Seçiniz" },
+        { "value": "1", "label": "1. Sınıf" },
+        { "value": "2", "label": "2. Sınıf" },
+        { "value": "3", "label": "3. Sınıf" },
+        { "value": "4", "label": "4. Sınıf" },
+        { "value": "master", "label": "Yüksek Lisans" },
+        { "value": "phd", "label": "Doktora" }
+      ]
+    },
+    {
+      "id": "motivation",
+      "label": "Neden Yazılım Kulübüne katılmak istiyorsunuz?",
+      "type": "textarea",
+      "placeholder": "Motivasyonunuzu kısaca açıklayınız",
+      "required": true
+    }
+  ]
+}

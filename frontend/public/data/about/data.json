@@ -1,0 +1,170 @@
+{
+  "pageContent": {
+    "missionVision": {
+      "title": "Misyon & Vizyon",
+      "mission": {
+        "title": "Misyonumuz",
+        "description": "Kocaeli Üniversitesi Yazılım Kulübü’nün misyonu, öğrencilerin yazılım ve teknoloji alanındaki bilgi birikimlerini artırarak uygulamalı projeler geliştirmelerine imkân tanımaktır. Kulübümüz, düzenlenen eğitimler, etkinlikler ve sosyal faaliyetlerle üyelerin hem teknik hem de kişisel gelişimlerine katkı sağlamayı amaçlar. Bunun yanı sıra iletişim, ekip çalışması ve problem çözme gibi becerilerin güçlendirilmesi de misyonumuzun önemli bir parçasını oluşturmaktadır."
+      },
+      "vision": {
+        "title": "Vizyonumuz",
+        "description": "Kocaeli Üniversitesi Yazılım Kulübü’nün vizyonu, öğrencilerin teknoloji dünyasındaki yenilikleri takip edebileceği, yaratıcı projeler geliştirebileceği ve sürekli öğrenme fırsatları bulabileceği bir ortam sunmaktır. Kulübümüz, güçlü bir topluluk kültürü oluşturarak öğrencilerin hem akademik hem de profesyonel hayatlarına katkı sağlamayı ve yazılım alanında üretken, paylaşımcı ve yenilikçi bir öğrenci topluluğu olmayı hedeflemektedir."
+      }
+    },
+    "boardMembers": {
+      "title": "Yönetim Kurulu",
+      "description": "Kulübümüzün yönetimini üstlenen, etkinliklerimizi planlayan ve vizyonumuzu hayata geçirmek için çalışan yönetim ekibimiz."
+    },
+    "timeline": {
+      "title": "Kulüp Tarihçemiz",
+      "description": "Kurulduğumuz günden bugüne kadar olan yolculuğumuzdaki önemli kilometre taşları."
+    },
+    "focusAreas": {
+      "title": "Çalışma Alanlarımız",
+      "description": "Kulüp üyelerimizin odaklandığı ve etkinlikler düzenlediğimiz çalışma alanları."
+    },
+    "cta": {
+      "title": "Bize Katılın",
+      "description": "Yazılım Kulübü’nde sadece kod yazmıyoruz; fikir üretiyor, paylaşıyor ve eğleniyoruz. Sen de bu topluluğun bir parçası ol.",
+      "buttonText": "Başvuru Yap",
+      "href": "/apply/general"
+    }
+  },
+  "boardMembers": [
+    {
+      "name": "Eyüp Gürer",
+      "role": "Başkan",
+      "image": "/profile/boardMembers/eyup_gurer.jpeg",
+      "department": "Yazılım Mühendisliği",
+      "github": "https://github.com/eyupgurer",
+      "linkedin": "https://www.linkedin.com/in/eyupgurer/"
+    },
+    {
+      "name": "Zeynep Turgut",
+      "role": "Başkan Yardımcısı",
+      "image": "/profile/boardMembers/zeynep_turgut.jpeg",
+      "department": "Yazılım Mühendisliği",
+      "github": "https://github.com/ZEYNEP-TURGUT",
+      "linkedin": "https://www.linkedin.com/in/zeynep-turgut-3961aa297/"
+    },
+    {
+      "name": "Serhat Can Bakır",
+      "role": "Teknik Ekip Koordinatörü",
+      "image": "/profile/boardMembers/serhat_can_bakır.jpeg",
+      "department": "Yazılım Mühendisliği",
+      "github": "https://github.com/SerhatCanBakir",
+      "linkedin": "https://www.linkedin.com/in/serhat-can-bak%C4%B1r-53850125a/"
+    },
+    {
+      "name": "İsmail Yılmaz",
+      "role": "Teknik Ekip Koordinatörü",
+      "image": "/profile/boardMembers/ismail_yilmaz.jpeg",
+      "department": "Yazılım Mühendisliği",
+      "github": "https://github.com/ismailyilmazz",
+      "linkedin": "https://www.linkedin.com/in/ismail-y%C4%B1lmaz-62b662297/"
+    },
+    {
+      "name": "Sena Nur Dülger",
+      "role": "Sosyal Medya Ekip Koordinatörü",
+      "image": "/profile/boardMembers/sena_nur_dulger.jpeg",
+      "department": "Yazılım Mühendisliği",
+      "github": "https://github.com/senadulger",
+      "linkedin": "https://www.linkedin.com/in/senadulger/"
+    },
+    {
+      "name": "Meryem Güldüren",
+      "role": "Sponsorluk Ekip Koordinatörü",
+      "image": "/profile/boardMembers/meryem_gulduren.jpeg",
+      "department": "Yazılım Mühendisliği",
+      "github": "https://github.com/meryemgulduren",
+      "linkedin": "https://www.linkedin.com/in/meryem-gulduren/"
+    },
+    {
+      "name": "Duygu Dilara Zent",
+      "role": "Organizasyon Ekip Koordinatörü",
+      "image": "/profile/boardMembers/duygu_dilara_zent.jpeg",
+      "department": "Yazılım Mühendisliği",
+      "github": "https://github.com/duyguuzent",
+      "linkedin": "https://www.linkedin.com/in/duygu-dilara-zent-a21003297/"
+    }
+  ],
+  "timelineEvents": [
+    {
+      "year": "2025 - Nisan",
+      "title": "Solana #2: Blockchain 102 Eğitimi",
+      "description": "Solana Allstars Türkiye ve KOÜ Bilgisayar Kulübü ortaklığıyla gerçekleşen bu eğitimde blockchain uygulamaları üzerine ileri seviye bilgiler paylaşılarak teknik detaylara odaklanıldı."
+    },
+    {
+      "year": "2025 - Mart",
+      "title": "Solana #1: Blockchain 101 Eğitimi",
+      "description": "Solana Allstars Türkiye iş birliğiyle düzenlenen bu etkinlikte blockchain teknolojisinin temelleri ve Solana ekosistemine giriş konuları işlendi."
+    },
+    {
+      "year": "2025 - Şubat",
+      "title": "Teknik Gezi: Bilişim Vadisi Gezisi",
+      "description": "Türkiye’nin teknoloji üssü Bilişim Vadisi’nde öğrenciler girişimcilik ve AR-GE faaliyetlerini yakından inceledi."
+    },
+    {
+      "year": "2024 - Kasım",
+      "title": "Dijital Uzay ve Gelecek:  Serkan Seyhan (Adenyum Teknoloji A.Ş.)",
+      "description": "Dijital dönüşüm ve geleceğin teknolojilerine dair vizyoner bir seminer gerçekleştirdik."
+    },
+    {
+      "year": "2023 - Aralık",
+      "title": "KOÜ Teknopark’ta Ön Kuluçka Girişimcilik Eğitimi",
+      "description": "Girişimcilik ekosistemine dair temel bilgiler paylaşılarak öğrencilere yeni ufuklar açıldı."
+    },
+    {
+      "year": "2023 - Temmuz",
+      "title": "“Azure’da Nasıl Sanal Makine Oluşturulur?” Eğitimi",
+      "description": "Katılımcılar bulut bilişim altyapısında sanal makinelerin kurulumu ve yönetimini deneyimledi."
+    },
+    {
+      "year": "2023 - Mart",
+      "title": "Git & Github 101 Eğitimi",
+      "description": "KOÜ Yapay Zeka Kulübü ortaklığıyla düzenlediğimiz bu etkinlikte üyelerimiz versiyon kontrol sistemlerini öğrenerek proje geliştirme kültürü kazandı."
+    },
+    {
+      "year": "2022 - Aralık",
+      "title": "Yazılım Kulübü Çalışma Kampı: Final Haftası",
+      "description": "Final sınavları öncesinde bir araya gelerek ikinci çalışma etkinliğimizi gerçekleştirdik."
+    },
+    {
+      "year": "2022 - Aralık",
+      "title": "Teknik Gezi: OBSS Şirket Gezisi",
+      "description": "Sektörün öncü şirketlerinden OBSS’yi ziyaret ederek profesyonel iş süreçlerini yerinde gözlemledik."
+    },
+    {
+      "year": "2022 - Aralık",
+      "title": "DevDays #2: İlke Uygun (IOS Engineer , VERISHOP)",
+      "description": "Mobil uygulama geliştirme ve yurtdışında yazılım kariyeri üzerine değerli bilgiler edindik."
+    },
+    {
+      "year": "2022 - Kasım",
+      "title": "DevDays #1: Yiğit Kemal Ağaç (UI/ UX Designer, Akbank)",
+      "description": "UI/UX dünyasına dair ilham verici bir deneyim ve kariyer sohbeti gerçekleştirdik."
+    },
+    {
+      "year": "2022 - Kasım",
+      "title": "Yazılım Kulübü Çalışma Kampı: Vize Haftası",
+      "description": "Öğrencilerin sınav döneminde birlikte çalışıp motivasyonlarını artırdığı ilk ders çalışma etkinliğimiz."
+    }
+  ],
+  "focusAreas": [
+    {
+      "title": "Web Geliştirme",
+      "description": "Modern teknolojilerle frontend ve backend geliştirme yapıyor, kullanıcı dostu ve responsive tasarımlar oluşturuyoruz. HTML, CSS, JavaScript gibi temel teknolojilerin yanında, React ve Node.js gibi popüler frameworklerle pratik yapma imkânı sunuyoruz. Amacımız kullanıcıya değer katan estetik ve işlevsel web deneyimleri geliştirmek.",
+      "icon": "faLaptopCode"
+    },
+    {
+      "title": "Yapay Zeka",
+      "description": "Makine öğrenmesi, derin öğrenme ve veri bilimi alanlarında hem teorik hem de uygulamalı çalışmalar yapıyoruz. Python, TensorFlow ve PyTorch gibi güçlü araçlarla modeller geliştiriyor, gerçek hayat problemlerine çözümler üretiyoruz. Yapay zekâyı sadece bir akademik alan değil, geleceğe yön veren bir alan olarak görüyoruz.",
+      "icon": "faRobot"
+    },
+    {
+      "title": "Oyun Geliştirme",
+      "description": "Unity ve Unreal Engine gibi güçlü oyun motorlarını kullanarak 2D ve 3D oyunlar tasarlıyor ve geliştiriyoruz. Oyun mekaniği, karakter modelleme ve tasarım gibi alanlarda hem teknik hem de yaratıcı yönlerimizi ortaya koyuyoruz. Hedefimiz yalnızca oyun üretmek değil, aynı zamanda yaratıcılığımızı ortaya koyarak özgün projeler geliştirmektir.",
+      "icon": "faGamepad"
+    }
+  ]
+}

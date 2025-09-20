@@ -1,0 +1,47 @@
+{
+  "pageContent": {
+    "title": "İletişim",
+    "description": "Kulübümüz ile ilgili sorularınız veya işbirliği teklifleriniz için bizimle iletişime geçebilirsiniz. Formun doldurulmasının ardından en kısa sürede geri dönüş yapacağız."
+  },
+  "contactInfo": {
+    "address": {
+      "title": "Adres",
+      "content": "Kocaeli Üniversitesi\nMühendislik Fakültesi\n41380 İzmit/Kocaeli"
+    },
+    "email": {
+      "title": "E-posta",
+      "content": "info@mail.kouseng.com"
+    },
+    "socialMedia": {
+      "title": "Sosyal Medya",
+      "description": "Sosyal medya hesaplarımızı takip ederek güncel etkinlik ve duyurularımızdan haberdar olabilirsiniz.",
+      "links": [
+        {
+          "platform": "GitHub",
+          "url": "https://github.com/KOU-Software-Community",
+          "ariaLabel": "GitHub"
+        },
+        {
+          "platform": "LinkedIn",
+          "url": "https://www.linkedin.com/company/yazılım-kulübü/",
+          "ariaLabel": "LinkedIn"
+        },
+        {
+          "platform": "Tiktok",
+          "url": "https://www.tiktok.com/@kou_seng",
+          "ariaLabel": "Tiktok"
+        },
+        {
+          "platform": "Instagram",
+          "url": "https://www.instagram.com/kou.seng",
+          "ariaLabel": "Instagram"
+        }
+      ]
+    }
+  },
+  "map": {
+    "title": "Kocaeli Üniversitesi Mühendislik Fakültesi Haritası",
+    "description": "Kulübümüzün bulunduğu konum aşağıdaki haritada işaretlenmiştir.",
+    "embedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3019.3094032666373!2d29.916646!3d40.823031!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cb5badf629fe45%3A0xc81fa849234e8755!2sKocaeli%20%C3%9Cniversitesi%20M%C3%BChendislik%20Fak%C3%BCltesi!5e0!3m2!1str!2str!4v1694547256269!5m2!1str!2str" 
+  }
+}

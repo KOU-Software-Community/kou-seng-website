@@ -1,0 +1,104 @@
+{
+  "id": 3,
+  "submissionType": "technical",
+  "slug": "ai",
+  "title": "Yapay Zeka Takımı Başvurusu",
+  "description": "Yapay zeka projelerinde yer almak için teknik başvuru formu. Takıma başvurmak için lütfen aşağıdaki bilgileri eksiksiz doldurunuz.",
+  "isOpen": true,
+  "deadline": "Belirtilmedi",
+  "icon": "faRobot",
+  "fields": [
+    {
+      "id": "name",
+      "label": "Ad",
+      "type": "text",
+      "placeholder": "Adınızı giriniz",
+      "required": true
+    },
+    {
+      "id": "surname",
+      "label": "Soyad",
+      "type": "text",
+      "placeholder": "Soyadınızı giriniz",
+      "required": true
+    },
+    {
+      "id": "studentId",
+      "label": "Öğrenci Numarası",
+      "type": "text",
+      "placeholder": "Öğrenci numaranızı giriniz",
+      "required": true
+    },
+    {
+      "id": "email",
+      "label": "E-posta",
+      "type": "email",
+      "placeholder": "E-posta adresinizi giriniz",
+      "required": true
+    },
+    {
+      "id": "phone",
+      "label": "Telefon Numarası",
+      "type": "tel",
+      "placeholder": "Telefon numaranızı giriniz",
+      "required": true
+    },
+    {
+      "id": "faculty",
+      "label": "Fakülte",
+      "type": "text",
+      "placeholder": "Fakültenizi giriniz",
+      "required": true
+    },
+    {
+      "id": "department",
+      "label": "Bölüm",
+      "type": "text",
+      "placeholder": "Bölümünüzü giriniz",
+      "required": true
+    },
+    {
+      "id": "grade",
+      "label": "Sınıf",
+      "type": "select",
+      "required": true,
+      "options": [
+        { "value": "", "label": "Seçiniz" },
+        { "value": "1", "label": "1. Sınıf" },
+        { "value": "2", "label": "2. Sınıf" },
+        { "value": "3", "label": "3. Sınıf" },
+        { "value": "4", "label": "4. Sınıf" },
+        { "value": "master", "label": "Yüksek Lisans" },
+        { "value": "phd", "label": "Doktora" }
+      ]
+    },
+    {
+      "id": "github",
+      "label": "GitHub URL",
+      "type": "url",
+      "placeholder": "GitHub profilinizin URL'ini giriniz",
+      "required": true
+    },
+    {
+      "id": "linkedin",
+      "label": "Linkedin URL",
+      "type": "url",
+      "placeholder": "Linkedin profilinizin URL'ini giriniz",
+      "required": true
+    },
+    {
+      "id": "experience",
+      "label": "Geçmiş Deneyiminiz",
+      "type": "textarea",
+      "placeholder": "Daha önce çalıştığınız projeler, kullandığınız teknolojiler ve deneyim süreniz hakkında bilgi veriniz",
+      "required": true
+    },
+    {
+      "id": "motivation",
+      "label": "Neden Yapay Zeka Takımına katılmak istiyorsunuz?",
+      "type": "textarea",
+      "placeholder": "Motivasyonunuzu kısaca açıklayınız",
+      "required": true
+    }
+  ]
+}

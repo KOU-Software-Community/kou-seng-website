@@ -1,0 +1,164 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  --radius: 0.625rem;
+  /* Ana renkler */
+  --koyu-lacivert: #001B4A; /* En koyu */
+  --lacivert: #014576;      /* Orta koyu */
+  --turkuaz: #0389BC;       /* Vurgu */
+  --acik-mavi: #93CBDC;     /* Açık vurgu */
+  --en-acik: #D2E7EC;       /* En açık */
+
+  /* Tema değişkenleri */
+  --background: var(--en-acik);
+  --foreground: var(--koyu-lacivert);
+  --card: white;
+  --card-foreground: var(--koyu-lacivert);
+  --popover: white;
+  --popover-foreground: var(--koyu-lacivert);
+  --primary: var(--lacivert);
+  --primary-foreground: white;
+  --secondary: var(--turkuaz);
+  --secondary-foreground: white;
+  --muted: var(--acik-mavi);
+  --muted-foreground: var(--lacivert);
+  --accent: var(--turkuaz);
+  --accent-foreground: white;
+  --destructive: #e11d48;
+  --border: color-mix(in srgb, var(--lacivert) 20%, transparent);
+  --input: color-mix(in srgb, var(--lacivert) 20%, transparent);
+  --ring: var(--turkuaz);
+  --chart-1: var(--koyu-lacivert);
+  --chart-2: var(--lacivert);
+  --chart-3: var(--turkuaz);
+  --chart-4: var(--acik-mavi);
+  --chart-5: var(--en-acik);
+  --sidebar: white;
+  --sidebar-foreground: var(--koyu-lacivert);
+  --sidebar-primary: var(--lacivert);
+  --sidebar-primary-foreground: white;
+  --sidebar-accent: var(--turkuaz);
+  --sidebar-accent-foreground: white;
+  --sidebar-border: color-mix(in srgb, var(--lacivert) 20%, transparent);
+  --sidebar-ring: var(--turkuaz);
+}
+
+.dark {
+  /* Dark mode tema değişkenleri */
+  --background: var(--koyu-lacivert);
+  --foreground: var(--en-acik);
+  --card: var(--lacivert);
+  --card-foreground: white;
+  --popover: var(--lacivert);
+  --popover-foreground: white;
+  --primary: var(--turkuaz);
+  --primary-foreground: var(--koyu-lacivert);
+  --secondary: var(--acik-mavi);
+  --secondary-foreground: var(--koyu-lacivert);
+  --muted: color-mix(in srgb, var(--lacivert) 50%, var(--koyu-lacivert));
+  --muted-foreground: var(--acik-mavi);
+  --accent: var(--acik-mavi);
+  --accent-foreground: var(--koyu-lacivert);
+  --destructive: #f43f5e;
+  --border: color-mix(in srgb, white 10%, transparent);
+  --input: color-mix(in srgb, white 15%, transparent);
+  --ring: var(--turkuaz);
+  --chart-1: var(--en-acik);
+  --chart-2: var(--acik-mavi);
+  --chart-3: var(--turkuaz);
+  --chart-4: var(--lacivert);
+  --chart-5: var(--koyu-lacivert);
+  --sidebar: var(--koyu-lacivert);
+  --sidebar-foreground: white;
+  --sidebar-primary: var(--turkuaz);
+  --sidebar-primary-foreground: var(--koyu-lacivert);
+  --sidebar-accent: var(--acik-mavi);
+  --sidebar-accent-foreground: var(--koyu-lacivert);
+  --sidebar-border: color-mix(in srgb, white 10%, transparent);
+  --sidebar-ring: var(--turkuaz);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  .container {
+    @apply mx-auto max-w-6xl px-4 w-full;
+  }
+}
+
+.rich-html {
+  /* İsterseniz tipografiyi burada yönetebilirsiniz */
+}
+
+/* UL madde işaretlerini kendimiz çizelim */
+.rich-html ul {
+  list-style: none;     /* tarayıcının varsayılan bullets'i kapat */
+  padding-left: 0;
+  margin-left: 0;
+}
+
+.rich-html ul li {
+  position: relative;
+  padding-left: 1rem;   /* girinti */
+}
+
+.rich-html ul li::before {
+  content: "-";
+  position: absolute;
+  left: 0;
+  color: var(--primary);  /* sizin örnekteki renk değişkeni */
+  padding-right: 0.25rem;
+}
+
+/* Link görselliği */
+.rich-html a {
+  color: var(--primary);
+  text-decoration: underline;
+}

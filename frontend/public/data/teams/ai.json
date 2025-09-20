@@ -1,0 +1,40 @@
+{
+    "slug": "ai",
+    "name": "Yapay Zeka Takımı",
+    "description": "Makine öğrenmesi, deep learning ve yapay zeka projelerine odaklanan takımımız.",
+    "icon": "faRobot",
+    "leaderMessage": {
+      "title": "Takım Lideri Mesajı",
+      "content": "Yapay zeka takımı olarak machine learning, deep learning ve natural language processing alanlarında projeler geliştiriyoruz. Python, TensorFlow, PyTorch gibi araçlarla gerçek dünya problemlerine çözümler üretiyoruz ve yarışmalara katılıyoruz.",
+      "author": "Selçuk Öz",
+      "role": "Yapay Zeka Takımı Lideri"
+    },
+    "members": [
+      {
+        "name": "Selçuk Öz",
+        "role": "Takım Lideri",
+        "image": "/profile/teams/ai/selcuk_oz.png",
+        "department": "Yazılım Mühendisliği",
+        "github": "https://github.com/Selcuk05",
+        "linkedin": "https://www.linkedin.com/in/selcuk-oz/",
+        "kaggle": "https://www.kaggle.com/selcukwashere",
+        "skills": []
+      }
+    ],
+    "achievements": [],
+    "competitions": [
+      {
+        "name": "Trendyol E-Ticaret Hackathonu 2025",
+        "date": "2025-08-08",
+        "result": "",
+        "description": "Teknofest kapmasında düzenlenen e-ticaret hackathonuna katıldık."
+      },
+      {
+        "name": "BTK Hackathon 2025",
+        "date": "2025-07-17",
+        "result": "",
+        "description": "BTK kapmasında düzenlenen veri bilimi yarışmasına katıldık."
+      }
+    ],
+    "projects": []
+  }

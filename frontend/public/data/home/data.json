@@ -1,0 +1,49 @@
+{
+  "hero": {
+    "badge": "Kocaeli Üniversitesi",
+    "title": "Yazılım tutkunlarının buluşma noktası",
+    "titleHighlight": "buluşma",
+    "description": "Kod yazmayı sevenlerin bir araya geldiği, bilgi paylaşımı ve üretkenliği teşvik eden öğrenci topluluğu. Yazılım dünyasında birlikte büyüyelim.",
+    "primaryButton": {
+      "text": "Üye Ol",
+      "href": "/apply/general"
+    },
+    "secondaryButton": {
+      "text": "Daha Fazla Bilgi",
+      "href": "/about"
+    }
+  },
+  "clubIntroduction": {
+    "title": "Kulüp Tanıtımı",
+    "description": "Yazılım Kulübü olarak teknoloji dünyasında fark yaratma, bilgi paylaşımını artırmak ve üyelerimize projeler üzerinden öğrenme fırsatı sunmayı amaçlıyoruz.",
+    "features": [
+      {
+        "title": "Topluluk",
+        "description": "Farklı bölümlerden öğrencilerin bir araya geldiği, bilgi ve tecrübelerini paylaştığı dinamik bir topluluk ortamı sağlıyoruz.",
+        "icon": "faUsers"
+      },
+      {
+        "title": "Eğitim",
+        "description": "Workshoplar, seminerler ve mentorluk programlarıyla yazılım becerilerinizi geliştirmeniz için birçok fırsat sunuyoruz.",
+        "icon": "faAward"
+      },
+      {
+        "title": "Projeler",
+        "description": "Gerçek dünya problemlerine çözüm üreten projelerde yer alarak teorik bilgilerinizi pratiğe dökme ve çeşitli yarışmalara hazırlanma fırsatı bulacaksınız.",
+        "icon": "faFileLines"
+      }
+    ]
+  },
+  "announcements": {
+    "title": "Duyurular",
+    "description": "Kulübümüzün önemli duyuruları hakkında bilgi alın.",
+    "viewAllText": "Tüm Duyuruları Gör",
+    "viewAllHref": "/announcements"
+  },
+  "publications": {
+    "title": "Son Yayınlarımız",
+    "description": "Kulüp üyelerimizin kaleme aldığı teknik makaleler ve yazılım dünyasına dair içerikler.",
+    "viewAllText": "Tüm Yayınları Gör",
+    "viewAllHref": "/publications"
+  }
+}

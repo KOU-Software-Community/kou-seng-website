@@ -1,0 +1,45 @@
+{
+    "slug": "web",
+    "name": "Web Geliştirme Takımı",
+    "description": "Modern web uygulamaları geliştiren, frontend ve backend teknolojilerinde uzmanlaşan takımımız.",
+    "icon": "faLaptopCode",
+    "leaderMessage": {
+      "title": "Takım Lideri Mesajı",
+      "content": "Web takımı olarak modern web teknolojilerini kullanarak kullanıcı dostu ve performanslı uygulamalar geliştiriyoruz. React, Next.js, Node.js gibi güncel teknolojilerle projeler üretiyoruz. Takımımız hem frontend hem de backend geliştirme konularında deneyim kazanmak isteyen arkadaşları bekliyor.",
+      "author": "Metehan Şenyer",
+      "role": "Web Takımı Lideri"
+    },
+    "members": [
+      {
+        "name": "Metehan Şenyer",
+        "role": "Takım Lideri",
+        "image": "/profile/teams/web/metehan_senyer.jpeg",
+        "department": "Yazılım Mühendisliği",
+        "github": "https://github.com/metehansenyer",
+        "kaggle": "https://www.kaggle.com/metehansenyer",
+        "linkedin": "https://linkedin.com/in/metehansenyer",
+        "skills": ["Next.js", "TypeScript", "Python", "Node.js", "C/C++"]
+      },
+      {
+        "name": "Arifcan Güneş",
+        "role": "Yardımcı Lider",
+        "image": "/profile/teams/web/arifcan_gunes.jpeg",
+        "department": "Yazılım Mühendisliği",
+        "github": "https://github.com/arifcanGunes",
+        "linkedin": "https://www.linkedin.com/in/arifcan-g%C3%BCne%C5%9F-4b96021ab/",
+        "skills": ["C#", ".NET", "JavaScript"]
+      }
+    ],
+    "achievements": [],
+    "competitions": [],
+    "projects": [
+      {
+        "title": "KOU-SENG Web Sitesi",
+        "description": "Kulübümüzün resmi web sitesi. Modern teknolojiler kullanılarak geliştirildi.",
+        "technologies": ["Next.js", "TypeScript", "TailwindCSS", "Node.js"],
+        "status": "Aktif",
+        "github": "https://github.com/KOU-Software-Community/kou-seng-website",
+        "demo": "https://kouseng.com/"
+      }
+    ]
+  }

@@ -1,0 +1,118 @@
+{
+  "id": 2,
+  "submissionType": "technical",
+  "slug": "web",
+  "title": "Web Geliştirme Takımı Başvurusu",
+  "description": "Frontend ve backend web geliştirme projelerinde yer almak için teknik başvuru formu. Takıma katılmak için lütfen aşağıdaki bilgileri eksiksiz doldurunuz.",
+  "isOpen": true,
+  "deadline": "Belirtilmedi",
+  "type": "technical",
+  "icon": "faLaptopCode",
+  "fields": [
+    {
+      "id": "name",
+      "label": "Ad",
+      "type": "text",
+      "placeholder": "Adınızı giriniz",
+      "required": true
+    },
+    {
+      "id": "surname",
+      "label": "Soyad",
+      "type": "text",
+      "placeholder": "Soyadınızı giriniz",
+      "required": true
+    },
+    {
+      "id": "studentId",
+      "label": "Öğrenci Numarası",
+      "type": "text",
+      "placeholder": "Öğrenci numaranızı giriniz",
+      "required": true
+    },
+    {
+      "id": "email",
+      "label": "E-posta",
+      "type": "email",
+      "placeholder": "E-posta adresinizi giriniz",
+      "required": true
+    },
+    {
+      "id": "phone",
+      "label": "Telefon Numarası",
+      "type": "tel",
+      "placeholder": "Telefon numaranızı giriniz",
+      "required": true
+    },
+    {
+      "id": "faculty",
+      "label": "Fakülte",
+      "type": "text",
+      "placeholder": "Fakültenizi giriniz",
+      "required": true
+    },
+    {
+      "id": "department",
+      "label": "Bölüm",
+      "type": "text",
+      "placeholder": "Bölümünüzü giriniz",
+      "required": true
+    },
+    {
+      "id": "grade",
+      "label": "Sınıf",
+      "type": "select",
+      "required": true,
+      "options": [
+        { "value": "", "label": "Seçiniz" },
+        { "value": "1", "label": "1. Sınıf" },
+        { "value": "2", "label": "2. Sınıf" },
+        { "value": "3", "label": "3. Sınıf" },
+        { "value": "4", "label": "4. Sınıf" },
+        { "value": "master", "label": "Yüksek Lisans" },
+        { "value": "phd", "label": "Doktora" }
+      ]
+    },
+    {
+      "id": "interests",
+      "label": "İlgilendiğiniz Web Geliştirme Alanları",
+      "type": "select",
+      "required": true,
+      "options": [
+        { "value": "", "label": "Seçiniz" },
+        { "value": "frontend", "label": "Frontend Geliştirme" },
+        { "value": "backend", "label": "Backend Geliştirme" },
+        { "value": "fullstack", "label": "Full-stack Geliştirme" },
+        { "value": "ui-ux", "label": "UI/UX Tasarım" }
+      ]
+    },
+    {
+      "id": "github",
+      "label": "GitHub URL",
+      "type": "url",
+      "placeholder": "GitHub profilinizin URL'ini giriniz",
+      "required": true
+    },
+    {
+      "id": "portfolio",
+      "label": "Portfolyo URL (varsa)",
+      "type": "url",
+      "placeholder": "Portfolyo sitenizin URL'ini giriniz",
+      "required": false
+    },
+    {
+      "id": "experience",
+      "label": "Web Geliştirme Deneyiminiz",
+      "type": "textarea",
+      "placeholder": "Daha önce çalıştığınız projeler, kullandığınız teknolojiler ve deneyim süreniz hakkında bilgi veriniz",
+      "required": true
+    },
+    {
+      "id": "motivation",
+      "label": "Neden Web Geliştirme Takımına katılmak istiyorsunuz?",
+      "type": "textarea",
+      "placeholder": "Motivasyonunuzu kısaca açıklayınız",
+      "required": true
+    }
+  ]
+}

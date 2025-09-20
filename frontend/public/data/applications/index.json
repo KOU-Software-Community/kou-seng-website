@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "slug": "general",
+    "title": "Genel Üyelik Başvurusu",
+    "description": "Yazılım Kulübü'ne üyelik için genel başvuru formu.",
+    "isOpen": true,
+    "deadline": "Belirtilmedi",
+    "type": "general",
+    "icon": "faUsers"
+  },
+  {
+    "id": 2,
+    "slug": "web",
+    "title": "Web Geliştirme Takımı Başvurusu",
+    "description": "Frontend ve backend web geliştirme projelerinde yer almak için teknik başvuru formu.",
+    "isOpen": true,
+    "deadline": "Belirtilmedi",
+    "type": "technical",
+    "icon": "faLaptopCode"
+  },
+  {
+    "id": 3,
+    "slug": "ai",
+    "title": "Yapay Zeka Takımı Başvurusu",
+    "description": "Makine öğrenmesi ve yapay zeka projelerinde çalışmak için teknik başvuru formu.",
+    "isOpen": true,
+    "deadline": "Belirtilmedi",
+    "type": "technical",
+    "icon": "faRobot"
+  },
+  {
+    "id": 4,
+    "slug": "game",
+    "title": "Oyun Takımı Başvurusu",
+    "description": "Oyun projelerinde çalışmak için teknik başvuru formu.",
+    "isOpen": true,
+    "deadline": "Belirtilmedi",
+    "type": "technical",
+    "icon": "faGamepad"
+  }
+]

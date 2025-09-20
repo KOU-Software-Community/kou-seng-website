@@ -1,0 +1,69 @@
+{
+  "clubInfo": {
+    "name": "KOU SENG",
+    "description": "Kocaeli Üniversitesi Yazılım Kulübü, öğrencilerin yazılım yolculuklarında birlikte öğrenip kendilerini geliştirdikleri bir topluluktur."
+  },
+  "quickLinks": [
+    {
+      "title": "Anasayfa",
+      "href": "/"
+    },
+    {
+      "title": "Hakkımızda",
+      "href": "/about"
+    },
+    {
+      "title": "Duyurular",
+      "href": "/announcements"
+    },
+    {
+      "title": "Yayınlar",
+      "href": "/publications"
+    },
+    {
+      "title": "Başvuru",
+      "href": "/apply"
+    },
+    {
+      "title": "İletişim",
+      "href": "/contact"
+    }
+  ],
+  "contactInfo": {
+    "address": {
+      "university": "Kocaeli Üniversitesi",
+      "faculty": "Mühendislik Fakültesi",
+      "location": "41380 İzmit/Kocaeli"
+    },
+    "email": "info@mail.kouseng.com"
+  },
+  "socialMedia": [
+    {
+      "name": "GitHub",
+      "href": "https://github.com/KOU-Software-Community",
+      "icon": "faGithub",
+      "ariaLabel": "GitHub"
+    },
+    {
+      "name": "TikTok",
+      "href": "https://www.tiktok.com/@kou_seng",
+      "icon": "faTiktok",
+      "ariaLabel": "TikTok"
+    },
+    {
+      "name": "Instagram",
+      "href": "https://www.instagram.com/kou.seng",
+      "icon": "faInstagram",
+      "ariaLabel": "Instagram"
+    },
+    {
+      "name": "LinkedIn",
+      "href": "https://www.linkedin.com/company/yazılım-kulübü/",
+      "icon": "faLinkedin",
+      "ariaLabel": "LinkedIn"
+    }
+  ],
+  "copyright": {
+    "text": "KOU SENG - Kocaeli Üniversitesi Yazılım Kulübü. Tüm hakları saklıdır."
+  }
+}

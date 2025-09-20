@@ -1,0 +1,46 @@
+name: Öneri veya Geliştirme Talebi
+description: Yeni bir özellik, geliştirme veya iyileştirme talebinde bulunun.
+title: "[Öneri] <Kısa açıklama>"
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 🤔 Ne önermek istiyorsunuz?
+        Yeni bir özellik, geliştirme veya iyileştirme fikrinizi aşağıda paylaşabilirsiniz.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Açıklama
+      description: Talebinizi detaylandırın.
+      placeholder: "Önerinizi ayrıntılı olarak açıklayın."
+    validations:
+      required: true
+
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Motivasyon
+      description: Bu geliştirme neden önemli?
+      placeholder: "Öğrenci, kulüp veya platform için sağlayacağı katkıyı belirtin."
+    validations:
+      required: false
+
+  - type: input
+    id: related
+    attributes:
+      label: İlgili Kısımlar
+      description: Hangi kısımlar/ekranlar/özellikler etkilenebilir?
+      placeholder: "ör: Anasayfa, Etkinlikler, Üyelik"
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Katkı Kuralları
+      description: Katkı kurallarını okudum ve kabul ediyorum.
+      options:
+        - label: Katkı kurallarını okudum ve kabul ediyorum.
+          required: true

@@ -1,0 +1,27 @@
+name: Geri Bildirim
+description: Genel görüş, tavsiye veya teşekkür için geri bildirim bırakın.
+title: "[Geri Bildirim] <Kısa açıklama>"
+labels: [feedback]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 🎓 Öğrenci ve Katılımcı Geri Bildirimi
+
+  - type: textarea
+    id: feedback
+    attributes:
+      label: Geri Bildiriminiz
+      description: Görüşünüzü, önerinizi veya teşekkürünüzü yazınız.
+      placeholder: "Geri bildiriminizi buraya yazın."
+    validations:
+      required: true
+
+  - type: input
+    id: name
+    attributes:
+      label: Adınız (isteğe bağlı)
+      description: Adınızı veya takma adınızı bırakabilirsiniz.
+      placeholder: "Adınız veya takma adınız"
+    validations:
+      required: false

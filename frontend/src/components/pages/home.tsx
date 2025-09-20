@@ -1,61 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
-import { format } from 'date-fns';
-import { tr } from 'date-fns/locale';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRight, faScroll, faUsers, faFileLines, faSpinner, faBullhorn } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight, faUsers, faFileLines } from '@fortawesome/free-solid-svg-icons';
 import { type IconProp } from '@fortawesome/fontawesome-svg-core';
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { HomeData } from '@/lib/homeData';
-
-// RSS feed item type
-type RssItem = {
-  title: string;
-  link: string;
-  excerpt: string;
-  author: string;
-  date: string;
-  coverImage?: string;
-};
-
-// Announcement type
-type Announcement = {
-  _id: string;
-  title: string;
-  summary: string;
-  category: string;
-  createdAt: string;
-};
+import AnnouncementsSection from '@/components/layout/AnnouncementsSection';
+import RssSection from '@/components/layout/RssSection';
 
 type HomeProps = {
   homeData: HomeData;
-  articles: RssItem[];
-  announcements: Announcement[];
-  rssLoading: boolean;
-  rssError: string | null;
-  announcementsLoading: boolean;
-  announcementsError: string | null;
 };
 
-export default function Home({ 
-  homeData, 
-  articles, 
-  announcements, 
-  rssLoading, 
-  rssError, 
-  announcementsLoading, 
-  announcementsError 
-}: HomeProps) {
-  // Tarih formatını düzenleyen yardımcı fonksiyon
-  const formatDate = (dateString: string) => {
-    try {
-      return format(new Date(dateString), 'd MMMM yyyy', { locale: tr });
-    } catch {
-      return dateString; // Hatalı tarih formatı durumunda orijinal string'i döndür
-    }
-  };
+export default function Home({ homeData }: HomeProps) {
 
   return (
     <main className="flex flex-col gap-16">
@@ -181,152 +139,22 @@ export default function Home({
       </section>
 
       {/* 3. Duyurular */}
-      <section className="container">
-        <div className="mb-12 mx-auto text-center max-w-3xl">
-          <h2 className="mb-2 text-3xl font-bold tracking-tight">{homeData.announcements.title}</h2>
-          <p className="mx-auto max-w-2xl text-muted-foreground">
-            {homeData.announcements.description}
-          </p>
-        </div>
-
-        <div className="mx-auto max-w-3xl">
-          {/* Duyurular */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Güncel Duyurular</CardTitle>
-            </CardHeader>
-            <CardContent className="flex flex-col gap-4">
-              {announcementsLoading ? (
-                <div className="flex justify-center items-center h-32">
-                  <FontAwesomeIcon icon={faSpinner} className="h-6 w-6 text-primary animate-spin" />
-                </div>
-              ) : announcementsError ? (
-                <div className="text-center p-6">
-                  <p className="text-sm text-muted-foreground">Duyurular yüklenirken bir hata oluştu.</p>
-                </div>
-              ) : announcements.length === 0 ? (
-                <div className="text-center p-6">
-                  <p className="text-sm text-muted-foreground">Şu an gösterilecek duyuru bulunmamaktadır.</p>
-                </div>
-              ) : (
-                announcements.slice(0, 2).map((announcement) => (
-                  <div key={announcement._id} className="rounded-lg border p-4">
-                    <div className="flex justify-between items-start mb-1">
-                      <p className="font-medium">{announcement.title}</p>
-                      <span className="text-xs text-muted-foreground flex items-center gap-1">
-                        <FontAwesomeIcon icon={faBullhorn} className="h-3 w-3" />
-                        {announcement.category}
-                      </span>
-                    </div>
-                    <p className="text-sm text-muted-foreground mb-1">
-                      {announcement.summary}
-                    </p>
-                    <p className="text-xs text-muted-foreground mt-2">
-                      <FontAwesomeIcon icon={faScroll} className="h-3 w-3 mr-1" />
-                      {formatDate(announcement.createdAt)}
-                    </p>
-                  </div>
-                ))
-              )}
-            </CardContent>
-            <CardFooter>
-              <Button asChild variant="outline" size="sm" className="mx-auto cursor-pointer">
-                <Link href={homeData.announcements.viewAllHref}>
-                  <FontAwesomeIcon icon={faScroll} className="mr-2 h-4 w-4" /> {homeData.announcements.viewAllText}
-                </Link>
-              </Button>
-            </CardFooter>
-          </Card>
-        </div>
-      </section>
+      <AnnouncementsSection
+        title={homeData.announcements.title}
+        description={homeData.announcements.description}
+        viewAllHref={homeData.announcements.viewAllHref}
+        viewAllText={homeData.announcements.viewAllText}
+        maxItems={2}
+      />
 
       {/* 4. Medium Makaleleri */}
-      <section className="container pb-16">
-        <div className="mb-12 mx-auto text-center max-w-3xl">
-          <h2 className="mb-2 text-3xl font-bold tracking-tight">{homeData.publications.title}</h2>
-          <p className="mx-auto max-w-2xl text-muted-foreground">
-            {homeData.publications.description}
-          </p>
-        </div>
-
-        {rssLoading ? (
-          <div className="flex justify-center items-center h-64">
-            <FontAwesomeIcon icon={faSpinner} className="h-8 w-8 text-primary animate-spin" />
-          </div>
-        ) : rssError ? (
-          <div className="text-center p-12 border rounded-lg">
-            <FontAwesomeIcon icon={faFileLines} className="h-12 w-12 text-muted-foreground mb-4" />
-            <h3 className="text-lg font-medium mb-2">Hata Oluştu</h3>
-            <p className="text-muted-foreground">{rssError}</p>
-          </div>
-        ) : articles.length === 0 ? (
-          <div className="text-center p-12 border rounded-lg">
-            <FontAwesomeIcon icon={faFileLines} className="h-12 w-12 text-muted-foreground mb-4" />
-            <h3 className="text-lg font-medium mb-2">Henüz Yayın Yok</h3>
-            <p className="text-muted-foreground">Yakında kulüp üyelerimizin yazılım dünyasına dair makaleleri burada yer alacak.</p>
-          </div>
-        ) : (
-          <div className="mx-auto max-w-6xl grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {articles.map((article, index) => (
-              <Card key={index} className={`py-0 pb-6 overflow-hidden ${index > 0 ? 'hidden md:flex' : ''}`}>
-                <AspectRatio ratio={16 / 9}>
-                  {article.coverImage && article.coverImage !== '/file.svg' ? (
-                    <Image
-                      src={article.coverImage}
-                      alt={article.title}
-                      fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      className="object-cover"
-                    />
-                  ) : (
-                    <div className={`flex h-full w-full items-center justify-center bg-gradient-to-b ${index % 3 === 0 ? 'from-primary/30 to-primary/10' :
-                      index % 3 === 1 ? 'from-secondary/30 to-secondary/10' :
-                        'from-accent/30 to-accent/10'
-                      }`}>
-                      <FontAwesomeIcon icon={faFileLines} className={`h-10 w-10 ${index % 3 === 0 ? 'text-primary/40' :
-                        index % 3 === 1 ? 'text-secondary/40' :
-                          'text-accent/40'
-                        }`} />
-                    </div>
-                  )}
-                </AspectRatio>
-                <CardHeader>
-                  <CardTitle className="line-clamp-2">
-                    {article.title}
-                  </CardTitle>
-                  <CardDescription className="flex items-center text-xs">
-                    <span>{article.author}</span>
-                    <span className="mx-2">•</span>
-                    <span>{article.date}</span>
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p className="line-clamp-3 text-sm text-muted-foreground">
-                    {article.excerpt}
-                  </p>
-                </CardContent>
-                <CardFooter className="justify-center">
-                  <Button variant="ghost" size="sm" className="gap-1" asChild>
-                    <Link href={article.link} target="_blank" rel="noopener noreferrer">
-                      Okumaya Devam Et <FontAwesomeIcon icon={faArrowRight} className="h-3 w-3" />
-                    </Link>
-                  </Button>
-                </CardFooter>
-              </Card>
-            ))}
-          </div>
-        )}
-
-        {articles.length > 0 && (
-          <div className="mt-8 flex justify-center">
-            <Button asChild variant="outline" className="mx-auto">
-              <Link href={homeData.publications.viewAllHref}>
-                {homeData.publications.viewAllText} <FontAwesomeIcon icon={faArrowRight} className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-          </div>
-        )}
-      </section>
+      <RssSection
+        title={homeData.publications.title}
+        description={homeData.publications.description}
+        viewAllHref={homeData.publications.viewAllHref}
+        viewAllText={homeData.publications.viewAllText}
+        maxItems={3}
+      />
     </main>
   );
 }

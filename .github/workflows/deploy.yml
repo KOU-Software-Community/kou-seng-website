@@ -1,0 +1,48 @@
+# .github/workflows/deploy.yml
+name: Deploy to VPS
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '**'
+      - '!**.md'
+      - '!.github/**'
+      - '.github/scripts/**'
+      - '.github/workflows/build_push.yml'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Deploy to VPS
+      uses: appleboy/ssh-action@v0.1.5
+      with:
+        host: ${{ secrets.VPS_HOST }}
+        username: ${{ secrets.VPS_USERNAME }}
+        key: ${{ secrets.VPS_SSH_KEY }}
+        script: |
+          # Stop services
+          cd /home/${{ secrets.VPS_USERNAME }}/kou-seng-website
+          pm2 stop all
+
+          # Update Repo
+          cd /home/${{ secrets.VPS_USERNAME }}/kou-seng-website
+          git pull origin main
+          
+          # Install and Build frontend
+          cd /home/${{ secrets.VPS_USERNAME }}/kou-seng-website/frontend
+          npm i
+          npm run build
+          
+          # Install backend
+          cd /home/${{ secrets.VPS_USERNAME }}/kou-seng-website/backend
+          npm i
+          
+          # Restart services
+          cd /home/${{ secrets.VPS_USERNAME }}/kou-seng-website
+          pm2 start ecosystem.config.js
+          pm2 save

@@ -1,0 +1,54 @@
+name: Hata Bildirimi
+description: Tespit ettiğiniz bir hatayı bildirin.
+title: "[Hata] <Hatanın özeti>"
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 🐞 Hata Bilgisi
+
+  - type: textarea
+    id: bug-description
+    attributes:
+      label: Hatanın Açıklaması
+      description: Hatanın detaylarını ve nasıl tekrarlanabileceğini yazın.
+      placeholder: "Adımlar, ekran görüntüsü veya hata mesajı ekleyebilirsiniz."
+    validations:
+      required: true
+
+  - type: input
+    id: environment
+    attributes:
+      label: Ortam
+      description: Kullandığınız tarayıcı, işletim sistemi vb.
+      placeholder: "ör: Chrome 121, Windows 10"
+    validations:
+      required: false
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Beklenen Davranış
+      description: Normalde ne olması gerekiyordu?
+      placeholder: "Beklediğiniz sonucu yazınız."
+    validations:
+      required: false
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Ekran Görüntüleri
+      description: Hata ile ilgili ekran görüntüsü veya video ekleyiniz.
+      placeholder: "Ekran görüntüsünü ekleyin."
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Katkı Kuralları
+      description: Katkı kurallarını okudum ve kabul ediyorum.
+      options:
+        - label: Katkı kurallarını okudum ve kabul ediyorum.
+          required: true

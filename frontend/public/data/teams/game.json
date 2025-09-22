@@ -1,11 +1,11 @@
 {
     "slug": "game",
     "name": "Oyun Geliştirme Takımı",
-    "description": "Unity, Unreal Engine ve indie game development odaklı takımımız.",
+    "description": "Unity ile beraber indie game development odaklı takımımız.",
     "icon": "faGamepad",
     "leaderMessage": {
       "title": "Takım Lideri Mesajı",
-      "content": "Oyun geliştirme takımı olarak Unity ve Unreal Engine kullanarak 2D ve 3D oyunlar geliştiriyoruz. Game design, programming ve art konularında multidisipliner bir yaklaşım benimsiyoruz. Takımımızda oyun geliştirme tutkusu olan herkesi bekliyoruz. Hem hobi hem de profesyonel projeler üzerinde çalışarak deneyim kazanıyoruz.",
+      "content": "Oyun geliştirme takımı olarak Unity kullanarak 2D ve 3D oyunlar geliştiriyoruz. Game design, programming ve art konularında multidisipliner bir yaklaşım benimsiyoruz. Takımımızda oyun geliştirme tutkusu olan herkesi bekliyoruz. Hem hobi hem de profesyonel projeler üzerinde çalışarak deneyim kazanıyoruz.",
       "author": "Turan Akgün",
       "role": "Oyun Geliştirme Takımı Lideri"
     },
@@ -17,7 +17,7 @@
         "department": "Yazılım Mühendisliği",
         "github": "https://github.com/turanak111",
         "linkedin": "https://www.linkedin.com/in/turan-akgun/",
-        "skills": []
+        "skills": ["Unity2D", "Unity3D", "C#"]
       },
       {
         "name": "Sefa Selim Tura",
@@ -26,7 +26,7 @@
         "department": "Yazılım Mühendisliği",
         "github": "https://github.com/SefaSelim",
         "linkedin": "https://www.linkedin.com/in/sefaselimtura/",
-        "skills": []
+        "skills": ["Unity2D", "Unity3D", "C#"]
       }
     ],
     "achievements": [],

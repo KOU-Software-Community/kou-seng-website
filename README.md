@@ -74,7 +74,7 @@ npm run dev
 
 ## 📞 İletişim
 
-- **Email**: info@mail.kouseng.com
+- **Email**: info@kouseng.com
 - **Website**: [kouseng.com](https://kouseng.com)
 
 ---

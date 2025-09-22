@@ -163,7 +163,7 @@
     },
     {
       "title": "Oyun Geliştirme",
-      "description": "Unity ve Unreal Engine gibi güçlü oyun motorlarını kullanarak 2D ve 3D oyunlar tasarlıyor ve geliştiriyoruz. Oyun mekaniği, karakter modelleme ve tasarım gibi alanlarda hem teknik hem de yaratıcı yönlerimizi ortaya koyuyoruz. Hedefimiz yalnızca oyun üretmek değil, aynı zamanda yaratıcılığımızı ortaya koyarak özgün projeler geliştirmektir.",
+      "description": "Unity gibi güçlü oyun motorlarını kullanarak 2D ve 3D oyunlar tasarlıyor ve geliştiriyoruz. Oyun mekaniği, karakter modelleme ve tasarım gibi alanlarda hem teknik hem de yaratıcı yönlerimizi ortaya koyuyoruz. Hedefimiz yalnızca oyun üretmek değil, aynı zamanda yaratıcılığımızı ortaya koyarak özgün projeler geliştirmektir.",
       "icon": "faGamepad"
     }
   ]

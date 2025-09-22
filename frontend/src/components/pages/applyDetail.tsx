@@ -198,11 +198,6 @@ export default function ApplyDetail(props: { slug: string }) {
         <CardContent>
           <p>{error || 'Başvuru bilgisi bulunamadı.'}</p>
         </CardContent>
-        <CardFooter>
-          <Button variant="outline" onClick={() => window.history.back()}>
-            Geri Dön
-          </Button>
-        </CardFooter>
       </Card>
     );
   }
@@ -221,11 +216,6 @@ export default function ApplyDetail(props: { slug: string }) {
             <p className="text-muted-foreground mt-2">{application.deadline}</p>
           </div>
         </CardContent>
-        <CardFooter>
-          <Button variant="outline" className='cursor-pointer' onClick={() => window.history.back()}>
-            Başvurulara Geri Dön
-          </Button>
-        </CardFooter>
       </Card>
     );
   }
@@ -337,11 +327,6 @@ export default function ApplyDetail(props: { slug: string }) {
             )}
           </div>
         </CardContent>
-        <CardFooter className="flex justify-center">
-          <Button variant="outline" className='cursor-pointer' onClick={() => window.history.back()}>
-            Başvurulara Geri Dön
-          </Button>
-        </CardFooter>
       </Card>
     );
   }
@@ -363,9 +348,6 @@ export default function ApplyDetail(props: { slug: string }) {
           </div>
         </CardContent>
         <CardFooter className="flex justify-center gap-4">
-          <Button variant="outline" className='cursor-pointer' onClick={() => window.history.back()}>
-            Başvurulara Geri Dön
-          </Button>
           <Button className='cursor-pointer' onClick={() => window.location.reload()}>
             Tekrar Dene
           </Button>

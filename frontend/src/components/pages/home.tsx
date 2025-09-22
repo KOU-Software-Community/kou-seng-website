@@ -19,7 +19,7 @@ export default function Home({ homeData }: HomeProps) {
     <main className="flex flex-col gap-16">
       {/* 1. Hero Bölümü */}
       <section className="relative overflow-hidden bg-gradient-to-br from-background via-background to-accent/20 py-16 md:py-28 lg:py-32">
-        <div className="container">
+        <div className="container px-4 sm:px-6 lg:px-8">
           {/* İki sütunlu düzen (Mobilde tek sütun) */}
           <div className="grid items-center gap-12 lg:grid-cols-2">
             {/* Sol taraf - Metin içeriği */}
@@ -56,7 +56,7 @@ export default function Home({ homeData }: HomeProps) {
             </div>
 
             {/* Sağ taraf - Görseller */}
-            <div className="relative mx-auto w-full max-w-[280px] sm:max-w-[340px] md:max-w-md lg:ml-auto mt-12 md:mt-0 aspect-[4/3] md:aspect-square">
+            <div className="relative mx-auto lg:mx-0 w-full max-w-[280px] sm:max-w-[340px] md:max-w-md lg:max-w-lg mt-12 md:mt-0 aspect-[4/3] md:aspect-square lg:justify-self-center xl:justify-self-end">
               {/* Ana görsel - kod ve teknoloji temalı illüstrasyon */}
               <div className="absolute inset-0 rounded-lg border border-border/40 bg-background/80 p-2 backdrop-blur-sm shadow-xl">
                 <div className="h-full w-full rounded bg-gradient-to-br from-primary/10 to-accent/5 p-3 sm:p-4 md:p-6 flex items-center justify-center">

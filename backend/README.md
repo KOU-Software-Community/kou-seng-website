@@ -156,7 +156,7 @@ Bu proje MIT lisansı altında lisanslanmıştır.
 ## 📞 İletişim
 
 Sorularınız için:
-- **Email**: info@mail.kouseng.com
+- **Email**: info@kouseng.com
 - **GitHub Issues**: [GitHub Issues](https://github.com/KOU-Software-Community/kou-seng-website/issues)
 
 ---

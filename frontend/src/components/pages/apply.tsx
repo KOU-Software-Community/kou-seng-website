@@ -186,9 +186,15 @@ export default function Apply() {
                         <div className="flex flex-col gap-3">
                             <h3 className="text-lg font-medium">Başvuru Süreci Hakkında</h3>
                             <p className="text-muted-foreground">
-                                Başvurunuzu gönderdikten sonra kulüp yönetimi tarafından değerlendirilecek ve 
-                                başvuru sonucunuz kayıtlı e-posta adresinize bildirilecektir. Teknik takım başvurularında 
-                                mülakat süreci olabilir. Lütfen birden fazla başvuru yapmaya çalışmayınız, yapamazsınız. Sorun olduğunda iletişim kısmında yazınız.
+                                Kulüp üyelik başvurusu yapan öğrenciler, kulüp etkinliklerinden haberdar 
+                                olabilmeleri için WhatsApp grubuna eklenecektir.
+                                <br /><br />
+                                Teknik takım başvurularında mülakat süreci olabilir. Bu başvurular kulüp 
+                                yönetimi tarafından değerlendirilecek ve sonuçlar kayıtlı e-posta adresiniz 
+                                veya telefon numaranız üzerinden size bildirilecektir.
+                                <br /><br />
+                                Her öğrenci yalnızca tek bir başvuru yapabilir. Hata veya sorun yaşamanız 
+                                durumunda, lütfen <Link href="/contact" className="underline">iletişim</Link> kısmından bizimle iletişime geçiniz.
                             </p>
                         </div>
                     </CardContent>

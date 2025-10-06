@@ -261,8 +261,15 @@ export const exportSubmissionsToCSV = async (req, res) => {
       });
     }
 
-    // CSV dönüştürme işlemi için alanları hazırla
-    const fields = [
+    // Tüm customFields anahtarlarını dinamik olarak topla
+    const allCustomKeys = [
+      ...new Set(
+        submissions.flatMap(sub => Object.keys(sub.customFields || {}))
+      )
+    ];
+
+    // CSV dönüştürme işlemi için temel alanları hazırla
+    const baseFields = [
       { label: 'Başvuru Tipi', value: 'submissionType' },
       { label: 'Ad', value: 'name' },
       { label: 'Öğrenci No', value: 'studentId' },
@@ -271,10 +278,22 @@ export const exportSubmissionsToCSV = async (req, res) => {
       { label: 'Fakülte', value: 'faculty' },
       { label: 'Bölüm', value: 'department' },
       { label: 'Sınıf', value: 'grade' },
-      { label: 'Teknik Kategori', value: 'technicalCategory' },
       { label: 'Durum', value: 'status' },
       { label: 'Başvuru Tarihi', value: row => new Date(row.createdAt).toLocaleString('tr-TR') }
     ];
+
+    // Yalnızca teknik başvurular için teknik kategori ekle
+    if (type === "technical" || submissions.some(s => s.submissionType === "technical")) {
+      baseFields.splice(8, 0, { label: 'Teknik Kategori', value: 'technicalCategory' });
+    }
+
+    // Custom field’ları ekle
+    const customFieldDefs = allCustomKeys.map(key => ({
+      label: key,
+      value: row => (row.customFields && row.customFields[key]) ? row.customFields[key] : ''
+    }));
+
+    const fields = [...baseFields, ...customFieldDefs];
 
     // JSON'dan CSV'ye dönüştür
     const json2csvParser = new Parser({ fields });
@@ -284,7 +303,7 @@ export const exportSubmissionsToCSV = async (req, res) => {
     res.setHeader('Content-Type', 'text/csv');
     res.setHeader('Content-Disposition', 'attachment; filename=submissions.csv');
 
-    logger.debug(`Başvurular CSV formatında dışa aktarıldı: ${csv.length} başvuru`);
+    logger.debug(`Başvurular CSV formatında dışa aktarıldı: ${submissions.length} başvuru`);
     return res.status(200).send(csv);
 
   } catch (error) {

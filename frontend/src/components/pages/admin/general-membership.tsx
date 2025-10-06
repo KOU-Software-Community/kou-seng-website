@@ -20,7 +20,7 @@ const formatStatus = (status: string): string => {
       return 'İncelelendi';
     case 'pending':
       return 'Beklemede';
-    case 'approved':
+    case 'accepted':
       return 'Onaylandı';
     case 'rejected':
       return 'Reddedildi';
@@ -114,7 +114,7 @@ export default function AdminGeneralMembership() {
 
     const [page, setPage] = useState<number>(1);
     const [searchValue, setSearchValue] = useState<string>('');
-    const [statusFilter, setStatusFilter] = useState<'' | 'pending' | 'reviewed' | 'approved' | 'rejected'>('');
+    const [statusFilter, setStatusFilter] = useState<'' | 'pending' | 'reviewed' | 'accepted' | 'rejected'>('');
 
     // Dialog state
     const [detailsOpen, setDetailsOpen] = useState<boolean>(false);
@@ -122,7 +122,7 @@ export default function AdminGeneralMembership() {
     const [selectedId, setSelectedId] = useState<string | null>(null);
 
     // Review form state
-    const [reviewStatus, setReviewStatus] = useState<'pending' | 'approved' | 'rejected' | string>('pending');
+    const [reviewStatus, setReviewStatus] = useState<'pending' | 'accepted' | 'rejected' | string>('pending');
     const [reviewNotes, setReviewNotes] = useState<string>('');
 
     const selectedSubmission = useMemo(() => submissions.find((s) => s._id === selectedId) || null, [selectedId, submissions]);
@@ -197,7 +197,7 @@ export default function AdminGeneralMembership() {
     const handleOpenReview = (id: string) => {
         setSelectedId(id);
         const current = submissions.find((s) => s._id === id);
-        setReviewStatus((current?.status as 'pending' | 'approved' | 'rejected' | string) || 'pending');
+        setReviewStatus((current?.status as 'pending' | 'accepted' | 'rejected' | string) || 'pending');
         setReviewNotes(current?.reviewNotes || '');
         setReviewOpen(true);
     };
@@ -236,7 +236,7 @@ export default function AdminGeneralMembership() {
                         <option value="">Tümü</option>
                         <option value="pending">Beklemede</option>
                         <option value="reviewed">İncelelendi</option>
-                        <option value="approved">Onaylandı</option>
+                        <option value="accepted">Onaylandı</option>
                         <option value="rejected">Reddedildi</option>
                     </select>
                 </div>
@@ -397,7 +397,7 @@ export default function AdminGeneralMembership() {
                             >
                                 <option value="pending">Beklemede</option>
                                 <option value="reviewed">İncelelendi</option>
-                                <option value="approved">Onaylandı</option>
+                                <option value="accepted">Onaylandı</option>
                                 <option value="rejected">Reddedildi</option>
                             </select>
                         </div>

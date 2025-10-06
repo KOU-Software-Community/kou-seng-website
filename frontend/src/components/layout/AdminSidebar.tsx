@@ -82,8 +82,20 @@ export default function AdminSidebar() {
   }, [isTechnicalTeamRoute]);
   const visibleNavItems = useMemo(() => {
     if (userRole === 'admin') return navItems;
-    if (userRole === 'user') return navItems.filter((n) => n.label === 'Teknik Takım');
+    const limitedRoles = ['web', 'ai', 'game'];
+    if (limitedRoles.includes(userRole)) {
+      return navItems.filter((n) => n.label === 'Dashboard' || n.label === 'Teknik Takım');
+    }
     return [];
+  }, [userRole]);
+
+  const allowedTechSlug = useMemo(() => {
+    const roleToSlug: Record<string, string | undefined> = {
+      web: 'web',
+      ai: 'ai',
+      game: 'game',
+    };
+    return roleToSlug[userRole] ?? undefined;
   }, [userRole]);
 
   const handleLogoutClick = async () => {
@@ -146,7 +158,13 @@ export default function AdminSidebar() {
                             { label: 'Web', slug: 'web' },
                             { label: 'AI', slug: 'ai' },
                             { label: 'Game', slug: 'game' },
-                          ].map((sub) => {
+                          ]
+                            .filter((sub) => {
+                              // admin tüm altları görür; diğer roller sadece kendi alanını görür
+                              if (userRole === 'admin') return true;
+                              return allowedTechSlug ? sub.slug === allowedTechSlug : false;
+                            })
+                            .map((sub) => {
                             const href = `/admin/dashboard/technical-team/${sub.slug}`;
                             const isSubActive = activeHref === href;
                             return (
@@ -158,7 +176,7 @@ export default function AdminSidebar() {
                                 </SidebarMenuSubButton>
                               </SidebarMenuSubItem>
                             );
-                          })}
+                            })}
                         </SidebarMenuSub>
                       )}
                     </SidebarMenuItem>
@@ -183,5 +201,3 @@ export default function AdminSidebar() {
     </>
   );
 }
-
-

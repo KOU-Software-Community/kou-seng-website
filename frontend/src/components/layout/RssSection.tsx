@@ -56,7 +56,7 @@ export default function RssSection({
           {articles.slice(0, maxItems).map((article, index) => (
             <Card key={index} className={`py-0 pb-6 overflow-hidden ${index > 0 ? 'hidden md:flex' : ''}`}>
               <AspectRatio ratio={16 / 9}>
-                {article.coverImage && article.coverImage !== '/file.svg' ? (
+                {article.coverImage ? (
                   <Image
                     src={article.coverImage}
                     alt={article.title}

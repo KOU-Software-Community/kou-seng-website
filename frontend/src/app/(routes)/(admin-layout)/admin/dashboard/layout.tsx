@@ -49,11 +49,24 @@ export default function AdminDashboardLayout({ children }: DashboardLayoutProps)
           router.replace('/');
           return;
         }
-        // Rol "user" ise sadece technical-team sayfasına erişmesine izin ver
-        const onTechnicalTeamPage = pathname?.startsWith('/admin/dashboard/technical-team');
+        // Rol kontrolü
         const role = (detail as AuthUser).role;
-        if (role === 'user' && !onTechnicalTeamPage) {
-          router.replace('/admin/dashboard/technical-team');
+        const onDashboardPage = pathname === '/admin/dashboard';
+        
+        // Admin rolü her sayfaya erişebilir
+        if (role === 'admin') {
+          if (isMounted) setIsChecking(false);
+          return;
+        }
+        
+        // Web, AI, Game rolleri sadece dashboard ve kendi teknik sayfasına erişebilir
+        if (['web', 'ai', 'game'].includes(role)) {
+          const isOwnTechnicalPage = pathname?.startsWith(`/admin/dashboard/technical-team/${role}`);
+          if (!onDashboardPage && !isOwnTechnicalPage) {
+            router.replace(`/admin/dashboard/technical-team/${role}`);
+            return;
+          }
+          if (isMounted) setIsChecking(false);
           return;
         }
         if (isMounted) setIsChecking(false);
@@ -91,5 +104,3 @@ export default function AdminDashboardLayout({ children }: DashboardLayoutProps)
     </SidebarProvider>
   );
 }
-
-

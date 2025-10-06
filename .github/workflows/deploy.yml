@@ -9,8 +9,7 @@ on:
       - '**'
       - '!**.md'
       - '!.github/**'
-      - '.github/scripts/**'
-      - '.github/workflows/build_push.yml'
+      - '!**/.gitignore'
   workflow_dispatch:
 
 jobs:

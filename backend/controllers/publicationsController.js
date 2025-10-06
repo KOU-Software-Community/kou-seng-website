@@ -170,8 +170,6 @@ const extractCoverImage = (content) => {
   // Daha kapsamlı regex - farklı görsel formatlarını yakalayabilir
   const imgRegexes = [
     /<img.*?src=["'](https:\/\/cdn-images-.*?\.medium\.com\/.*?)["']/i,  // Medium CDN görselleri
-    /<img.*?src=["'](.*?\.(?:png|jpg|jpeg|gif|webp))["']/i,              // Herhangi bir görsel uzantısı
-    /<img.*?src=["'](.*?)["']/i                                          // Genel olarak herhangi bir görsel
   ];
   
   // Regex'leri sırayla dene
@@ -183,7 +181,7 @@ const extractCoverImage = (content) => {
   }
   
   // Hiç görsel bulunamadı, varsayılan görseli döndür
-  return '/file.svg';
+  return null;
 };
 
 // Extract text excerpt from HTML content

@@ -16,6 +16,25 @@ const adminOnly = (req, res, next) => {
     }
 }
 
+// @desc    Yönetici erişim kontrolü
+const roleOnly = (req, res, next) => {
+    try {
+        if(req.user && req.user.role === 'admin') {
+            return next();
+        }
+    
+        if(req.query && req.query.type === "technical" && req.query.category) {
+            if(req.user && req.user.role === req.query.category) {
+                return next();
+            }
+        }
+        
+        res.status(403).json({ message: `Erişim engellendi. Yönetici Bölgesi...` });
+    } catch (error) {
+        res.status(500).json({ message: `Rol bazlı erişim hatası alındı.`, error: error.message });
+    }
+}
+
 // @desc    Token kontrolü
 const protect = async (req, res, next) => {
     try {
@@ -66,4 +85,4 @@ const firstUserCreation = async (req, res, next) => {
     }
 }
 
-export { adminOnly, protect, firstUserCreation };
+export { adminOnly, roleOnly, protect, firstUserCreation };

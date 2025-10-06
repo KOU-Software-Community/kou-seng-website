@@ -7,7 +7,7 @@ import {
   exportSubmissionsToCSV,
   updateSubmission
 } from '../controllers/submissionsController.js';
-import { protect, adminOnly } from '../middlewares/authMiddleware.js';
+import { protect, adminOnly, roleOnly } from '../middlewares/authMiddleware.js';
 
 const router = express.Router();
 
@@ -17,8 +17,8 @@ router.post('/general', createGeneralSubmission);
 // Teknik takım başvurusu al (:slug parametresi ile)
 router.post('/technical/:slug', createTechnicalSubmission);
 
-// Tüm başvuruları listele (yöneticiler için)
-router.get('/', protect, adminOnly, getAllSubmissions);
+// Tüm başvuruları listele
+router.get('/', protect, roleOnly, getAllSubmissions);
 
 // Başvuruları CSV olarak dışa aktar
 router.get('/export', protect, adminOnly, exportSubmissionsToCSV);

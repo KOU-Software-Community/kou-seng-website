@@ -25,6 +25,7 @@ const logger = {
   },
 
   error: (message) => {
+    // TODO: Telegram ile loglama yapılacak
     console.log(formatLogMessage('ERROR', message));
   }
 };

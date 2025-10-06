@@ -31,7 +31,7 @@ export type SubmissionListItem = {
   department: string;
   grade: number;
   customFields: Record<string, string>;
-  status: 'pending'| 'reviewed' | 'approved' | 'rejected' | string;
+  status: 'pending'| 'reviewed' | 'accepted' | 'rejected' | string;
   reviewNotes?: string;
   createdAt: string;
   updatedAt: string;
@@ -57,14 +57,14 @@ export type SubmissionListResponse = {
 export type ListSubmissionsParams = {
   type?: 'general' | 'technical';
   category?: string;
-  status?: 'pending' | 'reviewed' | 'approved' | 'rejected' | string;
+  status?: 'pending' | 'reviewed' | 'accepted' | 'rejected' | string;
   search?: string;
   page?: number;
   limit?: number;
 };
 
 export type UpdateSubmissionBody = {
-  status?: 'pending' | 'reviewed' | 'approved' | 'rejected' | string;
+  status?: 'pending' | 'reviewed' | 'accepted' | 'rejected' | string;
   reviewNotes?: string;
 };
 

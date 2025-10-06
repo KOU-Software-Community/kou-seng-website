@@ -14,6 +14,10 @@ import logger from './helpers/logger.js';
 import rateSkip from './helpers/rateSkip.js';
 
 const app = express();
+
+// Proxy üzerinden gelen IP'lere güven
+app.set('trust proxy', true);
+
 dotenv.config({ quiet: true });
 
 const PORT = process.env.PORT || 3001;

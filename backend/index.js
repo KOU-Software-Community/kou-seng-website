@@ -42,8 +42,7 @@ const limiter = rateLimit({
   max: 100, // Limit each IP to 100 requests per window
   standardHeaders: true,
   legacyHeaders: false,
-  skip: (req) => rateSkip(req),
-  keyGenerator: (req) => req.ip,
+  skip: (req) => rateSkip(req)
 });
 app.use(limiter);
 

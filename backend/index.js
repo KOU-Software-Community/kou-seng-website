@@ -15,6 +15,8 @@ import rateSkip from './helpers/rateSkip.js';
 
 const app = express();
 
+app.set("trust proxy", 1);
+
 dotenv.config({ quiet: true });
 
 const PORT = process.env.PORT || 3001;

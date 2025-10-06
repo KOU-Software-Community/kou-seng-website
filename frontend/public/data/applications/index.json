@@ -14,8 +14,8 @@
     "slug": "web",
     "title": "Web Geliştirme Takımı Başvurusu",
     "description": "Frontend ve backend web geliştirme projelerinde yer almak için teknik başvuru formu.",
-    "isOpen": true,
-    "deadline": "Belirtilmedi",
+    "isOpen": false,
+    "deadline": "5 Ekim 2025",
     "type": "technical",
     "icon": "faLaptopCode"
   },
@@ -24,8 +24,8 @@
     "slug": "ai",
     "title": "Yapay Zeka Takımı Başvurusu",
     "description": "Makine öğrenmesi ve yapay zeka projelerinde çalışmak için teknik başvuru formu.",
-    "isOpen": true,
-    "deadline": "Belirtilmedi",
+    "isOpen": false,
+    "deadline": "5 Ekim 2025",
     "type": "technical",
     "icon": "faRobot"
   },
@@ -34,8 +34,8 @@
     "slug": "game",
     "title": "Oyun Takımı Başvurusu",
     "description": "Oyun projelerinde çalışmak için teknik başvuru formu.",
-    "isOpen": true,
-    "deadline": "Belirtilmedi",
+    "isOpen": false,
+    "deadline": "5 Ekim 2025",
     "type": "technical",
     "icon": "faGamepad"
   }

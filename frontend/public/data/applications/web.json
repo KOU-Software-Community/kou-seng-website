@@ -4,8 +4,8 @@
   "slug": "web",
   "title": "Web Geliştirme Takımı Başvurusu",
   "description": "Frontend ve backend web geliştirme projelerinde yer almak için teknik başvuru formu. Takıma katılmak için lütfen aşağıdaki bilgileri eksiksiz doldurunuz.",
-  "isOpen": true,
-  "deadline": "Belirtilmedi",
+  "isOpen": false,
+  "deadline": "5 Ekim 2025",
   "type": "technical",
   "icon": "faLaptopCode",
   "fields": [

@@ -4,8 +4,8 @@
   "slug": "ai",
   "title": "Yapay Zeka Takımı Başvurusu",
   "description": "Yapay zeka projelerinde yer almak için teknik başvuru formu. Takıma başvurmak için lütfen aşağıdaki bilgileri eksiksiz doldurunuz.",
-  "isOpen": true,
-  "deadline": "Belirtilmedi",
+  "isOpen": false,
+  "deadline": "5 Ekim 2025",
   "icon": "faRobot",
   "fields": [
     {

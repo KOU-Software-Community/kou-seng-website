@@ -10,7 +10,7 @@ export const createGeneralSubmission = async (req, res) => {
     const { name, studentId, email, phone, faculty, department, grade } = req.body;
 
     // Zorunlu alanları kontrol et
-    if (!name || !studentId || !email || !phone || !faculty || !department || !grade) {
+    if (!name || !studentId || !email || !phone || !faculty || !department || grade === undefined || grade === null || grade === '') {
       return res.status(400).json({
         success: false,
         message: "Lütfen tüm zorunlu alanları doldurunuz."
@@ -70,7 +70,7 @@ export const createTechnicalSubmission = async (req, res) => {
     const { name, studentId, email, phone, faculty, department, grade, ...customFields } = req.body;
 
     // Zorunlu alanları kontrol et
-    if (!name || !studentId || !email || !phone || !faculty || !department || !grade) {
+    if (!name || !studentId || !email || !phone || !faculty || !department || grade === undefined || grade === null || grade === '') {
       return res.status(400).json({
         success: false,
         message: "Lütfen tüm zorunlu alanları doldurunuz."

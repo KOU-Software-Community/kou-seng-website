@@ -30,6 +30,27 @@ const formatStatus = (status: string): string => {
   }
 };
 
+const formatGrade = (grade: number): string => {
+    switch (grade) {
+        case 0:
+            return 'Hazırlık';
+        case 1:
+            return '1. Sınıf';
+        case 2:
+            return '2. Sınıf';
+        case 3:
+            return '3. Sınıf';
+        case 4:
+            return '4. Sınıf';
+        case 5:
+            return 'Yüksek Lisans';
+        case 6:
+            return 'Doktora';
+        default:
+            return grade.toString();
+    }
+};
+
 const formatCustomFields = (field: string): string => {
     switch (field) {
       case 'question_interests':
@@ -349,7 +370,7 @@ export default function AdminTechnicalTeam({ category }: { category?: string }) 
                                 { label: "Telefon", value: selectedSubmission.phone },
                                 { label: "Fakülte", value: selectedSubmission.faculty },
                                 { label: "Bölüm", value: selectedSubmission.department },
-                                { label: "Sınıf", value: selectedSubmission.grade },
+                                { label: "Sınıf", value: formatGrade(selectedSubmission.grade) },
                                 { label: "Durum", value: formatStatus(selectedSubmission.status) }
                             ].map((item, index) => (
                                 <div key={index}>

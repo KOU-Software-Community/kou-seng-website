@@ -148,7 +148,7 @@ export default function ApplyDetail(props: { slug: string }) {
       if (data.department) submissionData.department = data.department;
       
       // Sınıf bilgisini sayıya çevir
-      if (data.grade) {
+      if (data.grade !== undefined && data.grade !== null && data.grade !== '') {
         const grade = data.grade as string;
         submissionData.grade = isNaN(parseInt(grade)) ? grade : parseInt(grade);
       }

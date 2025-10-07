@@ -2,8 +2,8 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useUser, type User, type CreateUserRequest, type UpdateUserRequest } from '@/hooks/useUser';
-import { useAuth, type AuthUser } from '@/hooks/useAuth';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { useAuth } from '@/hooks/useAuth';
+import { Card, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';

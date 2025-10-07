@@ -1,4 +1,5 @@
 import User from "../models/User.js";
+import Submission from "../models/Submission.js";
 import jwt from 'jsonwebtoken';
 import logger from "../helpers/logger.js";
 
@@ -16,8 +17,8 @@ const adminOnly = (req, res, next) => {
     }
 }
 
-// @desc    Yönetici erişim kontrolü
-const roleOnly = (req, res, next) => {
+// @desc    Yönetici erişim kontrolü category bazlı
+const roleOnlyForCategory = (req, res, next) => {
     try {
         if(req.user && req.user.role === 'admin') {
             return next();
@@ -29,6 +30,27 @@ const roleOnly = (req, res, next) => {
             }
         }
         
+        res.status(403).json({ message: `Erişim engellendi. Yönetici Bölgesi...` });
+    } catch (error) {
+        res.status(500).json({ message: `Rol bazlı erişim hatası alındı.`, error: error.message });
+    }
+}
+
+// @desc    Yönetici erişim kontrolü submission bazlı
+const roleOnlyForSubmission = async (req, res, next) => {
+    try {
+        if(req.user && req.user.role === 'admin') {
+            return next();
+        }
+
+        if(req.params && req.params.id) {
+            const submission = await Submission.findById(req.params.id);
+
+            if(submission && submission.submissionType === 'technical' && submission.technicalCategory === req.user.role) {
+                return next();
+            }
+        }
+
         res.status(403).json({ message: `Erişim engellendi. Yönetici Bölgesi...` });
     } catch (error) {
         res.status(500).json({ message: `Rol bazlı erişim hatası alındı.`, error: error.message });
@@ -85,4 +107,4 @@ const firstUserCreation = async (req, res, next) => {
     }
 }
 
-export { adminOnly, roleOnly, protect, firstUserCreation };
+export { adminOnly, roleOnlyForCategory, roleOnlyForSubmission, protect, firstUserCreation };

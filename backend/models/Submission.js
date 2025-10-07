@@ -43,8 +43,8 @@ const submissionSchema = new mongoose.Schema(
     grade: {
       type: Number,
       required: true,
-      min: 1,
-      max: 6, // Hazırlık sınıfı veya yüksek lisans/doktora dahil
+      min: 0,
+      max: 6, // Hazırlık sınıfı, yüksek lisans/doktora dahil
     },
     // Teknik başvuru için ek alanlar
     technicalCategory: {

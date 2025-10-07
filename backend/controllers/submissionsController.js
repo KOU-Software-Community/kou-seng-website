@@ -86,6 +86,26 @@ export const createTechnicalSubmission = async (req, res) => {
       });
     }
 
+    // Custom fields validasyonu
+    const allowedCustomFields = [
+      "question_interests",
+      "question_github",
+      "question_experience",
+      "question_motivation",
+      "question_linkedin",
+      "question_itchio"
+    ];
+
+    const customFieldKeys = Object.keys(customFields);
+    const invalidFields = customFieldKeys.filter(key => !allowedCustomFields.includes(key));
+
+    if (invalidFields.length > 0) {
+      return res.status(400).json({
+        success: false,
+        message: `Geçersiz alanlar tespit edildi. Lütfen geçerli alanlar gönderiniz.`
+      });
+    }
+
     // Aynı öğrenci numarası veya email ile aynı kategoride başka bir başvuru var mı kontrol et
     const existingSubmission = await Submission.findOne({
       $and: [

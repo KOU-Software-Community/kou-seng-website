@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useSubmissions } from '@/hooks/useSubmissions';
 import { useAuth } from '@/hooks/useAuth';
+import { useIsMobile } from '@/hooks/use-mobile';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -111,6 +112,7 @@ const formatCustomFields = (field: string): string => {
 export default function AdminGeneralMembership() {
     const { listSubmissions, submissions, isFetchingSubmissions, pagination, updateSubmission, isUpdatingSubmission, submissionsError } = useSubmissions();
     const { isAuthenticated } = useAuth();
+    const isMobile = useIsMobile();
 
     const [page, setPage] = useState<number>(1);
     const [searchValue, setSearchValue] = useState<string>('');
@@ -264,13 +266,13 @@ export default function AdminGeneralMembership() {
                     submissions.map((item) => (
                         <Card key={item._id} className="flex items-center justify-between px-4 py-3">
                             <div className="grid w-full grid-cols-12 items-center gap-2">
-                                <div className="col-span-3 truncate text-sm font-medium" aria-label="Öğrenci numarası">
+                                <div className="hidden md:block md:col-span-3 truncate text-sm font-medium" aria-label="Öğrenci numarası">
                                     {item.studentId}
                                 </div>
-                                <div className="col-span-6 truncate text-sm" aria-label="Ad soyad">
-                                    {item.name}
+                                <div className="col-span-7 md:col-span-6 truncate text-sm" aria-label="Ad soyad">
+                                    {isMobile && item.name.length > 12 ? item.name.slice(0, 12) + "..." : item.name}
                                 </div>
-                                <div className="col-span-3 flex items-center justify-end gap-2">
+                                <div className="col-span-5 md:col-span-3 flex items-center justify-end gap-2">
                                     <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground" aria-label="Durum">
                                         {formatStatus(item.status)}
                                     </span>

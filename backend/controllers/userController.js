@@ -81,6 +81,10 @@ const updateUser = async (req, res) => {
             return res.status(404).json({ message: 'Kullanıcı bulunamadı' });
         }
 
+        if (req.user._id.toString() === req.params.id && role && role !== req.user.role) {
+            return res.status(403).json({ message: 'Kendi kullanıcı rolünüzü değiştiremezsiniz' });
+        }
+
         user.name = name || user.name;
         user.email = email || user.email;
         user.role = role || user.role;
@@ -109,6 +113,10 @@ const deleteUser = async (req, res) => {
 
         if (!user) {
             return res.status(404).json({ message: 'Kullanıcı bulunamadı' });
+        }
+
+        if (req.user._id.toString() === req.params.id) {
+            return res.status(403).json({ message: 'Kendi kullanıcı hesabınızı silemezsiniz' });
         }
 
         await User.deleteOne({ _id: user._id });

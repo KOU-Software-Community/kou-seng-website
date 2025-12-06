@@ -48,6 +48,7 @@ export default function AdminManagement() {
     const [isCreateDialogOpen, setIsCreateDialogOpen] = useState<boolean>(false);
     const [isEditDialogOpen, setIsEditDialogOpen] = useState<boolean>(false);
     const [selectedUser, setSelectedUser] = useState<User | null>(null);
+    const [deletingUserId, setDeletingUserId] = useState<string | null>(null);
 
     // Form states
     const [formName, setFormName] = useState<string>('');
@@ -183,7 +184,10 @@ export default function AdminManagement() {
         
         const confirmed = window.confirm(`"${userName}" kullanıcısını silmek istediğinize emin misiniz?`);
         if (!confirmed) return;
+        
+        setDeletingUserId(id);
         await deleteUser(id);
+        setDeletingUserId(null);
     };
 
     return (
@@ -260,10 +264,10 @@ export default function AdminManagement() {
                                     size="sm"
                                     className="cursor-pointer"
                                     onClick={() => handleDeleteUser(user._id, user.name, user.email)}
-                                    disabled={isDeleting || (currentUserEmail === user.email)}
+                                    disabled={deletingUserId === user._id || (currentUserEmail === user.email)}
                                     aria-label="Kullanıcıyı sil"
                                 >
-                                    {isDeleting ? 'Siliniyor...' : 'Sil'}
+                                    {deletingUserId === user._id ? 'Siliniyor...' : 'Sil'}
                                 </Button>
                             </CardFooter>
                         </Card>

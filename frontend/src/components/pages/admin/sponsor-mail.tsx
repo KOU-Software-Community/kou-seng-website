@@ -11,8 +11,8 @@ import { Separator } from '@/components/ui/separator';
 type BlockType = MailBlock['type'];
 
 const BLOCK_LABELS: Record<BlockType, string> = {
-  paragraph: 'Paragraf',
   heading: 'Başlık',
+  paragraph: 'Paragraf',
   list: 'Liste',
   signature: 'İmza',
 };

@@ -14,7 +14,15 @@ const emailRegex = /^\S+@\S+\.\S+$/;
 // @access  Private/SponsorOrAdmin
 const sendSponsorMail = async (req, res) => {
     try {
-        const { to, subject, blocks } = req.body;
+        const { to, subject } = req.body;
+
+        // blocks FormData'dan JSON string olarak gelir
+        let blocks;
+        try {
+            blocks = JSON.parse(req.body.blocks || '[]');
+        } catch {
+            return res.status(400).json({ success: false, message: 'Geçersiz blok verisi.' });
+        }
 
         if (!to || !subject || !Array.isArray(blocks) || blocks.length === 0) {
             return res.status(400).json({
@@ -65,6 +73,14 @@ const sendSponsorMail = async (req, res) => {
             },
         ];
 
+        // Kullanıcının yüklediği dosya eki (opsiyonel)
+        if (req.file) {
+            attachments.push({
+                filename: req.file.originalname,
+                content: req.file.buffer,
+            });
+        }
+
         await transporter.sendMail({
             from: `"${mailSenderName}" <${mailUser}>`,
             to,
@@ -73,7 +89,8 @@ const sendSponsorMail = async (req, res) => {
             attachments,
         });
 
-        logger.info(`Sponsorluk maili gönderildi: ${to} (gönderen: ${req.user?.email})`);
+        const attachmentInfo = req.file ? ` | ek: ${req.file.originalname}` : '';
+        logger.info(`Sponsorluk maili gönderildi: ${to} (gönderen: ${req.user?.email}${attachmentInfo})`);
 
         return res.status(200).json({
             success: true,

@@ -13,6 +13,7 @@ export type SendMailPayload = {
   to: string;
   subject: string;
   blocks: MailBlock[];
+  attachment?: File | null;
 };
 
 interface UseSponsorMailReturn {
@@ -37,13 +38,19 @@ export const useSponsorMail = (): UseSponsorMailReturn => {
     setErrorMessage('');
 
     try {
+      // multipart/form-data — Content-Type başlığını tarayıcı otomatik ekler
+      const formData = new FormData();
+      formData.append('to', payload.to);
+      formData.append('subject', payload.subject);
+      formData.append('blocks', JSON.stringify(payload.blocks));
+      if (payload.attachment) {
+        formData.append('attachment', payload.attachment);
+      }
+
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/mail/send`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          ...getAuthHeader(),
-        },
-        body: JSON.stringify(payload),
+        headers: { ...getAuthHeader() },
+        body: formData,
       });
 
       const result = await response.json() as { success: boolean; message?: string };

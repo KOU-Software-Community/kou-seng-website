@@ -24,6 +24,7 @@
     "json2csv": "^6.0.0-alpha.2",
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.2.3",
+    "multer": "^2.1.0",
     "nodemailer": "^8.0.1",
     "rss-parser": "^3.13.0"
   },

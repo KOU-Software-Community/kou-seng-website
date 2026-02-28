@@ -38,6 +38,8 @@ export default function AdminSponsorMail() {
   const [subject, setSubject] = useState('');
   const [blocks, setBlocks] = useState<MailBlock[]>([]);
   const [addMenuOpen, setAddMenuOpen] = useState(false);
+  const [attachment, setAttachment] = useState<File | null>(null);
+  const [fileInputKey, setFileInputKey] = useState(0);
 
   const addBlock = (type: BlockType) => {
     setBlocks((prev) => [...prev, createBlock(type)]);
@@ -67,7 +69,11 @@ export default function AdminSponsorMail() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await sendMail({ to, subject, blocks });
+    const success = await sendMail({ to, subject, blocks, attachment });
+    if (success) {
+      setAttachment(null);
+      setFileInputKey((k) => k + 1);
+    }
   };
 
   return (
@@ -101,6 +107,40 @@ export default function AdminSponsorMail() {
             onChange={(e) => { setSubject(e.target.value); resetStatus(); }}
             required
           />
+        </div>
+
+        <div className="flex flex-col gap-1">
+          <label htmlFor="mail-attachment" className="text-sm font-medium">
+            Dosya Eki{' '}
+            <span className="font-normal text-muted-foreground">(opsiyonel · PDF, görsel veya Word · maks. 10 MB)</span>
+          </label>
+          <div className="flex items-center gap-2">
+            <Input
+              key={fileInputKey}
+              id="mail-attachment"
+              type="file"
+              accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"
+              className="cursor-pointer"
+              onChange={(e) => { setAttachment(e.target.files?.[0] ?? null); resetStatus(); }}
+            />
+            {attachment && (
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                className="h-8 w-8 p-0 text-destructive hover:text-destructive cursor-pointer shrink-0"
+                onClick={() => { setAttachment(null); setFileInputKey((k) => k + 1); }}
+                aria-label="Dosyayı kaldır"
+              >
+                ✕
+              </Button>
+            )}
+          </div>
+          {attachment && (
+            <p className="text-xs text-muted-foreground">
+              {attachment.name} · {(attachment.size / 1024).toFixed(0)} KB
+            </p>
+          )}
         </div>
       </form>
 

@@ -6,7 +6,7 @@ const UserSchema = new mongoose.Schema({
         match: [/^\S+@\S+\.\S+$/, 'Geçerli bir e-posta adresi giriniz']  
     },
     password: {type: String, required: true},
-    role: {type: String, required: true, enum: ['admin', 'web', 'ai', 'game', 'user'], default: 'user'}
+    role: {type: String, required: true, enum: ['admin', 'web', 'ai', 'game', 'user', 'sponsor'], default: 'user'}
 }, {
     timestamps: true
 });

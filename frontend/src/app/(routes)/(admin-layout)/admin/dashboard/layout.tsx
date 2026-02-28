@@ -69,6 +69,18 @@ export default function AdminDashboardLayout({ children }: DashboardLayoutProps)
           if (isMounted) setIsChecking(false);
           return;
         }
+
+        // Sponsor rolü sadece dashboard ve sponsor-mail sayfasına erişebilir
+        if (role === 'sponsor') {
+          const isSponsorMailPage = pathname === '/admin/dashboard/sponsor-mail';
+          if (!onDashboardPage && !isSponsorMailPage) {
+            router.replace('/admin/dashboard/sponsor-mail');
+            return;
+          }
+          if (isMounted) setIsChecking(false);
+          return;
+        }
+
         if (isMounted) setIsChecking(false);
         return;
       }

@@ -9,6 +9,7 @@ import contactRoutes from './routes/contactRoutes.js';
 import publicationRoutes from './routes/publicationRoutes.js';
 import submissionsRoutes from './routes/submissionsRoutes.js';
 import healthRoutes from './routes/healthRoutes.js';
+import mailRoutes from './routes/mailRoutes.js';
 import ConnectDB from './config/dbConnection.js';
 import logger from './helpers/logger.js';
 import rateSkip from './helpers/rateSkip.js';
@@ -61,6 +62,7 @@ app.use('/announcements', announcementRoutes);
 app.use('/contact', contactRoutes);
 app.use('/rss', publicationRoutes);
 app.use('/submissions', submissionsRoutes);
+app.use('/mail', mailRoutes);
 
 app.listen(PORT, () => {
     logger.info(`Server ${PORT} portunda çalışıyor`);

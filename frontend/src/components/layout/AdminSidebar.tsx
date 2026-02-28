@@ -34,6 +34,7 @@ const navItems: NavItem[] = [
   { label: 'Teknik Takım', href: '/admin/dashboard/technical-team' },
   { label: 'İletişim', href: '/admin/dashboard/contact' },
   { label: 'Admin Yönetimi', href: '/admin/dashboard/admin-management' },
+  { label: 'Sponsor Mail', href: '/admin/dashboard/sponsor-mail' },
 ];
 
 export default function AdminSidebar() {
@@ -85,6 +86,9 @@ export default function AdminSidebar() {
     const limitedRoles = ['web', 'ai', 'game'];
     if (limitedRoles.includes(userRole)) {
       return navItems.filter((n) => n.label === 'Dashboard' || n.label === 'Teknik Takım');
+    }
+    if (userRole === 'sponsor') {
+      return navItems.filter((n) => n.label === 'Dashboard' || n.label === 'Sponsor Mail');
     }
     return [];
   }, [userRole]);

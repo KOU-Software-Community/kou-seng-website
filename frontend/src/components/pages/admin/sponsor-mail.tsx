@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useId } from 'react';
+import { useState, useId, useRef } from 'react';
 import { useSponsorMail, type MailBlock } from '@/hooks/useSponsorMail';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -217,6 +217,68 @@ export default function AdminSponsorMail() {
   );
 }
 
+// Seçili metni biçimlendirme işaretleriyle saran textarea bileşeni
+function FormatableTextarea({
+  value,
+  onChange,
+  placeholder,
+  rows = 3,
+}: {
+  value: string;
+  onChange: (val: string) => void;
+  placeholder?: string;
+  rows?: number;
+}) {
+  const ref = useRef<HTMLTextAreaElement>(null);
+
+  const applyFormat = (open: string, close: string) => {
+    const el = ref.current;
+    if (!el) return;
+    const start = el.selectionStart;
+    const end = el.selectionEnd;
+    const next =
+      value.slice(0, start) + open + value.slice(start, end) + close + value.slice(end);
+    onChange(next);
+    // Seçimi işaretlerin içinde tut
+    requestAnimationFrame(() => {
+      el.focus();
+      el.setSelectionRange(start + open.length, end + open.length);
+    });
+  };
+
+  return (
+    <div className="flex flex-col gap-1">
+      <div className="flex items-center gap-1.5">
+        <button
+          type="button"
+          title="Kalın — seçili metni kalın yap"
+          className="inline-flex items-center justify-center h-6 px-2 text-xs font-bold border rounded hover:bg-muted cursor-pointer select-none"
+          onMouseDown={(e) => { e.preventDefault(); applyFormat('**', '**'); }}
+        >
+          B
+        </button>
+        <button
+          type="button"
+          title="Vurgu — seçili metni vurgula"
+          className="inline-flex items-center justify-center h-6 px-2 text-xs border rounded cursor-pointer select-none font-semibold"
+          style={{ color: '#142850', background: '#eef4ff' }}
+          onMouseDown={(e) => { e.preventDefault(); applyFormat('[[', ']]'); }}
+        >
+          Vurgu
+        </button>
+        <span className="text-xs text-muted-foreground">**kalın** · [[vurgu]]</span>
+      </div>
+      <Textarea
+        ref={ref}
+        placeholder={placeholder}
+        value={value}
+        rows={rows}
+        onChange={(e) => onChange(e.target.value)}
+      />
+    </div>
+  );
+}
+
 function BlockEditor({
   block,
   onChange,
@@ -226,11 +288,11 @@ function BlockEditor({
 }) {
   if (block.type === 'paragraph') {
     return (
-      <Textarea
-        placeholder="Paragraf metni..."
+      <FormatableTextarea
+        placeholder="Paragraf metni... (**kalın** veya [[vurgu]] kullanabilirsiniz)"
         value={block.text}
         rows={3}
-        onChange={(e) => onChange({ ...block, text: e.target.value })}
+        onChange={(text) => onChange({ ...block, text })}
       />
     );
   }
@@ -260,32 +322,33 @@ function BlockEditor({
       onChange({ ...block, items: block.items.filter((_, idx) => idx !== i) });
 
     return (
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-3">
         {block.items.map((item, i) => (
-          <div key={i} className="flex items-center gap-2">
-            <Input
-              placeholder="Başlık (opsiyonel)"
-              value={item.title}
-              className="w-1/3"
-              onChange={(e) => updateItem(i, 'title', e.target.value)}
-            />
-            <Input
-              placeholder="Açıklama"
+          <div key={i} className="flex flex-col gap-1.5 rounded-md border p-3">
+            <div className="flex items-center gap-2">
+              <Input
+                placeholder="Başlık (opsiyonel, otomatik kalın)"
+                value={item.title}
+                onChange={(e) => updateItem(i, 'title', e.target.value)}
+              />
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                className="h-8 w-8 p-0 text-destructive hover:text-destructive cursor-pointer shrink-0"
+                onClick={() => removeItem(i)}
+                disabled={block.items.length <= 1}
+                aria-label="Maddeyi sil"
+              >
+                ✕
+              </Button>
+            </div>
+            <FormatableTextarea
+              placeholder="Açıklama..."
               value={item.description}
-              className="flex-1"
-              onChange={(e) => updateItem(i, 'description', e.target.value)}
+              rows={2}
+              onChange={(desc) => updateItem(i, 'description', desc)}
             />
-            <Button
-              type="button"
-              variant="ghost"
-              size="sm"
-              className="h-8 w-8 p-0 text-destructive hover:text-destructive cursor-pointer shrink-0"
-              onClick={() => removeItem(i)}
-              disabled={block.items.length <= 1}
-              aria-label="Maddeyi sil"
-            >
-              ✕
-            </Button>
           </div>
         ))}
         <Button

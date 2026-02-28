@@ -7,6 +7,10 @@
  *   { type: 'heading',   text: string }
  *   { type: 'list',      items: Array<{ title: string, description: string }> }
  *   { type: 'signature', name: string, title: string, email: string }
+ *
+ * Paragraf ve liste açıklamalarında inline biçimlendirme desteklenir:
+ *   **metin**   → <strong>metin</strong>   (kalın)
+ *   [[metin]]   → <span class="highlight"> (vurgu)
  */
 
 const escapeHtml = (str) => {
@@ -19,10 +23,27 @@ const escapeHtml = (str) => {
         .replace(/'/g, '&#039;');
 };
 
+/**
+ * HTML escape eder, ardından **bold** ve [[highlight]] işaretleyicilerini HTML tag'lerine çevirir.
+ * Sıralama önemlidir: önce escape, sonra replace (eklenen tag'ler escape edilmez).
+ */
+const parseInline = (str) => {
+    if (typeof str !== 'string') return '';
+    let result = escapeHtml(str);
+    // **metin** → <strong>metin</strong>
+    result = result.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    // [[metin]] → vurgulu span
+    result = result.replace(
+        /\[\[(.+?)\]\]/g,
+        '<span style="color:#142850;font-weight:600;background-color:#eef4ff;padding:2px 6px;border-radius:4px;">$1</span>'
+    );
+    return result;
+};
+
 const blockToHtml = (block) => {
     switch (block.type) {
         case 'paragraph':
-            return `<p>${escapeHtml(block.text)}</p>`;
+            return `<p>${parseInline(block.text)}</p>`;
 
         case 'heading':
             return `<h3 style="color: #142850; margin-top: 30px;">${escapeHtml(block.text)}</h3>`;
@@ -32,7 +53,7 @@ const blockToHtml = (block) => {
             const liItems = block.items
                 .map((item) => {
                     const title = escapeHtml(item.title || '');
-                    const desc = escapeHtml(item.description || '');
+                    const desc = parseInline(item.description || '');
                     if (title && desc) {
                         return `<li><strong>${title}:</strong> ${desc}</li>`;
                     }

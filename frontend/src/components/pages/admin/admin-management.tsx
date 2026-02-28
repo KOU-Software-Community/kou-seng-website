@@ -22,6 +22,8 @@ const formatRole = (role: string): string => {
             return 'AI Takımı';
         case 'game':
             return 'Oyun Takımı';
+        case 'sponsor':
+            return 'Sponsorluk Ekibi';
         default:
             return role;
     }
@@ -63,7 +65,7 @@ export default function AdminManagement() {
         if (!isAuthenticated) return;
         hasFetchedRef.current = true;
         void fetchUsers();
-        
+
         // Giriş yapmış kullanıcının bilgilerini al
         const getCurrentUserEmail = async () => {
             try {
@@ -75,7 +77,7 @@ export default function AdminManagement() {
                 console.error('Kullanıcı bilgileri alınamadı', error);
             }
         };
-        
+
         void getCurrentUserEmail();
     }, [isAuthenticated, fetchUsers, getAuthDetail]);
 
@@ -181,10 +183,10 @@ export default function AdminManagement() {
             alert('Kendi hesabınızı silemezsiniz.');
             return;
         }
-        
+
         const confirmed = window.confirm(`"${userName}" kullanıcısını silmek istediğinize emin misiniz?`);
         if (!confirmed) return;
-        
+
         setDeletingUserId(id);
         await deleteUser(id);
         setDeletingUserId(null);
@@ -358,6 +360,7 @@ export default function AdminManagement() {
                                 <option value="web">Web Takımı</option>
                                 <option value="ai">AI Takımı</option>
                                 <option value="game">Oyun Takımı</option>
+                                <option value="sponsor">Oyun Takımı</option>
                             </select>
                         </div>
                     </div>
@@ -431,7 +434,7 @@ export default function AdminManagement() {
                                 <option value="admin">Admin</option>
                                 <option value="web">Web Takımı</option>
                                 <option value="ai">AI Takımı</option>
-                                <option value="game">Oyun Takımı</option>
+                                <option value="game">Sponsorluk Ekibi</option>
                             </select>
                         </div>
                     </div>

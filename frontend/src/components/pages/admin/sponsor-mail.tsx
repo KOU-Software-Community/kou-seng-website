@@ -55,9 +55,6 @@ export default function AdminSponsorMail() {
   const [draftNameInput, setDraftNameInput] = useState('');
   const [draftSavedMsg, setDraftSavedMsg] = useState(false);
 
-  // Taslaklar listesi
-  const [draftsOpen, setDraftsOpen] = useState(false);
-
   // --- Blok işlemleri ---
   const addBlock = (type: BlockType) => {
     setBlocks((prev) => [...prev, createBlock(type)]);
@@ -109,7 +106,6 @@ export default function AdminSponsorMail() {
     setDraftNameInput('');
     setDraftSavedMsg(true);
     setTimeout(() => setDraftSavedMsg(false), 3000);
-    setDraftsOpen(true);
   };
 
   const handleCancelDraftSave = () => {
@@ -133,292 +129,288 @@ export default function AdminSponsorMail() {
   };
 
   return (
-    <div className="flex flex-col gap-6 max-w-2xl pb-20">
-      <h1 className="text-xl font-semibold">Sponsor Mail Gönder</h1>
+    <div className="flex gap-6 items-start">
+      {/* Sol sütun: form + bloklar */}
+      <div className="flex flex-col gap-6 min-w-0 flex-1 max-w-2xl pb-20">
+        <h1 className="text-xl font-semibold">Sponsor Mail Gönder</h1>
 
-      <form id={formId} onSubmit={handleSubmit} className="flex flex-col gap-4">
-        <div className="flex flex-col gap-1">
-          <label htmlFor="mail-to" className="text-sm font-medium">
-            Alıcı E-posta
-          </label>
-          <Input
-            id="mail-to"
-            type="email"
-            placeholder="ornek@sirket.com"
-            value={to}
-            onChange={(e) => { setTo(e.target.value); resetStatus(); }}
-            required
-          />
-        </div>
-
-        <div className="flex flex-col gap-1">
-          <label htmlFor="mail-subject" className="text-sm font-medium">
-            Konu
-          </label>
-          <Input
-            id="mail-subject"
-            type="text"
-            placeholder="Mail konusu"
-            value={subject}
-            onChange={(e) => { setSubject(e.target.value); resetStatus(); }}
-            required
-          />
-        </div>
-
-        <div className="flex flex-col gap-1">
-          <label htmlFor="mail-attachment" className="text-sm font-medium">
-            Dosya Eki{' '}
-            <span className="font-normal text-muted-foreground">(opsiyonel · PDF, görsel veya Word · maks. 10 MB)</span>
-          </label>
-          <div className="flex items-center gap-2">
+        <form id={formId} onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <div className="flex flex-col gap-1">
+            <label htmlFor="mail-to" className="text-sm font-medium">
+              Alıcı E-posta
+            </label>
             <Input
-              key={fileInputKey}
-              id="mail-attachment"
-              type="file"
-              accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"
-              className="cursor-pointer"
-              onChange={(e) => { setAttachment(e.target.files?.[0] ?? null); resetStatus(); }}
+              id="mail-to"
+              type="email"
+              placeholder="ornek@sirket.com"
+              value={to}
+              onChange={(e) => { setTo(e.target.value); resetStatus(); }}
+              required
             />
+          </div>
+
+          <div className="flex flex-col gap-1">
+            <label htmlFor="mail-subject" className="text-sm font-medium">
+              Konu
+            </label>
+            <Input
+              id="mail-subject"
+              type="text"
+              placeholder="Mail konusu"
+              value={subject}
+              onChange={(e) => { setSubject(e.target.value); resetStatus(); }}
+              required
+            />
+          </div>
+
+          <div className="flex flex-col gap-1">
+            <label htmlFor="mail-attachment" className="text-sm font-medium">
+              Dosya Eki{' '}
+              <span className="font-normal text-muted-foreground">(opsiyonel · PDF, görsel veya Word · maks. 10 MB)</span>
+            </label>
+            <div className="flex items-center gap-2">
+              <Input
+                key={fileInputKey}
+                id="mail-attachment"
+                type="file"
+                accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"
+                className="cursor-pointer"
+                onChange={(e) => { setAttachment(e.target.files?.[0] ?? null); resetStatus(); }}
+              />
+              {attachment && (
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="sm"
+                  className="h-8 w-8 p-0 text-destructive hover:text-destructive cursor-pointer shrink-0"
+                  onClick={() => { setAttachment(null); setFileInputKey((k) => k + 1); }}
+                  aria-label="Dosyayı kaldır"
+                >
+                  ✕
+                </Button>
+              )}
+            </div>
             {attachment && (
-              <Button
-                type="button"
-                variant="ghost"
-                size="sm"
-                className="h-8 w-8 p-0 text-destructive hover:text-destructive cursor-pointer shrink-0"
-                onClick={() => { setAttachment(null); setFileInputKey((k) => k + 1); }}
-                aria-label="Dosyayı kaldır"
-              >
-                ✕
-              </Button>
+              <p className="text-xs text-muted-foreground">
+                {attachment.name} · {(attachment.size / 1024).toFixed(0)} KB
+              </p>
             )}
           </div>
-          {attachment && (
-            <p className="text-xs text-muted-foreground">
-              {attachment.name} · {(attachment.size / 1024).toFixed(0)} KB
+        </form>
+
+        <Separator />
+
+        <div className="flex flex-col gap-3">
+          <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">
+            İçerik Blokları
+          </h2>
+
+          {blocks.length === 0 && (
+            <p className="text-sm text-muted-foreground">
+              Henüz blok eklenmedi. Aşağıdaki butonu kullanarak içerik ekleyebilirsiniz.
             </p>
           )}
-        </div>
-      </form>
 
-      <Separator />
-
-      <div className="flex flex-col gap-3">
-        <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">
-          İçerik Blokları
-        </h2>
-
-        {blocks.length === 0 && (
-          <p className="text-sm text-muted-foreground">
-            Henüz blok eklenmedi. Aşağıdaki butonu kullanarak içerik ekleyebilirsiniz.
-          </p>
-        )}
-
-        {blocks.map((block, index) => (
-          <Card key={index}>
-            <CardHeader className="pb-2">
-              <div className="flex items-center justify-between">
-                <CardTitle className="text-sm font-medium">{BLOCK_LABELS[block.type]}</CardTitle>
-                <div className="flex items-center gap-1">
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="sm"
-                    className="h-7 w-7 p-0 cursor-pointer"
-                    onClick={() => moveBlock(index, 'up')}
-                    disabled={index === 0}
-                    aria-label="Yukarı taşı"
-                  >
-                    ↑
-                  </Button>
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="sm"
-                    className="h-7 w-7 p-0 cursor-pointer"
-                    onClick={() => moveBlock(index, 'down')}
-                    disabled={index === blocks.length - 1}
-                    aria-label="Aşağı taşı"
-                  >
-                    ↓
-                  </Button>
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="sm"
-                    className="h-7 w-7 p-0 text-destructive hover:text-destructive cursor-pointer"
-                    onClick={() => removeBlock(index)}
-                    aria-label="Bloğu sil"
-                  >
-                    ✕
-                  </Button>
+          {blocks.map((block, index) => (
+            <Card key={index}>
+              <CardHeader className="pb-2">
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-sm font-medium">{BLOCK_LABELS[block.type]}</CardTitle>
+                  <div className="flex items-center gap-1">
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      className="h-7 w-7 p-0 cursor-pointer"
+                      onClick={() => moveBlock(index, 'up')}
+                      disabled={index === 0}
+                      aria-label="Yukarı taşı"
+                    >
+                      ↑
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      className="h-7 w-7 p-0 cursor-pointer"
+                      onClick={() => moveBlock(index, 'down')}
+                      disabled={index === blocks.length - 1}
+                      aria-label="Aşağı taşı"
+                    >
+                      ↓
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      className="h-7 w-7 p-0 text-destructive hover:text-destructive cursor-pointer"
+                      onClick={() => removeBlock(index)}
+                      aria-label="Bloğu sil"
+                    >
+                      ✕
+                    </Button>
+                  </div>
                 </div>
-              </div>
-            </CardHeader>
-            <CardContent className="pt-0">
-              <BlockEditor block={block} onChange={(updated) => updateBlock(index, updated)} />
-            </CardContent>
-          </Card>
-        ))}
+              </CardHeader>
+              <CardContent className="pt-0">
+                <BlockEditor block={block} onChange={(updated) => updateBlock(index, updated)} />
+              </CardContent>
+            </Card>
+          ))}
 
-        {/* Blok ekleme butonu — listenin altında, dropdown yukarı açılır */}
-        <div className="relative self-start">
-          <Button
-            type="button"
-            variant="outline"
-            size="sm"
-            className="cursor-pointer"
-            onClick={() => setAddMenuOpen((prev) => !prev)}
-          >
-            + Blok Ekle
-          </Button>
-          {addMenuOpen && (
-            <div className="absolute left-0 bottom-full mb-1 z-10 flex flex-col bg-background border rounded-md shadow-md min-w-[130px]">
-              {(Object.keys(BLOCK_LABELS) as BlockType[]).map((type) => (
-                <button
-                  key={type}
-                  type="button"
-                  className="px-4 py-2 text-sm text-left hover:bg-muted cursor-pointer"
-                  onClick={() => addBlock(type)}
-                >
-                  {BLOCK_LABELS[type]}
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
-      </div>
-
-      {/* Taslaklar bölümü */}
-      {!draftsLoading && (
-        <>
-          <Separator />
-          <div className="flex flex-col gap-3">
-            <button
-              type="button"
-              className="flex items-center justify-between text-sm font-semibold text-muted-foreground uppercase tracking-wide cursor-pointer hover:text-foreground transition-colors"
-              onClick={() => setDraftsOpen((o) => !o)}
-            >
-              <span>Taslaklar {drafts.length > 0 && `(${drafts.length})`}</span>
-              <span className="text-xs">{draftsOpen ? '▲' : '▼'}</span>
-            </button>
-
-            {draftsOpen && (
-              drafts.length === 0 ? (
-                <p className="text-sm text-muted-foreground">Henüz kayıtlı taslak yok.</p>
-              ) : (
-                <div className="flex flex-col gap-2">
-                  {drafts.map((draft) => (
-                    <Card key={draft.id}>
-                      <CardContent className="py-3 px-4">
-                        <div className="flex items-start justify-between gap-3">
-                          <div className="flex flex-col gap-0.5 min-w-0">
-                            <span className="font-medium text-sm truncate">{draft.name}</span>
-                            <span className="text-xs text-muted-foreground truncate">
-                              {draft.to && `${draft.to} · `}{draft.subject}
-                            </span>
-                            <span className="text-xs text-muted-foreground">
-                              {draft.attachment && `📎 ${draft.attachment.name} · `}
-                              {formatDate(draft.createdAt)}
-                            </span>
-                          </div>
-                          <div className="flex items-center gap-1 shrink-0">
-                            <Button
-                              type="button"
-                              size="sm"
-                              variant="outline"
-                              className="cursor-pointer"
-                              onClick={() => handleLoadDraft(draft)}
-                            >
-                              Yükle
-                            </Button>
-                            <Button
-                              type="button"
-                              size="sm"
-                              variant="ghost"
-                              className="cursor-pointer text-destructive hover:text-destructive"
-                              onClick={() => removeDraft(draft.id)}
-                            >
-                              Sil
-                            </Button>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-              )
-            )}
-          </div>
-        </>
-      )}
-
-      {/* Sticky action bar */}
-      <div className="sticky bottom-0 z-10 bg-background border-t flex items-center gap-3 py-3">
-        {isDraftNameOpen ? (
-          <>
-            <Input
-              className="h-8 text-sm flex-1"
-              placeholder="Taslak adı..."
-              value={draftNameInput}
-              onChange={(e) => setDraftNameInput(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') handleConfirmSaveDraft();
-                if (e.key === 'Escape') handleCancelDraftSave();
-              }}
-              autoFocus
-            />
-            <Button
-              type="button"
-              size="sm"
-              className="cursor-pointer shrink-0"
-              disabled={!draftNameInput.trim()}
-              onClick={handleConfirmSaveDraft}
-            >
-              Kaydet
-            </Button>
-            <Button
-              type="button"
-              size="sm"
-              variant="ghost"
-              className="cursor-pointer shrink-0"
-              onClick={handleCancelDraftSave}
-            >
-              İptal
-            </Button>
-          </>
-        ) : (
-          <>
+          {/* Blok ekleme butonu — listenin altında, dropdown yukarı açılır */}
+          <div className="relative self-start">
             <Button
               type="button"
               variant="outline"
               size="sm"
-              className="cursor-pointer shrink-0"
-              onClick={handleOpenDraftSave}
+              className="cursor-pointer"
+              onClick={() => setAddMenuOpen((prev) => !prev)}
             >
-              Taslak Kaydet
+              + Blok Ekle
             </Button>
-            <div className="flex-1 min-w-0 text-sm">
-              {draftSavedMsg && (
-                <span className="text-green-700" role="status">Taslak kaydedildi.</span>
-              )}
-              {!draftSavedMsg && errorMessage && (
-                <span className="text-destructive" role="alert">{errorMessage}</span>
-              )}
-              {!draftSavedMsg && !errorMessage && isSuccess && (
-                <span className="text-green-700" role="status">Mail başarıyla gönderildi.</span>
-              )}
-            </div>
-          </>
-        )}
-        <Button
-          type="submit"
-          form={formId}
-          disabled={isSending || blocks.length === 0}
-          className="cursor-pointer shrink-0"
-        >
-          {isSending ? 'Gönderiliyor...' : 'Mail Gönder'}
-        </Button>
+            {addMenuOpen && (
+              <div className="absolute left-0 bottom-full mb-1 z-10 flex flex-col bg-background border rounded-md shadow-md min-w-[130px]">
+                {(Object.keys(BLOCK_LABELS) as BlockType[]).map((type) => (
+                  <button
+                    key={type}
+                    type="button"
+                    className="px-4 py-2 text-sm text-left hover:bg-muted cursor-pointer"
+                    onClick={() => addBlock(type)}
+                  >
+                    {BLOCK_LABELS[type]}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Sticky action bar — sayfanın neresinde olunursa olunsun erişilebilir */}
+        <div className="sticky bottom-0 z-10 bg-background border-t flex items-center gap-3 py-3">
+          {isDraftNameOpen ? (
+            <>
+              <Input
+                className="h-8 text-sm flex-1"
+                placeholder="Taslak adı..."
+                value={draftNameInput}
+                onChange={(e) => setDraftNameInput(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') handleConfirmSaveDraft();
+                  if (e.key === 'Escape') handleCancelDraftSave();
+                }}
+                autoFocus
+              />
+              <Button
+                type="button"
+                size="sm"
+                className="cursor-pointer shrink-0"
+                disabled={!draftNameInput.trim()}
+                onClick={handleConfirmSaveDraft}
+              >
+                Kaydet
+              </Button>
+              <Button
+                type="button"
+                size="sm"
+                variant="ghost"
+                className="cursor-pointer shrink-0"
+                onClick={handleCancelDraftSave}
+              >
+                İptal
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                className="cursor-pointer shrink-0"
+                onClick={handleOpenDraftSave}
+              >
+                Taslak Kaydet
+              </Button>
+              <div className="flex-1 min-w-0 text-sm">
+                {draftSavedMsg && (
+                  <span className="text-green-700" role="status">Taslak kaydedildi.</span>
+                )}
+                {!draftSavedMsg && errorMessage && (
+                  <span className="text-destructive" role="alert">{errorMessage}</span>
+                )}
+                {!draftSavedMsg && !errorMessage && isSuccess && (
+                  <span className="text-green-700" role="status">Mail başarıyla gönderildi.</span>
+                )}
+              </div>
+            </>
+          )}
+          <Button
+            type="submit"
+            form={formId}
+            disabled={isSending || blocks.length === 0}
+            className="cursor-pointer shrink-0"
+          >
+            {isSending ? 'Gönderiliyor...' : 'Mail Gönder'}
+          </Button>
+        </div>
       </div>
+
+      {/* Sağ sütun: taslaklar */}
+      {!draftsLoading && (
+        <div className="w-72 shrink-0 sticky top-6 flex flex-col gap-3 self-start">
+          <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">
+            Taslaklar {drafts.length > 0 && `(${drafts.length})`}
+          </h2>
+
+          {drafts.length === 0 ? (
+            <p className="text-sm text-muted-foreground">Henüz kayıtlı taslak yok.</p>
+          ) : (
+            <div className="flex flex-col gap-2">
+              {drafts.map((draft) => (
+                <Card key={draft.id}>
+                  <CardContent className="py-3 px-3">
+                    <div className="flex flex-col gap-2">
+                      <div className="flex flex-col gap-0.5">
+                        <span className="font-medium text-sm truncate">{draft.name}</span>
+                        {draft.to && (
+                          <span className="text-xs text-muted-foreground truncate">{draft.to}</span>
+                        )}
+                        {draft.subject && (
+                          <span className="text-xs text-muted-foreground truncate">{draft.subject}</span>
+                        )}
+                        <span className="text-xs text-muted-foreground">
+                          {draft.attachment && `📎 ${draft.attachment.name} · `}
+                          {formatDate(draft.createdAt)}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <Button
+                          type="button"
+                          size="sm"
+                          variant="outline"
+                          className="cursor-pointer flex-1"
+                          onClick={() => handleLoadDraft(draft)}
+                        >
+                          Yükle
+                        </Button>
+                        <Button
+                          type="button"
+                          size="sm"
+                          variant="ghost"
+                          className="cursor-pointer text-destructive hover:text-destructive"
+                          onClick={() => removeDraft(draft.id)}
+                        >
+                          Sil
+                        </Button>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }
@@ -445,7 +437,6 @@ function FormatableTextarea({
     const next =
       value.slice(0, start) + open + value.slice(start, end) + close + value.slice(end);
     onChange(next);
-    // Seçimi işaretlerin içinde tut
     requestAnimationFrame(() => {
       el.focus();
       el.setSelectionRange(start + open.length, end + open.length);

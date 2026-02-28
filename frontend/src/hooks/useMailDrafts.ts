@@ -16,7 +16,7 @@ export type MailDraft = {
   to: string;
   subject: string;
   blocks: MailBlock[];
-  attachment: MailDraftAttachment | null;
+  attachments: MailDraftAttachment[];
 };
 
 export type DraftInput = {
@@ -24,7 +24,7 @@ export type DraftInput = {
   to: string;
   subject: string;
   blocks: MailBlock[];
-  attachment: File | null;
+  attachments: File[];
 };
 
 const DB_NAME = 'kou-seng-mail-drafts';
@@ -84,9 +84,7 @@ export function useMailDrafts() {
       to: input.to,
       subject: input.subject,
       blocks: input.blocks,
-      attachment: input.attachment
-        ? { name: input.attachment.name, type: input.attachment.type, blob: input.attachment }
-        : null,
+      attachments: input.attachments.map((f) => ({ name: f.name, type: f.type, blob: f })),
     };
     const db = await openDB();
     await idbOp(db, 'readwrite', (s) => s.put(draft));

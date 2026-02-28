@@ -73,11 +73,11 @@ const sendSponsorMail = async (req, res) => {
             },
         ];
 
-        // Kullanıcının yüklediği dosya eki (opsiyonel)
-        if (req.file) {
+        // Kullanıcının yüklediği dosya ekleri (opsiyonel, birden fazla olabilir)
+        for (const file of (req.files ?? [])) {
             attachments.push({
-                filename: req.file.originalname,
-                content: req.file.buffer,
+                filename: file.originalname,
+                content: file.buffer,
             });
         }
 
@@ -89,7 +89,9 @@ const sendSponsorMail = async (req, res) => {
             attachments,
         });
 
-        const attachmentInfo = req.file ? ` | ek: ${req.file.originalname}` : '';
+        const attachmentInfo = req.files?.length
+            ? ` | ekler: ${req.files.map(f => f.originalname).join(', ')}`
+            : '';
         logger.info(`Sponsorluk maili gönderildi: ${to} (gönderen: ${req.user?.email}${attachmentInfo})`);
 
         return res.status(200).json({

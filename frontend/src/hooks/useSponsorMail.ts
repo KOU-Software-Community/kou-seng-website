@@ -13,7 +13,7 @@ export type SendMailPayload = {
   to: string;
   subject: string;
   blocks: MailBlock[];
-  attachment?: File | null;
+  attachments?: File[];
 };
 
 interface UseSponsorMailReturn {
@@ -43,8 +43,8 @@ export const useSponsorMail = (): UseSponsorMailReturn => {
       formData.append('to', payload.to);
       formData.append('subject', payload.subject);
       formData.append('blocks', JSON.stringify(payload.blocks));
-      if (payload.attachment) {
-        formData.append('attachment', payload.attachment);
+      for (const file of (payload.attachments ?? [])) {
+        formData.append('attachments', file);
       }
 
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/mail/send`, {

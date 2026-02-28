@@ -26,11 +26,13 @@ const upload = multer({
 
 // Multer hatalarını tutarlı JSON formatında döndürür
 const uploadMiddleware = (req, res, next) => {
-    upload.single('attachment')(req, res, (err) => {
+    upload.array('attachments', 10)(req, res, (err) => {
         if (err instanceof multer.MulterError) {
             const msg = err.code === 'LIMIT_FILE_SIZE'
-                ? 'Dosya boyutu 10 MB sınırını aşıyor.'
-                : err.message;
+                ? 'Bir dosyanın boyutu 10 MB sınırını aşıyor.'
+                : err.code === 'LIMIT_FILE_COUNT'
+                    ? 'En fazla 10 dosya eklenebilir.'
+                    : err.message;
             return res.status(400).json({ success: false, message: msg });
         }
         if (err) {

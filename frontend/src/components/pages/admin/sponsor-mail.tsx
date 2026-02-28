@@ -47,7 +47,7 @@ export default function AdminSponsorMail() {
   const [subject, setSubject] = useState('');
   const [blocks, setBlocks] = useState<MailBlock[]>([]);
   const [addMenuOpen, setAddMenuOpen] = useState(false);
-  const [attachment, setAttachment] = useState<File | null>(null);
+  const [attachments, setAttachments] = useState<File[]>([]);
   const [fileInputKey, setFileInputKey] = useState(0);
 
   // Taslak kaydetme
@@ -85,9 +85,9 @@ export default function AdminSponsorMail() {
   // --- Mail gönder ---
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const success = await sendMail({ to, subject, blocks, attachment });
+    const success = await sendMail({ to, subject, blocks, attachments });
     if (success) {
-      setAttachment(null);
+      setAttachments([]);
       setFileInputKey((k) => k + 1);
     }
   };
@@ -101,7 +101,7 @@ export default function AdminSponsorMail() {
   const handleConfirmSaveDraft = async () => {
     const name = draftNameInput.trim();
     if (!name) return;
-    await saveDraft({ name, to, subject, blocks, attachment });
+    await saveDraft({ name, to, subject, blocks, attachments });
     setIsDraftNameOpen(false);
     setDraftNameInput('');
     setDraftSavedMsg(true);
@@ -118,11 +118,7 @@ export default function AdminSponsorMail() {
     setTo(draft.to);
     setSubject(draft.subject);
     setBlocks(draft.blocks);
-    if (draft.attachment) {
-      setAttachment(new File([draft.attachment.blob], draft.attachment.name, { type: draft.attachment.type }));
-    } else {
-      setAttachment(null);
-    }
+    setAttachments(draft.attachments.map((a) => new File([a.blob], a.name, { type: a.type })));
     setFileInputKey((k) => k + 1);
     resetStatus();
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -165,35 +161,49 @@ export default function AdminSponsorMail() {
 
           <div className="flex flex-col gap-1">
             <label htmlFor="mail-attachment" className="text-sm font-medium">
-              Dosya Eki{' '}
-              <span className="font-normal text-muted-foreground">(opsiyonel · PDF, görsel veya Word · maks. 10 MB)</span>
+              Dosya Ekleri{' '}
+              <span className="font-normal text-muted-foreground">(opsiyonel · PDF, görsel veya Word · maks. 10 MB/dosya)</span>
             </label>
-            <div className="flex items-center gap-2">
-              <Input
-                key={fileInputKey}
-                id="mail-attachment"
-                type="file"
-                accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"
-                className="cursor-pointer"
-                onChange={(e) => { setAttachment(e.target.files?.[0] ?? null); resetStatus(); }}
-              />
-              {attachment && (
-                <Button
-                  type="button"
-                  variant="ghost"
-                  size="sm"
-                  className="h-8 w-8 p-0 text-destructive hover:text-destructive cursor-pointer shrink-0"
-                  onClick={() => { setAttachment(null); setFileInputKey((k) => k + 1); }}
-                  aria-label="Dosyayı kaldır"
-                >
-                  ✕
-                </Button>
-              )}
-            </div>
-            {attachment && (
-              <p className="text-xs text-muted-foreground">
-                {attachment.name} · {(attachment.size / 1024).toFixed(0)} KB
-              </p>
+            <Input
+              key={fileInputKey}
+              id="mail-attachment"
+              type="file"
+              multiple
+              accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"
+              className="cursor-pointer"
+              onChange={(e) => {
+                const incoming = Array.from(e.target.files ?? []);
+                if (incoming.length > 0) {
+                  setAttachments((prev) => {
+                    const existingNames = new Set(prev.map((f) => f.name));
+                    return [...prev, ...incoming.filter((f) => !existingNames.has(f.name))];
+                  });
+                }
+                // Input'u sıfırla ki aynı dosyalar tekrar seçilebilsin
+                setFileInputKey((k) => k + 1);
+                resetStatus();
+              }}
+            />
+            {attachments.length > 0 && (
+              <div className="flex flex-col gap-1 mt-1">
+                {attachments.map((file, i) => (
+                  <div key={i} className="flex items-center gap-1.5">
+                    <span className="text-xs text-muted-foreground flex-1 truncate">
+                      {file.name} · {(file.size / 1024).toFixed(0)} KB
+                    </span>
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      className="h-6 w-6 p-0 text-destructive hover:text-destructive cursor-pointer shrink-0"
+                      onClick={() => { setAttachments((prev) => prev.filter((_, idx) => idx !== i)); resetStatus(); }}
+                      aria-label={`${file.name} dosyasını kaldır`}
+                    >
+                      ✕
+                    </Button>
+                  </div>
+                ))}
+              </div>
             )}
           </div>
         </form>
@@ -379,7 +389,11 @@ export default function AdminSponsorMail() {
                           <span className="text-xs text-muted-foreground truncate">{draft.subject}</span>
                         )}
                         <span className="text-xs text-muted-foreground">
-                          {draft.attachment && `📎 ${draft.attachment.name} · `}
+                          {draft.attachments.length > 0 && (
+                            draft.attachments.length === 1
+                              ? `📎 ${draft.attachments[0].name} · `
+                              : `📎 ${draft.attachments.length} dosya eki · `
+                          )}
                           {formatDate(draft.createdAt)}
                         </span>
                       </div>

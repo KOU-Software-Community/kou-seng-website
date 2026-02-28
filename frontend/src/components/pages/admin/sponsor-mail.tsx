@@ -3,8 +3,7 @@
 import { useState, useId, useRef, useEffect } from 'react';
 import type { MailBlock } from '@/hooks/useSponsorMail';
 import { useMailDrafts, type MailDraft } from '@/hooks/useMailDrafts';
-import { useMailQueue } from '@/contexts/MailQueueContext';
-import type { QueueJob } from '@/hooks/useMailQueue';
+import { useMailQueue, type QueueJob } from '@/contexts/MailQueueContext';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -33,7 +32,7 @@ const createBlock = (type: BlockType): MailBlock => {
   }
 };
 
-const formatDate = (ts: number) =>
+const formatDate = (ts: string | number) =>
   new Date(ts).toLocaleDateString('tr-TR', {
     day: 'numeric', month: 'short', year: 'numeric',
     hour: '2-digit', minute: '2-digit',
@@ -58,6 +57,7 @@ export default function AdminSponsorMail() {
   const [fileInputKey, setFileInputKey] = useState(0);
 
   const [enqueuedMsg, setEnqueuedMsg] = useState(false);
+  const [enqueueError, setEnqueueError] = useState('');
   const [isDraftNameOpen, setIsDraftNameOpen] = useState(false);
   const [draftNameInput, setDraftNameInput] = useState('');
   const [draftSavedMsg, setDraftSavedMsg] = useState(false);
@@ -94,9 +94,14 @@ export default function AdminSponsorMail() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (validEmails.length === 0 || blocks.length === 0) return;
-    await enqueueJob({ subject, recipients: validEmails, blocks, attachments });
-    setEnqueuedMsg(true);
-    setTimeout(() => setEnqueuedMsg(false), 4000);
+    setEnqueueError('');
+    try {
+      await enqueueJob({ subject, recipients: validEmails, blocks, attachments });
+      setEnqueuedMsg(true);
+      setTimeout(() => setEnqueuedMsg(false), 4000);
+    } catch (err) {
+      setEnqueueError((err as Error).message);
+    }
   };
 
   // --- Taslak kaydet ---
@@ -334,6 +339,9 @@ export default function AdminSponsorMail() {
                       : 'Görev kuyruğa eklendi.'}
                   </span>
                 )}
+                {!draftSavedMsg && !enqueuedMsg && enqueueError && (
+                  <span className="text-destructive" role="alert">{enqueueError}</span>
+                )}
               </div>
             </>
           )}
@@ -443,8 +451,9 @@ function QueueJobCard({
       setSecondsLeft(null);
       return;
     }
+    const nextSendTime = new Date(job.nextSendAt).getTime();
     const update = () => {
-      const diff = Math.ceil((job.nextSendAt! - Date.now()) / 1000);
+      const diff = Math.ceil((nextSendTime - Date.now()) / 1000);
       setSecondsLeft(diff > 0 ? diff : null);
     };
     update();

@@ -1,8 +1,10 @@
 'use client';
 
-import { useState, useId, useRef } from 'react';
-import { useSponsorMail, type MailBlock } from '@/hooks/useSponsorMail';
+import { useState, useId, useRef, useEffect } from 'react';
+import type { MailBlock } from '@/hooks/useSponsorMail';
 import { useMailDrafts, type MailDraft } from '@/hooks/useMailDrafts';
+import { useMailQueue } from '@/contexts/MailQueueContext';
+import type { QueueJob } from '@/hooks/useMailQueue';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -37,12 +39,17 @@ const formatDate = (ts: number) =>
     hour: '2-digit', minute: '2-digit',
   });
 
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function parseEmails(raw: string): string[] {
+  return raw.split(',').map((e) => e.trim()).filter(Boolean);
+}
+
 export default function AdminSponsorMail() {
-  const { isSending, isSuccess, errorMessage, sendMail, resetStatus } = useSponsorMail();
+  const { enqueueJob, jobs, cancelJob, dismissJob } = useMailQueue();
   const { drafts, loading: draftsLoading, saveDraft, removeDraft } = useMailDrafts();
   const formId = useId();
 
-  // Form alanları
   const [to, setTo] = useState('');
   const [subject, setSubject] = useState('');
   const [blocks, setBlocks] = useState<MailBlock[]>([]);
@@ -50,21 +57,23 @@ export default function AdminSponsorMail() {
   const [attachments, setAttachments] = useState<File[]>([]);
   const [fileInputKey, setFileInputKey] = useState(0);
 
-  // Taslak kaydetme
+  const [enqueuedMsg, setEnqueuedMsg] = useState(false);
   const [isDraftNameOpen, setIsDraftNameOpen] = useState(false);
   const [draftNameInput, setDraftNameInput] = useState('');
   const [draftSavedMsg, setDraftSavedMsg] = useState(false);
+
+  const parsedEmails = parseEmails(to);
+  const validEmails = parsedEmails.filter((e) => EMAIL_RE.test(e));
+  const invalidEmails = parsedEmails.filter((e) => !EMAIL_RE.test(e));
 
   // --- Blok işlemleri ---
   const addBlock = (type: BlockType) => {
     setBlocks((prev) => [...prev, createBlock(type)]);
     setAddMenuOpen(false);
-    resetStatus();
   };
 
   const removeBlock = (index: number) => {
     setBlocks((prev) => prev.filter((_, i) => i !== index));
-    resetStatus();
   };
 
   const moveBlock = (index: number, direction: 'up' | 'down') => {
@@ -79,17 +88,15 @@ export default function AdminSponsorMail() {
 
   const updateBlock = (index: number, updated: MailBlock) => {
     setBlocks((prev) => prev.map((b, i) => (i === index ? updated : b)));
-    resetStatus();
   };
 
-  // --- Mail gönder ---
+  // --- Gönder (kuyruğa ekle) ---
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const success = await sendMail({ to, subject, blocks, attachments });
-    if (success) {
-      setAttachments([]);
-      setFileInputKey((k) => k + 1);
-    }
+    if (validEmails.length === 0 || blocks.length === 0) return;
+    await enqueueJob({ subject, recipients: validEmails, blocks, attachments });
+    setEnqueuedMsg(true);
+    setTimeout(() => setEnqueuedMsg(false), 4000);
   };
 
   // --- Taslak kaydet ---
@@ -120,9 +127,11 @@ export default function AdminSponsorMail() {
     setBlocks(draft.blocks);
     setAttachments(draft.attachments.map((a) => new File([a.blob], a.name, { type: a.type })));
     setFileInputKey((k) => k + 1);
-    resetStatus();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  const sendBtnLabel =
+    validEmails.length > 1 ? `Toplu Gönder (${validEmails.length} alıcı)` : 'Gönder';
 
   return (
     <div className="flex gap-6 items-start">
@@ -131,38 +140,57 @@ export default function AdminSponsorMail() {
         <h1 className="text-xl font-semibold">Sponsor Mail Gönder</h1>
 
         <form id={formId} onSubmit={handleSubmit} className="flex flex-col gap-4">
+          {/* Alıcı */}
           <div className="flex flex-col gap-1">
             <label htmlFor="mail-to" className="text-sm font-medium">
               Alıcı E-posta
+              <span className="font-normal text-muted-foreground ml-1">
+                (birden fazla için virgülle ayırın)
+              </span>
             </label>
             <Input
               id="mail-to"
-              type="email"
-              placeholder="ornek@sirket.com"
+              type="text"
+              placeholder="ornek@sirket.com, diger@sirket.com"
               value={to}
-              onChange={(e) => { setTo(e.target.value); resetStatus(); }}
-              required
+              onChange={(e) => setTo(e.target.value)}
             />
+            {parsedEmails.length > 0 && (
+              <div className="flex flex-wrap gap-x-4 gap-y-0.5 mt-0.5">
+                {validEmails.length > 0 && (
+                  <span className="text-xs text-green-700">
+                    ✓ {validEmails.length} geçerli adres
+                  </span>
+                )}
+                {invalidEmails.length > 0 && (
+                  <span className="text-xs text-destructive">
+                    ✕ geçersiz: {invalidEmails.join(', ')}
+                  </span>
+                )}
+              </div>
+            )}
           </div>
 
+          {/* Konu */}
           <div className="flex flex-col gap-1">
-            <label htmlFor="mail-subject" className="text-sm font-medium">
-              Konu
-            </label>
+            <label htmlFor="mail-subject" className="text-sm font-medium">Konu</label>
             <Input
               id="mail-subject"
               type="text"
               placeholder="Mail konusu"
               value={subject}
-              onChange={(e) => { setSubject(e.target.value); resetStatus(); }}
+              onChange={(e) => setSubject(e.target.value)}
               required
             />
           </div>
 
+          {/* Dosya ekleri */}
           <div className="flex flex-col gap-1">
             <label htmlFor="mail-attachment" className="text-sm font-medium">
               Dosya Ekleri{' '}
-              <span className="font-normal text-muted-foreground">(opsiyonel · PDF, görsel veya Word · maks. 10 MB/dosya)</span>
+              <span className="font-normal text-muted-foreground">
+                (opsiyonel · PDF, görsel veya Word · maks. 10 MB/dosya)
+              </span>
             </label>
             <Input
               key={fileInputKey}
@@ -179,9 +207,7 @@ export default function AdminSponsorMail() {
                     return [...prev, ...incoming.filter((f) => !existingNames.has(f.name))];
                   });
                 }
-                // Input'u sıfırla ki aynı dosyalar tekrar seçilebilsin
                 setFileInputKey((k) => k + 1);
-                resetStatus();
               }}
             />
             {attachments.length > 0 && (
@@ -196,7 +222,7 @@ export default function AdminSponsorMail() {
                       variant="ghost"
                       size="sm"
                       className="h-6 w-6 p-0 text-destructive hover:text-destructive cursor-pointer shrink-0"
-                      onClick={() => { setAttachments((prev) => prev.filter((_, idx) => idx !== i)); resetStatus(); }}
+                      onClick={() => setAttachments((prev) => prev.filter((_, idx) => idx !== i))}
                       aria-label={`${file.name} dosyasını kaldır`}
                     >
                       ✕
@@ -210,6 +236,7 @@ export default function AdminSponsorMail() {
 
         <Separator />
 
+        {/* İçerik blokları */}
         <div className="flex flex-col gap-3">
           <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">
             İçerik Blokları
@@ -227,38 +254,17 @@ export default function AdminSponsorMail() {
                 <div className="flex items-center justify-between">
                   <CardTitle className="text-sm font-medium">{BLOCK_LABELS[block.type]}</CardTitle>
                   <div className="flex items-center gap-1">
-                    <Button
-                      type="button"
-                      variant="ghost"
-                      size="sm"
+                    <Button type="button" variant="ghost" size="sm"
                       className="h-7 w-7 p-0 cursor-pointer"
                       onClick={() => moveBlock(index, 'up')}
-                      disabled={index === 0}
-                      aria-label="Yukarı taşı"
-                    >
-                      ↑
-                    </Button>
-                    <Button
-                      type="button"
-                      variant="ghost"
-                      size="sm"
+                      disabled={index === 0} aria-label="Yukarı taşı">↑</Button>
+                    <Button type="button" variant="ghost" size="sm"
                       className="h-7 w-7 p-0 cursor-pointer"
                       onClick={() => moveBlock(index, 'down')}
-                      disabled={index === blocks.length - 1}
-                      aria-label="Aşağı taşı"
-                    >
-                      ↓
-                    </Button>
-                    <Button
-                      type="button"
-                      variant="ghost"
-                      size="sm"
+                      disabled={index === blocks.length - 1} aria-label="Aşağı taşı">↓</Button>
+                    <Button type="button" variant="ghost" size="sm"
                       className="h-7 w-7 p-0 text-destructive hover:text-destructive cursor-pointer"
-                      onClick={() => removeBlock(index)}
-                      aria-label="Bloğu sil"
-                    >
-                      ✕
-                    </Button>
+                      onClick={() => removeBlock(index)} aria-label="Bloğu sil">✕</Button>
                   </div>
                 </div>
               </CardHeader>
@@ -268,26 +274,17 @@ export default function AdminSponsorMail() {
             </Card>
           ))}
 
-          {/* Blok ekleme butonu — listenin altında, dropdown yukarı açılır */}
           <div className="relative self-start">
-            <Button
-              type="button"
-              variant="outline"
-              size="sm"
-              className="cursor-pointer"
-              onClick={() => setAddMenuOpen((prev) => !prev)}
-            >
+            <Button type="button" variant="outline" size="sm" className="cursor-pointer"
+              onClick={() => setAddMenuOpen((prev) => !prev)}>
               + Blok Ekle
             </Button>
             {addMenuOpen && (
               <div className="absolute left-0 bottom-full mb-1 z-10 flex flex-col bg-background border rounded-md shadow-md min-w-[130px]">
                 {(Object.keys(BLOCK_LABELS) as BlockType[]).map((type) => (
-                  <button
-                    key={type}
-                    type="button"
+                  <button key={type} type="button"
                     className="px-4 py-2 text-sm text-left hover:bg-muted cursor-pointer"
-                    onClick={() => addBlock(type)}
-                  >
+                    onClick={() => addBlock(type)}>
                     {BLOCK_LABELS[type]}
                   </button>
                 ))}
@@ -296,7 +293,7 @@ export default function AdminSponsorMail() {
           </div>
         </div>
 
-        {/* Sticky action bar — sayfanın neresinde olunursa olunsun erişilebilir */}
+        {/* Sticky action bar */}
         <div className="sticky bottom-0 z-10 bg-background border-t flex items-center gap-3 py-3">
           {isDraftNameOpen ? (
             <>
@@ -311,45 +308,31 @@ export default function AdminSponsorMail() {
                 }}
                 autoFocus
               />
-              <Button
-                type="button"
-                size="sm"
-                className="cursor-pointer shrink-0"
-                disabled={!draftNameInput.trim()}
-                onClick={handleConfirmSaveDraft}
-              >
+              <Button type="button" size="sm" className="cursor-pointer shrink-0"
+                disabled={!draftNameInput.trim()} onClick={handleConfirmSaveDraft}>
                 Kaydet
               </Button>
-              <Button
-                type="button"
-                size="sm"
-                variant="ghost"
-                className="cursor-pointer shrink-0"
-                onClick={handleCancelDraftSave}
-              >
+              <Button type="button" size="sm" variant="ghost"
+                className="cursor-pointer shrink-0" onClick={handleCancelDraftSave}>
                 İptal
               </Button>
             </>
           ) : (
             <>
-              <Button
-                type="button"
-                variant="outline"
-                size="sm"
-                className="cursor-pointer shrink-0"
-                onClick={handleOpenDraftSave}
-              >
+              <Button type="button" variant="outline" size="sm"
+                className="cursor-pointer shrink-0" onClick={handleOpenDraftSave}>
                 Taslak Kaydet
               </Button>
               <div className="flex-1 min-w-0 text-sm">
                 {draftSavedMsg && (
                   <span className="text-green-700" role="status">Taslak kaydedildi.</span>
                 )}
-                {!draftSavedMsg && errorMessage && (
-                  <span className="text-destructive" role="alert">{errorMessage}</span>
-                )}
-                {!draftSavedMsg && !errorMessage && isSuccess && (
-                  <span className="text-green-700" role="status">Mail başarıyla gönderildi.</span>
+                {!draftSavedMsg && enqueuedMsg && (
+                  <span className="text-green-700" role="status">
+                    {validEmails.length > 1
+                      ? `${validEmails.length} alıcı için görev kuyruğa eklendi.`
+                      : 'Görev kuyruğa eklendi.'}
+                  </span>
                 )}
               </div>
             </>
@@ -357,17 +340,18 @@ export default function AdminSponsorMail() {
           <Button
             type="submit"
             form={formId}
-            disabled={isSending || blocks.length === 0}
+            disabled={validEmails.length === 0 || blocks.length === 0}
             className="cursor-pointer shrink-0"
           >
-            {isSending ? 'Gönderiliyor...' : 'Mail Gönder'}
+            {sendBtnLabel}
           </Button>
         </div>
       </div>
 
-      {/* Sağ sütun: taslaklar */}
+      {/* Sağ sütun: taslaklar + görev kuyruğu */}
       {!draftsLoading && (
-        <div className="w-72 shrink-0 sticky top-6 flex flex-col gap-3 self-start">
+        <div className="w-72 shrink-0 sticky top-6 flex flex-col gap-3 self-start max-h-[calc(100vh-3rem)] overflow-y-auto">
+          {/* Taslaklar */}
           <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">
             Taslaklar {drafts.length > 0 && `(${drafts.length})`}
           </h2>
@@ -398,22 +382,13 @@ export default function AdminSponsorMail() {
                         </span>
                       </div>
                       <div className="flex items-center gap-1">
-                        <Button
-                          type="button"
-                          size="sm"
-                          variant="outline"
-                          className="cursor-pointer flex-1"
-                          onClick={() => handleLoadDraft(draft)}
-                        >
+                        <Button type="button" size="sm" variant="outline"
+                          className="cursor-pointer flex-1" onClick={() => handleLoadDraft(draft)}>
                           Yükle
                         </Button>
-                        <Button
-                          type="button"
-                          size="sm"
-                          variant="ghost"
+                        <Button type="button" size="sm" variant="ghost"
                           className="cursor-pointer text-destructive hover:text-destructive"
-                          onClick={() => removeDraft(draft.id)}
-                        >
+                          onClick={() => removeDraft(draft.id)}>
                           Sil
                         </Button>
                       </div>
@@ -423,13 +398,143 @@ export default function AdminSponsorMail() {
               ))}
             </div>
           )}
+
+          {/* Görev Kuyruğu */}
+          <Separator className="my-1" />
+          <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">
+            Görevler {jobs.length > 0 && `(${jobs.length})`}
+          </h2>
+
+          {jobs.length === 0 ? (
+            <p className="text-sm text-muted-foreground">Henüz görev yok.</p>
+          ) : (
+            <div className="flex flex-col gap-2">
+              {jobs.map((job) => (
+                <QueueJobCard
+                  key={job.id}
+                  job={job}
+                  onCancel={() => cancelJob(job.id)}
+                  onDismiss={() => dismissJob(job.id)}
+                />
+              ))}
+            </div>
+          )}
         </div>
       )}
     </div>
   );
 }
 
-// Seçili metni biçimlendirme işaretleriyle saran textarea bileşeni
+// ─── Kuyruk Görev Kartı ─────────────────────────────────────────────────────
+
+function QueueJobCard({
+  job,
+  onCancel,
+  onDismiss,
+}: {
+  job: QueueJob;
+  onCancel: () => void;
+  onDismiss: () => void;
+}) {
+  const [secondsLeft, setSecondsLeft] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (!job.nextSendAt) {
+      setSecondsLeft(null);
+      return;
+    }
+    const update = () => {
+      const diff = Math.ceil((job.nextSendAt! - Date.now()) / 1000);
+      setSecondsLeft(diff > 0 ? diff : null);
+    };
+    update();
+    const id = setInterval(update, 1000);
+    return () => clearInterval(id);
+  }, [job.nextSendAt]);
+
+  const total = job.recipients.length;
+  const done = job.results.length;
+  const sentCount = job.results.filter((r) => r.status === 'sent').length;
+  const failedCount = job.results.filter((r) => r.status === 'failed').length;
+  const progressPct = total > 0 ? Math.round((done / total) * 100) : 0;
+
+  const STATUS_LABEL: Record<QueueJob['status'], string> = {
+    pending: 'Bekliyor',
+    running: 'Çalışıyor',
+    done: 'Tamamlandı',
+    cancelled: 'İptal Edildi',
+  };
+
+  const STATUS_COLOR: Record<QueueJob['status'], string> = {
+    pending: 'text-muted-foreground',
+    running: 'text-blue-600',
+    done: 'text-green-700',
+    cancelled: 'text-muted-foreground',
+  };
+
+  const isActive = job.status === 'pending' || job.status === 'running';
+
+  return (
+    <Card>
+      <CardContent className="py-3 px-3">
+        <div className="flex flex-col gap-2">
+          {/* Konu + durum */}
+          <div className="flex items-start justify-between gap-1">
+            <span className="font-medium text-sm truncate flex-1">
+              {job.subject || '(konusuz)'}
+            </span>
+            <span className={`text-xs shrink-0 ${STATUS_COLOR[job.status]}`}>
+              {STATUS_LABEL[job.status]}
+            </span>
+          </div>
+
+          {/* İlerleme sayacı */}
+          <div className="flex justify-between text-xs text-muted-foreground">
+            <span>{done} / {total} alıcı</span>
+            <span className="flex gap-2">
+              {sentCount > 0 && <span className="text-green-700">{sentCount} ✓</span>}
+              {failedCount > 0 && <span className="text-destructive">{failedCount} ✗</span>}
+            </span>
+          </div>
+
+          {/* İlerleme çubuğu */}
+          <div className="w-full h-1.5 rounded-full bg-muted overflow-hidden">
+            <div
+              className="h-full rounded-full transition-all bg-primary"
+              style={{ width: `${progressPct}%` }}
+            />
+          </div>
+
+          {/* Geri sayım */}
+          {secondsLeft !== null && (
+            <p className="text-xs text-muted-foreground">
+              Sonraki gönderim: {secondsLeft}s
+            </p>
+          )}
+
+          <p className="text-xs text-muted-foreground">{formatDate(job.createdAt)}</p>
+
+          {/* Aksiyon butonları */}
+          {isActive ? (
+            <Button type="button" size="sm" variant="outline"
+              className="cursor-pointer text-destructive hover:text-destructive"
+              onClick={onCancel}>
+              İptal
+            </Button>
+          ) : (
+            <Button type="button" size="sm" variant="ghost"
+              className="cursor-pointer" onClick={onDismiss}>
+              Kapat
+            </Button>
+          )}
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+
+// ─── Biçimlendirilebilir Textarea ───────────────────────────────────────────
+
 function FormatableTextarea({
   value,
   onChange,
@@ -460,21 +565,15 @@ function FormatableTextarea({
   return (
     <div className="flex flex-col gap-1">
       <div className="flex items-center gap-1.5">
-        <button
-          type="button"
-          title="Kalın — seçili metni kalın yap"
+        <button type="button" title="Kalın"
           className="inline-flex items-center justify-center h-6 px-2 text-xs font-bold border rounded hover:bg-muted cursor-pointer select-none"
-          onMouseDown={(e) => { e.preventDefault(); applyFormat('**', '**'); }}
-        >
+          onMouseDown={(e) => { e.preventDefault(); applyFormat('**', '**'); }}>
           B
         </button>
-        <button
-          type="button"
-          title="Vurgu — seçili metni vurgula"
+        <button type="button" title="Vurgu"
           className="inline-flex items-center justify-center h-6 px-2 text-xs border rounded cursor-pointer select-none font-semibold"
           style={{ color: '#142850', background: '#eef4ff' }}
-          onMouseDown={(e) => { e.preventDefault(); applyFormat('[[', ']]'); }}
-        >
+          onMouseDown={(e) => { e.preventDefault(); applyFormat('[[', ']]'); }}>
           Vurgu
         </button>
         <span className="text-xs text-muted-foreground">**kalın** · [[vurgu]]</span>
@@ -542,15 +641,11 @@ function BlockEditor({
                 value={item.title}
                 onChange={(e) => updateItem(i, 'title', e.target.value)}
               />
-              <Button
-                type="button"
-                variant="ghost"
-                size="sm"
+              <Button type="button" variant="ghost" size="sm"
                 className="h-8 w-8 p-0 text-destructive hover:text-destructive cursor-pointer shrink-0"
                 onClick={() => removeItem(i)}
                 disabled={block.items.length <= 1}
-                aria-label="Maddeyi sil"
-              >
+                aria-label="Maddeyi sil">
                 ✕
               </Button>
             </div>
@@ -562,13 +657,8 @@ function BlockEditor({
             />
           </div>
         ))}
-        <Button
-          type="button"
-          variant="outline"
-          size="sm"
-          className="self-start cursor-pointer"
-          onClick={addItem}
-        >
+        <Button type="button" variant="outline" size="sm"
+          className="self-start cursor-pointer" onClick={addItem}>
           + Madde Ekle
         </Button>
       </div>
@@ -578,22 +668,12 @@ function BlockEditor({
   if (block.type === 'signature') {
     return (
       <div className="flex flex-col gap-2">
-        <Input
-          placeholder="Ad Soyad"
-          value={block.name}
-          onChange={(e) => onChange({ ...block, name: e.target.value })}
-        />
-        <Input
-          placeholder="Unvan (ör. Hackathon İletişim Sorumlusu)"
-          value={block.title}
-          onChange={(e) => onChange({ ...block, title: e.target.value })}
-        />
-        <Input
-          placeholder="E-posta"
-          type="email"
-          value={block.email}
-          onChange={(e) => onChange({ ...block, email: e.target.value })}
-        />
+        <Input placeholder="Ad Soyad" value={block.name}
+          onChange={(e) => onChange({ ...block, name: e.target.value })} />
+        <Input placeholder="Unvan (ör. Hackathon İletişim Sorumlusu)" value={block.title}
+          onChange={(e) => onChange({ ...block, title: e.target.value })} />
+        <Input placeholder="E-posta" type="email" value={block.email}
+          onChange={(e) => onChange({ ...block, email: e.target.value })} />
       </div>
     );
   }

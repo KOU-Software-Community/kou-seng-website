@@ -71,7 +71,7 @@ export default function AdminSponsorMail() {
   };
 
   return (
-    <div className="flex flex-col gap-6 max-w-2xl">
+    <div className="flex flex-col gap-6 max-w-2xl pb-20">
       <h1 className="text-xl font-semibold">Sponsor Mail Gönder</h1>
 
       <form id={formId} onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -107,40 +107,13 @@ export default function AdminSponsorMail() {
       <Separator />
 
       <div className="flex flex-col gap-3">
-        <div className="flex items-center justify-between">
-          <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">
-            İçerik Blokları
-          </h2>
-          <div className="relative">
-            <Button
-              type="button"
-              variant="outline"
-              size="sm"
-              className="cursor-pointer"
-              onClick={() => setAddMenuOpen((prev) => !prev)}
-            >
-              + Blok Ekle
-            </Button>
-            {addMenuOpen && (
-              <div className="absolute right-0 mt-1 z-10 flex flex-col bg-background border rounded-md shadow-md min-w-[130px]">
-                {(Object.keys(BLOCK_LABELS) as BlockType[]).map((type) => (
-                  <button
-                    key={type}
-                    type="button"
-                    className="px-4 py-2 text-sm text-left hover:bg-muted cursor-pointer"
-                    onClick={() => addBlock(type)}
-                  >
-                    {BLOCK_LABELS[type]}
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
+        <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">
+          İçerik Blokları
+        </h2>
 
         {blocks.length === 0 && (
           <p className="text-sm text-muted-foreground">
-            Henüz blok eklenmedi. Yukarıdaki butonu kullanarak içerik ekleyebilirsiniz.
+            Henüz blok eklenmedi. Aşağıdaki butonu kullanarak içerik ekleyebilirsiniz.
           </p>
         )}
 
@@ -190,29 +163,54 @@ export default function AdminSponsorMail() {
             </CardContent>
           </Card>
         ))}
+
+        {/* Blok ekleme butonu — listenin altında, dropdown yukarı açılır */}
+        <div className="relative self-start">
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            className="cursor-pointer"
+            onClick={() => setAddMenuOpen((prev) => !prev)}
+          >
+            + Blok Ekle
+          </Button>
+          {addMenuOpen && (
+            <div className="absolute left-0 bottom-full mb-1 z-10 flex flex-col bg-background border rounded-md shadow-md min-w-[130px]">
+              {(Object.keys(BLOCK_LABELS) as BlockType[]).map((type) => (
+                <button
+                  key={type}
+                  type="button"
+                  className="px-4 py-2 text-sm text-left hover:bg-muted cursor-pointer"
+                  onClick={() => addBlock(type)}
+                >
+                  {BLOCK_LABELS[type]}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
 
-      <Separator />
-
-      {errorMessage && (
-        <div className="rounded-md bg-destructive/10 text-destructive px-3 py-2 text-sm" role="alert">
-          {errorMessage}
+      {/* Sticky action bar — sayfanın neresinde olunursa olunsun erişilebilir */}
+      <div className="sticky bottom-0 z-10 bg-background border-t flex items-center gap-3 py-3">
+        <div className="flex-1 min-w-0 text-sm">
+          {errorMessage && (
+            <span className="text-destructive" role="alert">{errorMessage}</span>
+          )}
+          {isSuccess && (
+            <span className="text-green-700" role="status">Mail başarıyla gönderildi.</span>
+          )}
         </div>
-      )}
-      {isSuccess && (
-        <div className="rounded-md bg-green-100 text-green-800 px-3 py-2 text-sm" role="status">
-          Mail başarıyla gönderildi.
-        </div>
-      )}
-
-      <Button
-        type="submit"
-        form={formId}
-        disabled={isSending || blocks.length === 0}
-        className="self-start cursor-pointer"
-      >
-        {isSending ? 'Gönderiliyor...' : 'Mail Gönder'}
-      </Button>
+        <Button
+          type="submit"
+          form={formId}
+          disabled={isSending || blocks.length === 0}
+          className="cursor-pointer shrink-0"
+        >
+          {isSending ? 'Gönderiliyor...' : 'Mail Gönder'}
+        </Button>
+      </div>
     </div>
   );
 }

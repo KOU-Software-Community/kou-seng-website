@@ -37,6 +37,8 @@ const parseInline = (str) => {
         /\[\[(.+?)\]\]/g,
         '<span style="color:#142850;font-weight:600;background-color:#eef4ff;padding:2px 6px;border-radius:4px;">$1</span>'
     );
+    // Satır sonlarını <br> etiketine çevir
+    result = result.replace(/\n/g, '<br>');
     return result;
 };
 

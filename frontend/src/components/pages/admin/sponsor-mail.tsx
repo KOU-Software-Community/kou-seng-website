@@ -2,6 +2,7 @@
 
 import { useState, useId, useRef } from 'react';
 import { useSponsorMail, type MailBlock } from '@/hooks/useSponsorMail';
+import { useMailDrafts, type MailDraft } from '@/hooks/useMailDrafts';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -30,10 +31,18 @@ const createBlock = (type: BlockType): MailBlock => {
   }
 };
 
+const formatDate = (ts: number) =>
+  new Date(ts).toLocaleDateString('tr-TR', {
+    day: 'numeric', month: 'short', year: 'numeric',
+    hour: '2-digit', minute: '2-digit',
+  });
+
 export default function AdminSponsorMail() {
   const { isSending, isSuccess, errorMessage, sendMail, resetStatus } = useSponsorMail();
+  const { drafts, loading: draftsLoading, saveDraft, removeDraft } = useMailDrafts();
   const formId = useId();
 
+  // Form alanları
   const [to, setTo] = useState('');
   const [subject, setSubject] = useState('');
   const [blocks, setBlocks] = useState<MailBlock[]>([]);
@@ -41,6 +50,15 @@ export default function AdminSponsorMail() {
   const [attachment, setAttachment] = useState<File | null>(null);
   const [fileInputKey, setFileInputKey] = useState(0);
 
+  // Taslak kaydetme
+  const [isDraftNameOpen, setIsDraftNameOpen] = useState(false);
+  const [draftNameInput, setDraftNameInput] = useState('');
+  const [draftSavedMsg, setDraftSavedMsg] = useState(false);
+
+  // Taslaklar listesi
+  const [draftsOpen, setDraftsOpen] = useState(false);
+
+  // --- Blok işlemleri ---
   const addBlock = (type: BlockType) => {
     setBlocks((prev) => [...prev, createBlock(type)]);
     setAddMenuOpen(false);
@@ -67,6 +85,7 @@ export default function AdminSponsorMail() {
     resetStatus();
   };
 
+  // --- Mail gönder ---
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const success = await sendMail({ to, subject, blocks, attachment });
@@ -74,6 +93,43 @@ export default function AdminSponsorMail() {
       setAttachment(null);
       setFileInputKey((k) => k + 1);
     }
+  };
+
+  // --- Taslak kaydet ---
+  const handleOpenDraftSave = () => {
+    setDraftNameInput(subject.trim() || '');
+    setIsDraftNameOpen(true);
+  };
+
+  const handleConfirmSaveDraft = async () => {
+    const name = draftNameInput.trim();
+    if (!name) return;
+    await saveDraft({ name, to, subject, blocks, attachment });
+    setIsDraftNameOpen(false);
+    setDraftNameInput('');
+    setDraftSavedMsg(true);
+    setTimeout(() => setDraftSavedMsg(false), 3000);
+    setDraftsOpen(true);
+  };
+
+  const handleCancelDraftSave = () => {
+    setIsDraftNameOpen(false);
+    setDraftNameInput('');
+  };
+
+  // --- Taslak yükle ---
+  const handleLoadDraft = (draft: MailDraft) => {
+    setTo(draft.to);
+    setSubject(draft.subject);
+    setBlocks(draft.blocks);
+    if (draft.attachment) {
+      setAttachment(new File([draft.attachment.blob], draft.attachment.name, { type: draft.attachment.type }));
+    } else {
+      setAttachment(null);
+    }
+    setFileInputKey((k) => k + 1);
+    resetStatus();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -232,16 +288,128 @@ export default function AdminSponsorMail() {
         </div>
       </div>
 
-      {/* Sticky action bar — sayfanın neresinde olunursa olunsun erişilebilir */}
+      {/* Taslaklar bölümü */}
+      {!draftsLoading && (
+        <>
+          <Separator />
+          <div className="flex flex-col gap-3">
+            <button
+              type="button"
+              className="flex items-center justify-between text-sm font-semibold text-muted-foreground uppercase tracking-wide cursor-pointer hover:text-foreground transition-colors"
+              onClick={() => setDraftsOpen((o) => !o)}
+            >
+              <span>Taslaklar {drafts.length > 0 && `(${drafts.length})`}</span>
+              <span className="text-xs">{draftsOpen ? '▲' : '▼'}</span>
+            </button>
+
+            {draftsOpen && (
+              drafts.length === 0 ? (
+                <p className="text-sm text-muted-foreground">Henüz kayıtlı taslak yok.</p>
+              ) : (
+                <div className="flex flex-col gap-2">
+                  {drafts.map((draft) => (
+                    <Card key={draft.id}>
+                      <CardContent className="py-3 px-4">
+                        <div className="flex items-start justify-between gap-3">
+                          <div className="flex flex-col gap-0.5 min-w-0">
+                            <span className="font-medium text-sm truncate">{draft.name}</span>
+                            <span className="text-xs text-muted-foreground truncate">
+                              {draft.to && `${draft.to} · `}{draft.subject}
+                            </span>
+                            <span className="text-xs text-muted-foreground">
+                              {draft.attachment && `📎 ${draft.attachment.name} · `}
+                              {formatDate(draft.createdAt)}
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-1 shrink-0">
+                            <Button
+                              type="button"
+                              size="sm"
+                              variant="outline"
+                              className="cursor-pointer"
+                              onClick={() => handleLoadDraft(draft)}
+                            >
+                              Yükle
+                            </Button>
+                            <Button
+                              type="button"
+                              size="sm"
+                              variant="ghost"
+                              className="cursor-pointer text-destructive hover:text-destructive"
+                              onClick={() => removeDraft(draft.id)}
+                            >
+                              Sil
+                            </Button>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              )
+            )}
+          </div>
+        </>
+      )}
+
+      {/* Sticky action bar */}
       <div className="sticky bottom-0 z-10 bg-background border-t flex items-center gap-3 py-3">
-        <div className="flex-1 min-w-0 text-sm">
-          {errorMessage && (
-            <span className="text-destructive" role="alert">{errorMessage}</span>
-          )}
-          {isSuccess && (
-            <span className="text-green-700" role="status">Mail başarıyla gönderildi.</span>
-          )}
-        </div>
+        {isDraftNameOpen ? (
+          <>
+            <Input
+              className="h-8 text-sm flex-1"
+              placeholder="Taslak adı..."
+              value={draftNameInput}
+              onChange={(e) => setDraftNameInput(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') handleConfirmSaveDraft();
+                if (e.key === 'Escape') handleCancelDraftSave();
+              }}
+              autoFocus
+            />
+            <Button
+              type="button"
+              size="sm"
+              className="cursor-pointer shrink-0"
+              disabled={!draftNameInput.trim()}
+              onClick={handleConfirmSaveDraft}
+            >
+              Kaydet
+            </Button>
+            <Button
+              type="button"
+              size="sm"
+              variant="ghost"
+              className="cursor-pointer shrink-0"
+              onClick={handleCancelDraftSave}
+            >
+              İptal
+            </Button>
+          </>
+        ) : (
+          <>
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              className="cursor-pointer shrink-0"
+              onClick={handleOpenDraftSave}
+            >
+              Taslak Kaydet
+            </Button>
+            <div className="flex-1 min-w-0 text-sm">
+              {draftSavedMsg && (
+                <span className="text-green-700" role="status">Taslak kaydedildi.</span>
+              )}
+              {!draftSavedMsg && errorMessage && (
+                <span className="text-destructive" role="alert">{errorMessage}</span>
+              )}
+              {!draftSavedMsg && !errorMessage && isSuccess && (
+                <span className="text-green-700" role="status">Mail başarıyla gönderildi.</span>
+              )}
+            </div>
+          </>
+        )}
         <Button
           type="submit"
           form={formId}

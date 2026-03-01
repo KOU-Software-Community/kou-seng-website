@@ -32,6 +32,7 @@ const mailJobSchema = new mongoose.Schema(
         results: [resultSchema],
         attachments: [attachmentSchema],
         blocks: { type: mongoose.Schema.Types.Mixed, required: true },
+        scheduledAt: { type: Date, default: null },
         nextSendAt: { type: Date },
     },
     { timestamps: true },

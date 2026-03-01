@@ -58,8 +58,13 @@ export default function AdminSponsorMail() {
   const [attachments, setAttachments] = useState<File[]>([]);
   const [fileInputKey, setFileInputKey] = useState(0);
 
+  // Zamanlama alanları
+  const [scheduleDate, setScheduleDate] = useState('');
+  const [scheduleTime, setScheduleTime] = useState('');
+
   // Durum mesajları
   const [enqueuedMsg, setEnqueuedMsg] = useState(false);
+  const [lastScheduledAt, setLastScheduledAt] = useState<string | null>(null);
 
   // Taslak kaydetme
   const [isDraftNameOpen, setIsDraftNameOpen] = useState(false);
@@ -95,11 +100,24 @@ export default function AdminSponsorMail() {
     setBlocks((prev) => prev.map((b, i) => (i === index ? updated : b)));
   };
 
+  // --- Zamanlama hesaplama ---
+  const hasDate = scheduleDate !== '';
+  const hasTime = scheduleTime !== '';
+  const schedulePartial = hasDate !== hasTime; // birini vermiş diğerini vermemiş
+
   // --- Gönder (kuyruğa ekle) ---
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (validEmails.length === 0 || blocks.length === 0) return;
-    await enqueueJob({ subject, recipients: validEmails, blocks, attachments });
+    if (schedulePartial) return; // validasyon uyarısı zaten gösteriliyor
+
+    let scheduledAt: string | null = null;
+    if (hasDate && hasTime) {
+      scheduledAt = new Date(`${scheduleDate}T${scheduleTime}`).toISOString();
+    }
+
+    await enqueueJob({ subject, recipients: validEmails, blocks, attachments, scheduledAt });
+    setLastScheduledAt(scheduledAt);
     setEnqueuedMsg(true);
     setTimeout(() => setEnqueuedMsg(false), 4000);
   };
@@ -136,6 +154,9 @@ export default function AdminSponsorMail() {
   };
 
   const sendBtnLabel = () => {
+    const isScheduled = hasDate && hasTime;
+    if (isScheduled && validEmails.length > 1) return `Zamanla (${validEmails.length} alıcı)`;
+    if (isScheduled) return 'Zamanla';
     if (validEmails.length > 1) return `Toplu Gönder (${validEmails.length} alıcı)`;
     return 'Gönder';
   };
@@ -189,6 +210,35 @@ export default function AdminSponsorMail() {
               onChange={(e) => setSubject(e.target.value)}
               required
             />
+          </div>
+
+          <div className="flex flex-col gap-1">
+            <label className="text-sm font-medium">
+              Planlı Gönderim{' '}
+              <span className="font-normal text-muted-foreground">(opsiyonel — boş bırakılırsa anında başlar)</span>
+            </label>
+            <div className="flex gap-2">
+              <Input
+                type="date"
+                value={scheduleDate}
+                min={new Date().toISOString().split('T')[0]}
+                onChange={(e) => setScheduleDate(e.target.value)}
+                className="flex-1"
+                aria-label="Gönderim tarihi"
+              />
+              <Input
+                type="time"
+                value={scheduleTime}
+                onChange={(e) => setScheduleTime(e.target.value)}
+                className="flex-1"
+                aria-label="Gönderim saati"
+              />
+            </div>
+            {schedulePartial && (
+              <p className="text-xs text-destructive">
+                Tarih ve saat birlikte belirtilmelidir — ya her ikisini doldurun, ya da ikisini de boş bırakın.
+              </p>
+            )}
           </div>
 
           <div className="flex flex-col gap-1">
@@ -377,9 +427,11 @@ export default function AdminSponsorMail() {
                 )}
                 {!draftSavedMsg && enqueuedMsg && (
                   <span className="text-green-700" role="status">
-                    {validEmails.length > 1
-                      ? `${validEmails.length} alıcı için görev kuyruğa eklendi.`
-                      : 'Görev kuyruğa eklendi.'}
+                    {lastScheduledAt
+                      ? `Görev ${formatDate(lastScheduledAt)} için zamanlandı.`
+                      : validEmails.length > 1
+                        ? `${validEmails.length} alıcı için görev kuyruğa eklendi.`
+                        : 'Görev kuyruğa eklendi.'}
                   </span>
                 )}
               </div>
@@ -388,7 +440,7 @@ export default function AdminSponsorMail() {
           <Button
             type="submit"
             form={formId}
-            disabled={validEmails.length === 0 || blocks.length === 0}
+            disabled={validEmails.length === 0 || blocks.length === 0 || schedulePartial}
             className="cursor-pointer shrink-0"
           >
             {sendBtnLabel()}
@@ -563,6 +615,13 @@ function QueueJobCard({
               />
             </div>
           </div>
+
+          {/* Zamanlanmış başlangıç */}
+          {job.status === 'pending' && job.scheduledAt && new Date(job.scheduledAt) > new Date() && (
+            <p className="text-xs text-muted-foreground">
+              Başlangıç: {formatDate(job.scheduledAt)}
+            </p>
+          )}
 
           {/* Sonraki gönderim geri sayımı */}
           {secondsLeft !== null && (

@@ -16,6 +16,7 @@ function sanitizeJob(job) {
         currentIndex: job.currentIndex,
         status: job.status,
         results: job.results ?? [],
+        scheduledAt: job.scheduledAt ?? null,
         nextSendAt: job.nextSendAt ?? null,
         createdAt: job.createdAt,
         // Ek verisi (Buffer) gönderilmez; yalnızca meta bilgiler
@@ -39,6 +40,16 @@ export const createMailJob = async (req, res) => {
         }
 
         const { subject } = req.body;
+
+        // Opsiyonel zamanlanmış gönderim tarihi
+        let scheduledAt = null;
+        if (req.body.scheduledAt) {
+            const parsed = new Date(req.body.scheduledAt);
+            if (isNaN(parsed.getTime())) {
+                return res.status(400).json({ success: false, message: 'Geçersiz zamanlanmış tarih formatı.' });
+            }
+            scheduledAt = parsed;
+        }
 
         // Virgülle ayrılmış alıcı listesi
         const recipientsRaw = (req.body.recipients || '')
@@ -82,15 +93,20 @@ export const createMailJob = async (req, res) => {
             recipients: validRecipients,
             blocks,
             attachments,
+            scheduledAt,
         });
 
         logger.info(
             `Mail kuyruğuna görev eklendi: ${validRecipients.length} alıcı` +
             (attachments.length ? ` · ${attachments.length} ek` : '') +
+            (scheduledAt ? ` · zamanlanmış: ${scheduledAt.toISOString()}` : '') +
             ` (gönderen: ${req.user.email})`,
         );
 
-        wakeProcessor();
+        // Anlık görev ise işlemciyi hemen uyandır; zamanlanmışsa timer karşılayacak
+        if (!scheduledAt) {
+            wakeProcessor();
+        }
 
         return res.status(201).json({
             success: true,

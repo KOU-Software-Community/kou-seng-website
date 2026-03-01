@@ -27,6 +27,7 @@ export type QueueJob = {
   currentIndex: number;
   status: QueueJobStatus;
   results: QueueJobResult[];
+  scheduledAt?: string | null;
   nextSendAt?: string | null;
   createdAt: string;
   attachments: { filename: string; contentType: string }[];
@@ -37,6 +38,7 @@ export type EnqueueInput = {
   recipients: string[];
   blocks: MailBlock[];
   attachments: File[];
+  scheduledAt?: string | null;
 };
 
 type MailQueueContextValue = {
@@ -112,6 +114,9 @@ export function MailQueueProvider({ children }: { children: React.ReactNode }) {
       formData.append('subject', input.subject);
       formData.append('recipients', input.recipients.join(','));
       formData.append('blocks', JSON.stringify(input.blocks));
+      if (input.scheduledAt) {
+        formData.append('scheduledAt', input.scheduledAt);
+      }
       for (const file of input.attachments) {
         formData.append('attachments', file);
       }

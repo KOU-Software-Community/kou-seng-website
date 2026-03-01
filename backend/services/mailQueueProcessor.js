@@ -120,7 +120,14 @@ async function processJobs() {
     try {
         while (true) {
             const job = await MailJob.findOneAndUpdate(
-                { status: 'pending' },
+                {
+                    status: 'pending',
+                    $or: [
+                        { scheduledAt: null },
+                        { scheduledAt: { $exists: false } },
+                        { scheduledAt: { $lte: new Date() } },
+                    ],
+                },
                 { $set: { status: 'running' } },
                 { sort: { createdAt: 1 }, returnDocument: 'after' },
             );

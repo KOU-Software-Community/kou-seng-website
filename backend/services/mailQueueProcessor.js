@@ -16,7 +16,9 @@ function randomDelayMs() {
     return (Math.floor(Math.random() * 16) + 15) * 1_000; // 15–30 sn
 }
 
-let isProcessing = false;
+// Yalnızca job seçme döngüsünü korur; job'ların çalışma süresini değil.
+// Bu sayede yeni job eklenmesi (wakeProcessor) anında pick-up edilebilir.
+let isPickingJobs = false;
 let processorTimer = null;
 
 async function processJob(job) {
@@ -110,12 +112,12 @@ async function processJob(job) {
 }
 
 async function processJobs() {
-    if (isProcessing) return;
-    isProcessing = true;
+    // Sadece job seçme döngüsünü koru. Job'ların çalışması beklenmez;
+    // bu sayede yeni bir job eklendiğinde wakeProcessor anında devreye girer.
+    if (isPickingJobs) return;
+    isPickingJobs = true;
 
     try {
-        // Tüm pending job'ları atomik olarak 'running' durumuna al ve paralel işle
-        const workers = [];
         while (true) {
             const job = await MailJob.findOneAndUpdate(
                 { status: 'pending' },
@@ -123,17 +125,17 @@ async function processJobs() {
                 { sort: { createdAt: 1 }, returnDocument: 'after' },
             );
             if (!job) break;
-            workers.push(processJob(job));
-        }
 
-        if (workers.length > 0) {
-            await Promise.all(workers);
+            // Fire-and-forget: job arka planda çalışır, seçme döngüsünü bloklamaz.
+            processJob(job).catch((err) =>
+                logger.error(`İşlenmemiş görev hatası ${job._id}: ${err.message}`)
+            );
         }
     } catch (err) {
         logger.error(`Kuyruk işlemci hatası: ${err.message}`);
         await MailJob.updateMany({ status: 'running' }, { $set: { status: 'pending' } }).catch(() => {});
     } finally {
-        isProcessing = false;
+        isPickingJobs = false;
         processorTimer = setTimeout(processJobs, 5_000);
     }
 }

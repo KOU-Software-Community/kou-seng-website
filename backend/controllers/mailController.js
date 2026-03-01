@@ -1,6 +1,6 @@
-import nodemailer from 'nodemailer';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { getTransporter } from '../helpers/mailTransporter.js';
 import { buildMailHtml } from '../helpers/mailTemplateBuilder.js';
 import logger from '../helpers/logger.js';
 
@@ -39,10 +39,12 @@ const sendSponsorMail = async (req, res) => {
         }
 
         const mailUser = process.env.MAIL_USER;
-        const mailAppPassword = process.env.MAIL_APP_PASSWORD;
         const mailSenderName = process.env.MAIL_SENDER_NAME || 'KOU SENG';
 
-        if (!mailUser || !mailAppPassword) {
+        let transporter;
+        try {
+            transporter = getTransporter();
+        } catch {
             logger.error('Mail kimlik bilgileri eksik: MAIL_USER veya MAIL_APP_PASSWORD tanımlı değil.');
             return res.status(500).json({
                 success: false,
@@ -51,14 +53,6 @@ const sendSponsorMail = async (req, res) => {
         }
 
         const htmlContent = buildMailHtml(blocks);
-
-        const transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-                user: mailUser,
-                pass: mailAppPassword,
-            },
-        });
 
         const attachments = [
             {

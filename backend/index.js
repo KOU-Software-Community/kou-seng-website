@@ -15,6 +15,7 @@ import ConnectDB from './config/dbConnection.js';
 import logger from './helpers/logger.js';
 import rateSkip from './helpers/rateSkip.js';
 import { startMailQueueProcessor } from './services/mailQueueProcessor.js';
+import { initTransporter } from './helpers/mailTransporter.js';
 
 const app = express();
 
@@ -68,6 +69,7 @@ app.use('/mail', mailRoutes);
 app.use('/mail/queue', mailQueueRoutes);
 
 startMailQueueProcessor();
+initTransporter();
 
 app.listen(PORT, () => {
     logger.info(`Server ${PORT} portunda çalışıyor`);

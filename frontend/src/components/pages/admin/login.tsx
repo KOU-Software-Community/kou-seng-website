@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
 
@@ -26,6 +26,8 @@ type LoginFormValues = z.infer<typeof loginFormSchema>;
 export default function AdminLogin() {
   // Admin dashboard yönlendirmesi için
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get('redirect') ?? '/admin/dashboard';
   const { login, isAuthenticating, errorMessage, token, getAuthDetail, logout } = useAuth();
   const [error, setError] = useState<string | null>(null);
   const [isCheckingAuth, setIsCheckingAuth] = useState(false);
@@ -45,7 +47,7 @@ export default function AdminLogin() {
       setError(errorMessage || "Giriş yapılamadı. Lütfen bilgilerinizi kontrol ediniz.");
       return;
     }
-    router.push('/admin/dashboard');
+    router.push(redirectTo);
   };
 
   // Eğer token varsa, sayfa açılışında doğrula
@@ -57,7 +59,7 @@ export default function AdminLogin() {
       const result = await getAuthDetail();
       if (cancelled) return;
       if ('name' in result && result?.email) {
-        router.push('/admin/dashboard');
+        router.push(redirectTo);
         return;
       }
       // Token geçersiz ise temizle ve normal akışa devam et

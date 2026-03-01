@@ -39,7 +39,7 @@ export default function AdminDashboardLayout({ children }: DashboardLayoutProps)
     const verifyAuth = async () => {
       // Depoda token yok ve state de authenticated değilse yönlendir
       if (!isAuthenticated && !hasStoredToken) {
-        router.replace('/');
+        router.replace(`/admin/login?redirect=${encodeURIComponent(pathname ?? '/admin/dashboard')}`);
         return;
       }
 
@@ -47,7 +47,7 @@ export default function AdminDashboardLayout({ children }: DashboardLayoutProps)
       if (isAuthenticated) {
         const detail = await getAuthDetail();
         if ('error' in detail) {
-          router.replace('/');
+          router.replace(`/admin/login?redirect=${encodeURIComponent(pathname ?? '/admin/dashboard')}`);
           return;
         }
         // Rol kontrolü

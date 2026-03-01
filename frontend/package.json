@@ -55,6 +55,11 @@
     "onlyBuiltDependencies": [
       "sharp",
       "unrs-resolver"
-    ]
+    ],
+    "overrides": {
+      "minimatch@<3.1.4": "3.1.4",
+      "minimatch@>=9.0.0 <9.0.7": "9.0.7",
+      "ajv@<6.14.0": "6.14.0"
+    }
   }
 }

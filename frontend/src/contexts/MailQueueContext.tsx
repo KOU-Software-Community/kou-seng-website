@@ -8,7 +8,6 @@ import {
   useRef,
   useState,
 } from 'react';
-import useAuth from '@/hooks/useAuth';
 import type { MailBlock } from '@/hooks/useSponsorMail';
 
 // ─── Tipler ──────────────────────────────────────────────────────────────────
@@ -28,8 +27,8 @@ export type QueueJob = {
   currentIndex: number;
   status: QueueJobStatus;
   results: QueueJobResult[];
-  nextSendAt?: string | null; // ISO date string
-  createdAt: string;           // ISO date string
+  nextSendAt?: string | null;
+  createdAt: string;
   attachments: { filename: string; contentType: string }[];
 };
 
@@ -53,80 +52,57 @@ const MailQueueContext = createContext<MailQueueContextValue | null>(null);
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL;
 
+/** localStorage'dan token'ı okur — auth state'e değil, her zaman güncel değere bakar */
+function authHeaders(): Record<string, string> {
+  if (typeof window === 'undefined') return {};
+  const token = localStorage.getItem('auth_token');
+  return token ? { Authorization: `Bearer ${token}` } : {};
+}
+
 // ─── Provider ────────────────────────────────────────────────────────────────
 
 export function MailQueueProvider({ children }: { children: React.ReactNode }) {
   const [jobs, setJobs] = useState<QueueJob[]>([]);
-  const { getAuthHeader } = useAuth();
-
-  // getAuthHeader'ı ref'te tut; polling closure'ları hep güncel tokeni kullanır
-  const authRef = useRef(getAuthHeader);
-  useEffect(() => {
-    authRef.current = getAuthHeader;
-  }, [getAuthHeader]);
-
   const mountedRef = useRef(true);
+
   useEffect(() => {
     mountedRef.current = true;
     return () => { mountedRef.current = false; };
   }, []);
 
-  const pollingTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  // ─── API Çağrıları ────────────────────────────────────────────────────────
+  // ─── Görevleri Getir ─────────────────────────────────────────────────────
 
   const fetchJobs = useCallback(async () => {
+    const headers = authHeaders();
+    if (!headers.Authorization) return; // Oturum açılmamış
     try {
-      const res = await fetch(`${API_BASE}/mail/queue`, {
-        headers: { ...authRef.current() },
-      });
+      const res = await fetch(`${API_BASE}/mail/queue`, { headers });
       if (!res.ok) return;
       const data = (await res.json()) as { success: boolean; jobs: QueueJob[] };
       if (data.success && mountedRef.current) {
         setJobs(data.jobs);
       }
     } catch {
-      // Ağ hatası — sessizce geç, bir sonraki poll'da tekrar dene
+      // Ağ hatası — sessizce geç
     }
   }, []);
 
-  // ─── Adaptif polling ─────────────────────────────────────────────────────
-  // Aktif (pending/running) görev varsa her 3 s, yoksa her 15 s poll et.
+  // ─── İlk Yükleme ─────────────────────────────────────────────────────────
 
-  const scheduleNextPoll = useCallback(
-    (currentJobs: QueueJob[]) => {
-      if (!mountedRef.current) return;
-      const hasActive = currentJobs.some(
-        (j) => j.status === 'pending' || j.status === 'running',
-      );
-      const interval = hasActive ? 3_000 : 15_000;
-
-      pollingTimerRef.current = setTimeout(async () => {
-        await fetchJobs();
-        // jobs state güncellenmiş olacak — ama closure eski değeri tutar;
-        // bir sonraki schedule için state'i doğrudan okuyamayız, bu yüzden
-        // kendi fetched verimiyle döngüyü sürdürüyoruz:
-        setJobs((latest) => {
-          scheduleNextPoll(latest);
-          return latest;
-        });
-      }, interval);
-    },
-    [fetchJobs],
-  );
-
-  // İlk yükleme
   useEffect(() => {
-    fetchJobs().then(() => {
-      setJobs((latest) => {
-        scheduleNextPoll(latest);
-        return latest;
-      });
-    });
-    return () => {
-      if (pollingTimerRef.current) clearTimeout(pollingTimerRef.current);
-    };
-  }, [fetchJobs, scheduleNextPoll]);
+    fetchJobs();
+  }, [fetchJobs]);
+
+  // ─── Adaptif Polling ──────────────────────────────────────────────────────
+  // Aktif görev varsa 3 s, yoksa 15 s. jobs değişince interval yeniden kurulur.
+
+  const hasActive = jobs.some((j) => j.status === 'pending' || j.status === 'running');
+
+  useEffect(() => {
+    const interval = hasActive ? 3_000 : 15_000;
+    const id = setInterval(fetchJobs, interval);
+    return () => clearInterval(id);
+  }, [hasActive, fetchJobs]);
 
   // ─── Aksiyonlar ──────────────────────────────────────────────────────────
 
@@ -142,44 +118,38 @@ export function MailQueueProvider({ children }: { children: React.ReactNode }) {
 
       const res = await fetch(`${API_BASE}/mail/queue`, {
         method: 'POST',
-        headers: { ...authRef.current() },
+        headers: authHeaders(),
         body: formData,
       });
 
-      const data = (await res.json()) as { success: boolean; message?: string; job?: QueueJob };
+      const data = (await res.json()) as { success: boolean; message?: string };
       if (!res.ok || !data.success) {
         throw new Error(data.message ?? 'Görev oluşturulamadı.');
       }
 
-      // Yeni görevi hemen listeye ekle, ardından poll zamanlamasını sıfırla
       await fetchJobs();
-      if (pollingTimerRef.current) clearTimeout(pollingTimerRef.current);
-      setJobs((latest) => {
-        scheduleNextPoll(latest);
-        return latest;
-      });
     },
-    [fetchJobs, scheduleNextPoll],
+    [fetchJobs],
   );
 
   const cancelJob = useCallback(
     async (id: string) => {
-      const res = await fetch(`${API_BASE}/mail/queue/${id}/cancel`, {
+      await fetch(`${API_BASE}/mail/queue/${id}/cancel`, {
         method: 'PATCH',
-        headers: { ...authRef.current() },
+        headers: authHeaders(),
       });
-      if (res.ok) await fetchJobs();
+      await fetchJobs();
     },
     [fetchJobs],
   );
 
   const dismissJob = useCallback(
     async (id: string) => {
-      const res = await fetch(`${API_BASE}/mail/queue/${id}`, {
+      await fetch(`${API_BASE}/mail/queue/${id}`, {
         method: 'DELETE',
-        headers: { ...authRef.current() },
+        headers: authHeaders(),
       });
-      if (res.ok) await fetchJobs();
+      await fetchJobs();
     },
     [fetchJobs],
   );

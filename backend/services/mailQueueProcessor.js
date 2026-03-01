@@ -19,11 +19,6 @@ function randomDelayMs() {
 let isProcessing = false;
 let processorTimer = null;
 
-/**
- * Ana işlemci döngüsü.
- * Sıradaki 'pending' görevi alır, tüm alıcılara tek tek mail gönderir,
- * aralarında 15–30 sn bekler. Her adım MongoDB'ye kaydedilir.
- */
 async function processJobs() {
     if (isProcessing) return;
     isProcessing = true;
@@ -34,10 +29,10 @@ async function processJobs() {
             const job = await MailJob.findOneAndUpdate(
                 { status: 'pending' },
                 { $set: { status: 'running' } },
-                { sort: { createdAt: 1 }, new: true },
+                { sort: { createdAt: 1 }, returnDocument: 'after' },
             );
 
-            if (!job) break; // İşlenecek görev kalmadı
+            if (!job) break; // İşlenecek görev yok
 
             logger.info(`Kuyruk işlemcisi görevi başlattı: ${job._id} (${job.recipients.length} alıcı)`);
 
@@ -58,10 +53,21 @@ async function processJobs() {
 
             const htmlContent = buildMailHtml(job.blocks);
 
-            // Her alıcı için gönderim döngüsü
+            // Ekleri Mongoose dokümanından al (Buffer tipinde gelir).
+            // lean() ile sorgu yapılırsa MongoDB Binary döner — nodemailer ile uyumsuz.
+            const mailAttachments = [
+                { filename: 'logo.png', path: path.join(assetsDir, 'logo.png'), cid: 'logo' },
+                { filename: 'teknopark-logo.png', path: path.join(assetsDir, 'teknopark-logo.png'), cid: 'teknopark-logo' },
+                ...job.attachments.map((att) => ({
+                    filename: att.filename,
+                    content: att.data, // Buffer — Mongoose dokümanından
+                    contentType: att.contentType,
+                })),
+            ];
+
             for (let i = job.currentIndex; i < job.recipients.length; i++) {
-                // İptal kontrolü
-                const fresh = await MailJob.findById(job._id).lean();
+                // İptal kontrolü için yalnızca status alanını sorgula
+                const fresh = await MailJob.findById(job._id).select('status').lean();
                 if (!fresh || fresh.status === 'cancelled') {
                     logger.info(`Kuyruk görevi iptal edildi: ${job._id}`);
                     break;
@@ -69,22 +75,12 @@ async function processJobs() {
 
                 const email = job.recipients[i];
 
-                const mailAttachments = [
-                    { filename: 'logo.png', path: path.join(assetsDir, 'logo.png'), cid: 'logo' },
-                    { filename: 'teknopark-logo.png', path: path.join(assetsDir, 'teknopark-logo.png'), cid: 'teknopark-logo' },
-                    ...fresh.attachments.map((att) => ({
-                        filename: att.filename,
-                        content: att.data,
-                        contentType: att.contentType,
-                    })),
-                ];
-
                 let result;
                 try {
                     await transporter.sendMail({
                         from: `"${mailSenderName}" <${mailUser}>`,
                         to: email,
-                        subject: fresh.subject,
+                        subject: job.subject,
                         html: htmlContent,
                         attachments: mailAttachments,
                     });
@@ -95,7 +91,7 @@ async function processJobs() {
                     logger.error(`Kuyruk maili gönderilemedi → ${email} (görev: ${job._id}): ${err.message}`);
                 }
 
-                // İlerlemeyi hemen kaydet
+                // İlerlemeyi kaydet
                 await MailJob.updateOne(
                     { _id: job._id },
                     {
@@ -118,7 +114,7 @@ async function processJobs() {
             const updated = await MailJob.findOneAndUpdate(
                 { _id: job._id, status: 'running' },
                 { $set: { status: 'done', nextSendAt: null } },
-                { new: true },
+                { returnDocument: 'after' },
             );
             if (updated) {
                 logger.info(`Kuyruk görevi tamamlandı: ${job._id}`);
@@ -126,19 +122,13 @@ async function processJobs() {
         }
     } catch (err) {
         logger.error(`Kuyruk işlemci hatası: ${err.message}`);
-        // Crash durumunda running görevleri pending'e al
         await MailJob.updateMany({ status: 'running' }, { $set: { status: 'pending' } }).catch(() => {});
     } finally {
         isProcessing = false;
-        // 5 saniyede bir yeni görev var mı kontrol et
         processorTimer = setTimeout(processJobs, 5_000);
     }
 }
 
-/**
- * Uygulama başlangıcında çağrılır.
- * Önceki çökmelerden kalan 'running' görevleri 'pending''e alır, ardından işlemciyi başlatır.
- */
 export function startMailQueueProcessor() {
     MailJob.updateMany({ status: 'running' }, { $set: { status: 'pending' } })
         .then(() => {
@@ -148,9 +138,6 @@ export function startMailQueueProcessor() {
         .catch((err) => logger.error(`Kuyruk başlatılamadı: ${err.message}`));
 }
 
-/**
- * Yeni görev eklendiğinde işlemciyi hemen uyandırır.
- */
 export function wakeProcessor() {
     clearTimeout(processorTimer);
     processJobs();

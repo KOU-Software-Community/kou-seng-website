@@ -32,6 +32,7 @@ const navItems: NavItem[] = [
   { label: 'Duyurular', href: '/admin/dashboard/announcements' },
   { label: 'Genel Üyelik', href: '/admin/dashboard/general-membership' },
   { label: 'Teknik Takım', href: '/admin/dashboard/technical-team' },
+  { label: 'Sponsor Mail', href: '/admin/dashboard/sponsor-mail' },
   { label: 'İletişim', href: '/admin/dashboard/contact' },
   { label: 'Admin Yönetimi', href: '/admin/dashboard/admin-management' },
 ];
@@ -85,6 +86,9 @@ export default function AdminSidebar() {
     const limitedRoles = ['web', 'ai', 'game'];
     if (limitedRoles.includes(userRole)) {
       return navItems.filter((n) => n.label === 'Dashboard' || n.label === 'Teknik Takım');
+    }
+    if (userRole === 'sponsor') {
+      return navItems.filter((n) => n.label === 'Dashboard' || n.label === 'Sponsor Mail');
     }
     return [];
   }, [userRole]);
@@ -147,9 +151,8 @@ export default function AdminSidebar() {
                         <span>{item.label}</span>
                         <FontAwesomeIcon
                           icon={faChevronDown}
-                          className={`h-3 w-3 transition-transform ${
-                            isTechnicalTeamOpen ? 'rotate-180' : 'rotate-0'
-                          }`}
+                          className={`h-3 w-3 transition-transform ${isTechnicalTeamOpen ? 'rotate-180' : 'rotate-0'
+                            }`}
                         />
                       </SidebarMenuButton>
                       {isTechnicalTeamOpen && (
@@ -165,17 +168,17 @@ export default function AdminSidebar() {
                               return allowedTechSlug ? sub.slug === allowedTechSlug : false;
                             })
                             .map((sub) => {
-                            const href = `/admin/dashboard/technical-team/${sub.slug}`;
-                            const isSubActive = activeHref === href;
-                            return (
-                              <SidebarMenuSubItem key={href}>
-                                <SidebarMenuSubButton asChild isActive={isSubActive}>
-                                  <Link href={href}>
-                                    <span>{sub.label}</span>
-                                  </Link>
-                                </SidebarMenuSubButton>
-                              </SidebarMenuSubItem>
-                            );
+                              const href = `/admin/dashboard/technical-team/${sub.slug}`;
+                              const isSubActive = activeHref === href;
+                              return (
+                                <SidebarMenuSubItem key={href}>
+                                  <SidebarMenuSubButton asChild isActive={isSubActive}>
+                                    <Link href={href}>
+                                      <span>{sub.label}</span>
+                                    </Link>
+                                  </SidebarMenuSubButton>
+                                </SidebarMenuSubItem>
+                              );
                             })}
                         </SidebarMenuSub>
                       )}

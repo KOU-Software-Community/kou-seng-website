@@ -5,6 +5,7 @@ import AdminSidebar from '@/components/layout/AdminSidebar';
 import { Sidebar, SidebarInset, SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
 import useAuth, { type AuthUser } from '@/hooks/useAuth';
 import { usePathname, useRouter } from 'next/navigation';
+import { MailQueueProvider } from '@/contexts/MailQueueContext';
 
 type DashboardLayoutProps = {
   children: React.ReactNode;
@@ -69,6 +70,18 @@ export default function AdminDashboardLayout({ children }: DashboardLayoutProps)
           if (isMounted) setIsChecking(false);
           return;
         }
+
+        // Sponsor rolü sadece dashboard ve sponsor-mail sayfasına erişebilir
+        if (role === 'sponsor') {
+          const isSponsorMailPage = pathname === '/admin/dashboard/sponsor-mail';
+          if (!onDashboardPage && !isSponsorMailPage) {
+            router.replace('/admin/dashboard/sponsor-mail');
+            return;
+          }
+          if (isMounted) setIsChecking(false);
+          return;
+        }
+
         if (isMounted) setIsChecking(false);
         return;
       }
@@ -87,20 +100,22 @@ export default function AdminDashboardLayout({ children }: DashboardLayoutProps)
 
   return (
     <SidebarProvider>
-      <div className="mx-auto w-full max-w-screen-xl px-4 py-6">
-        <div className="flex gap-4">
-          <Sidebar side="left" variant="sidebar" collapsible="offcanvas" className="border-r">
-            <AdminSidebar />
-          </Sidebar>
-          <SidebarInset className="min-h-[60vh]">
-            <div className="flex items-center gap-2 p-2 md:hidden">
-              <SidebarTrigger />
-              <h1 className="text-lg font-semibold">Admin Panel</h1>
-            </div>
-            {children}
-          </SidebarInset>
+      <MailQueueProvider>
+        <div className="mx-auto w-full max-w-screen-xl px-4 py-6">
+          <div className="flex gap-4">
+            <Sidebar side="left" variant="sidebar" collapsible="offcanvas" className="border-r">
+              <AdminSidebar />
+            </Sidebar>
+            <SidebarInset className="min-h-[60vh]">
+              <div className="flex items-center gap-2 p-2 md:hidden">
+                <SidebarTrigger />
+                <h1 className="text-lg font-semibold">Admin Panel</h1>
+              </div>
+              {children}
+            </SidebarInset>
+          </div>
         </div>
-      </div>
+      </MailQueueProvider>
     </SidebarProvider>
   );
 }

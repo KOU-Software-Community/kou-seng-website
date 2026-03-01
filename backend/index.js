@@ -9,9 +9,12 @@ import contactRoutes from './routes/contactRoutes.js';
 import publicationRoutes from './routes/publicationRoutes.js';
 import submissionsRoutes from './routes/submissionsRoutes.js';
 import healthRoutes from './routes/healthRoutes.js';
+import mailRoutes from './routes/mailRoutes.js';
+import mailQueueRoutes from './routes/mailQueueRoutes.js';
 import ConnectDB from './config/dbConnection.js';
 import logger from './helpers/logger.js';
 import rateSkip from './helpers/rateSkip.js';
+import { startMailQueueProcessor } from './services/mailQueueProcessor.js';
 
 const app = express();
 
@@ -61,6 +64,10 @@ app.use('/announcements', announcementRoutes);
 app.use('/contact', contactRoutes);
 app.use('/rss', publicationRoutes);
 app.use('/submissions', submissionsRoutes);
+app.use('/mail', mailRoutes);
+app.use('/mail/queue', mailQueueRoutes);
+
+startMailQueueProcessor();
 
 app.listen(PORT, () => {
     logger.info(`Server ${PORT} portunda çalışıyor`);

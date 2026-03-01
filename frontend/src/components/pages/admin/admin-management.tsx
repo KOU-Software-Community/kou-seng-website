@@ -360,7 +360,7 @@ export default function AdminManagement() {
                                 <option value="web">Web Takımı</option>
                                 <option value="ai">AI Takımı</option>
                                 <option value="game">Oyun Takımı</option>
-                                <option value="sponsor">Oyun Takımı</option>
+                                <option value="sponsor">Sponsorluk Ekibi</option>
                             </select>
                         </div>
                     </div>

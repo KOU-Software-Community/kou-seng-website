@@ -1,2 +1,3 @@
 .DS_Store
 ecosystem.config.js
+.pnpm-store/

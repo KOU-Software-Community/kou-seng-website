@@ -7,7 +7,7 @@ export type User = {
   _id: string;
   name: string;
   email: string;
-  role: 'admin' | 'web' | 'ai' | 'game';
+  role: 'admin' | 'mobil-web' | 'ai' | 'game';
   createdAt: string;
 };
 
@@ -15,13 +15,13 @@ export type CreateUserRequest = {
   name: string;
   email: string;
   password: string;
-  role: 'admin' | 'web' | 'ai' | 'game';
+  role: 'admin' | 'mobil-web' | 'ai' | 'game';
 };
 
 export type UpdateUserRequest = {
   name: string;
   email: string;
-  role: 'admin' | 'web' | 'ai' | 'game';
+  role: 'admin' | 'mobil-web' | 'ai' | 'game';
 };
 
 export type UserResponse = {

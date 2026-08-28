@@ -16,8 +16,8 @@ const formatRole = (role: string): string => {
     switch (role) {
         case 'admin':
             return 'Admin';
-        case 'web':
-            return 'Web Takımı';
+        case 'mobil-web':
+            return 'Mobil Web Takımı';
         case 'ai':
             return 'AI Takımı';
         case 'game':
@@ -56,7 +56,7 @@ export default function AdminManagement() {
     const [formName, setFormName] = useState<string>('');
     const [formEmail, setFormEmail] = useState<string>('');
     const [formPassword, setFormPassword] = useState<string>('');
-    const [formRole, setFormRole] = useState<'admin' | 'web' | 'ai' | 'game'>('web');
+    const [formRole, setFormRole] = useState<'admin' | 'mobil-web' | 'ai' | 'game'>('mobil-web');
 
     // StrictMode'da çift çalışmayı önlemek için guard
     const hasFetchedRef = useRef<boolean>(false);
@@ -126,7 +126,7 @@ export default function AdminManagement() {
         setFormName('');
         setFormEmail('');
         setFormPassword('');
-        setFormRole('web');
+        setFormRole('mobil-web');
         setIsCreateDialogOpen(true);
     };
 
@@ -321,7 +321,7 @@ export default function AdminManagement() {
                                 id="create-name"
                                 value={formName}
                                 onChange={(e) => setFormName(e.target.value)}
-                                placeholder="Örn: Metehan Şenyer"
+                                placeholder="Örn: Abdülkadir İvenç"
                                 aria-label="Kullanıcı adı"
                             />
                         </div>
@@ -353,11 +353,11 @@ export default function AdminManagement() {
                                 id="create-role"
                                 className="h-9 rounded-md border bg-background px-3 text-sm shadow-sm outline-none focus-visible:ring-2 focus-visible:ring-primary"
                                 value={formRole}
-                                onChange={(e) => setFormRole(e.target.value as 'admin' | 'web' | 'ai' | 'game')}
+                                onChange={(e) => setFormRole(e.target.value as 'admin' | 'mobil-web' | 'ai' | 'game')}
                                 aria-label="Kullanıcı rolü"
                             >
                                 <option value="admin">Admin</option>
-                                <option value="web">Web Takımı</option>
+                                <option value="mobil-web">Mobil Web Takımı</option>
                                 <option value="ai">AI Takımı</option>
                                 <option value="game">Oyun Takımı</option>
                                 <option value="sponsor">Sponsorluk Ekibi</option>
@@ -427,12 +427,12 @@ export default function AdminManagement() {
                                 id="edit-role"
                                 className="h-9 rounded-md border bg-background px-3 text-sm shadow-sm outline-none focus-visible:ring-2 focus-visible:ring-primary"
                                 value={formRole}
-                                onChange={(e) => setFormRole(e.target.value as 'admin' | 'web' | 'ai' | 'game')}
+                                onChange={(e) => setFormRole(e.target.value as 'admin' | 'mobil-web' | 'ai' | 'game')}
                                 disabled={selectedUser?.email === currentUserEmail}
                                 aria-label="Kullanıcı rolü"
                             >
                                 <option value="admin">Admin</option>
-                                <option value="web">Web Takımı</option>
+                                <option value="mobil-web">Mobil Web Takımı</option>
                                 <option value="ai">AI Takımı</option>
                                 <option value="game">Sponsorluk Ekibi</option>
                             </select>

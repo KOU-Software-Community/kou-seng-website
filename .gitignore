@@ -1,4 +1,15 @@
 .DS_Store
 ecosystem.config.js
 .pnpm-store/
-ecosystem.config.js
+
+# graphify build output (AST cache holds absolute local paths)
+graphify-out/
+
+# Claude Code çalışma ortamı — yerel kalır (settings, hooks, vendor skill'ler)
+.claude/
+
+# Ham fotoğraf kaynakları — işlenmiş hâlleri frontend/public/profile/ altında
+görseller yeni/
+
+# Veritabanı yedekleri — başvuranların kişisel verilerini içerir, asla commit edilmez
+backend/backups/

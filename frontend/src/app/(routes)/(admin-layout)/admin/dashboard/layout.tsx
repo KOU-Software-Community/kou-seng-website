@@ -61,7 +61,7 @@ export default function AdminDashboardLayout({ children }: DashboardLayoutProps)
         }
         
         // Web, AI, Game rolleri sadece dashboard ve kendi teknik sayfasına erişebilir
-        if (['web', 'ai', 'game'].includes(role)) {
+        if (['mobil-web', 'ai', 'game'].includes(role)) {
           const isOwnTechnicalPage = pathname?.startsWith(`/admin/dashboard/technical-team/${role}`);
           if (!onDashboardPage && !isOwnTechnicalPage) {
             router.replace(`/admin/dashboard/technical-team/${role}`);

@@ -78,7 +78,7 @@ export const createTechnicalSubmission = async (req, res) => {
     }
 
     // Geçerli bir teknik kategori mi kontrol et
-    const validCategories = ["web", "ai", "game"];
+    const validCategories = ["mobil-web", "ai", "game"];
     if (!validCategories.includes(slug)) {
       return res.status(400).json({
         success: false,

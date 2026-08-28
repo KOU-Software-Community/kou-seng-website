@@ -29,6 +29,24 @@ npm run pm2:start / pm2:stop / pm2:restart   # Her iki serviste de mevcut
 
 Test altyapısı henüz implemente edilmemiştir.
 
+## Paket yöneticisi: npm
+
+Bu proje **npm** ile çalışır. Bağlayıcı kanıt deploy workflow'u: `npm i` +
+`npm run build`. `packageManager` alanı, `pnpm-workspace.yaml` veya `.npmrc`
+yok — yani pnpm'e geçiş yapılmış değil.
+
+Bir dönem `pnpm-lock.yaml` dosyaları da repoya girmişti (lokalde pnpm denenmiş).
+İki lockfile bir arada kurulumların ayrışmasına yol açtığı için kaldırıldı;
+`pnpm-lock.yaml` ve `yarn.lock` artık `.gitignore`'da. Lokalde pnpm denersen
+ürettiği lockfile commit'e girmez.
+
+**Turbopack workspace kökü sabitlendi.** Next, kökü ağaçta yukarı doğru lockfile
+arayarak tahmin ediyor; geliştiricinin **ev dizininde** başıboş bir
+`package-lock.json` varsa (bu makinede `/Users/abdulkadir/package-lock.json`
+vardı) kökü oraya çözüp her build'de uyarı basıyordu. `next.config.ts` içindeki
+`turbopack.root` bunu makineden bağımsız hâle getirdi. Uyarıyı depodaki
+lockfile'ları silerek kovalama — sebep repo dışında olabilir.
+
 ## Environment Variables
 
 **Frontend (`.env`):**

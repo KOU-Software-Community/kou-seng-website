@@ -1,6 +1,13 @@
 .DS_Store
 ecosystem.config.js
+
+# Bu proje npm ile çalışır (deploy workflow'u `npm i` kullanıyor).
+# Başka bir paket yöneticisiyle lokalde denenirse üreteceği lockfile repoya
+# girmesin — iki lockfile bir arada Turbopack'in workspace kökünü yanlış
+# çözmesine ve kurulumların ayrışmasına yol açıyor.
 .pnpm-store/
+pnpm-lock.yaml
+yarn.lock
 
 # graphify build output (AST cache holds absolute local paths)
 graphify-out/

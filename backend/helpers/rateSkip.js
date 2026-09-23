@@ -27,10 +27,11 @@ const rateSkipIP = async (req) => {
                         'unknown';
 
         // Get allowed IPs from environment variable
-        const allowedIPsEnv = process.env.ALLOWED_SERVER_IPS;
-        
+        // .env.example bunu SERVER_IP olarak belgeliyor; ikisini de kabul et.
+        const allowedIPsEnv = process.env.ALLOWED_SERVER_IPS || process.env.SERVER_IP;
+
         if (!allowedIPsEnv) {
-            logger.debug('ALLOWED_SERVER_IPS environment variable tanımlanmamış');
+            logger.debug('ALLOWED_SERVER_IPS/SERVER_IP environment variable tanımlanmamış');
             return false;
         }
 

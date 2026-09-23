@@ -31,8 +31,8 @@ Test altyapısı henüz implemente edilmemiştir.
 
 ## Paket yöneticisi: npm
 
-Bu proje **npm** ile çalışır. Bağlayıcı kanıt deploy workflow'u: `npm i` +
-`npm run build`. `packageManager` alanı, `pnpm-workspace.yaml` veya `.npmrc`
+Bu proje **npm** ile çalışır: tek lockfile `package-lock.json`, CI `npm ci`
+kullanıyor. `packageManager` alanı, `pnpm-workspace.yaml` veya `.npmrc`
 yok — yani pnpm'e geçiş yapılmış değil.
 
 Bir dönem `pnpm-lock.yaml` dosyaları da repoya girmişti (lokalde pnpm denenmiş).
@@ -126,7 +126,7 @@ Yeni UI bileşenleri eklemek için Shadcn/UI kullanılır (`new-york` stili, CSS
 
 ### Deployment
 
-GitHub Actions (`deploy.yml`) `main` branch'e push edildiğinde SSH üzerinden sunucuya deploy eder: PM2'yi durdurur, git pull yapar, bağımlılıkları kurar, build alır ve PM2'yi yeniden başlatır.
+Deploy repo dışında, Coolify üzerinden yönetiliyor. Eski SSH + PM2 workflow'u (`deploy.yml`) kaldırıldı; repoda yalnızca CI (`ci.yml`) var.
 
 Detaylı API endpoint'leri için `backend/ENDPOINTS.md` dosyasına bakın.
 

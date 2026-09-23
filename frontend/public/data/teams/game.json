@@ -6,27 +6,18 @@
     "leaderMessage": {
       "title": "Takım Lideri Mesajı",
       "content": "Oyun geliştirme takımı olarak Unity kullanarak 2D ve 3D oyunlar geliştiriyoruz. Game design, programming ve art konularında multidisipliner bir yaklaşım benimsiyoruz. Takımımızda oyun geliştirme tutkusu olan herkesi bekliyoruz. Hem hobi hem de profesyonel projeler üzerinde çalışarak deneyim kazanıyoruz.",
-      "author": "Turan Akgün",
+      "author": "Alperen Çelik",
       "role": "Oyun Geliştirme Takımı Lideri"
     },
     "members": [
       {
-        "name": "Turan Akgün",
+        "name": "Alperen Çelik",
         "role": "Takım Lideri",
-        "image": "/profile/teams/game/turan_akgun.jpeg",
-        "department": "Yazılım Mühendisliği",
-        "github": "https://github.com/turanak111",
-        "linkedin": "https://www.linkedin.com/in/turan-akgun/",
-        "skills": ["Unity2D", "Unity3D", "C#"]
-      },
-      {
-        "name": "Sefa Selim Tura",
-        "role": "Yardımcı Lider",
-        "image": "/profile/teams/game/sefa_selim_tura.jpeg",
-        "department": "Yazılım Mühendisliği",
-        "github": "https://github.com/SefaSelim",
-        "linkedin": "https://www.linkedin.com/in/sefaselimtura/",
-        "skills": ["Unity2D", "Unity3D", "C#"]
+        "image": "/profile/teams/game/alperen_celik.jpeg",
+        "department": "",
+        "github": "https://github.com/Alp-Che",
+        "linkedin": "https://www.linkedin.com/in/alperen-%C3%A7elik-00717738a/",
+        "skills": []
       }
     ],
     "achievements": [],

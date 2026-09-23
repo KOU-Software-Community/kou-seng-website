@@ -1,0 +1,46 @@
+{
+    "slug": "mobil-web",
+    "name": "Mobil Web Geliştirme Takımı",
+    "description": "Mobil uygulama geliştirmeye ağırlık veren, web tarafında da frontend ve backend teknolojilerinde uzmanlaşan takımımız.",
+    "icon": "faLaptopCode",
+    "leaderMessage": {
+      "title": "Takım Lideri Mesajı",
+      "content": "Mobil Web takımı olarak ağırlıklı mobil uygulamalar geliştiriyor, web tarafında da kullanıcı dostu ve performanslı arayüzler üretiyoruz. React Native, Flutter gibi mobil teknolojilerin yanında React, Next.js ve Node.js ile projeler yürütüyoruz. Takımımız hem mobil hem de web geliştirme konularında deneyim kazanmak isteyen arkadaşları bekliyor.",
+      "author": "Abdülkadir İvenç",
+      "role": "Mobil Web Takımı Lideri"
+    },
+    "members": [
+      {
+        "name": "Abdülkadir İvenç",
+        "role": "Takım Lideri",
+        "image": "/profile/teams/mobil-web/abdulkadir_ivenc.jpeg",
+        "department": "",
+        "github": "https://github.com/Akadirr1",
+        "kaggle": "",
+        "linkedin": "https://www.linkedin.com/in/abd%C3%BClkadir-iven%C3%A7-66a4ab288/",
+        "skills": []
+      },
+      {
+        "name": "Cenk Aktaş",
+        "role": "Yardımcı Lider",
+        "image": "/profile/teams/mobil-web/cenk_aktas.jpeg",
+        "department": "",
+        "github": "https://github.com/Cenkaktas1",
+        "kaggle": "",
+        "linkedin": "https://www.linkedin.com/in/cenk-akta%C5%9F-a4ab66362/",
+        "skills": []
+      }
+    ],
+    "achievements": [],
+    "competitions": [],
+    "projects": [
+      {
+        "title": "KOU-SENG Web Sitesi",
+        "description": "Kulübümüzün resmi web sitesi. Modern teknolojiler kullanılarak geliştirildi.",
+        "technologies": ["Next.js", "TypeScript", "TailwindCSS", "Node.js"],
+        "status": "Aktif",
+        "github": "https://github.com/KOU-Software-Community/kou-seng-website",
+        "demo": "https://kouseng.com/"
+      }
+    ]
+  }

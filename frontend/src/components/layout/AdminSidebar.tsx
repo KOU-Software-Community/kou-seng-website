@@ -83,7 +83,7 @@ export default function AdminSidebar() {
   }, [isTechnicalTeamRoute]);
   const visibleNavItems = useMemo(() => {
     if (userRole === 'admin') return navItems;
-    const limitedRoles = ['web', 'ai', 'game'];
+    const limitedRoles = ['mobil-web', 'ai', 'game'];
     if (limitedRoles.includes(userRole)) {
       return navItems.filter((n) => n.label === 'Dashboard' || n.label === 'Teknik Takım');
     }
@@ -95,7 +95,7 @@ export default function AdminSidebar() {
 
   const allowedTechSlug = useMemo(() => {
     const roleToSlug: Record<string, string | undefined> = {
-      web: 'web',
+      'mobil-web': 'mobil-web',
       ai: 'ai',
       game: 'game',
     };
@@ -158,7 +158,7 @@ export default function AdminSidebar() {
                       {isTechnicalTeamOpen && (
                         <SidebarMenuSub id="technical-team-submenu">
                           {[
-                            { label: 'Web', slug: 'web' },
+                            { label: 'Mobil Web', slug: 'mobil-web' },
                             { label: 'AI', slug: 'ai' },
                             { label: 'Game', slug: 'game' },
                           ]

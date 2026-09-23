@@ -39,7 +39,7 @@ const getSystemStatus = async (req, res) => {
             // Teknik takımların hepsine yapılan toplam başvuru sayısı
             Submission.countDocuments({ 
                 submissionType: "technical",
-                technicalCategory: "web" 
+                technicalCategory: "mobil-web"
             }),
             
             // Teknik takımların hepsine yapılan toplam başvuru sayısı

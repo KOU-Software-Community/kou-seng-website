@@ -6,18 +6,18 @@
     "leaderMessage": {
       "title": "Takım Lideri Mesajı",
       "content": "Yapay zeka takımı olarak machine learning, deep learning ve natural language processing alanlarında projeler geliştiriyoruz. Python, TensorFlow, PyTorch gibi araçlarla gerçek dünya problemlerine çözümler üretiyoruz ve yarışmalara katılıyoruz.",
-      "author": "Selçuk Öz",
+      "author": "Ahmet Melih Çalış",
       "role": "Yapay Zeka Takımı Lideri"
     },
     "members": [
       {
-        "name": "Selçuk Öz",
+        "name": "Ahmet Melih Çalış",
         "role": "Takım Lideri",
-        "image": "/profile/teams/ai/selcuk_oz.png",
-        "department": "Yazılım Mühendisliği",
-        "github": "https://github.com/Selcuk05",
-        "linkedin": "https://www.linkedin.com/in/selcuk-oz/",
-        "kaggle": "https://www.kaggle.com/selcukwashere",
+        "image": "/profile/teams/ai/ahmet_melih_calis.jpeg",
+        "department": "",
+        "github": "https://github.com/ahmetmelihcalis",
+        "linkedin": "https://www.linkedin.com/in/ahmetmelihcalis/",
+        "kaggle": "https://www.kaggle.com/ahmetmelihcalis",
         "skills": []
       }
     ],

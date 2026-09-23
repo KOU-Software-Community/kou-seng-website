@@ -32,60 +32,60 @@
   },
   "boardMembers": [
     {
-      "name": "Eyüp Gürer",
-      "role": "Başkan",
-      "image": "/profile/boardMembers/eyup_gurer.jpeg",
-      "department": "Yazılım Mühendisliği",
-      "github": "https://github.com/eyupgurer",
-      "linkedin": "https://www.linkedin.com/in/eyupgurer/"
-    },
-    {
-      "name": "Zeynep Turgut",
-      "role": "Başkan Yardımcısı",
-      "image": "/profile/boardMembers/zeynep_turgut.jpeg",
-      "department": "Yazılım Mühendisliği",
-      "github": "https://github.com/ZEYNEP-TURGUT",
-      "linkedin": "https://www.linkedin.com/in/zeynep-turgut-3961aa297/"
-    },
-    {
-      "name": "Serhat Can Bakır",
-      "role": "Teknik Ekip Koordinatörü",
-      "image": "/profile/boardMembers/serhat_can_bakır.jpeg",
-      "department": "Yazılım Mühendisliği",
-      "github": "https://github.com/SerhatCanBakir",
-      "linkedin": "https://www.linkedin.com/in/serhat-can-bak%C4%B1r-53850125a/"
-    },
-    {
-      "name": "İsmail Yılmaz",
-      "role": "Teknik Ekip Koordinatörü",
-      "image": "/profile/boardMembers/ismail_yilmaz.jpeg",
-      "department": "Yazılım Mühendisliği",
-      "github": "https://github.com/ismailyilmazz",
-      "linkedin": "https://www.linkedin.com/in/ismail-y%C4%B1lmaz-62b662297/"
-    },
-    {
-      "name": "Sena Nur Dülger",
-      "role": "Sosyal Medya Ekip Koordinatörü",
-      "image": "/profile/boardMembers/sena_nur_dulger.jpeg",
-      "department": "Yazılım Mühendisliği",
-      "github": "https://github.com/senadulger",
-      "linkedin": "https://www.linkedin.com/in/senadulger/"
-    },
-    {
-      "name": "Meryem Güldüren",
-      "role": "Sponsorluk Ekip Koordinatörü",
-      "image": "/profile/boardMembers/meryem_gulduren.jpeg",
-      "department": "Yazılım Mühendisliği",
-      "github": "https://github.com/meryemgulduren",
-      "linkedin": "https://www.linkedin.com/in/meryem-gulduren/"
-    },
-    {
       "name": "Duygu Dilara Zent",
-      "role": "Organizasyon Ekip Koordinatörü",
+      "role": "Başkan",
       "image": "/profile/boardMembers/duygu_dilara_zent.jpeg",
       "department": "Yazılım Mühendisliği",
       "github": "https://github.com/duyguuzent",
       "linkedin": "https://www.linkedin.com/in/duygu-dilara-zent-a21003297/"
+    },
+    {
+      "name": "Mehmetcan Özbey",
+      "role": "Başkan Yardımcısı",
+      "image": "/profile/boardMembers/mehmetcan_ozbey.jpeg",
+      "department": "",
+      "github": "https://github.com/mehmetcnozb",
+      "linkedin": "https://www.linkedin.com/in/mehmetcan-%C3%B6zbey-078120338/"
+    },
+    {
+      "name": "Leyla Konyalı",
+      "role": "Teknik Ekip Koordinatörü",
+      "image": "/profile/boardMembers/leyla_konyali.jpeg",
+      "department": "",
+      "github": "https://github.com/leylaknyl",
+      "linkedin": "https://www.linkedin.com/in/leyla-konyal%C4%B1-0b1b88357/"
+    },
+    {
+      "name": "Enes Yazgan",
+      "role": "Teknik Ekip Koordinatörü",
+      "image": "/profile/boardMembers/enes_yazgan.jpeg",
+      "department": "",
+      "github": "https://github.com/EnesYazgan09",
+      "linkedin": "https://www.linkedin.com/in/enes-yazgan-0b54a6389/"
+    },
+    {
+      "name": "Bengüsu Levent",
+      "role": "Sosyal Medya Ekip Koordinatörü",
+      "image": "/profile/boardMembers/bengusu_levent.jpeg",
+      "department": "",
+      "github": "https://github.com/bengulevent",
+      "linkedin": "https://www.linkedin.com/in/beng%C3%BCsu-levent-695970388/"
+    },
+    {
+      "name": "Yağmur Sıla Kocaoğlu",
+      "role": "Sponsorluk Ekip Koordinatörü",
+      "image": "/profile/boardMembers/yagmur_sila_kocaoglu.jpeg",
+      "department": "",
+      "github": "https://github.com/yagmurskocaoglu",
+      "linkedin": "https://www.linkedin.com/in/ya%C4%9Fmur-s%C4%B1la-kocao%C4%9Flu-34646b388/"
+    },
+    {
+      "name": "Ayşenur Yağmurdereli",
+      "role": "Organizasyon Ekip Koordinatörü",
+      "image": "/profile/boardMembers/aysenur_yagmurdereli.jpeg",
+      "department": "",
+      "github": "https://github.com/aysenuryagmurdereli5",
+      "linkedin": "https://www.linkedin.com/in/aysenuryagmurdereli/"
     }
   ],
   "timelineEvents": [
@@ -152,8 +152,8 @@
   ],
   "focusAreas": [
     {
-      "title": "Web Geliştirme",
-      "description": "Modern teknolojilerle frontend ve backend geliştirme yapıyor, kullanıcı dostu ve responsive tasarımlar oluşturuyoruz. HTML, CSS, JavaScript gibi temel teknolojilerin yanında, React ve Node.js gibi popüler frameworklerle pratik yapma imkânı sunuyoruz. Amacımız kullanıcıya değer katan estetik ve işlevsel web deneyimleri geliştirmek.",
+      "title": "Mobil & Web Geliştirme",
+      "description": "Ağırlıklı olarak mobil uygulama geliştiriyor, web tarafında da kullanıcı dostu ve responsive arayüzler oluşturuyoruz. React Native ve Flutter gibi mobil teknolojilerin yanında HTML, CSS, JavaScript temelleri ile React ve Node.js gibi popüler frameworklerle pratik yapma imkânı sunuyoruz. Amacımız kullanıcıya değer katan estetik ve işlevsel mobil ve web deneyimleri geliştirmek.",
       "icon": "faLaptopCode"
     },
     {

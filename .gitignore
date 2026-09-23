@@ -1,4 +1,22 @@
 .DS_Store
 ecosystem.config.js
+
+# Bu proje npm ile çalışır (tek lockfile: package-lock.json).
+# Başka bir paket yöneticisiyle lokalde denenirse üreteceği lockfile repoya
+# girmesin — iki lockfile bir arada Turbopack'in workspace kökünü yanlış
+# çözmesine ve kurulumların ayrışmasına yol açıyor.
 .pnpm-store/
-ecosystem.config.js
+pnpm-lock.yaml
+yarn.lock
+
+# graphify build output (AST cache holds absolute local paths)
+graphify-out/
+
+# Claude Code çalışma ortamı — yerel kalır (settings, hooks, vendor skill'ler)
+.claude/
+
+# Ham fotoğraf kaynakları — işlenmiş hâlleri frontend/public/profile/ altında
+görseller yeni/
+
+# Veritabanı yedekleri — başvuranların kişisel verilerini içerir, asla commit edilmez
+backend/backups/

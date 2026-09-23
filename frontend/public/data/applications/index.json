@@ -11,9 +11,9 @@
   },
   {
     "id": 2,
-    "slug": "web",
-    "title": "Web Geliştirme Takımı Başvurusu",
-    "description": "Frontend ve backend web geliştirme projelerinde yer almak için teknik başvuru formu.",
+    "slug": "mobil-web",
+    "title": "Mobil Web Geliştirme Takımı Başvurusu",
+    "description": "Mobil uygulama ve web geliştirme projelerinde yer almak için teknik başvuru formu.",
     "isOpen": false,
     "deadline": "5 Ekim 2025",
     "type": "technical",

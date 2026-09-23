@@ -1,9 +1,9 @@
 {
   "id": 2,
   "submissionType": "technical",
-  "slug": "web",
-  "title": "Web Geliştirme Takımı Başvurusu",
-  "description": "Frontend ve backend web geliştirme projelerinde yer almak için teknik başvuru formu. Takıma katılmak için lütfen aşağıdaki bilgileri eksiksiz doldurunuz.",
+  "slug": "mobil-web",
+  "title": "Mobil Web Geliştirme Takımı Başvurusu",
+  "description": "Mobil uygulama ve web geliştirme projelerinde yer almak için teknik başvuru formu. Takıma katılmak için lütfen aşağıdaki bilgileri eksiksiz doldurunuz.",
   "isOpen": false,
   "deadline": "5 Ekim 2025",
   "type": "technical",
@@ -75,7 +75,7 @@
     },
     {
       "id": "interests",
-      "label": "İlgilendiğiniz Web Geliştirme Alanları",
+      "label": "İlgilendiğiniz Mobil / Web Geliştirme Alanları",
       "type": "select",
       "required": true,
       "options": [
@@ -102,14 +102,14 @@
     },
     {
       "id": "experience",
-      "label": "Web Geliştirme Deneyiminiz",
+      "label": "Mobil / Web Geliştirme Deneyiminiz",
       "type": "textarea",
       "placeholder": "Daha önce çalıştığınız projeler, kullandığınız teknolojiler ve deneyim süreniz hakkında bilgi veriniz",
       "required": true
     },
     {
       "id": "motivation",
-      "label": "Neden Web Geliştirme Takımına katılmak istiyorsunuz?",
+      "label": "Neden Mobil Web Geliştirme Takımına katılmak istiyorsunuz?",
       "type": "textarea",
       "placeholder": "Motivasyonunuzu kısaca açıklayınız",
       "required": true

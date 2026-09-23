@@ -6,6 +6,8 @@
 //
 // --submit gerçek kayıt yazar. ASLA production veritabanına çalıştırma:
 // MONGODB_URI'yi ayrı bir db adına yönlendir (ör. .../loadtest?retryWrites=true).
+//
+// Çıkış kodu: 2xx ve 429 dışında tek bir yanıt bile varsa 1. CI (.github/workflows/ci.yml) buna bakıyor.
 
 const arg = (f, d) => {
   const i = process.argv.indexOf(f);
@@ -16,9 +18,12 @@ const N = Number(arg('--n', 150));
 const C = Number(arg('--c', 10));
 const SUBMIT = process.argv.includes('--submit');
 
+// Alan adları createGeneralSubmission'la aynı olmalı, yoksa her istek 400 döner.
+// API öğrenci no / e-posta / telefon tekrarını 409'la reddeder: her koşu ve her istek benzersiz.
+const RUN = Date.now().toString(36);
 const body = (i) => ({
-  firstName: 'Yuk', lastName: `Test${i}`, studentNumber: String(200000000 + i),
-  email: `loadtest+${i}@example.invalid`, phone: '5000000000',
+  name: `Yuk Test${i}`, studentId: `${RUN}-${i}`,
+  email: `loadtest+${RUN}-${i}@example.invalid`, phone: `${RUN}-${i}`,
   faculty: 'Mühendislik', department: 'Yazılım Mühendisliği', grade: 2,
 });
 
@@ -80,4 +85,11 @@ const pct = (a, p) => a[Math.min(a.length - 1, Math.floor(a.length * p))];
   if (errs.length) console.log(`\n${errs.length} bağlantı hatası, ilki: ${errs[0].err}`);
   const server5xx = out.filter((r) => r.status >= 500).length;
   if (server5xx) console.log(`\n${server5xx} adet 5xx — sunucu tarafı patladı, logları kontrol et.`);
+
+  // 429 beklenen davranış (rate limit); geri kalan her şey — 0, 4xx, 5xx — hata.
+  const unexpected = out.filter((r) => r.status !== 429 && (r.status < 200 || r.status > 299)).length;
+  if (unexpected) {
+    console.log(`\nBAŞARISIZ: ${unexpected} yanıt 2xx/429 dışında.`);
+    process.exitCode = 1;
+  }
 })();

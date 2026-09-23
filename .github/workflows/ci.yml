@@ -1,0 +1,72 @@
+# .github/workflows/ci.yml
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  frontend:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: frontend
+
+    steps:
+    - uses: actions/checkout@v5
+    - uses: actions/setup-node@v5
+      with:
+        node-version: 22
+        cache: npm
+        cache-dependency-path: frontend/package-lock.json
+
+    # Bağımlılık istemiyor; en hızlı kırmızıyı veren kontrol önce.
+    - run: npm run check:content
+    - run: npm ci
+    # Deploy'da da build backend durdurulmuşken alınıyor: API'nin erişilemediği hâl aynı.
+    # lint yok: `npm run lint` config yüklerken çöküyor (CLAUDE.md, "Bilinen kırık"). Düzelince ekle.
+    - run: npm run build
+      env:
+        NEXT_PUBLIC_API_URL: http://127.0.0.1:3001
+
+  backend:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: backend
+
+    # Her koşuda sıfırdan, iş bitince silinen veritabanı: loadtest --submit burada güvenli.
+    services:
+      mongo:
+        image: mongo:8
+        ports:
+          - 27017:27017
+
+    env:
+      MONGODB_URI: mongodb://127.0.0.1:27017/ci
+
+    steps:
+    - uses: actions/checkout@v5
+    - uses: actions/setup-node@v5
+      with:
+        node-version: 22
+        cache: npm
+        cache-dependency-path: backend/package-lock.json
+
+    - run: npm ci
+    # `node --check` ESM hatalarını kaçırıyor (CLAUDE.md); sunucuyu gerçekten ayağa kaldır.
+    - run: nohup node index.js > server.log 2>&1 &
+    - run: timeout 30 bash -c 'until curl -sf 127.0.0.1:3001/health > /dev/null; do sleep 1; done'
+    # Rate limit IP başına 15 dk'da 100 istek: önce yazma yolu, kalan kota /health'e.
+    - run: node scripts/loadtest.js --submit --n 40
+    - run: node scripts/loadtest.js --n 100
+    - if: failure()
+      run: cat server.log

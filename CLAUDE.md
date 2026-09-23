@@ -270,6 +270,10 @@ FontAwesome ikon fallback'i render eder — dosyanın var olması gerekmez.
 cd frontend && npm run check:content && npm run lint && npm run build
 ```
 
+CI (`.github/workflows/ci.yml`) her PR'da ve `main`'e push'ta bunları (lint hariç)
+koşturur; backend'i geçici bir MongoDB ile gerçekten ayağa kaldırıp
+`scripts/loadtest.js`'i (`--submit` + `/health`) smoke test olarak çalıştırır.
+
 `npm run build` `public/data/` JSON'larını doğrulamaz; `check:content` bunun
 için var (`frontend/scripts/check-content.mjs`). Kontrol ettikleri ve neden:
 

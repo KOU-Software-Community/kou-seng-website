@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import sanitizeHtml from "sanitize-html";
 import Announcement from "../models/Announcement.js";
 import logger from "../helpers/logger.js";
+import toSearchPattern from "../helpers/searchPattern.js";
 
 // İçerik sitede HTML olarak gösteriliyor: yalnızca editörün ürettiği
 // biçimlendirme etiketleri kalır, hiçbir öznitelik taşınmaz. Aynı liste
@@ -45,10 +46,11 @@ const createAnnouncement = async (req, res) => {
 // @access  Public
 const getAnnouncements = async (req, res) => {
     try {
-        const page = parseInt(req.query.page) || 1;
-        const limit = parseInt(req.query.limit) || 10;
+        const page = Math.max(parseInt(req.query.page) || 1, 1);
+        const limit = Math.min(Math.max(parseInt(req.query.limit) || 10, 1), 50);
         const skip = (page - 1) * limit;
-        const search = req.query.search || '';
+        const searchText = typeof req.query.search === 'string' ? req.query.search.slice(0, 100) : '';
+        const search = toSearchPattern(searchText);
         
         // Arama sorgusu oluştur
         let searchQuery = {};
@@ -86,7 +88,7 @@ const getAnnouncements = async (req, res) => {
                 limit,
                 totalPages
             },
-            search: search || null
+            search: searchText || null
         });
     } catch (error) {
         logger.error(`Duyurular getirilirken bir hata oluştu: ${error.message}`);

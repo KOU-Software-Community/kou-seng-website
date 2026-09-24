@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import Submission from "../models/Submission.js";
 import logger from "../helpers/logger.js";
+import toSearchPattern from "../helpers/searchPattern.js";
 import { Parser, formatters } from "json2csv";
 
 // Formdan gelen alanlar düz metin olmalı: nesne/dizi gibi değerler sorguya
@@ -186,12 +187,12 @@ export const getAllSubmissions = async (req, res) => {
       type,
       category,
       status,
-      search,
       sort = "createdAt",
-      order = "desc",
-      page = 1,
-      limit = 20
+      order = "desc"
     } = req.query;
+    const search = toSearchPattern(req.query.search);
+    const page = Math.max(parseInt(req.query.page) || 1, 1);
+    const limit = Math.min(Math.max(parseInt(req.query.limit) || 20, 1), 50);
 
     // Temel filtre nesnesini oluştur
     const filter = {};
@@ -217,8 +218,8 @@ export const getAllSubmissions = async (req, res) => {
     // Sorguyu oluştur ve veritabanından çek
     const submissions = await Submission.find(filter).select('-__v')
       .sort({ [sort]: sortOrder })
-      .skip((parseInt(page) - 1) * parseInt(limit))
-      .limit(parseInt(limit))
+      .skip((page - 1) * limit)
+      .limit(limit)
       .lean();
 
     return res.status(200).json({
@@ -226,9 +227,9 @@ export const getAllSubmissions = async (req, res) => {
       message: "Başvurular başarıyla listelendi.",
       data: submissions,
       count: total,
-      page: parseInt(page),
-      limit: parseInt(limit),
-      totalPages: Math.ceil(total / parseInt(limit))
+      page,
+      limit,
+      totalPages: Math.ceil(total / limit)
     });
   } catch (error) {
     logger.error(`Başvurular listelenirken hata oluştu: ${error.message}`);

@@ -254,6 +254,16 @@ cd backend && MONGODB_URI="" node scripts/<betik>.js --dry-run   # exit 2 beklen
 Betikler `scripts/` altından çalıştığından `dotenv.config()` çıplak
 çağrılmamalı — `.env` backend kökünde, yol açıkça verilmeli.
 
+**Production Node 22.11 ve `require(esm)`.** Coolify (Nixpacks) backend'i Node
+22.11.0 ile çalıştırıyor. Bu sürümde bir CommonJS paketinin yalnızca ESM olan
+bir paketi `require()` etmesi bayraksız kapalı (Node 22.12'de varsayılan
+açıldı). `sanitize-html` 2.17.6+ `htmlparser2` 12'yi böyle yüklüyor; bu yüzden
+`npm start` `node --experimental-require-module index.js` çalıştırıyor. Sunucuyu
+`node index.js` ile doğrudan başlatırsan Node < 22.12'de açılışta
+`ERR_REQUIRE_ESM` ile çöker. CI, production'daki Node sürümü (`ci.yml`
+`NODE_VERSION`) ve `npm start` ile koşuyor. Production 22.12+'ya geçerse bayrak
+kaldırılabilir; `NODE_VERSION` da güncellenmeli.
+
 ### Mongoose `sanitizeFilter` açık — operatörlü sorgu `trusted()` ister
 
 `config/dbConnection.js` global `sanitizeFilter`'ı açıyor: filtre içinde `$`

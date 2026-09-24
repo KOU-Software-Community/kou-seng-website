@@ -100,6 +100,7 @@ export const createTechnicalSubmission = async (req, res) => {
     const allowedCustomFields = [
       "question_interests",
       "question_github",
+      "question_portfolio",
       "question_experience",
       "question_motivation",
       "question_linkedin",

@@ -59,7 +59,7 @@ NEXT_PUBLIC_API_URL=http://localhost:3001
 PORT=3001
 MONGODB_URI=...
 JWT_SECRET=...
-KEY=...                        # İlk admin oluşturma için özel anahtar
+KEY=...                        # İlk admin oluşturma anahtarı, en az 32 karakter
 CORS_ALLOWED_ORIGINS=http://localhost:3000,https://kouseng.com
 MEDIUM_RSS_URLS=https://medium.com/feed/@...
 LOG_LEVEL=info
@@ -209,11 +209,15 @@ penceresinde yapılmalı.
 ### İlk admin oluşturma (deploy edilmiş sunucuda)
 
 Mantık `firstUserCreation()`'da değil, `protect` içinde
-(`authMiddleware.js:66-77`). `POST /users` isteğinde **dört koşul birden**
-aranır: `req.originalUrl === '/users'` (birebir), `req.method === 'POST'`,
-`token === process.env.KEY`, ve `User.countDocuments() === 0`. Biri tutmazsa
-istek `jwt.verify` yoluna düşer ve **401** döner — hata hangi koşulun
-tutmadığını söylemez.
+(`authMiddleware.js:82-91`, karşılaştırma `matchesSystemKey`). `POST /users`
+isteğinde **dört koşul birden** aranır: `req.originalUrl === '/users'`
+(birebir), `req.method === 'POST'`, token'ın `KEY` ile eşleşmesi ve
+`User.countDocuments() === 0`. Biri tutmazsa istek `jwt.verify` yoluna düşer ve
+**401** döner — hata hangi koşulun tutmadığını söylemez.
+
+**`KEY` en az 32 karakter olmalı** (`openssl rand -hex 32`). Tanımsız veya daha
+kısa bir `KEY` bu yolu tamamen kapatır; kısaysa backend logunda "KEY 32
+karakterden kısa" hatası görünür. Karşılaştırma sabit sürede yapılır.
 
 Sunucuda, localhost'a karşı çalıştır (KEY internete çıkmaz, CORS'a takılmaz,
 ters proxy yolu değiştiremez):

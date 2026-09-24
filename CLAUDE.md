@@ -301,6 +301,14 @@ CI (`.github/workflows/ci.yml`) her PR'da ve `main`'e push'ta bunları
 koşturur; backend'i geçici bir MongoDB ile gerçekten ayağa kaldırıp
 `scripts/loadtest.js`'i (`--submit` + `/health`) smoke test olarak çalıştırır.
 
+**Rate limit (`backend/index.js`):** genel limit IP başına 15 dk'da 100 istek
+(geçerli token'lı istekler sayılmaz, mail kuyruğu sık yokluyor). Ek olarak,
+muafiyetsiz: `POST /auth/login` 15 dk'da 10 **hatalı** deneme, başvuru ve
+iletişim formları birlikte 15 dk'da 30. Smoke testte `--submit 40`'ın son 10'u
+bu yüzden 429 alır; loadtest 429'u hata saymaz. Limitler `req.ip`'ye dayanır:
+sunucuda `trust proxy` gerçek proxy sayısıyla uyuşmazsa tüm ziyaretçiler tek
+IP gibi sayılır. Prod'da `LOG_LEVEL=debug` ile loglanan IP'lere bakarak doğrula.
+
 `npm run build` `public/data/` JSON'larını doğrulamaz; `check:content` bunun
 için var (`frontend/scripts/check-content.mjs`). Kontrol ettikleri ve neden:
 

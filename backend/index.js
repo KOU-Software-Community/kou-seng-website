@@ -52,6 +52,28 @@ const limiter = rateLimit({
 });
 app.use(limiter);
 
+// Genel limit oturumlu kullanıcıları saymıyor (mail kuyruğu 3 sn'de bir
+// yokluyor), bu yüzden login ve herkese açık formlar ayrıca, muafiyetsiz
+// sınırlanır. Kampüs ağında çok sayıda öğrenci aynı IP'yi paylaşabildiği için
+// form limiti 15 dakikada 30.
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 10,
+  skipSuccessfulRequests: true, // yalnızca hatalı girişler sayılır
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { message: 'Çok fazla hatalı giriş denemesi. Lütfen 15 dakika sonra tekrar deneyin.' },
+});
+const formLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 30,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { success: false, message: 'Çok fazla gönderim yapıldı. Lütfen 15 dakika sonra tekrar deneyin.' },
+});
+app.post('/auth/login', loginLimiter);
+app.post(['/submissions/general', '/submissions/technical/:slug', '/contact'], formLimiter);
+
 app.use((req, res, next) => {
   logger.debug(`${req.method} ${req.url} [${req.ip}]`);
   next();

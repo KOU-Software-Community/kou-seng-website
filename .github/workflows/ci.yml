@@ -65,7 +65,8 @@ jobs:
     # `node --check` ESM hatalarını kaçırıyor (CLAUDE.md); sunucuyu gerçekten ayağa kaldır.
     - run: nohup node index.js > server.log 2>&1 &
     - run: timeout 30 bash -c 'until curl -sf 127.0.0.1:3001/health > /dev/null; do sleep 1; done'
-    # Rate limit IP başına 15 dk'da 100 istek: önce yazma yolu, kalan kota /health'e.
+    # Genel limit IP başına 15 dk'da 100 istek, formlar ayrıca 15 dk'da 30:
+    # --submit 40 → 30×201 + 10×429 (429 beklenen). Kalan genel kota /health'e.
     - run: node scripts/loadtest.js --submit --n 40
     - run: node scripts/loadtest.js --n 100
     - if: failure()

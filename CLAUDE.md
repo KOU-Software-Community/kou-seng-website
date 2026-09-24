@@ -166,6 +166,10 @@ dosyalarında; `src/lib/*Data.ts` bunları okuyup tiplendirir.
   görseller `frontend/public/profile/boardMembers/`
 - Takım üyeleri: `frontend/public/data/teams/{web,ai,game}.json` → `members[]`
   ve `leaderMessage.author`, görseller `frontend/public/profile/teams/<takım>/`
+- KVKK aydınlatma metni (`/kvkk`): `frontend/public/data/kvkk/data.json`.
+  Başvuru veya iletişim formuna yeni bir alan eklenirse, verinin paylaşıldığı
+  ya da saklandığı yer değişirse metindeki ilgili bölüm ve `lastUpdated` da
+  güncellenmeli; metin sitenin gerçekte topladığı veriyi anlatmalı.
 
 Bir kişinin adı değişince `leaderMessage.author` alanı da kontrol edilmeli —
 lider ismi `members[]` dışında ikinci bir yerde daha tekrar ediyor.

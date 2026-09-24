@@ -14,6 +14,7 @@ import useSubmissions, { type SubmissionData } from '@/hooks/useSubmissions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faSpinner, faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import React from "react";
+import Link from "next/link";
 
 export default function ApplyDetail(props: { slug: string }) {
   const { application, isLoading, error } = useApplyDetail(props.slug);
@@ -382,7 +383,11 @@ export default function ApplyDetail(props: { slug: string }) {
 
             <div className="border-t pt-4">
               <FormDescription className="mb-4">
-                * Form bilgileriniz, KVKK kapsamında işlenecek ve sadece başvuru değerlendirmesi için kullanılacaktır.
+                * Form bilgileriniz KVKK kapsamında, başvurunuzun değerlendirilmesi ve sizinle iletişim kurulması amacıyla işlenir. Ayrıntılar için{' '}
+                <Link href="/kvkk" target="_blank" rel="noopener noreferrer" className="underline hover:text-primary">
+                  KVKK Aydınlatma Metni
+                </Link>
+                &apos;ni inceleyebilirsiniz.
               </FormDescription>
               <Button 
                 type="submit" 

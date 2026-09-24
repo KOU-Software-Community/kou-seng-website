@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useContact, ContactFormValues } from "@/hooks/useContact";
+import Link from "next/link";
 
 // Form doğrulama şeması
 const formSchema = z.object({
@@ -130,6 +131,14 @@ export default function ContactForm() {
               </div>
             )}
             
+            <p className="text-sm text-muted-foreground">
+              Mesajınız, yanıtlanması amacıyla KVKK kapsamında işlenir. Ayrıntılar için{' '}
+              <Link href="/kvkk" target="_blank" rel="noopener noreferrer" className="underline hover:text-primary">
+                KVKK Aydınlatma Metni
+              </Link>
+              &apos;ni inceleyebilirsiniz.
+            </p>
+
             <Button 
               type="submit" 
               className="w-full sm:w-auto cursor-pointer" 

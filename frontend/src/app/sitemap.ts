@@ -56,6 +56,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/announcements`, lastModified: now, changeFrequency: "daily", priority: 0.9 },
     { url: `${baseUrl}/apply`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
     { url: `${baseUrl}/contact`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${baseUrl}/kvkk`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
   ];
 
   const [teamSlugs, applicationSlugs] = await Promise.all([getTeamSlugs(), getApplicationSlugs()]);

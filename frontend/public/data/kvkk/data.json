@@ -1,0 +1,131 @@
+{
+  "title": "Kişisel Verilerin Korunması Hakkında Aydınlatma Metni",
+  "lastUpdated": "24 Eylül 2026",
+  "intro": [
+    "KOÜ Yazılım Kulübü (KOU SENG) olarak, internet sitemiz (kouseng.com) üzerinden ilettiğiniz kişisel verileri 6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK) ve ilgili mevzuata uygun olarak işliyoruz.",
+    "Bu metin, KVKK'nın 10. maddesi ve Aydınlatma Yükümlülüğünün Yerine Getirilmesinde Uyulacak Usul ve Esaslar Hakkında Tebliğ uyarınca; sitedeki genel üyelik ve teknik takım başvuru formlarını, iletişim formunu kullanan ve siteyi ziyaret eden kişileri bilgilendirmek amacıyla hazırlanmıştır."
+  ],
+  "sections": [
+    {
+      "title": "1. Veri Sorumlusu",
+      "paragraphs": [
+        "Veri sorumlusu, Kocaeli Üniversitesi bünyesinde faaliyet gösteren öğrenci topluluğu KOÜ Yazılım Kulübü'dür (KOU SENG)."
+      ],
+      "items": [
+        "Adres: Kocaeli Üniversitesi Mühendislik Fakültesi, 41380 İzmit/Kocaeli",
+        "E-posta: info@kouseng.com"
+      ]
+    },
+    {
+      "title": "2. İşlenen Kişisel Veriler",
+      "paragraphs": [
+        "Yalnızca sitedeki formlar aracılığıyla bizzat ilettiğiniz bilgileri ve aşağıda belirtilen teknik bilgiyi işliyoruz:"
+      ],
+      "items": [
+        "Kimlik bilgileri: ad, soyad.",
+        "İletişim bilgileri: e-posta adresi, telefon numarası.",
+        "Eğitim bilgileri: öğrenci numarası, fakülte, bölüm, sınıf.",
+        "Teknik takım başvurularına özgü bilgiler: GitHub, LinkedIn, Itch.io ve portfolyo bağlantıları; ilgi alanları, deneyim ve motivasyon sorularına verdiğiniz yanıtlar.",
+        "Başvuru değerlendirme bilgileri: başvurunuzun tarihi, durumu (beklemede, incelendi, kabul edildi, reddedildi) ve kulüp yöneticilerinin değerlendirme notları.",
+        "İletişim formu bilgileri: ad, e-posta adresi, mesajınızın konusu ve içeriği.",
+        "İşlem güvenliği bilgisi: IP adresi."
+      ],
+      "after": [
+        "Sağlık, din, etnik köken gibi özel nitelikli kişisel veriler talep etmiyoruz. Serbest metin alanlarına bu tür bilgiler yazmamanızı rica ederiz."
+      ]
+    },
+    {
+      "title": "3. Kişisel Verilerin İşlenme Amaçları",
+      "items": [
+        "Genel üyelik ve teknik takım başvurularının alınması, değerlendirilmesi ve sonuçlandırılması,",
+        "Başvurunuz veya mesajınızla ilgili sizinle iletişime geçilmesi,",
+        "İletişim formu üzerinden ilettiğiniz soru, öneri ve taleplerin yanıtlanması,",
+        "Başvurusu kabul edilen üyelerle kulüp etkinliklerinin ve takım çalışmalarının yürütülmesi,",
+        "Sitenin ve kişisel verilerin güvenliğinin sağlanması, otomatik veya kötü amaçlı gönderimlerin engellenmesi."
+      ],
+      "after": [
+        "Kişisel verileriniz bu amaçlar dışında kullanılmaz; satılmaz, reklam veya pazarlama amacıyla işlenmez."
+      ]
+    },
+    {
+      "title": "4. Toplama Yöntemi ve Hukuki Sebepler",
+      "paragraphs": [
+        "Kişisel verileriniz, sitedeki başvuru ve iletişim formlarını doldurmanız yoluyla elektronik ortamda doğrudan sizden toplanır. IP adresiniz, siteyi kullanırken otomatik olarak işlenir.",
+        "Verileriniz, KVKK'nın 5. maddesinin 2. fıkrasında yer alan aşağıdaki hukuki sebeplere dayanılarak işlenir:"
+      ],
+      "items": [
+        "(c) Bir sözleşmenin kurulması veya ifasıyla doğrudan ilgili olması: kulüp üyeliği ve takım başvurularının alınması, değerlendirilmesi ve sonuçlandırılması.",
+        "(f) Temel hak ve özgürlüklerinize zarar vermemek kaydıyla, kulübün meşru menfaatleri için zorunlu olması: iletişim formu mesajlarının yanıtlanması, site ve bilgi güvenliğinin sağlanması.",
+        "(ç) Kulübün hukuki yükümlülüğünü yerine getirebilmesi için zorunlu olması: mevzuattan doğan bir yükümlülük bulunması hâlinde."
+      ],
+      "after": [
+        "Bu hukuki sebepler açık rızanızı gerektirmediğinden formlarda ayrıca onay istenmez. Formları doldurmak zorunlu değildir; ancak zorunlu alanlar doldurulmadan başvurunuz alınamaz ve değerlendirilemez."
+      ]
+    },
+    {
+      "title": "5. Kişisel Verilerin Aktarılması",
+      "paragraphs": [
+        "Kişisel verileriniz yalnızca aşağıdaki durumlarda, amaçla sınırlı ve ölçülü olarak aktarılabilir:"
+      ],
+      "items": [
+        "Barındırma hizmet sağlayıcısı: Site ve veritabanı Türkiye'deki bir sunucuda barındırılır. Hizmet sağlayıcı, verilere yalnızca teknik altyapıyı sağlamak için veri işleyen sıfatıyla erişebilir.",
+        "Kocaeli Üniversitesi: Öğrenci topluluklarına ilişkin mevzuat gereği talep edilmesi hâlinde, kulübün bağlı olduğu Kocaeli Üniversitesi birimlerine yalnızca talep edilen ve gerekli olan bilgiler (ör. üye listesi) aktarılabilir.",
+        "Yetkili kamu kurum ve kuruluşları: Kanuni bir yükümlülük veya yetkili makamların talebi hâlinde, KVKK'nın 8. maddesine uygun olarak.",
+        "E-posta yazışmaları: Başvurunuz veya mesajınızla ilgili size e-postayla dönüş yaptığımızda, yazışma kulübün kullandığı e-posta hizmeti üzerinden yürütülür."
+      ],
+      "after": [
+        "Site üzerinden toplanan kişisel veriler Türkiye'deki sunucuda saklanır; site altyapısı üzerinden yurt dışına aktarım yapılmaz."
+      ]
+    },
+    {
+      "title": "6. Üçüncü Taraf İçerik",
+      "paragraphs": [
+        "İletişim sayfasındaki harita Google Maps tarafından sağlanır. Bu sayfayı açtığınızda tarayıcınız doğrudan Google sunucularına bağlanır ve Google, IP adresiniz gibi bilgileri kendi gizlilik politikasına göre işleyebilir. Bu bağlantı kulübün sunucuları üzerinden gerçekleşmez ve kulüp bu verilere erişmez."
+      ]
+    },
+    {
+      "title": "7. Saklama Süresi ve İmha",
+      "items": [
+        "Başvuru kayıtları değerlendirme süreci boyunca saklanır ve en geç ilgili eğitim-öğretim yılının sonunda kulüp yönetimi tarafından silinir.",
+        "İletişim formu mesajları, talebiniz sonuçlandıktan sonra aynı süre içinde silinir.",
+        "Silme öncesinde alınan yedekler yalnızca kulüp yönetiminde tutulur ve aynı sürenin sonunda imha edilir.",
+        "IP adresiniz, kötüye kullanımı önlemek için en fazla 15 dakika boyunca sunucu belleğinde tutulur; ayrıca barındırma altyapısının teknik güvenlik kayıtlarında sınırlı bir süre yer alabilir."
+      ]
+    },
+    {
+      "title": "8. Haklarınız",
+      "paragraphs": [
+        "KVKK'nın 11. maddesi uyarınca veri sorumlusuna başvurarak:"
+      ],
+      "items": [
+        "Kişisel verilerinizin işlenip işlenmediğini öğrenme,",
+        "Kişisel verileriniz işlenmişse buna ilişkin bilgi talep etme,",
+        "Kişisel verilerinizin işlenme amacını ve bunların amacına uygun kullanılıp kullanılmadığını öğrenme,",
+        "Yurt içinde veya yurt dışında kişisel verilerinizin aktarıldığı üçüncü kişileri bilme,",
+        "Kişisel verilerinizin eksik veya yanlış işlenmiş olması hâlinde bunların düzeltilmesini isteme,",
+        "KVKK'nın 7. maddesinde öngörülen şartlar çerçevesinde kişisel verilerinizin silinmesini veya yok edilmesini isteme,",
+        "Düzeltme, silme veya yok etme işlemlerinin, kişisel verilerinizin aktarıldığı üçüncü kişilere bildirilmesini isteme,",
+        "İşlenen verilerin münhasıran otomatik sistemler vasıtasıyla analiz edilmesi suretiyle aleyhinize bir sonucun ortaya çıkmasına itiraz etme,",
+        "Kişisel verilerinizin kanuna aykırı olarak işlenmesi sebebiyle zarara uğramanız hâlinde zararın giderilmesini talep etme"
+      ],
+      "after": [
+        "haklarına sahipsiniz."
+      ]
+    },
+    {
+      "title": "9. Başvuru Yöntemi",
+      "paragraphs": [
+        "Haklarınıza ilişkin taleplerinizi aşağıdaki yollardan biriyle iletebilirsiniz:"
+      ],
+      "items": [
+        "Formlarda kullandığınız ve sistemimizde kayıtlı e-posta adresinizden info@kouseng.com adresine e-posta göndererek,",
+        "Yukarıdaki adrese ıslak imzalı dilekçeyle, şahsen veya posta yoluyla."
+      ],
+      "after": [
+        "Başvurunuzda adınız, soyadınız, yazılı başvurularda imzanız, T.C. kimlik numaranız (yabancılar için uyruk ve pasaport numarası), tebligata esas adresiniz, varsa bildirime esas e-posta adresiniz veya telefon numaranız ve talebinizin konusu yer almalıdır.",
+        "Başvurunuz, talebin niteliğine göre en kısa sürede ve en geç 30 gün içinde ücretsiz olarak sonuçlandırılır. İşlemin ayrıca bir maliyet gerektirmesi hâlinde Kişisel Verileri Koruma Kurulu'nca belirlenen tarifedeki ücret alınabilir.",
+        "Başvurunuzun reddedilmesi, verilen cevabı yetersiz bulmanız veya süresinde cevap verilmemesi hâlinde, cevabı öğrendiğiniz tarihten itibaren 30 gün ve her hâlde başvuru tarihinden itibaren 60 gün içinde Kişisel Verileri Koruma Kurulu'na şikâyette bulunabilirsiniz."
+      ]
+    }
+  ]
+}

@@ -293,7 +293,7 @@ FontAwesome ikon fallback'i render eder — dosyanın var olması gerekmez.
 cd frontend && npm run check:content && npm run lint && npm run build
 ```
 
-CI (`.github/workflows/ci.yml`) her PR'da ve `main`'e push'ta bunları (lint hariç)
+CI (`.github/workflows/ci.yml`) her PR'da ve `main`'e push'ta bunları
 koşturur; backend'i geçici bir MongoDB ile gerçekten ayağa kaldırıp
 `scripts/loadtest.js`'i (`--submit` + `/health`) smoke test olarak çalıştırır.
 
@@ -315,12 +315,12 @@ Beş hata sınıfının da gerçekten kırmızı verdiği kasten bozularak doğr
 Kontrol yeşilken bile içerik değiştirdikten sonra ilgili sayfayı `npm run dev`
 ile aç — kırpma/çerçeveleme kalitesini betik ölçmez.
 
-**Bilinen kırık:** `npm run lint` şu an çalışmıyor. ESLint, extend edilen bir
-paylaşılan config'i doğrularken dairesel yapı hatasıyla çöküyor
-(`config-validator.js` → `JSON.stringify` circular). Hata dosyalardan bağımsız,
-config yükleme aşamasında; `eslint.config.mjs` ilk commit'ten beri değişmemiş,
-yani bir bağımlılık sürümü kayması. Bunu kendi değişikliğinin sonucu sanma —
-`scripts/` klasörünü tamamen kaldırıp denedim, aynı hata.
+**Lint:** `eslint.config.mjs`, `eslint-config-next`'in flat config export'larını
+doğrudan kullanıyor. Eski `FlatCompat.extends("next/...")` hâli
+`eslint-config-next` 16'dan sonra dairesel JSON hatasıyla çöküyordu; o yola geri
+dönme. `react-hooks/set-state-in-effect` ve `react-hooks/purity` React Compiler
+kuralları; proje compiler kullanmadığı için uyarı seviyesinde. CI hata (error)
+çıkarsa kırmızı verir, uyarılar geçer.
 
 ### Sosyal medya linkleri
 

@@ -30,8 +30,8 @@ jobs:
     # Bağımlılık istemiyor; en hızlı kırmızıyı veren kontrol önce.
     - run: npm run check:content
     - run: npm ci
+    - run: npm run lint
     # API'ye erişilemezken build: sayfalar build anında API'ye bağımlı olmamalı.
-    # lint yok: `npm run lint` config yüklerken çöküyor (CLAUDE.md, "Bilinen kırık"). Düzelince ekle.
     - run: npm run build
       env:
         NEXT_PUBLIC_API_URL: http://127.0.0.1:3001

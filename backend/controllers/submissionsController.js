@@ -386,7 +386,7 @@ export const updateSubmission = async (req, res) => {
     const updated = await Submission.findByIdAndUpdate(
       id,
       { $set: update },
-      { new: true, runValidators: true }
+      { returnDocument: 'after', runValidators: true }
     )
       .select('-__v')
       .lean();

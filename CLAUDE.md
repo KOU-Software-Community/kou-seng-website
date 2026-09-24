@@ -318,9 +318,16 @@ koşturur; backend'i geçici bir MongoDB ile gerçekten ayağa kaldırıp
 (geçerli token'lı istekler sayılmaz, mail kuyruğu sık yokluyor). Ek olarak,
 muafiyetsiz: `POST /auth/login` ve `PATCH /auth/password` birlikte 15 dk'da 10
 **hatalı** deneme, başvuru ve iletişim formları birlikte 15 dk'da 30. Smoke
-testte `--submit 40`'ın son 10'u bu yüzden 429 alır; loadtest 429'u hata saymaz. Limitler `req.ip`'ye dayanır:
-sunucuda `trust proxy` gerçek proxy sayısıyla uyuşmazsa tüm ziyaretçiler tek
-IP gibi sayılır. Prod'da `LOG_LEVEL=debug` ile loglanan IP'lere bakarak doğrula.
+testte `--submit 40`'ın son 10'u bu yüzden 429 alır; loadtest 429'u hata saymaz.
+
+Site ve API Cloudflare arkasında: ziyaretçi → Cloudflare → Coolify proxy →
+Express. `trust proxy 1` ile `req.ip` Cloudflare'in kenar sunucusu olur; limit
+onunla sayılırsa o sunucudan gelen herkes aynı kovayı paylaşır. Bu yüzden
+limitler `helpers/clientIp.js` ile sayılır: istek bir Cloudflare adresinden
+geldiyse `CF-Connecting-IP`, gelmediyse `req.ip` (sunucuya doğrudan gelen biri
+başlığı uyduramasın diye). Cloudflare IP listesi o dosyada; Cloudflare
+değiştirirse güncellenmeli. `LOG_LEVEL=debug` ile her istek
+`[ziyaretçi] (req.ip: kenar sunucusu)` biçiminde loglanır.
 
 `npm run build` `public/data/` JSON'larını doğrulamaz; `check:content` bunun
 için var (`frontend/scripts/check-content.mjs`). Kontrol ettikleri ve neden:

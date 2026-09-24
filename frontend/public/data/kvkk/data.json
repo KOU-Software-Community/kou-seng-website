@@ -9,7 +9,7 @@
     {
       "title": "1. Veri Sorumlusu",
       "paragraphs": [
-        "Veri sorumlusu, Kocaeli Üniversitesi bünyesinde faaliyet gösteren öğrenci topluluğu KOÜ Yazılım Kulübü'dür (KOU SENG)."
+        "Veri sorumlusu, Kocaeli Üniversitesi'ne bağlı öğrenci topluluğu KOÜ Yazılım Kulübü'dür (KOU SENG)."
       ],
       "items": [
         "Adres: Kocaeli Üniversitesi Mühendislik Fakültesi, 41380 İzmit/Kocaeli",
@@ -71,10 +71,10 @@
         "Barındırma hizmet sağlayıcısı: Site ve veritabanı Türkiye'deki bir sunucuda barındırılır. Hizmet sağlayıcı, verilere yalnızca teknik altyapıyı sağlamak için veri işleyen sıfatıyla erişebilir.",
         "Kocaeli Üniversitesi: Öğrenci topluluklarına ilişkin mevzuat gereği talep edilmesi hâlinde, kulübün bağlı olduğu Kocaeli Üniversitesi birimlerine yalnızca talep edilen ve gerekli olan bilgiler (ör. üye listesi) aktarılabilir.",
         "Yetkili kamu kurum ve kuruluşları: Kanuni bir yükümlülük veya yetkili makamların talebi hâlinde, KVKK'nın 8. maddesine uygun olarak.",
-        "E-posta yazışmaları: Başvurunuz veya mesajınızla ilgili size e-postayla dönüş yaptığımızda, yazışma kulübün kullandığı e-posta hizmeti üzerinden yürütülür."
+        "Yurt dışına aktarım (e-posta hizmeti): Kulübün e-posta adresi (info@kouseng.com) Google Workspace üzerinde çalışır. Başvurunuz veya mesajınızla ilgili size e-postayla dönüş yaptığımızda; adınız, e-posta adresiniz ve yazışmanın içeriği, hizmet sağlayıcı Google'ın yurt dışındaki sunucularında işlenir ve saklanır. Bu aktarım yalnızca sizinle iletişim kurulması amacıyla ve KVKK'nın 9. maddesinde öngörülen şartlara uygun olarak yapılır."
       ],
       "after": [
-        "Site üzerinden toplanan kişisel veriler Türkiye'deki sunucuda saklanır; site altyapısı üzerinden yurt dışına aktarım yapılmaz."
+        "Site üzerinden toplanan kişisel veriler Türkiye'deki sunucuda saklanır. Yurt dışına aktarım yalnızca yukarıda açıklanan e-posta yazışmaları için söz konusudur."
       ]
     },
     {

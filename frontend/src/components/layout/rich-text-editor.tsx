@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBold, faList } from '@fortawesome/free-solid-svg-icons';
 import { cn } from '@/lib/utils';
+import { sanitizeHTML } from '@/lib/sanitizeHTML';
 
 interface RichTextEditorProps {
   value: string;
@@ -38,9 +39,12 @@ export const RichTextEditor = forwardRef<RichTextEditorRef, RichTextEditorProps>
       }
     }));
 
+    // Dışarıdan gelen değer (düzenlenen kayıtlı duyuru) editöre filtrelenerek
+    // yazılır; kullanıcı yazarken value zaten innerHTML'e eşit olduğundan bu
+    // atama hiç çalışmaz.
     useEffect(() => {
       if (editorRef.current && editorRef.current.innerHTML !== (value || '')) {
-        editorRef.current.innerHTML = value || '';
+        editorRef.current.innerHTML = sanitizeHTML(value);
       }
     }, [value]);
 

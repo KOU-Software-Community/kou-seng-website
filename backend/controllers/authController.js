@@ -7,6 +7,9 @@ import bcrypt from "bcryptjs";
 // @access  Public
 const loginUser = async (req, res) => {
     const { email, password } = req.body;
+    if (typeof email !== 'string' || typeof password !== 'string') {
+        return res.status(400).json({ message: 'E-posta adresi veya şifre yanlış' });
+    }
     try {
         const user = await User.findOne({ email });
         if (!user) {

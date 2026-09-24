@@ -27,7 +27,10 @@ export default function AdminLogin() {
   // Admin dashboard yönlendirmesi için
   const router = useRouter();
   const searchParams = useSearchParams();
-  const redirectTo = searchParams.get('redirect') ?? '/admin/dashboard';
+  // Yalnızca panel içi yollar kabul edilir. Dış adrese ya da tarayıcının başka
+  // bir adrese çözebileceği biçimlere (//, /\, görünmez karakter) yönlendirilmez.
+  const requestedRedirect = searchParams.get('redirect') ?? '';
+  const redirectTo = /^\/admin(\/[\w-]+)*\/?$/.test(requestedRedirect) ? requestedRedirect : '/admin/dashboard';
   const { login, isAuthenticating, errorMessage, token, getAuthDetail, logout } = useAuth();
   const [error, setError] = useState<string | null>(null);
   const [isCheckingAuth, setIsCheckingAuth] = useState(false);

@@ -30,8 +30,8 @@ jobs:
     # Bağımlılık istemiyor; en hızlı kırmızıyı veren kontrol önce.
     - run: npm run check:content
     - run: npm ci
+    - run: npm run lint
     # API'ye erişilemezken build: sayfalar build anında API'ye bağımlı olmamalı.
-    # lint yok: `npm run lint` config yüklerken çöküyor (CLAUDE.md, "Bilinen kırık"). Düzelince ekle.
     - run: npm run build
       env:
         NEXT_PUBLIC_API_URL: http://127.0.0.1:3001
@@ -65,8 +65,28 @@ jobs:
     # `node --check` ESM hatalarını kaçırıyor (CLAUDE.md); sunucuyu gerçekten ayağa kaldır.
     - run: nohup node index.js > server.log 2>&1 &
     - run: timeout 30 bash -c 'until curl -sf 127.0.0.1:3001/health > /dev/null; do sleep 1; done'
-    # Rate limit IP başına 15 dk'da 100 istek: önce yazma yolu, kalan kota /health'e.
+    # Genel limit IP başına 15 dk'da 100 istek, formlar ayrıca 15 dk'da 30:
+    # --submit 40 → 30×201 + 10×429 (429 beklenen). Kalan genel kota /health'e.
     - run: node scripts/loadtest.js --submit --n 40
     - run: node scripts/loadtest.js --n 100
     - if: failure()
       run: cat server.log
+
+  # Ayrı job: yeni bir advisory yayınlandığında build ve smoke sonuçları görünür
+  # kalır. npm audit yalnızca lockfile'ı okur, npm ci gerekmez. Dev araçları
+  # (eslint vb.) production'a çıkmadığı için --omit=dev.
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    strategy:
+      fail-fast: false
+      matrix:
+        dir: [frontend, backend]
+
+    steps:
+    - uses: actions/checkout@v5
+    - uses: actions/setup-node@v5
+      with:
+        node-version: 22
+    - run: npm audit --omit=dev --audit-level=high
+      working-directory: ${{ matrix.dir }}

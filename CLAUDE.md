@@ -59,7 +59,7 @@ NEXT_PUBLIC_API_URL=http://localhost:3001
 PORT=3001
 MONGODB_URI=...
 JWT_SECRET=...
-KEY=...                        # İlk admin oluşturma için özel anahtar
+KEY=...                        # İlk admin oluşturma anahtarı, en az 32 karakter
 CORS_ALLOWED_ORIGINS=http://localhost:3000,https://kouseng.com
 MEDIUM_RSS_URLS=https://medium.com/feed/@...
 LOG_LEVEL=info
@@ -209,11 +209,15 @@ penceresinde yapılmalı.
 ### İlk admin oluşturma (deploy edilmiş sunucuda)
 
 Mantık `firstUserCreation()`'da değil, `protect` içinde
-(`authMiddleware.js:66-77`). `POST /users` isteğinde **dört koşul birden**
-aranır: `req.originalUrl === '/users'` (birebir), `req.method === 'POST'`,
-`token === process.env.KEY`, ve `User.countDocuments() === 0`. Biri tutmazsa
-istek `jwt.verify` yoluna düşer ve **401** döner — hata hangi koşulun
-tutmadığını söylemez.
+(`authMiddleware.js:82-91`, karşılaştırma `matchesSystemKey`). `POST /users`
+isteğinde **dört koşul birden** aranır: `req.originalUrl === '/users'`
+(birebir), `req.method === 'POST'`, token'ın `KEY` ile eşleşmesi ve
+`User.countDocuments() === 0`. Biri tutmazsa istek `jwt.verify` yoluna düşer ve
+**401** döner — hata hangi koşulun tutmadığını söylemez.
+
+**`KEY` en az 32 karakter olmalı** (`openssl rand -hex 32`). Tanımsız veya daha
+kısa bir `KEY` bu yolu tamamen kapatır; kısaysa backend logunda "KEY 32
+karakterden kısa" hatası görünür. Karşılaştırma sabit sürede yapılır.
 
 Sunucuda, localhost'a karşı çalıştır (KEY internete çıkmaz, CORS'a takılmaz,
 ters proxy yolu değiştiremez):
@@ -250,6 +254,29 @@ cd backend && MONGODB_URI="" node scripts/<betik>.js --dry-run   # exit 2 beklen
 Betikler `scripts/` altından çalıştığından `dotenv.config()` çıplak
 çağrılmamalı — `.env` backend kökünde, yol açıkça verilmeli.
 
+### Mongoose `sanitizeFilter` açık — operatörlü sorgu `trusted()` ister
+
+`config/dbConnection.js` global `sanitizeFilter`'ı açıyor: filtre içinde `$`
+anahtarlı her nesne `$eq` ile sarılır, istek gövdesinden gelen değer operatör
+olarak çalışamaz. Bedeli: **bilerek** operatör kullanan yeni bir filtre
+(`$regex`, `$gte`, `$in` …) `mongoose.trusted({...})` ile sarılmazsa hata
+vermez, sessizce eşitlik aramasına döner ve **boş sonuç** gelir. Örnek:
+`announcementsController` / `submissionsController` arama kodu. `$or`/`$and`
+dokunulmadan geçer; update nesneleri (`$set`, `$push`) etkilenmez.
+`scripts/` ayrı süreç olduğu için bu ayardan etkilenmez.
+
+### Duyuru HTML'i ve CSP
+
+Duyuru içeriği HTML olarak gösteriliyor ve iki yerde aynı izin listesinden
+geçiyor: kaydederken `announcementsController` (`sanitize-html`), gösterirken
+`frontend/src/lib/sanitizeHTML.ts` (public sayfa, admin önizleme, editör).
+Listeyi değiştirirsen ikisini birlikte değiştir.
+
+`next.config.ts` bir Content-Security-Policy gönderiyor. Yeni bir dış kaynak
+(script, iframe, API adresi) eklenirse oraya da eklenmeli; yoksa tarayıcı onu
+engeller ve yalnızca konsola "Refused to …" yazar. Görseller `next/image`
+üzerinden geldiği için `img-src 'self'` yeterli.
+
 ### Kişi kartlarındaki runtime tuzağı
 
 `teamDetail.tsx` `member.skills.length` yazıyor — optional chaining **yok**.
@@ -270,9 +297,24 @@ FontAwesome ikon fallback'i render eder — dosyanın var olması gerekmez.
 cd frontend && npm run check:content && npm run lint && npm run build
 ```
 
-CI (`.github/workflows/ci.yml`) her PR'da ve `main`'e push'ta bunları (lint hariç)
+CI (`.github/workflows/ci.yml`) her PR'da ve `main`'e push'ta bunları
 koşturur; backend'i geçici bir MongoDB ile gerçekten ayağa kaldırıp
 `scripts/loadtest.js`'i (`--submit` + `/health`) smoke test olarak çalıştırır.
+
+**Rate limit (`backend/index.js`):** genel limit IP başına 15 dk'da 100 istek
+(geçerli token'lı istekler sayılmaz, mail kuyruğu sık yokluyor). Ek olarak,
+muafiyetsiz: `POST /auth/login` 15 dk'da 10 **hatalı** deneme, başvuru ve
+iletişim formları birlikte 15 dk'da 30. Smoke testte `--submit 40`'ın son 10'u
+bu yüzden 429 alır; loadtest 429'u hata saymaz.
+
+Site ve API Cloudflare arkasında: ziyaretçi → Cloudflare → Coolify proxy →
+Express. `trust proxy 1` ile `req.ip` Cloudflare'in kenar sunucusu olur; limit
+onunla sayılırsa o sunucudan gelen herkes aynı kovayı paylaşır. Bu yüzden
+limitler `helpers/clientIp.js` ile sayılır: istek bir Cloudflare adresinden
+geldiyse `CF-Connecting-IP`, gelmediyse `req.ip` (sunucuya doğrudan gelen biri
+başlığı uyduramasın diye). Cloudflare IP listesi o dosyada; Cloudflare
+değiştirirse güncellenmeli. `LOG_LEVEL=debug` ile her istek
+`[ziyaretçi] (req.ip: kenar sunucusu)` biçiminde loglanır.
 
 `npm run build` `public/data/` JSON'larını doğrulamaz; `check:content` bunun
 için var (`frontend/scripts/check-content.mjs`). Kontrol ettikleri ve neden:
@@ -292,12 +334,12 @@ Beş hata sınıfının da gerçekten kırmızı verdiği kasten bozularak doğr
 Kontrol yeşilken bile içerik değiştirdikten sonra ilgili sayfayı `npm run dev`
 ile aç — kırpma/çerçeveleme kalitesini betik ölçmez.
 
-**Bilinen kırık:** `npm run lint` şu an çalışmıyor. ESLint, extend edilen bir
-paylaşılan config'i doğrularken dairesel yapı hatasıyla çöküyor
-(`config-validator.js` → `JSON.stringify` circular). Hata dosyalardan bağımsız,
-config yükleme aşamasında; `eslint.config.mjs` ilk commit'ten beri değişmemiş,
-yani bir bağımlılık sürümü kayması. Bunu kendi değişikliğinin sonucu sanma —
-`scripts/` klasörünü tamamen kaldırıp denedim, aynı hata.
+**Lint:** `eslint.config.mjs`, `eslint-config-next`'in flat config export'larını
+doğrudan kullanıyor. Eski `FlatCompat.extends("next/...")` hâli
+`eslint-config-next` 16'dan sonra dairesel JSON hatasıyla çöküyordu; o yola geri
+dönme. `react-hooks/set-state-in-effect` ve `react-hooks/purity` React Compiler
+kuralları; proje compiler kullanmadığı için uyarı seviyesinde. CI hata (error)
+çıkarsa kırmızı verir, uyarılar geçer.
 
 ### Sosyal medya linkleri
 

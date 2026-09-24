@@ -2,6 +2,7 @@
 //
 //   node scripts/loadtest.js --n 150                    # GET /health — rate limit duvarını bulur
 //   node scripts/loadtest.js --n 200 --c 20 --submit    # POST /submissions/general — uçtan uca
+//                                                        # (form limiti: 15 dk'da 30, sonrası 429)
 //   node scripts/loadtest.js --url https://api.kouseng.com --n 120
 //
 // --submit gerçek kayıt yazar. ASLA production veritabanına çalıştırma:

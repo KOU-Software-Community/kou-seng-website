@@ -1,5 +1,16 @@
+import mongoose from "mongoose";
+import sanitizeHtml from "sanitize-html";
 import Announcement from "../models/Announcement.js";
 import logger from "../helpers/logger.js";
+import toSearchPattern from "../helpers/searchPattern.js";
+
+// İçerik sitede HTML olarak gösteriliyor: yalnızca editörün ürettiği
+// biçimlendirme etiketleri kalır, hiçbir öznitelik taşınmaz. Aynı liste
+// frontend/src/lib/sanitizeHTML.ts'de; biri değişirse diğeri de değişmeli.
+const cleanContent = (html) => sanitizeHtml(html, {
+    allowedTags: ['p', 'br', 'ul', 'ol', 'li', 'strong', 'b'],
+    allowedAttributes: {},
+});
 
 // @desc    Yeni duyuru oluştur
 // @route   POST /announcements
@@ -15,7 +26,7 @@ const createAnnouncement = async (req, res) => {
     }
     
     try {
-        await Announcement.create({ title, content, summary, category, author });
+        await Announcement.create({ title, content: cleanContent(content), summary, category, author });
         logger.debug(`Duyuru başarıyla oluşturuldu: ${title}`);
         return res.status(201).json({ 
             success: true,
@@ -35,21 +46,22 @@ const createAnnouncement = async (req, res) => {
 // @access  Public
 const getAnnouncements = async (req, res) => {
     try {
-        const page = parseInt(req.query.page) || 1;
-        const limit = parseInt(req.query.limit) || 10;
+        const page = Math.max(parseInt(req.query.page) || 1, 1);
+        const limit = Math.min(Math.max(parseInt(req.query.limit) || 10, 1), 50);
         const skip = (page - 1) * limit;
-        const search = req.query.search || '';
+        const searchText = typeof req.query.search === 'string' ? req.query.search.slice(0, 100) : '';
+        const search = toSearchPattern(searchText);
         
         // Arama sorgusu oluştur
         let searchQuery = {};
         if (search) {
             searchQuery = {
                 $or: [
-                    { title: { $regex: search, $options: 'i' } },
-                    { content: { $regex: search, $options: 'i' } },
-                    { summary: { $regex: search, $options: 'i' } },
-                    { category: { $regex: search, $options: 'i' } },
-                    { author: { $regex: search, $options: 'i' } }
+                    { title: mongoose.trusted({ $regex: search, $options: 'i' }) },
+                    { content: mongoose.trusted({ $regex: search, $options: 'i' }) },
+                    { summary: mongoose.trusted({ $regex: search, $options: 'i' }) },
+                    { category: mongoose.trusted({ $regex: search, $options: 'i' }) },
+                    { author: mongoose.trusted({ $regex: search, $options: 'i' }) }
                 ]
             };
         }
@@ -76,7 +88,7 @@ const getAnnouncements = async (req, res) => {
                 limit,
                 totalPages
             },
-            search: search || null
+            search: searchText || null
         });
     } catch (error) {
         logger.error(`Duyurular getirilirken bir hata oluştu: ${error.message}`);
@@ -137,7 +149,7 @@ const updateAnnouncement = async (req, res) => {
         // Duyuruyu güncelle
         announcement.title = title || announcement.title;
         announcement.summary = summary || announcement.summary;
-        announcement.content = content || announcement.content;
+        announcement.content = content ? cleanContent(content) : announcement.content;
         announcement.category = category || announcement.category;
         announcement.author = author || announcement.author;
         announcement.updatedAt = Date.now();

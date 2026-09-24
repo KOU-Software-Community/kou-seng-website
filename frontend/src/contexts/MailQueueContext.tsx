@@ -8,6 +8,7 @@ import {
   useRef,
   useState,
 } from 'react';
+import { useRouter } from 'next/navigation';
 import type { MailBlock } from '@/hooks/useSponsorMail';
 
 // ─── Tipler ──────────────────────────────────────────────────────────────────
@@ -62,6 +63,7 @@ function authHeaders(): Record<string, string> {
 // ─── Provider ────────────────────────────────────────────────────────────────
 
 export function MailQueueProvider({ children }: { children: React.ReactNode }) {
+  const router = useRouter();
   const [jobs, setJobs] = useState<QueueJob[]>([]);
   const mountedRef = useRef(true);
 
@@ -77,6 +79,14 @@ export function MailQueueProvider({ children }: { children: React.ReactNode }) {
     if (!headers.Authorization) return; // Oturum açılmamış
     try {
       const res = await fetch(`${API_BASE}/mail/queue`, { headers });
+      // Oturum düştü (süre doldu, hesap silindi). Geçersiz token'lı istekler rate
+      // limit muafiyetinden yararlanmaz; açık kalan sekme yoklamaya devam ederse
+      // IP'nin kotasını bitirip girişi de kilitler.
+      if (res.status === 401) {
+        localStorage.removeItem('auth_token');
+        router.replace(`/admin/login?redirect=${encodeURIComponent(window.location.pathname)}`);
+        return;
+      }
       if (!res.ok) return;
       const data = (await res.json()) as { success: boolean; jobs: QueueJob[] };
       if (data.success && mountedRef.current) {
@@ -85,7 +95,7 @@ export function MailQueueProvider({ children }: { children: React.ReactNode }) {
     } catch {
       // Ağ hatası — sessizce geç
     }
-  }, []);
+  }, [router]);
 
   // ─── İlk Yükleme ─────────────────────────────────────────────────────────
 

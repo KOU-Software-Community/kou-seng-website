@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import rateLimit from 'express-rate-limit';
+import rateLimit, { ipKeyGenerator } from 'express-rate-limit';
 import authRoutes from './routes/authRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import announcementRoutes from './routes/announcementRoutes.js';
@@ -14,6 +14,7 @@ import mailQueueRoutes from './routes/mailQueueRoutes.js';
 import ConnectDB from './config/dbConnection.js';
 import logger from './helpers/logger.js';
 import rateSkip from './helpers/rateSkip.js';
+import clientIp from './helpers/clientIp.js';
 import { startMailQueueProcessor } from './services/mailQueueProcessor.js';
 import { initTransporter } from './helpers/mailTransporter.js';
 
@@ -43,17 +44,45 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // Rate limiting middleware
+// Limitler Cloudflare arkasındaki gerçek ziyaretçi adresine göre sayılır
+// (helpers/clientIp.js); IPv6 adresleri kütüphanenin varsayılanı gibi /56 ağına göre.
+const keyGenerator = (req) => ipKeyGenerator(clientIp(req));
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100, // Limit each IP to 100 requests per window
   standardHeaders: true,
   legacyHeaders: false,
+  keyGenerator,
   skip: (req) => rateSkip(req)
 });
 app.use(limiter);
 
+// Genel limit oturumlu kullanıcıları saymıyor (mail kuyruğu 3 sn'de bir
+// yokluyor), bu yüzden login ve herkese açık formlar ayrıca, muafiyetsiz
+// sınırlanır. Kampüs ağında çok sayıda öğrenci aynı IP'yi paylaşabildiği için
+// form limiti 15 dakikada 30.
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 10,
+  skipSuccessfulRequests: true, // yalnızca hatalı girişler sayılır
+  standardHeaders: true,
+  legacyHeaders: false,
+  keyGenerator,
+  message: { message: 'Çok fazla hatalı giriş denemesi. Lütfen 15 dakika sonra tekrar deneyin.' },
+});
+const formLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 30,
+  standardHeaders: true,
+  legacyHeaders: false,
+  keyGenerator,
+  message: { success: false, message: 'Çok fazla gönderim yapıldı. Lütfen 15 dakika sonra tekrar deneyin.' },
+});
+app.post('/auth/login', loginLimiter);
+app.post(['/submissions/general', '/submissions/technical/:slug', '/contact'], formLimiter);
+
 app.use((req, res, next) => {
-  logger.debug(`${req.method} ${req.url} [${req.ip}]`);
+  logger.debug(`${req.method} ${req.url} [${clientIp(req)}] (req.ip: ${req.ip})`);
   next();
 });
 

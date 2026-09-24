@@ -1,6 +1,21 @@
+import mongoose from "mongoose";
 import Submission from "../models/Submission.js";
 import logger from "../helpers/logger.js";
-import { Parser } from "json2csv";
+import toSearchPattern from "../helpers/searchPattern.js";
+import { Parser, formatters } from "json2csv";
+
+// Formdan gelen alanlar düz metin olmalı: nesne/dizi gibi değerler sorguya
+// ulaşmadan reddedilir, uzunluk da sınırlanır.
+const isText = (value, max = 200) => typeof value === "string" && value.length <= max;
+const INVALID_FIELD_MESSAGE = "Gönderilen alanlardan biri geçersiz veya çok uzun.";
+
+// CSV Excel/Sheets'te açıldığında başvurandan gelen metin formül olarak
+// çalışmasın: = + - @ tab veya CR ile başlayan hücrenin başına ' eklenir.
+// Yalnızca rakam, boşluk, parantez ve +/- içeren değerler (telefon gibi)
+// formül taşıyamaz; görünür bir ' çıkmasın diye olduğu gibi bırakılır.
+const quoteCsvString = formatters.string();
+const csvString = (value) =>
+  quoteCsvString(/^[=+\-@\t\r]/.test(value) && !/^\+?[\d\s()-]+$/.test(value) ? `'${value}` : value);
 
 // @desc    Genel başvuru oluştur
 // @route   POST /submissions/general
@@ -15,6 +30,10 @@ export const createGeneralSubmission = async (req, res) => {
         success: false,
         message: "Lütfen tüm zorunlu alanları doldurunuz."
       });
+    }
+
+    if (![name, studentId, email, phone, faculty, department].every((v) => isText(v))) {
+      return res.status(400).json({ success: false, message: INVALID_FIELD_MESSAGE });
     }
 
     // Aynı öğrenci numarası veya email ile başka bir başvuru var mı kontrol et
@@ -90,6 +109,7 @@ export const createTechnicalSubmission = async (req, res) => {
     const allowedCustomFields = [
       "question_interests",
       "question_github",
+      "question_portfolio",
       "question_experience",
       "question_motivation",
       "question_linkedin",
@@ -104,6 +124,11 @@ export const createTechnicalSubmission = async (req, res) => {
         success: false,
         message: `Geçersiz alanlar tespit edildi. Lütfen geçerli alanlar gönderiniz.`
       });
+    }
+
+    if (![name, studentId, email, phone, faculty, department].every((v) => isText(v)) ||
+        !Object.values(customFields).every((v) => isText(v, 5000))) {
+      return res.status(400).json({ success: false, message: INVALID_FIELD_MESSAGE });
     }
 
     // Aynı öğrenci numarası veya email ile aynı kategoride başka bir başvuru var mı kontrol et
@@ -162,12 +187,12 @@ export const getAllSubmissions = async (req, res) => {
       type,
       category,
       status,
-      search,
       sort = "createdAt",
-      order = "desc",
-      page = 1,
-      limit = 20
+      order = "desc"
     } = req.query;
+    const search = toSearchPattern(req.query.search);
+    const page = Math.max(parseInt(req.query.page) || 1, 1);
+    const limit = Math.min(Math.max(parseInt(req.query.limit) || 20, 1), 50);
 
     // Temel filtre nesnesini oluştur
     const filter = {};
@@ -178,9 +203,9 @@ export const getAllSubmissions = async (req, res) => {
     if (status) filter.status = status;
     if (search) {
       filter.$or = [
-        { name: { $regex: search, $options: "i" } },
-        { email: { $regex: search, $options: "i" } },
-        { studentId: { $regex: search, $options: "i" } }
+        { name: mongoose.trusted({ $regex: search, $options: "i" }) },
+        { email: mongoose.trusted({ $regex: search, $options: "i" }) },
+        { studentId: mongoose.trusted({ $regex: search, $options: "i" }) }
       ];
     }
 
@@ -193,8 +218,8 @@ export const getAllSubmissions = async (req, res) => {
     // Sorguyu oluştur ve veritabanından çek
     const submissions = await Submission.find(filter).select('-__v')
       .sort({ [sort]: sortOrder })
-      .skip((parseInt(page) - 1) * parseInt(limit))
-      .limit(parseInt(limit))
+      .skip((page - 1) * limit)
+      .limit(limit)
       .lean();
 
     return res.status(200).json({
@@ -202,9 +227,9 @@ export const getAllSubmissions = async (req, res) => {
       message: "Başvurular başarıyla listelendi.",
       data: submissions,
       count: total,
-      page: parseInt(page),
-      limit: parseInt(limit),
-      totalPages: Math.ceil(total / parseInt(limit))
+      page,
+      limit,
+      totalPages: Math.ceil(total / limit)
     });
   } catch (error) {
     logger.error(`Başvurular listelenirken hata oluştu: ${error.message}`);
@@ -316,7 +341,7 @@ export const exportSubmissionsToCSV = async (req, res) => {
     const fields = [...baseFields, ...customFieldDefs];
 
     // JSON'dan CSV'ye dönüştür
-    const json2csvParser = new Parser({ fields });
+    const json2csvParser = new Parser({ fields, formatters: { string: csvString } });
     const csv = json2csvParser.parse(submissions);
 
     // CSV dosyasını indirilecek şekilde gönder
@@ -386,7 +411,7 @@ export const updateSubmission = async (req, res) => {
     const updated = await Submission.findByIdAndUpdate(
       id,
       { $set: update },
-      { new: true, runValidators: true }
+      { returnDocument: 'after', runValidators: true }
     )
       .select('-__v')
       .lean();

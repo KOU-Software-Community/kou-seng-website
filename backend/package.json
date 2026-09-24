@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node --experimental-require-module index.js",
     "dev": "nodemon index.js",
     "pm2:start": "pm2 start index.js --name 'backend'",
     "pm2:stop": "pm2 stop backend",

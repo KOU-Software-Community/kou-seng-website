@@ -261,6 +261,18 @@ vermez, sessizce eşitlik aramasına döner ve **boş sonuç** gelir. Örnek:
 dokunulmadan geçer; update nesneleri (`$set`, `$push`) etkilenmez.
 `scripts/` ayrı süreç olduğu için bu ayardan etkilenmez.
 
+### Duyuru HTML'i ve CSP
+
+Duyuru içeriği HTML olarak gösteriliyor ve iki yerde aynı izin listesinden
+geçiyor: kaydederken `announcementsController` (`sanitize-html`), gösterirken
+`frontend/src/lib/sanitizeHTML.ts` (public sayfa, admin önizleme, editör).
+Listeyi değiştirirsen ikisini birlikte değiştir.
+
+`next.config.ts` bir Content-Security-Policy gönderiyor. Yeni bir dış kaynak
+(script, iframe, API adresi) eklenirse oraya da eklenmeli; yoksa tarayıcı onu
+engeller ve yalnızca konsola "Refused to …" yazar. Görseller `next/image`
+üzerinden geldiği için `img-src 'self'` yeterli.
+
 ### Kişi kartlarındaki runtime tuzağı
 
 `teamDetail.tsx` `member.skills.length` yazıyor — optional chaining **yok**.

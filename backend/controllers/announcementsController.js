@@ -1,6 +1,15 @@
 import mongoose from "mongoose";
+import sanitizeHtml from "sanitize-html";
 import Announcement from "../models/Announcement.js";
 import logger from "../helpers/logger.js";
+
+// İçerik sitede HTML olarak gösteriliyor: yalnızca editörün ürettiği
+// biçimlendirme etiketleri kalır, hiçbir öznitelik taşınmaz. Aynı liste
+// frontend/src/lib/sanitizeHTML.ts'de; biri değişirse diğeri de değişmeli.
+const cleanContent = (html) => sanitizeHtml(html, {
+    allowedTags: ['p', 'br', 'ul', 'ol', 'li', 'strong', 'b'],
+    allowedAttributes: {},
+});
 
 // @desc    Yeni duyuru oluştur
 // @route   POST /announcements
@@ -16,7 +25,7 @@ const createAnnouncement = async (req, res) => {
     }
     
     try {
-        await Announcement.create({ title, content, summary, category, author });
+        await Announcement.create({ title, content: cleanContent(content), summary, category, author });
         logger.debug(`Duyuru başarıyla oluşturuldu: ${title}`);
         return res.status(201).json({ 
             success: true,
@@ -138,7 +147,7 @@ const updateAnnouncement = async (req, res) => {
         // Duyuruyu güncelle
         announcement.title = title || announcement.title;
         announcement.summary = summary || announcement.summary;
-        announcement.content = content || announcement.content;
+        announcement.content = content ? cleanContent(content) : announcement.content;
         announcement.category = category || announcement.category;
         announcement.author = author || announcement.author;
         announcement.updatedAt = Date.now();

@@ -15,6 +15,7 @@ import { faPlus, faEdit, faTrash, faSearch, faEye, faSpinner } from '@fortawesom
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
+import { sanitizeHTML } from '@/lib/sanitizeHTML';
 
 // Form validation schema (removed author from user input)
 const announcementSchema = z.object({
@@ -34,70 +35,6 @@ const formatDate = (dateString: string): string => {
     hour: '2-digit',
     minute: '2-digit'
   });
-};
-
-// Simple HTML sanitizer for allowed tags
-const sanitizeHTML = (html: string): string => {
-  if (!html) return '';
-
-  // Create a temporary div to parse HTML
-  const tempDiv = document.createElement('div');
-  tempDiv.innerHTML = html;
-
-  // Allowed tags and their attributes
-  const allowedTags = ['p', 'br', 'ul', 'ol', 'li', 'strong', 'b'];
-  const allowedAttributes: string[] = [];
-
-  // Recursive function to clean nodes
-  const cleanNode = (node: Node): Node | null => {
-    if (node.nodeType === Node.TEXT_NODE) {
-      return node.cloneNode(true);
-    }
-
-    if (node.nodeType === Node.ELEMENT_NODE) {
-      const element = node as Element;
-      const tagName = element.tagName.toLowerCase();
-
-      if (!allowedTags.includes(tagName)) {
-        // Convert disallowed tags to text or remove them
-        const textNode = document.createTextNode(element.textContent || '');
-        return textNode;
-      }
-
-      // Create new clean element
-      const cleanElement = document.createElement(tagName);
-
-      // Copy allowed attributes (none for our use case)
-      allowedAttributes.forEach(attr => {
-        if (element.hasAttribute(attr)) {
-          cleanElement.setAttribute(attr, element.getAttribute(attr) || '');
-        }
-      });
-
-      // Recursively clean children
-      Array.from(element.childNodes).forEach(child => {
-        const cleanChild = cleanNode(child);
-        if (cleanChild) {
-          cleanElement.appendChild(cleanChild);
-        }
-      });
-
-      return cleanElement;
-    }
-
-    return null;
-  };
-
-  // Clean all child nodes
-  const cleanDiv = document.createElement('div');
-  Array.from(tempDiv.childNodes).forEach(child => {
-    const cleanChild = cleanNode(child);
-    if (cleanChild) {
-      cleanDiv.appendChild(cleanChild);
-    }
-  });
-
-  return cleanDiv.innerHTML;
 };
 
 export default function AdminAnnouncements() {

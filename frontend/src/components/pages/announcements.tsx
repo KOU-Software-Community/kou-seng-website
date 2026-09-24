@@ -10,6 +10,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Input } from '@/components/ui/input';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import useAnnouncements from '@/hooks/useAnnouncements';
+import { sanitizeHTML } from '@/lib/sanitizeHTML';
 
 export default function Announcements() {
     const {
@@ -170,10 +171,10 @@ export default function Announcements() {
                                     </DialogDescription>
                                 </DialogHeader>
                                 <div className="mt-4 text-sm space-y-4 overflow-auto max-h-96 prose prose-sm prose-p:text-muted-foreground prose-a:text-primary hover:prose-a:text-primary/80 hover:prose-a:underline prose-li:text-muted-foreground prose-strong:text-foreground">
-                                    {/* HTML içeriği dangerouslySetInnerHTML ile render ediyoruz */}
+                                    {/* HTML içerik izin listesinden geçirilerek render ediliyor */}
                                     <div
                                         className="text-muted-foreground rich-html"
-                                        dangerouslySetInnerHTML={{ __html: selectedAnnouncement.content }}
+                                        dangerouslySetInnerHTML={{ __html: sanitizeHTML(selectedAnnouncement.content) }}
                                     />
                                 </div>
                                 <div className="mt-4 flex justify-end">

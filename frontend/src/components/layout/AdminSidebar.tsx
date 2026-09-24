@@ -3,9 +3,12 @@
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronDown, faRightFromBracket, faUser } from '@fortawesome/free-solid-svg-icons';
-import useAuth from '@/hooks/useAuth';
+import { faChevronDown, faKey, faRightFromBracket, faUser } from '@fortawesome/free-solid-svg-icons';
+import useAuth, { MIN_PASSWORD_LENGTH } from '@/hooks/useAuth';
 import React, { useEffect, useMemo, useState } from 'react';
 import {
   SidebarContent,
@@ -36,6 +39,117 @@ const navItems: NavItem[] = [
   { label: 'İletişim', href: '/admin/dashboard/contact' },
   { label: 'Admin Yönetimi', href: '/admin/dashboard/admin-management' },
 ];
+
+// Başarılı değişiklikten sonra onChanged çağrılır (çıkış yapılıp login'e dönülür).
+function ChangePasswordDialog({ onChanged }: { onChanged: () => void }) {
+  const { changePassword } = useAuth();
+  const [open, setOpen] = useState(false);
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [repeatPassword, setRepeatPassword] = useState('');
+  const [error, setError] = useState<string | null>(null);
+  const [isSaving, setIsSaving] = useState(false);
+
+  const handleOpenChange = (value: boolean) => {
+    setOpen(value);
+    // Kapanınca girilen şifreler bellekte kalmasın
+    if (!value) {
+      setCurrentPassword('');
+      setNewPassword('');
+      setRepeatPassword('');
+      setError(null);
+    }
+  };
+
+  // Şifreler trim'lenmez: baştaki/sondaki boşluk da şifrenin parçası.
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (newPassword.length < MIN_PASSWORD_LENGTH) {
+      setError(`Yeni şifre en az ${MIN_PASSWORD_LENGTH} karakter olmalıdır.`);
+      return;
+    }
+    if (newPassword !== repeatPassword) {
+      setError('Yeni şifreler eşleşmiyor.');
+      return;
+    }
+    setIsSaving(true);
+    const message = await changePassword(currentPassword, newPassword);
+    setIsSaving(false);
+    if (message) {
+      setError(message);
+      return;
+    }
+    alert('Şifreniz değiştirildi. Yeni şifrenizle tekrar giriş yapın.');
+    onChanged();
+  };
+
+  return (
+    <Dialog open={open} onOpenChange={handleOpenChange}>
+      <DialogTrigger asChild>
+        <Button
+          variant="ghost"
+          size="icon"
+          className="text-muted-foreground hover:text-white cursor-pointer"
+          aria-label="Şifre değiştir"
+        >
+          <FontAwesomeIcon icon={faKey} className="h-4 w-4" />
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-md">
+        <DialogHeader>
+          <DialogTitle>Şifre Değiştir</DialogTitle>
+          <DialogDescription>Değişiklikten sonra yeni şifrenizle tekrar giriş yapmanız gerekir.</DialogDescription>
+        </DialogHeader>
+        <form onSubmit={handleSubmit} className="grid gap-4">
+          <div className="grid gap-2">
+            <Label htmlFor="current-password">Mevcut şifre</Label>
+            <Input
+              id="current-password"
+              type="password"
+              autoComplete="current-password"
+              value={currentPassword}
+              onChange={(e) => setCurrentPassword(e.target.value)}
+              required
+            />
+          </div>
+          <div className="grid gap-2">
+            <Label htmlFor="new-password">Yeni şifre</Label>
+            <Input
+              id="new-password"
+              type="password"
+              autoComplete="new-password"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              placeholder={`En az ${MIN_PASSWORD_LENGTH} karakter`}
+              required
+            />
+          </div>
+          <div className="grid gap-2">
+            <Label htmlFor="repeat-password">Yeni şifre (tekrar)</Label>
+            <Input
+              id="repeat-password"
+              type="password"
+              autoComplete="new-password"
+              value={repeatPassword}
+              onChange={(e) => setRepeatPassword(e.target.value)}
+              required
+            />
+          </div>
+          {error && (
+            <div className="rounded-md bg-destructive/10 text-destructive px-3 py-2 text-sm" role="alert">
+              {error}
+            </div>
+          )}
+          <DialogFooter>
+            <Button type="submit" disabled={isSaving} className="cursor-pointer">
+              {isSaving ? 'Kaydediliyor...' : 'Şifreyi değiştir'}
+            </Button>
+          </DialogFooter>
+        </form>
+      </DialogContent>
+    </Dialog>
+  );
+}
 
 export default function AdminSidebar() {
   const { isAuthenticated, getAuthDetail, logout } = useAuth();
@@ -118,6 +232,7 @@ export default function AdminSidebar() {
             <p className="text-sm font-medium leading-none">{userName || 'Kullanıcı'}</p>
             <p className="text-xs text-muted-foreground">{userEmail || '—'}</p>
           </div>
+          <ChangePasswordDialog onChanged={handleLogoutClick} />
           <Button
             variant="ghost"
             size="icon"

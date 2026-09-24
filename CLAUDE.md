@@ -229,7 +229,8 @@ cd ~/kou-seng-website/backend && KEY=$(grep '^KEY=' .env | cut -d= -f2-) && read
 **Tek atış hakkı var.** `createUser` `role: role || 'user'` diyor; gövdeye
 `"role": "admin"` koymazsan sıradan bir `user` oluşur, `usersCount` artık 0
 olmadığı için KEY yolu **kalıcı olarak kapanır** ve geriye yalnızca veritabanına
-elle müdahale kalır.
+elle müdahale kalır. Şifre en az 10 karakter olmalı; daha kısası 400 döner ve
+kullanıcı oluşmadığı için KEY yolunu tüketmez.
 
 Diğer iki tuzak: sonda slash veya sorgu dizesi (`/users/`, `/users?x=1`)
 eşleşmeyi bozar; nginx `/api/` gibi bir önek ile proxy'liyorsa `originalUrl`
@@ -303,9 +304,9 @@ koşturur; backend'i geçici bir MongoDB ile gerçekten ayağa kaldırıp
 
 **Rate limit (`backend/index.js`):** genel limit IP başına 15 dk'da 100 istek
 (geçerli token'lı istekler sayılmaz, mail kuyruğu sık yokluyor). Ek olarak,
-muafiyetsiz: `POST /auth/login` 15 dk'da 10 **hatalı** deneme, başvuru ve
-iletişim formları birlikte 15 dk'da 30. Smoke testte `--submit 40`'ın son 10'u
-bu yüzden 429 alır; loadtest 429'u hata saymaz. Limitler `req.ip`'ye dayanır:
+muafiyetsiz: `POST /auth/login` ve `PATCH /auth/password` birlikte 15 dk'da 10
+**hatalı** deneme, başvuru ve iletişim formları birlikte 15 dk'da 30. Smoke
+testte `--submit 40`'ın son 10'u bu yüzden 429 alır; loadtest 429'u hata saymaz. Limitler `req.ip`'ye dayanır:
 sunucuda `trust proxy` gerçek proxy sayısıyla uyuşmazsa tüm ziyaretçiler tek
 IP gibi sayılır. Prod'da `LOG_LEVEL=debug` ile loglanan IP'lere bakarak doğrula.
 

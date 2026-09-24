@@ -1,4 +1,4 @@
-import User from "../models/User.js";
+import User, { MIN_PASSWORD_LENGTH } from "../models/User.js";
 import bcrypt from "bcryptjs";
 import logger from "../helpers/logger.js";
 
@@ -33,6 +33,9 @@ const createUser = async (req, res) => {
         // Gerekli alanları kontrol et
         if (!name || !email || !password) {
             return res.status(400).json({ message: 'Lütfen tüm alanları doldurun' });
+        }
+        if (typeof password !== 'string' || password.length < MIN_PASSWORD_LENGTH) {
+            return res.status(400).json({ message: `Şifre en az ${MIN_PASSWORD_LENGTH} karakter olmalıdır` });
         }
 
         // Kullanıcının zaten var olup olmadığını kontrol et

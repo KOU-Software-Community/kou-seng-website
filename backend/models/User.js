@@ -1,5 +1,10 @@
 import mongoose from "mongoose";
 
+// Yeni şifreler için alt sınır (kullanıcı oluşturma, şifre değiştirme). Login
+// formundaki min(6) bilerek aynı kaldı: kısa şifreli eski hesaplar giriş yapıp
+// şifresini değiştirebilsin.
+export const MIN_PASSWORD_LENGTH = 10;
+
 const UserSchema = new mongoose.Schema({
     name: { type: String, required: true },
     email: {

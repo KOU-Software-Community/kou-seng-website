@@ -1,5 +1,5 @@
 import generateToken from "../helpers/generateToken.js";
-import User from "../models/User.js";
+import User, { MIN_PASSWORD_LENGTH } from "../models/User.js";
 import bcrypt from "bcryptjs";
 
 // @desc    Admin girişi
@@ -48,4 +48,30 @@ const getMe = async (req, res) => {
     }
 }
 
-export { loginUser, getMe };
+// @desc    Oturumdaki kullanıcının şifresini değiştir
+// @route   PATCH /auth/password
+// @access  Private
+const changePassword = async (req, res) => {
+    const { currentPassword, newPassword } = req.body ?? {};
+    if (typeof currentPassword !== 'string' || typeof newPassword !== 'string') {
+        return res.status(400).json({ message: 'Mevcut ve yeni şifre gerekli' });
+    }
+    if (newPassword.length < MIN_PASSWORD_LENGTH) {
+        return res.status(400).json({ message: `Yeni şifre en az ${MIN_PASSWORD_LENGTH} karakter olmalıdır` });
+    }
+    try {
+        const user = await User.findById(req.user._id);
+        if (!(await bcrypt.compare(currentPassword, user.password))) {
+            return res.status(400).json({ message: 'Mevcut şifre yanlış' });
+        }
+        user.password = await bcrypt.hash(newPassword, await bcrypt.genSalt(10));
+        // Yalnızca şifre doğrulanır; eski kayıtlardaki başka bir alan (ör.
+        // migration'ı yapılmamış `web` rolü) şifre değişikliğini engellemesin.
+        await user.save({ validateModifiedOnly: true });
+        res.status(200).json({ message: 'Şifre değiştirildi' });
+    } catch {
+        res.status(500).json({ message: 'Şifre değiştirilemedi' });
+    }
+}
+
+export { loginUser, getMe, changePassword };

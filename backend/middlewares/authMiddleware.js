@@ -92,6 +92,10 @@ const protect = async (req, res, next) => {
             
             const decoded = jwt.verify(token, process.env.JWT_SECRET);
             req.user = await User.findOne({ _id: decoded.id }).select('-password');
+            // İmza geçerli ama hesap silinmiş: oturum da geçersiz.
+            if (!req.user) {
+                return res.status(401).json({ message: 'Not authorized, user not found' });
+            }
             next();
         }
         else {

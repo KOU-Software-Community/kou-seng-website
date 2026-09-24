@@ -35,8 +35,9 @@ const corsOptions = {
     if (!origin) return callback(null, true);
 
     if (allowedOrigins.indexOf(origin) === -1) {
-      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
-      return callback(new Error(msg), false);
+      const err = new Error('The CORS policy for this site does not allow access from the specified Origin.');
+      err.status = 403;
+      return callback(err, false);
     }
     return callback(null, true);
   },
@@ -97,6 +98,16 @@ app.use('/rss', publicationRoutes);
 app.use('/submissions', submissionsRoutes);
 app.use('/mail', mailRoutes);
 app.use('/mail/queue', mailQueueRoutes);
+
+// Yakalanmayan hatalar (CORS reddi, bozuk JSON, handler'dan fırlayan istisna)
+// Express'in stack içeren HTML sayfası yerine JSON döner. 4xx mesajları
+// istemciye yöneliktir; 500'ün ayrıntısı yalnızca loga yazılır.
+app.use((err, req, res, next) => {
+  if (res.headersSent) return next(err);
+  const status = err.status >= 400 && err.status < 500 ? err.status : 500;
+  if (status === 500) logger.error(`${req.method} ${req.originalUrl} işlenemedi: ${err.message}`);
+  res.status(status).json({ message: status === 500 ? 'Sunucu hatası' : err.message });
+});
 
 startMailQueueProcessor();
 initTransporter();

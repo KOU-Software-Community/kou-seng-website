@@ -1,6 +1,7 @@
 import generateToken from "../helpers/generateToken.js";
 import User, { MIN_PASSWORD_LENGTH } from "../models/User.js";
 import bcrypt from "bcryptjs";
+import logger from "../helpers/logger.js";
 
 // @desc    Admin girişi
 // @route   GET /auth/login
@@ -23,7 +24,8 @@ const loginUser = async (req, res) => {
             token: generateToken(user._id)
         });
     } catch (error) {
-        res.status(500).json({ message: 'Error logging in', error: error.message });
+        logger.error(`Giriş sırasında hata: ${error.message}`);
+        res.status(500).json({ message: 'Error logging in' });
     }
 }
 
@@ -44,7 +46,8 @@ const getMe = async (req, res) => {
             res.status(404).json({ message: 'Kullanıcı bulunamadı' });
         }
     } catch (error) {
-        res.status(500).json({ message: 'Error getting user', error: error.message });
+        logger.error(`Kullanıcı bilgisi getirilemedi: ${error.message}`);
+        res.status(500).json({ message: 'Error getting user' });
     }
 }
 

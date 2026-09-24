@@ -19,7 +19,8 @@ const getAllUsers = async (req, res) => {
         });
         res.status(200).json(formattedUsers);
     } catch (error) {
-        res.status(500).json({ message: 'Kullanıcıları getirirken hata oluştu', error: error.message });
+        logger.error(`Kullanıcılar getirilemedi: ${error.message}`);
+        res.status(500).json({ message: 'Kullanıcıları getirirken hata oluştu' });
     }
 };
 
@@ -68,7 +69,8 @@ const createUser = async (req, res) => {
             res.status(400).json({ message: 'Kullanıcı oluşturulurken hata oluştu' });
         }
     } catch (error) {
-        res.status(500).json({ message: 'Kullanıcı oluşturulurken hata oluştu', error: error.message });
+        logger.error(`Kullanıcı oluşturulamadı: ${error.message}`);
+        res.status(500).json({ message: 'Kullanıcı oluşturulurken hata oluştu' });
     }
 };
 
@@ -103,7 +105,8 @@ const updateUser = async (req, res) => {
             role: updatedUser.role
         });
     } catch (error) {
-        res.status(500).json({ message: 'Kullanıcı güncellenirken hata oluştu', error: error.message });
+        logger.error(`Kullanıcı güncellenemedi: ${error.message}`);
+        res.status(500).json({ message: 'Kullanıcı güncellenirken hata oluştu' });
     }
 };
 
@@ -126,7 +129,8 @@ const deleteUser = async (req, res) => {
         logger.debug(`Kullanıcı silindi: ${user.name} - ${user.email} - ${user.role}`);
         res.status(200).json({ message: 'Kullanıcı silindi' });
     } catch (error) {
-        res.status(500).json({ message: 'Kullanıcı silinirken hata oluştu', error: error.message });
+        logger.error(`Kullanıcı silinemedi: ${error.message}`);
+        res.status(500).json({ message: 'Kullanıcı silinirken hata oluştu' });
     }
 };
 

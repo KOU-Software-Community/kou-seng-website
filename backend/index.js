@@ -20,6 +20,7 @@ import { initTransporter } from './helpers/mailTransporter.js';
 const app = express();
 
 app.set("trust proxy", 1);
+app.disable('x-powered-by');
 
 dotenv.config({ quiet: true });
 
@@ -40,6 +41,11 @@ const corsOptions = {
     return callback(null, true);
   },
 };
+// API JSON ve CSV döndürüyor; tarayıcı içerik türünü tahmin etmeye kalkmasın.
+app.use((req, res, next) => {
+  res.set('X-Content-Type-Options', 'nosniff');
+  next();
+});
 app.use(cors(corsOptions));
 
 // Rate limiting middleware

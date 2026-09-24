@@ -437,3 +437,50 @@ export const updateSubmission = async (req, res) => {
     });
   }
 };
+
+// Panelden silme kapsamları. Varsayılan bir "hepsi" yok; kapsam açıkça seçilir.
+const PURGE_SCOPES = {
+  all: {},
+  general: { submissionType: "general" },
+  "mobil-web": { submissionType: "technical", technicalCategory: "mobil-web" },
+  ai: { submissionType: "technical", technicalCategory: "ai" },
+  game: { submissionType: "technical", technicalCategory: "game" },
+};
+
+// @desc    Seçilen kapsamdaki başvuruları kalıcı olarak sil
+// @route   POST /submissions/purge
+// @access  Admin
+export const purgeSubmissions = async (req, res) => {
+  const { scope, expectedCount } = req.body ?? {};
+  if (typeof scope !== "string" || !Object.hasOwn(PURGE_SCOPES, scope)) {
+    return res.status(400).json({ success: false, message: "Geçersiz kapsam." });
+  }
+  if (!Number.isInteger(expectedCount) || expectedCount < 1) {
+    return res.status(400).json({ success: false, message: "Silinecek kayıt sayısı (expectedCount) gerekli." });
+  }
+
+  try {
+    // Yalnızca şu an sayılan kayıtlar silinir: sayım ile silme arasında gelen
+    // bir başvuru yedeksiz gitmesin.
+    const ids = await Submission.find(PURGE_SCOPES[scope]).distinct("_id");
+    if (ids.length !== expectedCount) {
+      return res.status(409).json({
+        success: false,
+        message: `Kayıt sayısı değişmiş (şu an ${ids.length}). Yedeği yeniden indirip tekrar deneyin.`,
+        count: ids.length
+      });
+    }
+
+    const { deletedCount } = await Submission.deleteMany({ _id: mongoose.trusted({ $in: ids }) });
+    // Başvuranlara ait hiçbir bilgi loglanmaz; yalnızca kapsam, sayı ve işlemi yapan.
+    logger.info(`Başvurular silindi: kapsam=${scope}, ${deletedCount} kayıt (${req.user.email})`);
+
+    return res.status(200).json({ success: true, message: `${deletedCount} başvuru silindi.`, deletedCount });
+  } catch (error) {
+    logger.error(`Başvurular silinemedi: ${error.message}`);
+    return res.status(500).json({
+      success: false,
+      message: "Sunucu hatası, lütfen daha sonra tekrar deneyiniz."
+    });
+  }
+};

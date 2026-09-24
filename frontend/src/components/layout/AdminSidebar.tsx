@@ -38,6 +38,7 @@ const navItems: NavItem[] = [
   { label: 'Sponsor Mail', href: '/admin/dashboard/sponsor-mail' },
   { label: 'İletişim', href: '/admin/dashboard/contact' },
   { label: 'Admin Yönetimi', href: '/admin/dashboard/admin-management' },
+  { label: 'Veri Yönetimi', href: '/admin/dashboard/data' },
 ];
 
 // Başarılı değişiklikten sonra onChanged çağrılır (çıkış yapılıp login'e dönülür).

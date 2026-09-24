@@ -264,7 +264,19 @@ olarak çalışamaz. Bedeli: **bilerek** operatör kullanan yeni bir filtre
 vermez, sessizce eşitlik aramasına döner ve **boş sonuç** gelir. Örnek:
 `announcementsController` / `submissionsController` arama kodu. `$or`/`$and`
 dokunulmadan geçer; update nesneleri (`$set`, `$push`) etkilenmez.
-`scripts/` ayrı süreç olduğu için bu ayardan etkilenmez.
+`scripts/` ayrı süreç olduğu için bu ayardan etkilenmez. `trusted()` filtrenin
+tamamını değil operatör nesnesini sarar: `{ _id: mongoose.trusted({ $in: ids }) }`.
+Tüm filtre sarılırsa koruma yine devreye girer: ObjectId alanında CastError,
+string alanında boş sonuç.
+
+### Başvuruları silme (saklama süresi)
+
+Başvurular kişisel veri içeriyor; değerlendirme dönemi bitince silinmeli. Yol
+panelde: **Veri Yönetimi** (`/admin/dashboard/data`, yalnızca admin). Kapsam
+seçilir, CSV yedek indirilir; silme ancak ondan sonra açılır ve kayıt sayısının
+yazılmasını ister. `POST /submissions/purge` sayı tutmazsa 409 döner ve yalnızca
+o an saydığı kayıtları siler. JSON yedek gerekirse CLI betiği
+`scripts/purge-submissions.js` (`--dry-run`, `--expect`) aynen duruyor.
 
 ### Duyuru HTML'i ve CSP
 

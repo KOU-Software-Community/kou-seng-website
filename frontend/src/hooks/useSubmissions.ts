@@ -76,6 +76,9 @@ export type TechnicalSubmissionData = BaseSubmissionData & {
 
 export type SubmissionData = GeneralSubmissionData | TechnicalSubmissionData;
 
+// Panelden silme kapsamı; backend'deki PURGE_SCOPES ile aynı anahtarlar.
+export type PurgeScope = 'all' | 'general' | 'mobil-web' | 'ai' | 'game';
+
 interface UseSubmissionsReturn {
   isSubmitting: boolean;
   isSuccess: boolean;
@@ -92,6 +95,9 @@ interface UseSubmissionsReturn {
   isUpdatingSubmission: boolean;
   updateError: string | null;
   updateSubmission: (id: string, body: UpdateSubmissionBody) => Promise<Pick<SubmissionResponse, 'success' | 'message'>>;
+  // Veri yönetimi (admin)
+  downloadSubmissionsCsv: (params: Pick<ListSubmissionsParams, 'type' | 'category'>, filename: string) => Promise<string | null>;
+  purgeSubmissions: (scope: PurgeScope, expectedCount: number) => Promise<Pick<SubmissionResponse, 'success' | 'message'>>;
 }
 
 /**
@@ -323,6 +329,62 @@ export const useSubmissions = (): UseSubmissionsReturn => {
     }
   };
 
+  /**
+   * Admin: Başvuruları CSV olarak indirir. Başarılıysa null, değilse hata mesajı döner.
+   */
+  const downloadSubmissionsCsv = async (
+    params: Pick<ListSubmissionsParams, 'type' | 'category'>,
+    filename: string
+  ): Promise<string | null> => {
+    try {
+      const url = new URL(`${process.env.NEXT_PUBLIC_API_URL}/submissions/export`);
+      if (params.type) url.searchParams.set('type', params.type);
+      if (params.category) url.searchParams.set('category', params.category);
+
+      const response = await fetch(url.toString(), { headers: getAuthHeader() });
+      if (!response.ok) {
+        const data = await response.json().catch(() => null);
+        return data?.message || 'Yedek indirilemedi.';
+      }
+
+      const blobUrl = URL.createObjectURL(await response.blob());
+      const link = document.createElement('a');
+      link.href = blobUrl;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
+      return null;
+    } catch {
+      return 'Yedek indirilemedi. Bağlantınızı kontrol edin.';
+    }
+  };
+
+  /**
+   * Admin: Seçilen kapsamdaki başvuruları kalıcı olarak siler. Sunucu, kayıt
+   * sayısı expectedCount'la tutmazsa hiçbir şey silmeden 409 döner.
+   */
+  const purgeSubmissions = async (
+    scope: PurgeScope,
+    expectedCount: number
+  ): Promise<Pick<SubmissionResponse, 'success' | 'message'>> => {
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/submissions/purge`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', ...getAuthHeader() },
+        body: JSON.stringify({ scope, expectedCount }),
+      });
+      const data = await response.json().catch(() => null);
+      return {
+        success: response.ok && Boolean(data?.success),
+        message: data?.message || 'Başvurular silinemedi.',
+      };
+    } catch {
+      return { success: false, message: 'Başvurular silinemedi. Bağlantınızı kontrol edin.' };
+    }
+  };
+
   return {
     isSubmitting,
     isSuccess,
@@ -338,7 +400,10 @@ export const useSubmissions = (): UseSubmissionsReturn => {
     // update
     isUpdatingSubmission,
     updateError,
-    updateSubmission
+    updateSubmission,
+    // veri yönetimi
+    downloadSubmissionsCsv,
+    purgeSubmissions
   };
 };
 

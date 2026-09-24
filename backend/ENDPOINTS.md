@@ -89,6 +89,11 @@ Kullanıcıların doldurduğu genel ve teknik başvuruları yönetmek için kull
   - **Açıklama:** Başvuruları CSV formatında dışa aktarır.
   - **Gerekli Header:** `Authorization: Bearer <token>`
 
+- **POST** `/submissions/purge`
+  - **Açıklama:** Seçilen kapsamdaki başvuruları kalıcı olarak siler (yalnızca admin). `scope`: `all`, `general`, `mobil-web`, `ai` veya `game`. `expectedCount` kapsamdaki güncel kayıt sayısıyla tutmazsa hiçbir şey silinmez, 409 döner. Paneldeki "Veri Yönetimi" sayfası silmeden önce `/submissions/export` ile yedek indirtir.
+  - **Gerekli Header:** `Authorization: Bearer <token>`
+  - **Request Body:** `{ "scope": "string", "expectedCount": number }`
+
 ## Duyurular (Announcements) - YAPILDI
 
 Anasayfa ve duyurular sayfasında gösterilecek duyuruları yönetmek için kullanılır.

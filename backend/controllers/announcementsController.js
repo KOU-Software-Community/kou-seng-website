@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import Announcement from "../models/Announcement.js";
 import logger from "../helpers/logger.js";
 
@@ -45,11 +46,11 @@ const getAnnouncements = async (req, res) => {
         if (search) {
             searchQuery = {
                 $or: [
-                    { title: { $regex: search, $options: 'i' } },
-                    { content: { $regex: search, $options: 'i' } },
-                    { summary: { $regex: search, $options: 'i' } },
-                    { category: { $regex: search, $options: 'i' } },
-                    { author: { $regex: search, $options: 'i' } }
+                    { title: mongoose.trusted({ $regex: search, $options: 'i' }) },
+                    { content: mongoose.trusted({ $regex: search, $options: 'i' }) },
+                    { summary: mongoose.trusted({ $regex: search, $options: 'i' }) },
+                    { category: mongoose.trusted({ $regex: search, $options: 'i' }) },
+                    { author: mongoose.trusted({ $regex: search, $options: 'i' }) }
                 ]
             };
         }

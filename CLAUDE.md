@@ -250,6 +250,17 @@ cd backend && MONGODB_URI="" node scripts/<betik>.js --dry-run   # exit 2 beklen
 Betikler `scripts/` altından çalıştığından `dotenv.config()` çıplak
 çağrılmamalı — `.env` backend kökünde, yol açıkça verilmeli.
 
+### Mongoose `sanitizeFilter` açık — operatörlü sorgu `trusted()` ister
+
+`config/dbConnection.js` global `sanitizeFilter`'ı açıyor: filtre içinde `$`
+anahtarlı her nesne `$eq` ile sarılır, istek gövdesinden gelen değer operatör
+olarak çalışamaz. Bedeli: **bilerek** operatör kullanan yeni bir filtre
+(`$regex`, `$gte`, `$in` …) `mongoose.trusted({...})` ile sarılmazsa hata
+vermez, sessizce eşitlik aramasına döner ve **boş sonuç** gelir. Örnek:
+`announcementsController` / `submissionsController` arama kodu. `$or`/`$and`
+dokunulmadan geçer; update nesneleri (`$set`, `$push`) etkilenmez.
+`scripts/` ayrı süreç olduğu için bu ayardan etkilenmez.
+
 ### Kişi kartlarındaki runtime tuzağı
 
 `teamDetail.tsx` `member.skills.length` yazıyor — optional chaining **yok**.

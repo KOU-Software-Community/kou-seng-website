@@ -1,6 +1,12 @@
+import mongoose from "mongoose";
 import Submission from "../models/Submission.js";
 import logger from "../helpers/logger.js";
 import { Parser } from "json2csv";
+
+// Formdan gelen alanlar düz metin olmalı: nesne/dizi gibi değerler sorguya
+// ulaşmadan reddedilir, uzunluk da sınırlanır.
+const isText = (value, max = 200) => typeof value === "string" && value.length <= max;
+const INVALID_FIELD_MESSAGE = "Gönderilen alanlardan biri geçersiz veya çok uzun.";
 
 // @desc    Genel başvuru oluştur
 // @route   POST /submissions/general
@@ -15,6 +21,10 @@ export const createGeneralSubmission = async (req, res) => {
         success: false,
         message: "Lütfen tüm zorunlu alanları doldurunuz."
       });
+    }
+
+    if (![name, studentId, email, phone, faculty, department].every((v) => isText(v))) {
+      return res.status(400).json({ success: false, message: INVALID_FIELD_MESSAGE });
     }
 
     // Aynı öğrenci numarası veya email ile başka bir başvuru var mı kontrol et
@@ -106,6 +116,11 @@ export const createTechnicalSubmission = async (req, res) => {
       });
     }
 
+    if (![name, studentId, email, phone, faculty, department].every((v) => isText(v)) ||
+        !Object.values(customFields).every((v) => isText(v, 5000))) {
+      return res.status(400).json({ success: false, message: INVALID_FIELD_MESSAGE });
+    }
+
     // Aynı öğrenci numarası veya email ile aynı kategoride başka bir başvuru var mı kontrol et
     const existingSubmission = await Submission.findOne({
       $and: [
@@ -178,9 +193,9 @@ export const getAllSubmissions = async (req, res) => {
     if (status) filter.status = status;
     if (search) {
       filter.$or = [
-        { name: { $regex: search, $options: "i" } },
-        { email: { $regex: search, $options: "i" } },
-        { studentId: { $regex: search, $options: "i" } }
+        { name: mongoose.trusted({ $regex: search, $options: "i" }) },
+        { email: mongoose.trusted({ $regex: search, $options: "i" }) },
+        { studentId: mongoose.trusted({ $regex: search, $options: "i" }) }
       ];
     }
 

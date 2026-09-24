@@ -62,6 +62,8 @@ export type TeamDetail = {
 
 // Server-side function to fetch team data
 export async function getTeamDetail(slug: string): Promise<TeamDetail | null> {
+  // URL'den gelen slug dosya yoluna yalnızca teams/ altında gerçekten varsa girer.
+  if (!(await getTeamSlugs()).includes(slug)) return null;
   try {
     const filePath = path.join(process.cwd(), 'public', 'data', 'teams', `${slug}.json`);
     const fileContents = await fs.readFile(filePath, 'utf8');

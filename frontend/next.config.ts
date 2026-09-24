@@ -32,10 +32,13 @@ const nextConfig: NextConfig = {
     root: path.resolve(__dirname),
   },
   images: {
+    // Backend yalnızca Medium CDN'deki kapak görsellerini döndürüyor
+    // (publicationsController). Daha geniş bir kalıp, görsel optimizer'ı
+    // medium.com'un her alt alan adı için bir proxy'ye çeviriyordu.
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: '*.medium.com',
+        hostname: 'cdn-images-*.medium.com',
       }
     ],
   },

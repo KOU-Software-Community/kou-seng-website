@@ -1,12 +1,20 @@
 import mongoose from "mongoose";
 import Submission from "../models/Submission.js";
 import logger from "../helpers/logger.js";
-import { Parser } from "json2csv";
+import { Parser, formatters } from "json2csv";
 
 // Formdan gelen alanlar düz metin olmalı: nesne/dizi gibi değerler sorguya
 // ulaşmadan reddedilir, uzunluk da sınırlanır.
 const isText = (value, max = 200) => typeof value === "string" && value.length <= max;
 const INVALID_FIELD_MESSAGE = "Gönderilen alanlardan biri geçersiz veya çok uzun.";
+
+// CSV Excel/Sheets'te açıldığında başvurandan gelen metin formül olarak
+// çalışmasın: = + - @ tab veya CR ile başlayan hücrenin başına ' eklenir.
+// Yalnızca rakam, boşluk, parantez ve +/- içeren değerler (telefon gibi)
+// formül taşıyamaz; görünür bir ' çıkmasın diye olduğu gibi bırakılır.
+const quoteCsvString = formatters.string();
+const csvString = (value) =>
+  quoteCsvString(/^[=+\-@\t\r]/.test(value) && !/^\+?[\d\s()-]+$/.test(value) ? `'${value}` : value);
 
 // @desc    Genel başvuru oluştur
 // @route   POST /submissions/general
@@ -332,7 +340,7 @@ export const exportSubmissionsToCSV = async (req, res) => {
     const fields = [...baseFields, ...customFieldDefs];
 
     // JSON'dan CSV'ye dönüştür
-    const json2csvParser = new Parser({ fields });
+    const json2csvParser = new Parser({ fields, formatters: { string: csvString } });
     const csv = json2csvParser.parse(submissions);
 
     // CSV dosyasını indirilecek şekilde gönder

@@ -70,3 +70,22 @@ jobs:
     - run: node scripts/loadtest.js --n 100
     - if: failure()
       run: cat server.log
+
+  # Ayrı job: yeni bir advisory yayınlandığında build ve smoke sonuçları görünür
+  # kalır. npm audit yalnızca lockfile'ı okur, npm ci gerekmez. Dev araçları
+  # (eslint vb.) production'a çıkmadığı için --omit=dev.
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    strategy:
+      fail-fast: false
+      matrix:
+        dir: [frontend, backend]
+
+    steps:
+    - uses: actions/checkout@v5
+    - uses: actions/setup-node@v5
+      with:
+        node-version: 22
+    - run: npm audit --omit=dev --audit-level=high
+      working-directory: ${{ matrix.dir }}

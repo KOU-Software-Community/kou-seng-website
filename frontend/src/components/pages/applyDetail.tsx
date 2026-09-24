@@ -267,7 +267,7 @@ export default function ApplyDetail(props: { slug: string }) {
                   {field.required && <span className="text-destructive ml-1">*</span>}
                 </FormLabel>
                 <FormControl>
-                  <Textarea placeholder={field.placeholder} {...formField} value={(formField.value as string | undefined) ?? ''} />
+                  <Textarea placeholder={field.placeholder} maxLength={5000} {...formField} value={(formField.value as string | undefined) ?? ''} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

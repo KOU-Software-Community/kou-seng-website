@@ -170,6 +170,10 @@ dosyalarında; `src/lib/*Data.ts` bunları okuyup tiplendirir.
   görseller `frontend/public/profile/boardMembers/`
 - Takım üyeleri: `frontend/public/data/teams/{web,ai,game}.json` → `members[]`
   ve `leaderMessage.author`, görseller `frontend/public/profile/teams/<takım>/`
+- KVKK aydınlatma metni (`/kvkk`): `frontend/public/data/kvkk/data.json`.
+  Başvuru veya iletişim formuna yeni bir alan eklenirse, verinin paylaşıldığı
+  ya da saklandığı yer değişirse metindeki ilgili bölüm ve `lastUpdated` da
+  güncellenmeli; metin sitenin gerçekte topladığı veriyi anlatmalı.
 
 Bir kişinin adı değişince `leaderMessage.author` alanı da kontrol edilmeli —
 lider ismi `members[]` dışında ikinci bir yerde daha tekrar ediyor.
@@ -233,7 +237,8 @@ cd ~/kou-seng-website/backend && KEY=$(grep '^KEY=' .env | cut -d= -f2-) && read
 **Tek atış hakkı var.** `createUser` `role: role || 'user'` diyor; gövdeye
 `"role": "admin"` koymazsan sıradan bir `user` oluşur, `usersCount` artık 0
 olmadığı için KEY yolu **kalıcı olarak kapanır** ve geriye yalnızca veritabanına
-elle müdahale kalır.
+elle müdahale kalır. Şifre en az 10 karakter olmalı; daha kısası 400 döner ve
+kullanıcı oluşmadığı için KEY yolunu tüketmez.
 
 Diğer iki tuzak: sonda slash veya sorgu dizesi (`/users/`, `/users?x=1`)
 eşleşmeyi bozar; nginx `/api/` gibi bir önek ile proxy'liyorsa `originalUrl`
@@ -277,7 +282,19 @@ olarak çalışamaz. Bedeli: **bilerek** operatör kullanan yeni bir filtre
 vermez, sessizce eşitlik aramasına döner ve **boş sonuç** gelir. Örnek:
 `announcementsController` / `submissionsController` arama kodu. `$or`/`$and`
 dokunulmadan geçer; update nesneleri (`$set`, `$push`) etkilenmez.
-`scripts/` ayrı süreç olduğu için bu ayardan etkilenmez.
+`scripts/` ayrı süreç olduğu için bu ayardan etkilenmez. `trusted()` filtrenin
+tamamını değil operatör nesnesini sarar: `{ _id: mongoose.trusted({ $in: ids }) }`.
+Tüm filtre sarılırsa koruma yine devreye girer: ObjectId alanında CastError,
+string alanında boş sonuç.
+
+### Başvuruları silme (saklama süresi)
+
+Başvurular kişisel veri içeriyor; değerlendirme dönemi bitince silinmeli. Yol
+panelde: **Veri Yönetimi** (`/admin/dashboard/data`, yalnızca admin). Kapsam
+seçilir, CSV yedek indirilir; silme ancak ondan sonra açılır ve kayıt sayısının
+yazılmasını ister. `POST /submissions/purge` sayı tutmazsa 409 döner ve yalnızca
+o an saydığı kayıtları siler. JSON yedek gerekirse CLI betiği
+`scripts/purge-submissions.js` (`--dry-run`, `--expect`) aynen duruyor.
 
 ### Duyuru HTML'i ve CSP
 
@@ -317,9 +334,9 @@ koşturur; backend'i geçici bir MongoDB ile gerçekten ayağa kaldırıp
 
 **Rate limit (`backend/index.js`):** genel limit IP başına 15 dk'da 100 istek
 (geçerli token'lı istekler sayılmaz, mail kuyruğu sık yokluyor). Ek olarak,
-muafiyetsiz: `POST /auth/login` 15 dk'da 10 **hatalı** deneme, başvuru ve
-iletişim formları birlikte 15 dk'da 30. Smoke testte `--submit 40`'ın son 10'u
-bu yüzden 429 alır; loadtest 429'u hata saymaz.
+muafiyetsiz: `POST /auth/login` ve `PATCH /auth/password` birlikte 15 dk'da 10
+**hatalı** deneme, başvuru ve iletişim formları birlikte 15 dk'da 30. Smoke
+testte `--submit 40`'ın son 10'u bu yüzden 429 alır; loadtest 429'u hata saymaz.
 
 Site ve API Cloudflare arkasında. Production'da istek Express'e
 `ziyaretçi → Cloudflare → 10.0.1.1 → Coolify proxy` yoluyla ulaşıyor; `10.0.1.1`

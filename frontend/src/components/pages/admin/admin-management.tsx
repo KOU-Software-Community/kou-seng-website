@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useUser, type User, type CreateUserRequest, type UpdateUserRequest } from '@/hooks/useUser';
-import { useAuth } from '@/hooks/useAuth';
+import { useAuth, MIN_PASSWORD_LENGTH } from '@/hooks/useAuth';
 import { Card, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -141,6 +141,10 @@ export default function AdminManagement() {
     const handleCreateUser = async () => {
         if (!formName.trim() || !formEmail.trim() || !formPassword.trim()) {
             alert('Lütfen tüm alanları doldurun.');
+            return;
+        }
+        if (formPassword.trim().length < MIN_PASSWORD_LENGTH) {
+            alert(`Şifre en az ${MIN_PASSWORD_LENGTH} karakter olmalıdır.`);
             return;
         }
 
@@ -343,7 +347,7 @@ export default function AdminManagement() {
                                 type="password"
                                 value={formPassword}
                                 onChange={(e) => setFormPassword(e.target.value)}
-                                placeholder="Güçlü bir şifre girin"
+                                placeholder={`En az ${MIN_PASSWORD_LENGTH} karakter`}
                                 aria-label="Şifre"
                             />
                         </div>

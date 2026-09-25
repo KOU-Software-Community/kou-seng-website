@@ -21,6 +21,7 @@ import { initTransporter } from './helpers/mailTransporter.js';
 const app = express();
 
 app.set("trust proxy", 1);
+app.disable('x-powered-by');
 
 dotenv.config({ quiet: true });
 
@@ -35,12 +36,18 @@ const corsOptions = {
     if (!origin) return callback(null, true);
 
     if (allowedOrigins.indexOf(origin) === -1) {
-      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
-      return callback(new Error(msg), false);
+      const err = new Error('The CORS policy for this site does not allow access from the specified Origin.');
+      err.status = 403;
+      return callback(err, false);
     }
     return callback(null, true);
   },
 };
+// API JSON ve CSV döndürüyor; tarayıcı içerik türünü tahmin etmeye kalkmasın.
+app.use((req, res, next) => {
+  res.set('X-Content-Type-Options', 'nosniff');
+  next();
+});
 app.use(cors(corsOptions));
 
 // Rate limiting middleware
@@ -59,8 +66,9 @@ app.use(limiter);
 
 // Genel limit oturumlu kullanıcıları saymıyor (mail kuyruğu 3 sn'de bir
 // yokluyor), bu yüzden login ve herkese açık formlar ayrıca, muafiyetsiz
-// sınırlanır. Kampüs ağında çok sayıda öğrenci aynı IP'yi paylaşabildiği için
-// form limiti 15 dakikada 30.
+// sınırlanır. Şifre değiştirme login'le aynı kovayı kullanır; yoksa ele
+// geçirilmiş bir token'la mevcut şifre sınırsız denenebilirdi. Kampüs ağında
+// çok sayıda öğrenci aynı IP'yi paylaşabildiği için form limiti 15 dakikada 30.
 const loginLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   limit: 10,
@@ -79,6 +87,7 @@ const formLimiter = rateLimit({
   message: { success: false, message: 'Çok fazla gönderim yapıldı. Lütfen 15 dakika sonra tekrar deneyin.' },
 });
 app.post('/auth/login', loginLimiter);
+app.patch('/auth/password', loginLimiter);
 app.post(['/submissions/general', '/submissions/technical/:slug', '/contact'], formLimiter);
 
 app.use((req, res, next) => {
@@ -96,6 +105,16 @@ app.use('/rss', publicationRoutes);
 app.use('/submissions', submissionsRoutes);
 app.use('/mail', mailRoutes);
 app.use('/mail/queue', mailQueueRoutes);
+
+// Yakalanmayan hatalar (CORS reddi, bozuk JSON, handler'dan fırlayan istisna)
+// Express'in stack içeren HTML sayfası yerine JSON döner. 4xx mesajları
+// istemciye yöneliktir; 500'ün ayrıntısı yalnızca loga yazılır.
+app.use((err, req, res, next) => {
+  if (res.headersSent) return next(err);
+  const status = err.status >= 400 && err.status < 500 ? err.status : 500;
+  if (status === 500) logger.error(`${req.method} ${req.originalUrl} işlenemedi: ${err.message}`);
+  res.status(status).json({ message: status === 500 ? 'Sunucu hatası' : err.message });
+});
 
 startMailQueueProcessor();
 initTransporter();

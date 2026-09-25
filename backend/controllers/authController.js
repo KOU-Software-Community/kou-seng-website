@@ -1,6 +1,7 @@
 import generateToken from "../helpers/generateToken.js";
-import User from "../models/User.js";
+import User, { MIN_PASSWORD_LENGTH } from "../models/User.js";
 import bcrypt from "bcryptjs";
+import logger from "../helpers/logger.js";
 
 // @desc    Admin girişi
 // @route   GET /auth/login
@@ -23,7 +24,8 @@ const loginUser = async (req, res) => {
             token: generateToken(user._id)
         });
     } catch (error) {
-        res.status(500).json({ message: 'Error logging in', error: error.message });
+        logger.error(`Giriş sırasında hata: ${error.message}`);
+        res.status(500).json({ message: 'Error logging in' });
     }
 }
 
@@ -44,8 +46,35 @@ const getMe = async (req, res) => {
             res.status(404).json({ message: 'Kullanıcı bulunamadı' });
         }
     } catch (error) {
-        res.status(500).json({ message: 'Error getting user', error: error.message });
+        logger.error(`Kullanıcı bilgisi getirilemedi: ${error.message}`);
+        res.status(500).json({ message: 'Error getting user' });
     }
 }
 
-export { loginUser, getMe };
+// @desc    Oturumdaki kullanıcının şifresini değiştir
+// @route   PATCH /auth/password
+// @access  Private
+const changePassword = async (req, res) => {
+    const { currentPassword, newPassword } = req.body ?? {};
+    if (typeof currentPassword !== 'string' || typeof newPassword !== 'string') {
+        return res.status(400).json({ message: 'Mevcut ve yeni şifre gerekli' });
+    }
+    if (newPassword.length < MIN_PASSWORD_LENGTH) {
+        return res.status(400).json({ message: `Yeni şifre en az ${MIN_PASSWORD_LENGTH} karakter olmalıdır` });
+    }
+    try {
+        const user = await User.findById(req.user._id);
+        if (!(await bcrypt.compare(currentPassword, user.password))) {
+            return res.status(400).json({ message: 'Mevcut şifre yanlış' });
+        }
+        user.password = await bcrypt.hash(newPassword, await bcrypt.genSalt(10));
+        // Yalnızca şifre doğrulanır; eski kayıtlardaki başka bir alan (ör.
+        // migration'ı yapılmamış `web` rolü) şifre değişikliğini engellemesin.
+        await user.save({ validateModifiedOnly: true });
+        res.status(200).json({ message: 'Şifre değiştirildi' });
+    } catch {
+        res.status(500).json({ message: 'Şifre değiştirilemedi' });
+    }
+}
+
+export { loginUser, getMe, changePassword };

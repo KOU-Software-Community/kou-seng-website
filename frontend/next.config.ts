@@ -23,6 +23,7 @@ const contentSecurityPolicy = [
 ].join('; ');
 
 const nextConfig: NextConfig = {
+  poweredByHeader: false,
   // Turbopack workspace kökünü ağaçta yukarı doğru lockfile arayarak tahmin
   // ediyor. Geliştiricinin ev dizininde başıboş bir package-lock.json varsa
   // kökü oraya çözüyor. Kökü açıkça sabitliyoruz ki build makineden bağımsız
@@ -31,16 +32,28 @@ const nextConfig: NextConfig = {
     root: path.resolve(__dirname),
   },
   images: {
+    // Backend yalnızca Medium CDN'deki kapak görsellerini döndürüyor
+    // (publicationsController). Daha geniş bir kalıp, görsel optimizer'ı
+    // medium.com'un her alt alan adı için bir proxy'ye çeviriyordu.
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: '*.medium.com',
+        hostname: 'cdn-images-*.medium.com',
       }
     ],
   },
   async headers() {
     return [
-      { source: '/:path*', headers: [{ key: 'Content-Security-Policy', value: contentSecurityPolicy }] },
+      {
+        source: '/:path*',
+        headers: [
+          { key: 'Content-Security-Policy', value: contentSecurityPolicy },
+          { key: 'X-Content-Type-Options', value: 'nosniff' },
+          { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+          // frame-ancestors'ı tanımayan eski tarayıcılar için
+          { key: 'X-Frame-Options', value: 'DENY' },
+        ],
+      },
     ];
   },
   // Web takımı "Mobil Web" olarak yeniden adlandırıldı ve slug'ı değişti.

@@ -5,7 +5,8 @@ import {
   getAllSubmissions,
   getSubmissionById,
   exportSubmissionsToCSV,
-  updateSubmission
+  updateSubmission,
+  purgeSubmissions
 } from '../controllers/submissionsController.js';
 import { protect, adminOnly, roleOnlyForCategory, roleOnlyForSubmission } from '../middlewares/authMiddleware.js';
 
@@ -22,6 +23,9 @@ router.get('/', protect, roleOnlyForCategory, getAllSubmissions);
 
 // Başvuruları CSV olarak dışa aktar
 router.get('/export', protect, adminOnly, exportSubmissionsToCSV);
+
+// Seçilen kapsamdaki başvuruları kalıcı olarak sil (önce yedek alınmalı)
+router.post('/purge', protect, adminOnly, purgeSubmissions);
 
 // Role only yapmak lazım burayı
 router.route('/:id')

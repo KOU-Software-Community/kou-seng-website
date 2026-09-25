@@ -10,21 +10,15 @@ const getHealthStatus = async (req, res) => {
         const dbState = mongoose.connection.readyState;
         const dbStatus = dbState === 1 ? 'connected' : 'disconnected';
         
-        // Sistem bilgileri
+        // Herkese açık uç: Node sürümü, platform ve bellek bilgisi bilerek yok.
         const systemInfo = {
             status: 'healthy',
             timestamp: new Date().toISOString(),
             uptime: process.uptime(),
-            memory: {
-                used: Math.round(process.memoryUsage().heapUsed / 1024 / 1024) + ' MB',
-                total: Math.round(process.memoryUsage().heapTotal / 1024 / 1024) + ' MB'
-            },
             database: {
                 status: dbStatus,
                 readyState: dbState
-            },
-            version: process.version,
-            platform: process.platform
+            }
         };
 
         // Veritabanı bağlı değilse unhealthy olarak işaretle
@@ -48,8 +42,7 @@ const getHealthStatus = async (req, res) => {
             message: "Sistem sağlık durumu kontrol edilirken bir hata oluştu.",
             data: {
                 status: 'unhealthy',
-                timestamp: new Date().toISOString(),
-                error: error.message
+                timestamp: new Date().toISOString()
             }
         });
     }

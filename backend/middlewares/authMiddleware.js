@@ -28,7 +28,8 @@ const adminOnly = (req, res, next) => {
             res.status(403).json({ message: 'Erişim engellendi. Yönetici Bölgesi...' });
         }
     } catch (error) {
-        res.status(500).json({ message: 'Admin only de sunucu hatası alındı.', error: error.message });
+        logger.error(`adminOnly hatası: ${error.message}`);
+        res.status(500).json({ message: 'Admin only de sunucu hatası alındı.' });
     }
 }
 
@@ -47,7 +48,8 @@ const roleOnlyForCategory = (req, res, next) => {
         
         res.status(403).json({ message: `Erişim engellendi. Yönetici Bölgesi...` });
     } catch (error) {
-        res.status(500).json({ message: `Rol bazlı erişim hatası alındı.`, error: error.message });
+        logger.error(`Rol bazlı erişim hatası: ${error.message}`);
+        res.status(500).json({ message: `Rol bazlı erişim hatası alındı.` });
     }
 }
 
@@ -68,7 +70,8 @@ const roleOnlyForSubmission = async (req, res, next) => {
 
         res.status(403).json({ message: `Erişim engellendi. Yönetici Bölgesi...` });
     } catch (error) {
-        res.status(500).json({ message: `Rol bazlı erişim hatası alındı.`, error: error.message });
+        logger.error(`Rol bazlı erişim hatası: ${error.message}`);
+        res.status(500).json({ message: `Rol bazlı erişim hatası alındı.` });
     }
 }
 
@@ -105,7 +108,7 @@ const protect = async (req, res, next) => {
         if (error.message == 'jwt expired') {
             res.status(401).json({ message: 'Token expired, please login again' });
         } else {
-            res.status(401).json({ message: 'Not authorized, token failed', error: error.message });
+            res.status(401).json({ message: 'Not authorized, token failed' });
         }
     }
 }
@@ -122,7 +125,8 @@ const firstUserCreation = async (req, res, next) => {
         }
         res.status(403).json({ message: 'Erişim engellendi. Yönetici Bölgesi...' });
     } catch (error) {
-        res.status(500).json({ message: 'Middleware hatası', error: error.message });
+        logger.error(`firstUserCreation hatası: ${error.message}`);
+        res.status(500).json({ message: 'Middleware hatası' });
     }
 }
 
@@ -135,7 +139,8 @@ const sponsorOrAdmin = (req, res, next) => {
             res.status(403).json({ message: 'Erişim engellendi. Sponsor veya Yönetici Bölgesi...' });
         }
     } catch (error) {
-        res.status(500).json({ message: 'sponsorOrAdmin middleware hatası', error: error.message });
+        logger.error(`sponsorOrAdmin hatası: ${error.message}`);
+        res.status(500).json({ message: 'sponsorOrAdmin middleware hatası' });
     }
 }
 

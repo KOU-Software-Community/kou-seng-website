@@ -32,9 +32,14 @@ export type UseAuthReturn = {
   logout: () => void;
   getAuthHeader: () => Record<string, string>;
   getAuthDetail: () => Promise<AuthUser | AuthError>;
+  /** Başarılıysa null, değilse gösterilecek hata mesajı döner. */
+  changePassword: (currentPassword: string, newPassword: string) => Promise<string | null>;
 };
 
 const AUTH_TOKEN_KEY = 'auth_token';
+
+/** Yeni şifreler için alt sınır; backend'deki MIN_PASSWORD_LENGTH ile aynı olmalı. */
+export const MIN_PASSWORD_LENGTH = 10;
 
 const getStoredToken = (): string | null => {
   if (typeof window === 'undefined') return null;
@@ -150,6 +155,21 @@ export const useAuth = (): UseAuthReturn => {
     }
   }, [getAuthHeader, token]);
 
+  const changePassword = useCallback(async (currentPassword: string, newPassword: string): Promise<string | null> => {
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/password`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json', ...getAuthHeader() },
+        body: JSON.stringify({ currentPassword, newPassword }),
+      });
+      if (response.ok) return null;
+      const data = await response.json().catch(() => null);
+      return typeof data?.message === 'string' ? data.message : 'Şifre değiştirilemedi.';
+    } catch {
+      return 'Şifre değiştirilemedi. Bağlantınızı kontrol edin.';
+    }
+  }, [getAuthHeader]);
+
   const isAuthenticated = useMemo(() => Boolean(token), [token]);
 
   return {
@@ -161,6 +181,7 @@ export const useAuth = (): UseAuthReturn => {
     logout,
     getAuthHeader,
     getAuthDetail,
+    changePassword,
   };
 };
 

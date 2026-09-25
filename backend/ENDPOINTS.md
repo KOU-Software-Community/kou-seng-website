@@ -14,6 +14,11 @@ Yönetim paneline erişim için kullanılır.
   - **Açıklama:** Mevcut token'a sahip yöneticinin bilgilerini döndürür. Oturum kontrolü için kullanılır.
   - **Gerekli Header:** `Authorization: Bearer <token>`
 
+- **PATCH** `/auth/password`
+  - **Açıklama:** Oturumdaki kullanıcının şifresini değiştirir. Yeni şifre en az 10 karakter. Hatalı denemeler login ile aynı limite (15 dakikada 10) sayılır.
+  - **Gerekli Header:** `Authorization: Bearer <token>`
+  - **Request Body:** `{ "currentPassword": "string", "newPassword": "string" }`
+
 ## Kullanıcı Yönetimi (Admin) - YAPILDI
 
 Yönetim panelindeki diğer yöneticileri yönetmek için kullanılır.
@@ -23,7 +28,7 @@ Yönetim panelindeki diğer yöneticileri yönetmek için kullanılır.
   - **Gerekli Header:** `Authorization: Bearer <token>`
 
 - **POST** `/users`
-  - **Açıklama:** Yeni bir yönetici kullanıcı oluşturur.
+  - **Açıklama:** Yeni bir yönetici kullanıcı oluşturur. Şifre en az 10 karakter.
   - **Gerekli Header:** `Authorization: Bearer <token>`
   - **Request Body:** `{ "name": "string", "email": "string", "password": "string", "role": "string" }`
 
@@ -83,6 +88,11 @@ Kullanıcıların doldurduğu genel ve teknik başvuruları yönetmek için kull
 - **GET** `/submissions/export`
   - **Açıklama:** Başvuruları CSV formatında dışa aktarır.
   - **Gerekli Header:** `Authorization: Bearer <token>`
+
+- **POST** `/submissions/purge`
+  - **Açıklama:** Seçilen kapsamdaki başvuruları kalıcı olarak siler (yalnızca admin). `scope`: `all`, `general`, `mobil-web`, `ai` veya `game`. `expectedCount` kapsamdaki güncel kayıt sayısıyla tutmazsa hiçbir şey silinmez, 409 döner. Paneldeki "Veri Yönetimi" sayfası silmeden önce `/submissions/export` ile yedek indirtir.
+  - **Gerekli Header:** `Authorization: Bearer <token>`
+  - **Request Body:** `{ "scope": "string", "expectedCount": number }`
 
 ## Duyurular (Announcements) - YAPILDI
 

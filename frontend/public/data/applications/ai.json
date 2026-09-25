@@ -68,8 +68,8 @@
         { "value": "2", "label": "2. Sınıf" },
         { "value": "3", "label": "3. Sınıf" },
         { "value": "4", "label": "4. Sınıf" },
-        { "value": "master", "label": "Yüksek Lisans" },
-        { "value": "phd", "label": "Doktora" }
+        { "value": "5", "label": "Yüksek Lisans" },
+        { "value": "6", "label": "Doktora" }
       ]
     },
     {

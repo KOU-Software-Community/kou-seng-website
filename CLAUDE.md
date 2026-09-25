@@ -316,6 +316,36 @@ tamamını değil operatör nesnesini sarar: `{ _id: mongoose.trusted({ $in: ids
 Tüm filtre sarılırsa koruma yine devreye girer: ObjectId alanında CastError,
 string alanında boş sonuç.
 
+### Başvuru formuna alan ekleme
+
+Form `applications/<slug>.json` → `fields[]`'ten render ediliyor;
+`applyDetail.tsx` öğrenci alanları dışındaki her alanı `question_<id>`
+anahtarıyla gönderiyor. Teknik forma yeni alan için:
+
+- `applications/<slug>.json` → `fields[]`
+- `submissionsController` → `allowedCustomFields`'e `question_<id>`
+- `formatCustomFields` etiket switch'i: `admin/technical-team.tsx` ve kopyası
+  `general-membership.tsx`; eklenmezse panelde ham `question_<id>` görünür
+- `kvkk/data.json` → "2. İşlenen Kişisel Veriler" ve `lastUpdated`
+
+Tuzaklar:
+
+- **Allowlist:** JSON'a eklenip `allowedCustomFields`'e eklenmeyen alan 400
+  döner ("Geçersiz alanlar tespit edildi"): zorunluysa her gönderimde,
+  opsiyonelse doldurulunca. Boş alan hiç gönderilmediği için boş bırakarak
+  yapılan deneme hatayı göstermez; form ekranda normal görünür.
+- **Genel üyelik formu `customFields` kabul etmiyor:** `createGeneralSubmission`
+  yalnızca öğrenci alanlarını okuyor; `general.json`'a eklenen alan 201 dönse de
+  sessizce atılır.
+- `customFields` değerleri yalnızca string (≤5000 karakter): dizi dönen alan
+  (çoklu seçim) 400 alır, `type: "number"` alan da (zod değeri sayıya çeviriyor).
+- `isOpen` ve `deadline` hem `index.json`'da (`/apply` listesi) hem
+  `<slug>.json`'da (form sayfası); ikisi birlikte güncellenmeli, yoksa liste
+  "Başvur" gösterirken form "kapanmıştır" der ya da tersi. Backend `isOpen`'a
+  bakmıyor.
+- Mongo'da migration gerekmez (`customFields` `Mixed`); CSV dışa aktarımı yeni
+  anahtarı kendiliğinden sütun yapar.
+
 ### Başvuruları silme (saklama süresi)
 
 Başvurular kişisel veri içeriyor; değerlendirme dönemi bitince silinmeli. Yol

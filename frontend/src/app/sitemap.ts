@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { promises as fs } from "node:fs";
 import path from "node:path";
+import { RSS_ENABLED } from "@/lib/utils";
 
 type TeamFileEntry = `${string}.json`;
 
@@ -74,5 +75,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  return [...staticRoutes, ...teamRoutes, ...applicationRoutes];
+  return [
+    ...staticRoutes.filter((route) => RSS_ENABLED || !route.url.endsWith("/publications")),
+    ...teamRoutes,
+    ...applicationRoutes,
+  ];
 }

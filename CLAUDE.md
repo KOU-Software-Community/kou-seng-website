@@ -52,7 +52,11 @@ lockfile'ları silerek kovalama — sebep repo dışında olabilir.
 **Frontend (`.env`):**
 ```
 NEXT_PUBLIC_API_URL=http://localhost:3001
+NEXT_PUBLIC_ENABLE_RSS=1       # 0: Yayınlar (Medium RSS) bölümü, menü/footer bağlantısı ve /publications kalkar
 ```
+
+`NEXT_PUBLIC_*` değerleri build sırasında koda gömülür: Coolify'da build'de de
+erişilebilir olmalı ve değiştirince yeniden deploy gerekir.
 
 **Backend (`.env`):**
 ```

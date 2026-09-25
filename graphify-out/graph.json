@@ -8874,7 +8874,7 @@
       "node_kind": "heading",
       "norm_label": "backend esm \u2014 `node --check` yalan soyluyor",
       "source_file": "CLAUDE.md",
-      "source_location": "L278"
+      "source_location": "L276"
     },
     {
       "id": "claude_ba\u015fvurular\u0131_silme_saklama_s\u00fcresi",
@@ -8886,7 +8886,7 @@
       "node_kind": "heading",
       "norm_label": "basvurular\u0131 silme (saklama suresi)",
       "source_file": "CLAUDE.md",
-      "source_location": "L321"
+      "source_location": "L319"
     },
     {
       "id": "claude_check_content",
@@ -8922,7 +8922,7 @@
       "node_kind": "heading",
       "norm_label": "duyuru html'i ve csp",
       "source_file": "CLAUDE.md",
-      "source_location": "L330"
+      "source_location": "L328"
     },
     {
       "id": "claude_frontend_frontend",
@@ -9018,7 +9018,7 @@
       "node_kind": "heading",
       "norm_label": "lint",
       "source_file": "CLAUDE.md",
-      "source_location": "L367"
+      "source_location": "L365"
     },
     {
       "id": "claude_mongoose_sanitizefilter_a\u00e7\u0131k_operat\u00f6rl\u00fc_sorgu_trusted_ister",
@@ -9030,7 +9030,7 @@
       "node_kind": "heading",
       "norm_label": "mongoose `sanitizefilter` ac\u0131k \u2014 operatorlu sorgu `trusted()` ister",
       "source_file": "CLAUDE.md",
-      "source_location": "L307"
+      "source_location": "L305"
     },
     {
       "id": "claude_ortam_de\u011fi\u015fkenleri",
@@ -9090,7 +9090,7 @@
       "node_kind": "heading",
       "norm_label": "rate limit ve cloudflare",
       "source_file": "CLAUDE.md",
-      "source_location": "L342"
+      "source_location": "L340"
     },
     {
       "id": "claude_sosyal_medya_linkleri",
@@ -10227,6 +10227,7 @@
     {
       "id": "frontend_src_components_ui_form_form",
       "label": "frontend_src_components_ui_form_form",
+      "_origin": "semantic",
       "community": 0,
       "community_name": "react",
       "external": true,
@@ -10238,6 +10239,7 @@
     {
       "id": "ref_path",
       "label": "ref_path",
+      "_origin": "semantic",
       "community": 23,
       "community_name": "aboutData.ts",
       "external": true,
@@ -10249,6 +10251,7 @@
     {
       "id": "ref_fs",
       "label": "ref_fs",
+      "_origin": "semantic",
       "community": 29,
       "community_name": "contactData.ts",
       "external": true,
@@ -10260,6 +10263,7 @@
     {
       "id": "ref_node_fs",
       "label": "ref_node_fs",
+      "_origin": "semantic",
       "community": 3,
       "community_name": "purge-submissions.js",
       "external": true,
@@ -10271,6 +10275,7 @@
     {
       "id": "ref_node_path",
       "label": "ref_node_path",
+      "_origin": "semantic",
       "community": 3,
       "community_name": "purge-submissions.js",
       "external": true,
@@ -10282,6 +10287,7 @@
     {
       "id": "ref_node_url",
       "label": "ref_node_url",
+      "_origin": "semantic",
       "community": 3,
       "community_name": "purge-submissions.js",
       "external": true,
@@ -10293,6 +10299,7 @@
     {
       "id": "ref_node_net",
       "label": "ref_node_net",
+      "_origin": "semantic",
       "community": 34,
       "community_name": "clientIp.js",
       "external": true,
@@ -10304,6 +10311,7 @@
     {
       "id": "frontend_src_app_globals",
       "label": "frontend_src_app_globals",
+      "_origin": "semantic",
       "community": 4,
       "community_name": "Projeye \u00f6zel kurallar",
       "external": true,
@@ -10315,6 +10323,7 @@
     {
       "id": "ref_url",
       "label": "ref_url",
+      "_origin": "semantic",
       "community": 5,
       "community_name": "mailQueueProcessor.js",
       "external": true,
@@ -10326,6 +10335,7 @@
     {
       "id": "ref_node_crypto",
       "label": "ref_node_crypto",
+      "_origin": "semantic",
       "community": 9,
       "community_name": "authMiddleware.js",
       "external": true,
@@ -26235,7 +26245,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L278",
+      "source_location": "L276",
       "weight": 1.0
     },
     {
@@ -26246,7 +26256,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L307",
+      "source_location": "L305",
       "weight": 1.0
     },
     {
@@ -26257,7 +26267,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L321",
+      "source_location": "L319",
       "weight": 1.0
     },
     {
@@ -26268,7 +26278,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L330",
+      "source_location": "L328",
       "weight": 1.0
     },
     {
@@ -26279,7 +26289,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L342",
+      "source_location": "L340",
       "weight": 1.0
     },
     {
@@ -26290,7 +26300,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L367",
+      "source_location": "L365",
       "weight": 1.0
     },
     {
@@ -32112,7 +32122,7 @@
       "confidence_score": 0.95,
       "context": "createUser",
       "source_file": "CLAUDE.md",
-      "source_location": "L268",
+      "source_location": "L266",
       "weight": 1.0
     },
     {
@@ -32237,5 +32247,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "17f00060e076302efb20b4e60e61f08c623e9438"
+  "built_at_commit": "4e6bed7304e82182d5863f7562059621bd5ba7da"
 }

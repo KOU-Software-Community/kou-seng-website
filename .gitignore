@@ -12,6 +12,9 @@ yarn.lock
 # Claude Code kişisel ayarları — yerel kalır
 .claude/settings.local.json
 
+# graphify'ın günlük yedekleri (graph.json üzerine yazılmadan önceki hâl)
+graphify-out/????-??-??/
+
 # Ham fotoğraf kaynakları — işlenmiş hâlleri frontend/public/profile/ altında
 görseller yeni/
 

@@ -246,7 +246,7 @@ doğrulamasında patlar. İkisi aynı bakım penceresinde yapılmalı.
 
 ### İlk admin oluşturma (deploy edilmiş sunucuda)
 
-Sistemde hiç kullanıcı yokken `POST /users`, `.env`'deki `KEY` ile
+Sistemde hiç kullanıcı yokken `POST /users`, `KEY` ortam değişkeniyle
 çağrılabilir. Mantık `firstUserCreation()`'da değil, `protect` içinde
 (`authMiddleware.js`, `isFirstUserRequest` + `matchesSystemKey`). `POST /users`
 isteğinde **dört koşul birden** aranır: `req.originalUrl === '/users'`
@@ -258,12 +258,10 @@ isteğinde **dört koşul birden** aranır: `req.originalUrl === '/users'`
 kısa bir `KEY` bu yolu tamamen kapatır; kısaysa backend logunda "KEY 32
 karakterden kısa" hatası görünür. Karşılaştırma sabit sürede yapılır.
 
-Sunucuda, localhost'a karşı çalıştır (KEY internete çıkmaz, CORS'a takılmaz,
-ters proxy yolu değiştiremez):
-
-```bash
-cd ~/kou-seng-website/backend && KEY=$(grep '^KEY=' .env | cut -d= -f2-) && read -rsp "Sifre: " PW && echo && curl -sS -X POST http://localhost:3001/users -H "Authorization: Bearer $KEY" -H "Content-Type: application/json" -d "{\"name\":\"Ad Soyad\",\"email\":\"admin@kouseng.com\",\"password\":\"$PW\",\"role\":\"admin\"}"
-```
+İsteği public adrese değil, backend container'ının içinden `localhost`'a gönder
+(KEY internete çıkmaz, CORS'a takılmaz, ters proxy yolu değiştiremez).
+Coolify'da `KEY` panelden tanımlanan bir ortam değişkeni; container'da `.env`
+dosyası olduğunu varsayma.
 
 **Tek atış hakkı var.** `createUser` `role: role || 'user'` diyor; gövdeye
 `"role": "admin"` koymazsan sıradan bir `user` oluşur, `usersCount` artık 0

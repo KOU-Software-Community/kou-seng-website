@@ -4,6 +4,7 @@ import Link from "next/link";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useState } from 'react';
 import { getFooterData, iconMap, type FooterData } from '@/lib/footerData';
+import { RSS_ENABLED } from '@/lib/utils';
 
 export default function Footer() {
   const [footerData, setFooterData] = useState<FooterData | null>(null);
@@ -44,7 +45,7 @@ export default function Footer() {
           <div className="hidden md:flex flex-col gap-2 items-start">
             <h3 className="text-sm font-semibold">Sayfalar</h3>
             <ul className="grid grid-cols-2 gap-x-6 gap-y-2">
-              {footerData.quickLinks.map((link, index) => (
+              {footerData.quickLinks.filter((link) => RSS_ENABLED || link.href !== '/publications').map((link, index) => (
                 <li key={index}>
                   <Link
                     href={link.href}

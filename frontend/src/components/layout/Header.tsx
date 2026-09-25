@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faXmark, faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
+import { RSS_ENABLED } from "@/lib/utils";
 
 interface NavLinkItem { title: string; href: string }
 type NavItem = NavLinkItem | { title: string; children: NavLinkItem[] }
@@ -22,7 +23,7 @@ const navItems: NavItem[] = [
       { title: "Game", href: "/technical-team/game" },
     ],
   },
-  { title: "Yayınlar", href: "/publications" },
+  ...(RSS_ENABLED ? [{ title: "Yayınlar", href: "/publications" }] : []),
   { title: "Başvuru", href: "/apply" },
   { title: "İletişim", href: "/contact" },
 ];

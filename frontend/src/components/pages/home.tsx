@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { HomeData } from '@/lib/homeData';
 import AnnouncementsSection from '@/components/layout/AnnouncementsSection';
 import RssSection from '@/components/layout/RssSection';
+import { RSS_ENABLED } from '@/lib/utils';
 
 type HomeProps = {
   homeData: HomeData;
@@ -148,13 +149,15 @@ export default function Home({ homeData }: HomeProps) {
       />
 
       {/* 4. Medium Makaleleri */}
-      <RssSection
-        title={homeData.publications.title}
-        description={homeData.publications.description}
-        viewAllHref={homeData.publications.viewAllHref}
-        viewAllText={homeData.publications.viewAllText}
-        maxItems={3}
-      />
+      {RSS_ENABLED && (
+        <RssSection
+          title={homeData.publications.title}
+          description={homeData.publications.description}
+          viewAllHref={homeData.publications.viewAllHref}
+          viewAllText={homeData.publications.viewAllText}
+          maxItems={3}
+        />
+      )}
     </main>
   );
 }

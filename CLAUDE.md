@@ -1,192 +1,222 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+## Proje
 
-## Proje Hakkında
+KOU SENG — Kocaeli Üniversitesi Yazılım Kulübü web sitesi: tanıtım ve takım
+sayfaları, duyurular, Medium yayınları (RSS), üyelik ve teknik takım
+başvuruları, iletişim formu, admin paneli, sponsorluk maili.
 
-KOU SENG - Kocaeli Üniversitesi Yazılım Kulübü web sitesi. Monorepo: `frontend/` (Next.js) + `backend/` (Express.js).
+Monorepo, kökte `package.json` yok: `frontend/` (Next.js 16) + `backend/`
+(Express.js + MongoDB). Deploy repo dışında, Coolify üzerinden; repoda yalnızca
+CI (`.github/workflows/ci.yml`) var.
 
 ## Komutlar
 
-### Frontend (`cd frontend`)
 ```bash
-npm run dev        # Geliştirme sunucusu (Turbopack, port 3000)
-npm run build      # Production build (Turbopack)
-npm run start      # Production sunucusu (port 3000)
-npm run lint       # ESLint
+# frontend/
+npm run dev             # Turbopack, port 3000
+npm run build           # production build (Turbopack)
+npm run start           # production sunucusu, port 3000
+npm run lint            # ESLint
+npm run check:content   # public/data JSON'ları + görseller
+
+# backend/
+npm run dev             # nodemon, port 3001
+npm start               # production komutu: node --experimental-require-module index.js
+node scripts/loadtest.js --n 150           # GET /health, rate limit duvarını bulur
+node scripts/loadtest.js --submit --n 40   # gerçek kayıt yazar — production DB'ye ASLA
 ```
 
-### Backend (`cd backend`)
+İki pakette de `pm2:start` / `pm2:stop` / `pm2:restart` script'leri var;
+production deploy'u Coolify'da.
+
+Unit test altyapısı yok. Push'tan önce:
+
 ```bash
-npm run dev        # Geliştirme sunucusu (nodemon, port 3001)
-npm start          # Production sunucusu
+cd frontend && npm run check:content && npm run lint && npm run build
 ```
 
-### PM2 (Production)
-```bash
-npm run pm2:start / pm2:stop / pm2:restart   # Her iki serviste de mevcut
-```
+CI her PR'da ve `main`'e push'ta frontend'de bu üçünü koşturur; backend'i
+geçici bir MongoDB ile `npm start` üzerinden gerçekten ayağa kaldırıp
+`scripts/loadtest.js`'i (`--submit --n 40`, ardından `/health`'e `--n 100`)
+smoke test olarak çalıştırır; iki pakette `npm audit --omit=dev
+--audit-level=high` koşar.
 
-Test altyapısı henüz implemente edilmemiştir.
+## Klasör yapısı
 
-## Paket yöneticisi: npm
+### Frontend (`frontend/`)
 
-Bu proje **npm** ile çalışır: tek lockfile `package-lock.json`, CI `npm ci`
-kullanıyor. `packageManager` alanı, `pnpm-workspace.yaml` veya `.npmrc`
-yok — yani pnpm'e geçiş yapılmış değil.
+Next.js App Router. Route'lar `src/app/(routes)/` altında layout gruplarında:
 
-Bir dönem `pnpm-lock.yaml` dosyaları da repoya girmişti (lokalde pnpm denenmiş).
-İki lockfile bir arada kurulumların ayrışmasına yol açtığı için kaldırıldı;
-`pnpm-lock.yaml` ve `yarn.lock` artık `.gitignore`'da. Lokalde pnpm denersen
-ürettiği lockfile commit'e girmez.
+- `(main-layout)/` — ana site sayfaları (Header + Footer)
+- `(admin-layout)/admin/` — admin paneli (AdminSidebar)
+- `(apply-layout)/apply/[applySlug]/` — başvuru formları
 
-**Turbopack workspace kökü sabitlendi.** Next, kökü ağaçta yukarı doğru lockfile
-arayarak tahmin ediyor; geliştiricinin **ev dizininde** başıboş bir
-`package-lock.json` varsa (bu makinede `/Users/abdulkadir/package-lock.json`
-vardı) kökü oraya çözüp her build'de uyarı basıyordu. `next.config.ts` içindeki
-`turbopack.root` bunu makineden bağımsız hâle getirdi. Uyarıyı depodaki
-lockfile'ları silerek kovalama — sebep repo dışında olabilir.
+`page.tsx` dosyaları çoğunlukla yalnızca `src/components/pages/` altındaki
+client component'i render eder; business logic orada.
 
-## Environment Variables
+- `src/hooks/` — tüm API çağrıları ve state yönetimi
+- `src/components/pages/` — sayfa düzeyi bileşenler (hook'ları kullanır)
+- `src/components/layout/` — Header, Footer, AdminSidebar gibi paylaşılan layout
+- `src/components/ui/` — Shadcn/UI primitive'leri, doğrudan düzenlenmez; yenisi
+  Shadcn ile eklenir (`new-york` stili, CSS değişkenleri açık)
+- `src/lib/api.ts` — tiplendirilmiş fetch'ler (RSS 5 dk, duyurular 1 dk önbellek)
+- `src/lib/*Data.ts` — `public/data/` JSON'larını okuyup tiplendirir
+- `scripts/check-content.mjs` — `check:content`
 
-**Frontend (`.env`):**
-```
-NEXT_PUBLIC_API_URL=http://localhost:3001
-NEXT_PUBLIC_ENABLE_RSS=1       # 0: Yayınlar (Medium RSS) bölümü, menü/footer bağlantısı ve /publications kalkar
-```
+Path alias: `@/*` → `src/*`.
 
-`NEXT_PUBLIC_*` değerleri build sırasında koda gömülür: Coolify'da build'de de
-erişilebilir olmalı ve değiştirince yeniden deploy gerekir.
+Stil: Tailwind CSS v4 + CSS değişkenleri. Marka renkleri
+`src/app/globals.css`'te: `--koyu-lacivert: #001B4A`, `--lacivert: #014576`,
+`--turkuaz: #0389BC`, `--acik-mavi: #93CBDC`. Dark/Light `next-themes` ile (root
+layout'ta `ThemeProvider`). Tailwind class çakışmaları için `src/lib/utils.ts`
+→ `cn()` (`clsx` + `tailwind-merge`).
 
-**Backend (`.env`):**
-```
-PORT=3001
-MONGODB_URI=...
-JWT_SECRET=...
-KEY=...                        # İlk admin oluşturma anahtarı, en az 32 karakter
-CORS_ALLOWED_ORIGINS=http://localhost:3000,https://kouseng.com
-MEDIUM_RSS_URLS=https://medium.com/feed/@...
-LOG_LEVEL=info
-```
+### Backend (`backend/`)
 
-## Mimari
+Express.js, routes → controllers → models; ayrıca `middlewares/`, `helpers/`,
+`config/`, `scripts/`. Endpoint ayrıntıları: `backend/ENDPOINTS.md`.
 
-### Frontend Yapısı
+Route prefix'leri: `/health`, `/auth`, `/users`, `/announcements`, `/contact`,
+`/rss`, `/submissions`, `/mail`, `/mail/queue`.
 
-Next.js 15 App Router kullanılır. Sayfalar layout gruplarına göre organize edilir:
+Kimlik doğrulama: `POST /auth/login` JWT döndürür, frontend token'ı
+localStorage'da saklar, korunan istekler `Authorization: Bearer <token>`
+gönderir. `middlewares/authMiddleware.js`: `protect`, `adminOnly`,
+`roleOnlyForCategory`, `roleOnlyForSubmission`, `sponsorOrAdmin`.
 
-- `app/(main-layout)/` — Ana site sayfaları (Header + Footer)
-- `app/(admin-layout)/admin/` — Admin paneli sayfaları (AdminSidebar)
-- `app/(apply-layout)/apply/[applySlug]/` — Başvuru formu sayfaları
+Roller (`User.role`): `admin`, `mobil-web`, `ai`, `game`, `sponsor`, `user`.
+Takım rolleri yalnızca kendi kategorilerinin başvurularını yönetir; `sponsor`
+yalnızca sponsor mailine (`/mail`, `/mail/queue`) erişir.
 
-Her route, business logic'i `src/components/pages/` altındaki client component'e devreder. `app/` klasöründeki page.tsx dosyaları çoğunlukla yalnızca bu component'leri render eder.
+Logging: `helpers/logger.js` — `logger.debug()`, `logger.info()`,
+`logger.error()`; `LOG_LEVEL=debug` olmadıkça debug logları gösterilmez.
 
-**Katman Ayrımı:**
-- `src/hooks/` — Tüm API çağrıları ve state yönetimi burada yapılır
-- `src/components/pages/` — Sayfa düzeyi bileşenler (hook'ları kullanır)
-- `src/components/layout/` — Header, Footer, AdminSidebar gibi paylaşılan layout bileşenleri
-- `src/components/ui/` — Shadcn/UI primitive bileşenleri (doğrudan düzenlenmez)
-- `src/lib/api.ts` — Tiplendirilmiş fetch fonksiyonları (RSS için 5 dk, duyurular için 1 dk önbellek)
-- `src/lib/*Data.ts` — Statik sayfa içerikleri için veri yükleyiciler
-
-Path alias: `@/*` → `src/*`
-
-### Backend Yapısı
-
-Standart Express.js katmanlı mimari (routes → controllers → models).
-
-**Route Prefix'leri:** `/health`, `/auth`, `/users`, `/announcements`, `/contact`, `/rss`, `/submissions`
-
-**Kimlik Doğrulama Akışı:**
-1. `POST /auth/login` JWT token döndürür
-2. Frontend token'ı localStorage'da saklar
-3. Korunan istekler `Authorization: Bearer <token>` header'ı gönderir
-4. `authMiddleware.js` token'ı doğrular: `protect`, `adminOnly`, `roleOnlyForCategory`, `roleOnlyForSubmission`
-
-**Kullanıcı Rolleri:** `admin`, `web`, `ai`, `game`, `user`
-`web`/`ai`/`game` rolleri yalnızca kendi kategorilerinin başvurularını yönetebilir.
-
-**İlk Admin Oluşturma:** Sistemde hiç kullanıcı yoksa `POST /users` endpoint'i `.env` dosyasındaki `KEY` değeriyle kullanılabilir.
-
-**Logging:** `helpers/logger.js` — `logger.debug()`, `logger.info()`, `logger.error()` metotları; `LOG_LEVEL=debug` olmadıkça debug logları gösterilmez.
-
-### Veri Modelleri (MongoDB/Mongoose)
+Modeller (`models/`, Mongoose):
 
 - **User:** `name`, `email`, `password` (bcrypt), `role`
 - **Announcement:** `title`, `content`, `summary`, `category`, `author`
 - **Contact:** `name`, `email`, `subject`, `message`, `isRead`
-- **Submission:** `submissionType` (general/technical), öğrenci alanları, `technicalCategory`, `customFields` (dinamik alanlar için), `status` (pending/reviewed/accepted/rejected)
+- **Submission:** `submissionType` (general/technical), öğrenci alanları,
+  `technicalCategory`, `customFields` (dinamik alanlar), `status`
+  (pending/reviewed/accepted/rejected)
+- **MailJob:** sponsor mail kuyruğu
 
-### Stil Sistemi
+### İçerik (`frontend/public/data/`)
 
-Tailwind CSS v4 + CSS değişkenleri. Özel marka renkleri `globals.css` içinde tanımlıdır:
-- `--koyu-lacivert: #001B4A`, `--lacivert: #014576`, `--turkuaz: #0389BC`, `--acik-mavi: #93CBDC`
+Statik site içeriği koda gömülü değil, JSON dosyalarında; `src/lib/*Data.ts`
+bunları okuyup tiplendirir.
 
-Dark/Light mod `next-themes` ile sağlanır; root layout'ta `ThemeProvider` bulunur.
+- Yönetim kurulu: `about/data.json` → `boardMembers[]`, görseller
+  `public/profile/boardMembers/`
+- Takım üyeleri: `teams/{mobil-web,ai,game}.json` → `members[]` ve
+  `leaderMessage.author`, görseller `public/profile/teams/<takım>/`
+- Başvuru formları: `applications/<slug>.json`
+- KVKK aydınlatma metni (`/kvkk`): `kvkk/data.json`
 
-Tailwind class çakışmalarını çözmek için `src/lib/utils.ts`'deki `cn()` yardımcı fonksiyonu (`clsx` + `tailwind-merge`) kullanın.
+## Ortam değişkenleri
 
-Yeni UI bileşenleri eklemek için Shadcn/UI kullanılır (`new-york` stili, CSS değişkenleri etkin).
+Şablonlar: `frontend/.env.example`, `backend/.env.example`. Şablonda olmayan
+backend değişkenleri: `MAIL_USER`, `MAIL_APP_PASSWORD`, `MAIL_SENDER_NAME`
+(sponsor maili).
 
-### Deployment
+- `NEXT_PUBLIC_ENABLE_RSS=0`: Yayınlar (Medium RSS) bölümü, menü/footer
+  bağlantısı ve `/publications` kalkar.
+- `NEXT_PUBLIC_*` değerleri build sırasında koda gömülür: Coolify'da build'de de
+  erişilebilir olmalı ve değiştirince yeniden deploy gerekir.
+- `KEY` en az 32 karakter olmalı (bkz. İlk admin oluşturma).
 
-Deploy repo dışında, Coolify üzerinden yönetiliyor. Eski SSH + PM2 workflow'u (`deploy.yml`) kaldırıldı; repoda yalnızca CI (`ci.yml`) var.
+## Projeye özel kurallar
 
-Detaylı API endpoint'leri için `backend/ENDPOINTS.md` dosyasına bakın.
+### Paket yöneticisi: npm
 
-## Ajan çalışma ortamı
+Her pakette tek lockfile `package-lock.json`, CI `npm ci` kullanıyor.
+`pnpm-lock.yaml` ve `yarn.lock` `.gitignore`'da: iki lockfile bir arada
+kurulumların ayrışmasına yol açıyordu.
 
-`.claude/` altında oturum disiplini kurulu:
-
-- `settings.json` — `SessionStart` hook'unu `.claude/hooks/session-start.sh`'e bağlar.
-- `hooks/session-start.sh` — idempotent bootstrap: graphify'ı kurar/kaydeder,
-  `node_modules` yoksa `frontend` ve `backend` için `npm ci` çalıştırır.
-- `skills/` — vendor edilmiş prompt-disiplin skill'leri (`native-core.md`,
-  `lean-build`, `surgical-patch`, `verify-and-stop`, `investigate-first`).
-  Kaynak ve lisans için `skills/NOTICE.md`.
-
-`.claude/` **`.gitignore`'da** — yerel kalır, depoya girmez. Sonuç: skill'ler ve
-hook yalnızca bu makinede geçerli; başka bir klonda, bulut/ephemeral oturumda
-veya başka bir geliştiricide **yüklenmez**. Oraya da isteniyorsa `.claude/`
-ignore'dan çıkarılmalı.
+**Turbopack workspace kökü sabitlendi.** Next, kökü ağaçta yukarı doğru lockfile
+arayarak tahmin ediyor; geliştiricinin ev dizininde başıboş bir
+`package-lock.json` varsa kökü oraya çözüp her build'de uyarı basıyordu.
+`next.config.ts` içindeki `turbopack.root` bunu makineden bağımsız hâle getirdi.
+Uyarıyı depodaki lockfile'ları silerek kovalama — sebep repo dışında olabilir.
 
 ### graphify
 
-`graphify-out/` build çıktısıdır, `.gitignore`'da. Grafik **AST-only** üretilir
-(`graphify update .`) — LLM çağrısı ve subagent yok, sıfır token.
+AST çıkarımı `.json` dosyalarından düğüm üretmiyor. Site içeriğinin büyük kısmı
+(`frontend/public/data/**.json` — yönetim kurulu, takım üyeleri, başvuru
+formları) grafikte **yok**. İçerik/roster soruları için `graphify query` değil,
+doğrudan dosya okuması gerekir. Grafik yalnızca kod ilişkileri için güvenilir.
 
-**Bilinen sınır:** AST çıkarımı `.json` dosyalarından düğüm üretmiyor. Site
-içeriğinin büyük kısmı (`frontend/public/data/**.json` — yönetim kurulu, takım
-üyeleri, başvuru formları) grafikte **yok**. İçerik/roster soruları için
-`graphify query` değil, doğrudan dosya okuması gerekir. Grafik yalnızca kod
-ilişkileri için güvenilirdir.
+### İçerik ve kişi kartları
 
-### İçerik nerede duruyor
+- Bir kişinin adı değişince `leaderMessage.author` alanı da kontrol edilmeli —
+  lider ismi `members[]` dışında ikinci bir yerde daha tekrar ediyor.
+- Görsel yolları JSON'da elle yazılı ve `next/image` `<Image>` ile `public/`
+  altından servis edilir (`about.tsx`, `teamDetail.tsx`). Next bu yolların
+  varlığını **build sırasında doğrulamaz** — yanlış yol build'i geçer ve çalışma
+  zamanında 404 olur. Dosya adı değişikliğinde JSON yolu ile dosya adını
+  birlikte değiştir ve sayfayı gerçekten aç.
+- Dosya adlarında ASCII kullan: Türkçe karakterli adlar (`ı`, `ü` …) Unicode
+  normalizasyon (NFC/NFD) farkı yüzünden macOS'ta çalışıp Linux sunucuda 404
+  verebilir.
+- `teamDetail.tsx` `member.skills.length` yazıyor — optional chaining **yok**.
+  Bir üyeden `skills` eksikse takım sayfası çalışma zamanında patlar, build
+  sorunsuz geçer. `skills` en azından `[]` olmalı.
+- `github`, `linkedin`, `kaggle`, `skills` alanlarının hepsi bileşende truthy
+  kontrolüyle sarılı — bilinmeyen değerler için `""` / `[]` yaz, alanı
+  **silme**.
+- Görseli olmayan üye için yolda **`placeholder`** kelimesi geçen bir değer
+  kullan (ör. `/profile/boardMembers/placeholder.jpeg`). `about.tsx` ve
+  `teamDetail.tsx` `!member.image.includes("placeholder")` kontrolüyle o kaydı
+  hiç yüklemeyip FontAwesome ikon fallback'i render eder — dosyanın var olması
+  gerekmez.
+- KVKK metni sitenin gerçekte topladığı veriyi anlatmalı: başvuru veya iletişim
+  formuna yeni bir alan eklenirse, verinin paylaşıldığı ya da saklandığı yer
+  değişirse `kvkk/data.json`'daki ilgili bölüm ve `lastUpdated` da
+  güncellenmeli.
 
-Statik site içeriği koda gömülü değil, `frontend/public/data/` altındaki JSON
-dosyalarında; `src/lib/*Data.ts` bunları okuyup tiplendirir.
+### Sosyal medya linkleri
 
-- Yönetim kurulu: `frontend/public/data/about/data.json` → `boardMembers[]`,
-  görseller `frontend/public/profile/boardMembers/`
-- Takım üyeleri: `frontend/public/data/teams/{web,ai,game}.json` → `members[]`
-  ve `leaderMessage.author`, görseller `frontend/public/profile/teams/<takım>/`
-- KVKK aydınlatma metni (`/kvkk`): `frontend/public/data/kvkk/data.json`.
-  Başvuru veya iletişim formuna yeni bir alan eklenirse, verinin paylaşıldığı
-  ya da saklandığı yer değişirse metindeki ilgili bölüm ve `lastUpdated` da
-  güncellenmeli; metin sitenin gerçekte topladığı veriyi anlatmalı.
+Üyeler linklerini telefondan paylaşıyor; gelen hâli işlenmeden yazılmamalı:
 
-Bir kişinin adı değişince `leaderMessage.author` alanı da kontrol edilmeli —
-lider ismi `members[]` dışında ikinci bir yerde daha tekrar ediyor.
+- `?utm_source=share_via&utm_content=profile&utm_medium=member_ios` kuyruğunu at.
+- Yol segmentindeki Türkçe karakterleri percent-encode et
+  (`bengüsu-levent` → `beng%C3%BCsu-levent`). Ham unicode tarayıcıda çalışıyor
+  ama kopyalanıp taşınırken bozulabiliyor; kayıtlı üyelerde de encode'lu hâl
+  kullanılmış.
+- GitHub çoğu zaman çıplak kullanıcı adı olarak geliyor (`duyguuzent`);
+  `https://github.com/<kullanıcı>` hâline getir. `check:content` mutlak URL
+  olmayan değeri reddeder.
 
-Görsel yolları JSON'da elle yazılı. Bunlar `next/image` `<Image>` ile
-`public/` altından servis edilir (`about.tsx`, `teamDetail.tsx`); Next bu
-yolların varlığını **build sırasında doğrulamaz** — yanlış yol build'i geçer ve
-çalışma zamanında 404 olur. Dosya adı değişikliğinde JSON yolu ile dosya adını
-birlikte değiştir ve sayfayı gerçekten aç.
+### Görsel hazırlama
 
-Uyarı: `boardMembers/serhat_can_bakır.jpeg` dosya adında Türkçe `ı` karakteri
-var. Bu tür adlar Unicode normalizasyon (NFC/NFD) farkı yüzünden macOS'ta
-çalışıp Linux sunucuda 404 verebilir — yeni dosyalarda ASCII kullan.
+Gelen fotoğraflar telefon çıktısı: HEIC, 2–4MB, dikey, EXIF'inde GPS var.
+Yayımlamadan önce: kareye kırp (yüz merkezli, yüz karenin ~%42 yüksekliğinde),
+400×400 JPEG'e indir, **EXIF'i düşür** (GPS konumu gerçek kişilerin
+fotoğrafında yayımlanmamalı). HEIC okumak için macOS'ta `sips`, Python'da
+`pillow_heif` + Pillow.
+
+Uzantıya güvenme: bu depoya bir kez `.jpeg` uzantılı ama içeriği HEIC olan dosya
+geldi. `check:content` bu yüzden magic byte'a bakıyor.
+
+### `check:content`
+
+`npm run build` `public/data/` JSON'larını doğrulamaz; bunu
+`frontend/scripts/check-content.mjs` yapar:
+
+| Kontrol | Neden var |
+|---|---|
+| Görsel yolu diskte var mı | Next `public/` yollarını build'de doğrulamıyor → sessiz 404 |
+| Dosyanın **gerçek** formatı (magic byte) | `.jpeg` uzantılı HEIC tarayıcıda render edilmez, build geçer |
+| Görsel kare mi | Kartlar `AspectRatio 1/1` + `object-cover`; kare olmayan görsel sessizce kırpılır |
+| Dosya boyutu < 300KB | Telefon fotoğrafları 2MB+ geliyor |
+| `leaderMessage.author` ∈ `members[]` | Lider adı iki yerde duruyor; biri unutulursa ayrılmış kişi sayfada kalır |
+| `skills` dizi mi | `member.skills.length` runtime tuzağı |
+| `github` / `linkedin` / `kaggle` mutlak URL mi | Çıplak kullanıcı adı kırık link olur |
+
+Betik hiçbir zaman sessizce atlamaz: ölçemediği her durum FAIL, çıkış kodu 1.
+Kontrol yeşilken bile içerik değiştirdikten sonra ilgili sayfayı `npm run dev`
+ile aç — kırpma/çerçeveleme kalitesini betik ölçmez.
 
 ### Takım slug'ı üç kimliği birden taşıyor
 
@@ -208,16 +238,17 @@ klasörü + JSON yolları → `User.js` role enum → `submissionsController`
 `roleToSlug`/alt menü → dashboard `layout.tsx` rol listesi → `Header.tsx` →
 `next.config.ts` redirect → **veritabanı migration'ı**.
 
-Web → Mobil Web geçişinde `backend/scripts/migrate-web-to-mobil-web.js`
-yazıldı (`--dry-run` ve `--rollback` destekli). **Kod deploy edilip migration
-çalıştırılmazsa role'ü `web` kalan yönetici hesapları teknik takım sayfasına
-erişemez** ve `User.save()` enum doğrulamasında patlar. İkisi aynı bakım
-penceresinde yapılmalı.
+Migration örneği: Web → Mobil Web geçişi için
+`backend/scripts/migrate-web-to-mobil-web.js` (`--dry-run` ve `--rollback`
+destekli). **Kod deploy edilip migration çalıştırılmazsa role'ü eski slug'da
+kalan yönetici hesapları teknik takım sayfasına erişemez** ve `User.save()` enum
+doğrulamasında patlar. İkisi aynı bakım penceresinde yapılmalı.
 
 ### İlk admin oluşturma (deploy edilmiş sunucuda)
 
-Mantık `firstUserCreation()`'da değil, `protect` içinde
-(`authMiddleware.js:82-91`, karşılaştırma `matchesSystemKey`). `POST /users`
+Sistemde hiç kullanıcı yokken `POST /users`, `.env`'deki `KEY` ile
+çağrılabilir. Mantık `firstUserCreation()`'da değil, `protect` içinde
+(`authMiddleware.js`, `isFirstUserRequest` + `matchesSystemKey`). `POST /users`
 isteğinde **dört koşul birden** aranır: `req.originalUrl === '/users'`
 (birebir), `req.method === 'POST'`, token'ın `KEY` ile eşleşmesi ve
 `User.countDocuments() === 0`. Biri tutmazsa istek `jwt.verify` yoluna düşer ve
@@ -308,35 +339,13 @@ Listeyi değiştirirsen ikisini birlikte değiştir.
 engeller ve yalnızca konsola "Refused to …" yazar. Görseller `next/image`
 üzerinden geldiği için `img-src 'self'` yeterli.
 
-### Kişi kartlarındaki runtime tuzağı
+### Rate limit ve Cloudflare
 
-`teamDetail.tsx` `member.skills.length` yazıyor — optional chaining **yok**.
-Bir üyeden `skills` alanı eksikse takım sayfası çalışma zamanında patlar, build
-sorunsuz geçer. Yeni üye eklerken `skills` en azından `[]` olmalı.
-
-`github`, `linkedin`, `kaggle`, `skills` alanlarının hepsi bileşende truthy
-kontrolüyle sarılı — bilinmeyen değerler için `""` / `[]` yaz, alanı **silme**.
-
-Görseli olmayan üye için yolda **`placeholder`** kelimesi geçen bir değer kullan
-(ör. `/profile/boardMembers/placeholder.jpeg`). `about.tsx` ve `teamDetail.tsx`
-`!member.image.includes("placeholder")` kontrolüyle o kaydı hiç yüklemeyip
-FontAwesome ikon fallback'i render eder — dosyanın var olması gerekmez.
-
-## Verify before pushing
-
-```bash
-cd frontend && npm run check:content && npm run lint && npm run build
-```
-
-CI (`.github/workflows/ci.yml`) her PR'da ve `main`'e push'ta bunları
-koşturur; backend'i geçici bir MongoDB ile gerçekten ayağa kaldırıp
-`scripts/loadtest.js`'i (`--submit` + `/health`) smoke test olarak çalıştırır.
-
-**Rate limit (`backend/index.js`):** genel limit IP başına 15 dk'da 100 istek
-(geçerli token'lı istekler sayılmaz, mail kuyruğu sık yokluyor). Ek olarak,
-muafiyetsiz: `POST /auth/login` ve `PATCH /auth/password` birlikte 15 dk'da 10
-**hatalı** deneme, başvuru ve iletişim formları birlikte 15 dk'da 30. Smoke
-testte `--submit 40`'ın son 10'u bu yüzden 429 alır; loadtest 429'u hata saymaz.
+`backend/index.js`: genel limit IP başına 15 dk'da 100 istek (geçerli token'lı
+istekler sayılmaz, mail kuyruğu sık yokluyor). Ek olarak, muafiyetsiz:
+`POST /auth/login` ve `PATCH /auth/password` birlikte 15 dk'da 10 **hatalı**
+deneme, başvuru ve iletişim formları birlikte 15 dk'da 30. Smoke testte
+`--submit --n 40`'ın son 10'u bu yüzden 429 alır; loadtest 429'u hata saymaz.
 
 Site ve API Cloudflare arkasında. Production'da istek Express'e
 `ziyaretçi → Cloudflare → 10.0.1.1 → Coolify proxy` yoluyla ulaşıyor; `10.0.1.1`
@@ -355,50 +364,11 @@ loglanır; köşeli parantezde `10.0.1.1` görünüyorsa ziyaretçi adresi okuna
 Dışarıdan: `curl -sI https://api.kouseng.com/health` yeni bir istemcide
 `ratelimit-remaining: 99` civarı vermeli; düşükse herkes aynı kovada.
 
-`npm run build` `public/data/` JSON'larını doğrulamaz; `check:content` bunun
-için var (`frontend/scripts/check-content.mjs`). Kontrol ettikleri ve neden:
+### Lint
 
-| Kontrol | Neden var |
-|---|---|
-| Görsel yolu diskte var mı | Next `public/` yollarını build'de doğrulamıyor → sessiz 404 |
-| Dosyanın **gerçek** formatı (magic byte) | Bir kez `.jpeg` uzantılı HEIC dosyası geldi; tarayıcı render edemez, build geçer |
-| Görsel kare mi | Kartlar `AspectRatio 1/1` + `object-cover`; kare olmayan görsel sessizce kırpılır |
-| Dosya boyutu < 300KB | Telefon fotoğrafları 2MB+ geliyor |
-| `leaderMessage.author` ∈ `members[]` | Lider adı iki yerde duruyor; biri unutulursa ayrılmış kişi sayfada kalır |
-| `skills` dizi mi | Yukarıdaki runtime tuzağı |
-
-Betik hiçbir zaman sessizce atlamaz: ölçemediği her durum FAIL, çıkış kodu 1.
-Beş hata sınıfının da gerçekten kırmızı verdiği kasten bozularak doğrulandı.
-
-Kontrol yeşilken bile içerik değiştirdikten sonra ilgili sayfayı `npm run dev`
-ile aç — kırpma/çerçeveleme kalitesini betik ölçmez.
-
-**Lint:** `eslint.config.mjs`, `eslint-config-next`'in flat config export'larını
+`eslint.config.mjs`, `eslint-config-next`'in flat config export'larını
 doğrudan kullanıyor. Eski `FlatCompat.extends("next/...")` hâli
 `eslint-config-next` 16'dan sonra dairesel JSON hatasıyla çöküyordu; o yola geri
 dönme. `react-hooks/set-state-in-effect` ve `react-hooks/purity` React Compiler
 kuralları; proje compiler kullanmadığı için uyarı seviyesinde. CI hata (error)
 çıkarsa kırmızı verir, uyarılar geçer.
-
-### Sosyal medya linkleri
-
-Üyeler linklerini telefondan paylaşıyor; gelen hâli işlenmeden yazılmamalı:
-
-- `?utm_source=share_via&utm_content=profile&utm_medium=member_ios` kuyruğunu at.
-- Yol segmentindeki Türkçe karakterleri percent-encode et
-  (`bengüsu-levent` → `beng%C3%BCsu-levent`). Ham unicode tarayıcıda çalışıyor
-  ama kopyalanıp taşınırken bozulabiliyor; kayıtlı üyelerde de encode'lu hâl
-  kullanılmış.
-- GitHub çoğu zaman çıplak kullanıcı adı olarak geliyor (`duyguuzent`);
-  `https://github.com/<kullanıcı>` hâline getir. `check:content` mutlak URL
-  olmayan değeri reddeder.
-
-### Görsel hazırlama
-
-Gelen fotoğraflar telefon çıktısı: HEIC, 2–4MB, dikey, EXIF'inde GPS var.
-Yayımlamadan önce: kareye kırp (yüz merkezli, yüz karenin ~%42 yüksekliğinde),
-400×400 JPEG'e indir, **EXIF'i düşür** (GPS konumu gerçek kişilerin fotoğrafında
-yayımlanmamalı). `sips` HEIC okur; Python tarafında `pillow_heif` + `PIL` kurulu.
-
-Uzantıya güvenme: bu depoya bir kez `.jpeg` uzantılı ama içeriği HEIC olan dosya
-geldi. `check:content` artık magic byte'a bakıyor.

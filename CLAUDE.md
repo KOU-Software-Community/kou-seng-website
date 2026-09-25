@@ -317,14 +317,22 @@ muafiyetsiz: `POST /auth/login` 15 dk'da 10 **hatalı** deneme, başvuru ve
 iletişim formları birlikte 15 dk'da 30. Smoke testte `--submit 40`'ın son 10'u
 bu yüzden 429 alır; loadtest 429'u hata saymaz.
 
-Site ve API Cloudflare arkasında: ziyaretçi → Cloudflare → Coolify proxy →
-Express. `trust proxy 1` ile `req.ip` Cloudflare'in kenar sunucusu olur; limit
-onunla sayılırsa o sunucudan gelen herkes aynı kovayı paylaşır. Bu yüzden
-limitler `helpers/clientIp.js` ile sayılır: istek bir Cloudflare adresinden
-geldiyse `CF-Connecting-IP`, gelmediyse `req.ip` (sunucuya doğrudan gelen biri
-başlığı uyduramasın diye). Cloudflare IP listesi o dosyada; Cloudflare
-değiştirirse güncellenmeli. `LOG_LEVEL=debug` ile her istek
-`[ziyaretçi] (req.ip: kenar sunucusu)` biçiminde loglanır.
+Site ve API Cloudflare arkasında. Production'da istek Express'e
+`ziyaretçi → Cloudflare → 10.0.1.1 → Coolify proxy` yoluyla ulaşıyor; `10.0.1.1`
+Coolify Docker ağının geçidi (Cloudflare Tunnel ya da Docker'ın port
+yönlendirmesi). `trust proxy 1` ile `req.ip` bu hop olur; limit onunla sayılırsa
+bütün site tek kovayı paylaşır: formlar tüm site için 15 dk'da 30 gönderimde
+kilitlenir, tek kişi herkesin girişini kilitler. Bu yüzden limitler
+`helpers/clientIp.js` ile sayılır: `req.ip` bir Cloudflare adresi ya da iç ağ
+adresiyse (10/8, 172.16/12, 192.168/16, 127/8, ::1, fc00::/7)
+`CF-Connecting-IP`, değilse `req.ip`. Cloudflare'i atlayıp doğrudan gelen biri
+Coolify proxy'sinde kendi public adresiyle görünür, başlığı uyduramaz.
+Cloudflare IP listesi o dosyada; Cloudflare değiştirirse güncellenmeli.
+
+Kontrol: `LOG_LEVEL=debug` ile her istek `[ziyaretçi] (req.ip: hop)` biçiminde
+loglanır; köşeli parantezde `10.0.1.1` görünüyorsa ziyaretçi adresi okunamıyor.
+Dışarıdan: `curl -sI https://api.kouseng.com/health` yeni bir istemcide
+`ratelimit-remaining: 99` civarı vermeli; düşükse herkes aynı kovada.
 
 `npm run build` `public/data/` JSON'larını doğrulamaz; `check:content` bunun
 için var (`frontend/scripts/check-content.mjs`). Kontrol ettikleri ve neden:

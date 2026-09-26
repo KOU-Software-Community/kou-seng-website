@@ -36,7 +36,7 @@
     "projects": [
       {
         "title": "KOU SENG Mobil Uygulaması",
-        "description": "Kulübümüzün resmî etkinlik uygulaması: etkinlik takvimi, QR ile yoklama, katılım sertifikası ve yapay zekâ destekli teknoloji gündemi.",
+        "description": "Kulübümüzün resmi etkinlik uygulaması: etkinlik takvimi, QR ile yoklama, katılım sertifikası ve yapay zeka destekli teknoloji gündemi.",
         "technologies": ["React Native", "Expo", "TypeScript", "Firebase"],
         "status": "Yayınlandı",
         "github": "https://github.com/KOU-Software-Community/app_seng",
@@ -47,7 +47,7 @@
         ]
       },
       {
-        "title": "KOU-SENG Web Sitesi",
+        "title": "KOU SENG Web Sitesi",
         "description": "Kulübümüzün resmi web sitesi. Modern teknolojiler kullanılarak geliştirildi.",
         "technologies": ["Next.js", "TypeScript", "TailwindCSS", "Node.js"],
         "status": "Aktif",

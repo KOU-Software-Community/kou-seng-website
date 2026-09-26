@@ -8,6 +8,7 @@
 //   - .jpeg uzantili ama icerigi HEIC    -> tarayici render edemez, build sessiz gecer
 //   - leaderMessage.author uyelerde yok  -> ayrilmis bir liderin adi sayfada kalir
 //   - skills alani eksik                 -> teamDetail.tsx `member.skills.length` ile patlar
+//   - projects[].stores dizi degil       -> teamDetail.tsx `project.stores?.map` ile patlar
 //
 // ÖNEMLİ: bu betik hiçbir zaman sessizce atlamaz. Ölçemedigi her sey FAIL'dir.
 
@@ -152,6 +153,21 @@ console.log('\nteams/*.json — takimlar');
         bad(slug, `leaderMessage.author "${author}" members[] icinde yok (${names.join(', ') || 'bos'})`);
       } else ok(slug, `leaderMessage.author = ${author}`);
       for (const m of d.members) checkPerson(`${slug}/${m.name || '(isimsiz)'}`, m, { requireSkills: true });
+      // teamDetail.tsx stores'u map'liyor ve ikonu name'e gore seciyor. JSON tip
+      // kontrolunden gecmez: nesne yazilirsa sayfa runtime'da patlar, yanlis name
+      // sessizce yanlis ikon gosterir. url null = "Yakinda" pasif buton.
+      for (const p of d.projects ?? []) {
+        if (p.stores === undefined) continue;
+        const label = `${slug}/${p.title || '(basliksiz)'}`;
+        if (!Array.isArray(p.stores)) { bad(label, 'stores dizi degil — teamDetail.tsx stores.map ile patlar'); continue; }
+        const names = p.stores.map((s) => s?.name);
+        if (new Set(names).size !== names.length) bad(label, `stores name tekrar ediyor: ${names.join(', ')}`);
+        for (const s of p.stores) {
+          if (!['App Store', 'Google Play'].includes(s?.name)) bad(label, `stores name "${s?.name}" — "App Store" ya da "Google Play" olmali`);
+          else if (s.url !== null && !/^https:\/\//.test(s.url)) bad(label, `${s.name} url https ile baslamali ya da null olmali: ${s.url}`);
+          else ok(label, `${s.name} ${s.url ?? '(yakinda)'}`);
+        }
+      }
     }
   }
 }

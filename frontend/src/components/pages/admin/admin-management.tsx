@@ -438,7 +438,8 @@ export default function AdminManagement() {
                                 <option value="admin">Admin</option>
                                 <option value="mobil-web">Mobil Web Geliştirme Takımı</option>
                                 <option value="ai">AI Takımı</option>
-                                <option value="game">Sponsorluk Ekibi</option>
+                                <option value="game">Oyun Takımı</option>
+                                <option value="sponsor">Sponsorluk Ekibi</option>
                             </select>
                         </div>
                     </div>

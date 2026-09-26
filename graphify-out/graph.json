@@ -872,7 +872,7 @@
       "file_type": "code",
       "norm_label": "teamdetail",
       "source_file": "frontend/src/lib/teamData.ts",
-      "source_location": "L51"
+      "source_location": "L53"
     },
     {
       "id": "frontend_src_lib_teamdata_teammember",
@@ -3397,7 +3397,7 @@
       "file_type": "code",
       "norm_label": "getteamdetail()",
       "source_file": "frontend/src/lib/teamData.ts",
-      "source_location": "L64"
+      "source_location": "L66"
     },
     {
       "id": "frontend_src_lib_teamdata_getteamslugs",
@@ -3409,7 +3409,7 @@
       "file_type": "code",
       "norm_label": "getteamslugs()",
       "source_file": "frontend/src/lib/teamData.ts",
-      "source_location": "L83"
+      "source_location": "L85"
     },
     {
       "id": "frontend_src_app_routes_admin_layout_admin_dashboard_general_membership_page_admingeneralmembershiproute",
@@ -12647,7 +12647,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "frontend/src/lib/teamData.ts",
-      "source_location": "L66",
+      "source_location": "L68",
       "weight": 1.0
     },
     {
@@ -31031,7 +31031,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/src/lib/teamData.ts",
-      "source_location": "L51",
+      "source_location": "L53",
       "weight": 1.0
     },
     {
@@ -31042,7 +31042,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/src/lib/teamData.ts",
-      "source_location": "L64",
+      "source_location": "L66",
       "weight": 1.0
     },
     {
@@ -31053,7 +31053,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/src/lib/teamData.ts",
-      "source_location": "L83",
+      "source_location": "L85",
       "weight": 1.0
     },
     {
@@ -32282,5 +32282,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "4dfac1d4505fc00107ee01c62423bcf67ba2aeea"
+  "built_at_commit": "64f742e713f3cbfdf07aead80483b48d3fa6b193"
 }

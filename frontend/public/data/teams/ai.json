@@ -5,7 +5,7 @@
     "icon": "faRobot",
     "leaderMessage": {
       "title": "Takım Lideri Mesajı",
-      "content": "Yapay zeka takımı olarak machine learning, deep learning ve natural language processing alanlarında projeler geliştiriyoruz. Python, TensorFlow, PyTorch gibi araçlarla gerçek dünya problemlerine çözümler üretiyoruz ve yarışmalara katılıyoruz.",
+      "content": "Yapay Zeka Takımı olarak yıl boyunca Veri Analizi, Makine Öğrenmesi, Derin Öğrenme, NLP ve yeni nesil yapay zeka teknolojileri üzerine proje bazlı çalışmalar yürütüyoruz. Python başta olmak üzere scikit-learn, PyTorch ve TensorFlow gibi araçları kullanarak gerçek veri setleri üzerinde uygulamalar geliştiriyor ve projelerimizi ilerletiyoruz. Eğitim süreci boyunca hem temel yapay zeka yöntemlerini öğrenmeyi hem de bu yöntemleri gerçek problemlere uygulayarak güçlü bir proje portföyü oluşturmayı hedefliyoruz.",
       "author": "Ahmet Melih Çalış",
       "role": "Yapay Zeka Takımı Lideri"
     },

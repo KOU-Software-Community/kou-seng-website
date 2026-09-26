@@ -153,7 +153,7 @@
   "focusAreas": [
     {
       "title": "Mobil & Web Geliştirme",
-      "description": "Ağırlıklı olarak mobil uygulama geliştiriyor, web tarafında da kullanıcı dostu ve responsive arayüzler oluşturuyoruz. React Native ve Flutter gibi mobil teknolojilerin yanında HTML, CSS, JavaScript temelleri ile React ve Node.js gibi popüler frameworklerle pratik yapma imkânı sunuyoruz. Amacımız kullanıcıya değer katan estetik ve işlevsel mobil ve web deneyimleri geliştirmek.",
+      "description": "Mobil uygulamalar, web siteleri ve backend ile frontend'i birlikte içeren tam kapsamlı projeleri yapay zeka destekli yazılım geliştirme yaklaşımıyla hayata geçiriyoruz. React Native (Expo), Firebase ve modern web teknolojilerini kullanıyor; Claude Code ve Cursor gibi araçları geliştirme sürecinin merkezine alıyoruz. App Store'da yayında olan kulüp uygulamamız KOU SENG üzerinde çalışarak fikirden yayına kadar tüm süreci birlikte deneyimliyoruz.",
       "icon": "faLaptopCode"
     },
     {

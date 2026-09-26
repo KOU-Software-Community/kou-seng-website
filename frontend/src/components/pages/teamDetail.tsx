@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationTriangle, faUser, faCalendar, faTrophy, faCode, faExternalLinkAlt, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import { faGithub, faKaggle, faLinkedin } from '@fortawesome/free-brands-svg-icons';
+import { faApple, faGithub, faGooglePlay, faKaggle, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Button } from '@/components/ui/button';
@@ -294,7 +294,7 @@ export default function TeamDetail({ team, error }: TeamDetailProps) {
                     </div>
                   </div>
 
-                  <div className="flex gap-2">
+                  <div className="flex flex-wrap gap-2">
                     {project.github && (
                       <Link href={project.github} target="_blank" rel="noopener noreferrer">
                         <Button variant="outline" size="sm" className='cursor-pointer'>
@@ -311,6 +311,22 @@ export default function TeamDetail({ team, error }: TeamDetailProps) {
                         </Button>
                       </Link>
                     )}
+                    {project.stores?.map((store) => {
+                      const icon = store.name === 'App Store' ? faApple : faGooglePlay;
+                      return store.url ? (
+                        <Link key={store.name} href={store.url} target="_blank" rel="noopener noreferrer">
+                          <Button variant="outline" size="sm" className='cursor-pointer'>
+                            <FontAwesomeIcon icon={icon} className="mr-2 h-3 w-3" />
+                            {store.name}
+                          </Button>
+                        </Link>
+                      ) : (
+                        <Button key={store.name} variant="outline" size="sm" disabled>
+                          <FontAwesomeIcon icon={icon} className="mr-2 h-3 w-3" />
+                          {store.name} · Yakında
+                        </Button>
+                      );
+                    })}
                   </div>
                 </CardContent>
               </Card>

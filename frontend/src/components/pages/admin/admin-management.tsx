@@ -17,7 +17,7 @@ const formatRole = (role: string): string => {
         case 'admin':
             return 'Admin';
         case 'mobil-web':
-            return 'Mobil Web Geliştirme Takımı';
+            return 'Mobil ve Web Geliştirme Takımı';
         case 'ai':
             return 'AI Takımı';
         case 'game':
@@ -361,7 +361,7 @@ export default function AdminManagement() {
                                 aria-label="Kullanıcı rolü"
                             >
                                 <option value="admin">Admin</option>
-                                <option value="mobil-web">Mobil Web Geliştirme Takımı</option>
+                                <option value="mobil-web">Mobil ve Web Geliştirme Takımı</option>
                                 <option value="ai">AI Takımı</option>
                                 <option value="game">Oyun Takımı</option>
                                 <option value="sponsor">Sponsorluk Ekibi</option>
@@ -436,7 +436,7 @@ export default function AdminManagement() {
                                 aria-label="Kullanıcı rolü"
                             >
                                 <option value="admin">Admin</option>
-                                <option value="mobil-web">Mobil Web Geliştirme Takımı</option>
+                                <option value="mobil-web">Mobil ve Web Geliştirme Takımı</option>
                                 <option value="ai">AI Takımı</option>
                                 <option value="game">Oyun Takımı</option>
                                 <option value="sponsor">Sponsorluk Ekibi</option>

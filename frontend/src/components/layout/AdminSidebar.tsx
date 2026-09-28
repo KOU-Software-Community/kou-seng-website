@@ -274,7 +274,7 @@ export default function AdminSidebar() {
                       {isTechnicalTeamOpen && (
                         <SidebarMenuSub id="technical-team-submenu">
                           {[
-                            { label: 'Mobil Web', slug: 'mobil-web' },
+                            { label: 'Mobil ve Web', slug: 'mobil-web' },
                             { label: 'AI', slug: 'ai' },
                             { label: 'Game', slug: 'game' },
                           ]

@@ -1,13 +1,13 @@
 {
     "slug": "mobil-web",
-    "name": "Mobil Web Geliştirme Takımı",
+    "name": "Mobil ve Web Geliştirme Takımı",
     "description": "Mobil uygulama geliştirmeye ağırlık veren, web tarafında da frontend ve backend teknolojilerinde uzmanlaşan takımımız.",
     "icon": "faLaptopCode",
     "leaderMessage": {
       "title": "Takım Lideri Mesajı",
-      "content": "Mobil Web Geliştirme Takımı olarak yıl boyunca yapay zeka destekli yazılım geliştirme üzerine proje bazlı çalışmalar yürütüyoruz. React Native (Expo), Firebase ve modern web teknolojilerini kullanarak mobil uygulamalar, web siteleri ve backend ile frontend'i birlikte içeren tam kapsamlı projeler geliştiriyoruz. Claude Code, Cursor gibi yapay zeka araçlarını geliştirme sürecinin merkezine alıyor, fikirden yayına kadar tüm aşamaları birlikte deneyimliyoruz. App Store'da yayında olan ve yakında Google Play'e de gelecek kulüp uygulamamız KOU SENG üzerinde gerçek katkılar yaparken sunucuya deploy ve mağaza dağıtım süreçlerini de öğreniyoruz. Eğitim süreci boyunca hem sağlam bir geliştirme temeli kazanmayı hem de yayında olan projelerle güçlü bir portföy oluşturmayı hedefliyoruz.",
+      "content": "Mobil ve Web Geliştirme Takımı olarak yıl boyunca yapay zeka destekli yazılım geliştirme üzerine proje bazlı çalışmalar yürütüyoruz. React Native (Expo), Firebase ve modern web teknolojilerini kullanarak mobil uygulamalar, web siteleri ve backend ile frontend'i birlikte içeren tam kapsamlı projeler geliştiriyoruz. Claude Code, Cursor gibi yapay zeka araçlarını geliştirme sürecinin merkezine alıyor, fikirden yayına kadar tüm aşamaları birlikte deneyimliyoruz. App Store'da yayında olan ve yakında Google Play'e de gelecek kulüp uygulamamız KOU SENG üzerinde gerçek katkılar yaparken sunucuya deploy ve mağaza dağıtım süreçlerini de öğreniyoruz. Eğitim süreci boyunca hem sağlam bir geliştirme temeli kazanmayı hem de yayında olan projelerle güçlü bir portföy oluşturmayı hedefliyoruz.",
       "author": "Abdülkadir İvenç",
-      "role": "Mobil Web Geliştirme Takımı Lideri"
+      "role": "Mobil ve Web Geliştirme Takımı Lideri"
     },
     "members": [
       {

@@ -24,7 +24,8 @@ export default function ApplyDetail(props: { slug: string }) {
     isSubmitting, 
     isSuccess, 
     errorMessage, 
-    submitApplication 
+    submitApplication,
+    resetStatus
   } = useSubmissions();
   // Açık/kapalı kararı backend'de; alınamazsa form kapalı görünür
   const { windows, isLoading: windowsLoading, error: windowsError } = useApplicationWindows();
@@ -357,7 +358,8 @@ export default function ApplyDetail(props: { slug: string }) {
           </div>
         </CardContent>
         <CardFooter className="flex justify-center gap-4">
-          <Button className='cursor-pointer' onClick={() => window.location.reload()}>
+          {/* Sayfayı yenilemez: forma döner, yazılanlar korunur (uzun cevaplar kaybolmasın) */}
+          <Button className='cursor-pointer' onClick={resetStatus}>
             Tekrar Dene
           </Button>
         </CardFooter>

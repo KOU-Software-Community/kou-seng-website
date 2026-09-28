@@ -56,6 +56,32 @@
       "source_location": "L12"
     },
     {
+      "id": "frontend_src_components_layout_rich_text_editor_richtexteditorprops",
+      "label": "RichTextEditorProps",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "applyDetail.tsx",
+      "file_type": "code",
+      "norm_label": "richtexteditorprops",
+      "source_file": "frontend/src/components/layout/rich-text-editor.tsx",
+      "source_location": "L10"
+    },
+    {
+      "id": "frontend_src_components_layout_rich_text_editor_richtexteditorref",
+      "label": "RichTextEditorRef",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "applyDetail.tsx",
+      "file_type": "code",
+      "norm_label": "richtexteditorref",
+      "source_file": "frontend/src/components/layout/rich-text-editor.tsx",
+      "source_location": "L17"
+    },
+    {
       "id": "frontend_src_components_layout_rsssection_rsssectionprops",
       "label": "RssSectionProps",
       "_callable": true,
@@ -745,6 +771,71 @@
       "source_location": "L82"
     },
     {
+      "id": "frontend_src_hooks_useuser_createuserrequest",
+      "label": "CreateUserRequest",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 28,
+      "community_name": "useUser.ts",
+      "file_type": "code",
+      "norm_label": "createuserrequest",
+      "source_file": "frontend/src/hooks/useUser.ts",
+      "source_location": "L14"
+    },
+    {
+      "id": "frontend_src_hooks_useuser_updateuserrequest",
+      "label": "UpdateUserRequest",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 28,
+      "community_name": "useUser.ts",
+      "file_type": "code",
+      "norm_label": "updateuserrequest",
+      "source_file": "frontend/src/hooks/useUser.ts",
+      "source_location": "L21"
+    },
+    {
+      "id": "frontend_src_hooks_useuser_user",
+      "label": "User",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 28,
+      "community_name": "useUser.ts",
+      "file_type": "code",
+      "norm_label": "user",
+      "source_file": "frontend/src/hooks/useUser.ts",
+      "source_location": "L6"
+    },
+    {
+      "id": "frontend_src_hooks_useuser_userresponse",
+      "label": "UserResponse",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 28,
+      "community_name": "useUser.ts",
+      "file_type": "code",
+      "norm_label": "userresponse",
+      "source_file": "frontend/src/hooks/useUser.ts",
+      "source_location": "L27"
+    },
+    {
+      "id": "frontend_src_hooks_useuser_useuserreturn",
+      "label": "UseUserReturn",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 28,
+      "community_name": "useUser.ts",
+      "file_type": "code",
+      "norm_label": "useuserreturn",
+      "source_file": "frontend/src/hooks/useUser.ts",
+      "source_location": "L32"
+    },
+    {
       "id": "frontend_src_hooks_usecontact_contactformvalues",
       "label": "ContactFormValues",
       "_callable": true,
@@ -836,13 +927,130 @@
       "source_location": "L6"
     },
     {
+      "id": "frontend_src_hooks_useannouncements_announcement",
+      "label": "Announcement",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "useAuth",
+      "file_type": "code",
+      "norm_label": "announcement",
+      "source_file": "frontend/src/hooks/useAnnouncements.ts",
+      "source_location": "L7"
+    },
+    {
+      "id": "frontend_src_hooks_useannouncements_apiresponse",
+      "label": "ApiResponse",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "useAuth",
+      "file_type": "code",
+      "norm_label": "apiresponse",
+      "source_file": "frontend/src/hooks/useAnnouncements.ts",
+      "source_location": "L37"
+    },
+    {
+      "id": "frontend_src_hooks_useannouncements_createannouncementrequest",
+      "label": "CreateAnnouncementRequest",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "useAuth",
+      "file_type": "code",
+      "norm_label": "createannouncementrequest",
+      "source_file": "frontend/src/hooks/useAnnouncements.ts",
+      "source_location": "L19"
+    },
+    {
+      "id": "frontend_src_hooks_useannouncements_updateannouncementrequest",
+      "label": "UpdateAnnouncementRequest",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "useAuth",
+      "file_type": "code",
+      "norm_label": "updateannouncementrequest",
+      "source_file": "frontend/src/hooks/useAnnouncements.ts",
+      "source_location": "L28"
+    },
+    {
+      "id": "frontend_src_hooks_useauth_autherror",
+      "label": "AuthError",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "useAuth",
+      "file_type": "code",
+      "norm_label": "autherror",
+      "source_file": "frontend/src/hooks/useAuth.ts",
+      "source_location": "L21"
+    },
+    {
+      "id": "frontend_src_hooks_useauth_authuser",
+      "label": "AuthUser",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "useAuth",
+      "file_type": "code",
+      "norm_label": "authuser",
+      "source_file": "frontend/src/hooks/useAuth.ts",
+      "source_location": "L14"
+    },
+    {
+      "id": "frontend_src_hooks_useauth_loginrequestbody",
+      "label": "LoginRequestBody",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "useAuth",
+      "file_type": "code",
+      "norm_label": "loginrequestbody",
+      "source_file": "frontend/src/hooks/useAuth.ts",
+      "source_location": "L5"
+    },
+    {
+      "id": "frontend_src_hooks_useauth_loginresponse",
+      "label": "LoginResponse",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "useAuth",
+      "file_type": "code",
+      "norm_label": "loginresponse",
+      "source_file": "frontend/src/hooks/useAuth.ts",
+      "source_location": "L10"
+    },
+    {
+      "id": "frontend_src_hooks_useauth_useauthreturn",
+      "label": "UseAuthReturn",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "useAuth",
+      "file_type": "code",
+      "norm_label": "useauthreturn",
+      "source_file": "frontend/src/hooks/useAuth.ts",
+      "source_location": "L26"
+    },
+    {
       "id": "frontend_src_hooks_usestatus_statusdata",
       "label": "StatusData",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "community": 35,
-      "community_name": "useStatus.ts",
+      "community_name": "useAuth",
       "file_type": "code",
       "norm_label": "statusdata",
       "source_file": "frontend/src/hooks/useStatus.ts",
@@ -855,7 +1063,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 35,
-      "community_name": "useStatus.ts",
+      "community_name": "useAuth",
       "file_type": "code",
       "norm_label": "statusresponse",
       "source_file": "frontend/src/hooks/useStatus.ts",
@@ -868,7 +1076,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 35,
-      "community_name": "useStatus.ts",
+      "community_name": "useAuth",
       "file_type": "code",
       "norm_label": "usestatusreturn",
       "source_file": "frontend/src/hooks/useStatus.ts",
@@ -933,7 +1141,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 38,
-      "community_name": "applicationWindow.test.js",
+      "community_name": "submissionsController.js",
       "file_type": "code",
       "norm_label": "application",
       "source_file": "frontend/src/components/pages/apply.tsx",
@@ -953,91 +1161,13 @@
       "source_location": "L1"
     },
     {
-      "id": "frontend_src_hooks_useauth_autherror",
-      "label": "AuthError",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 40,
-      "community_name": "useAuth.ts",
-      "file_type": "code",
-      "norm_label": "autherror",
-      "source_file": "frontend/src/hooks/useAuth.ts",
-      "source_location": "L21"
-    },
-    {
-      "id": "frontend_src_hooks_useauth_authuser",
-      "label": "AuthUser",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 40,
-      "community_name": "useAuth.ts",
-      "file_type": "code",
-      "norm_label": "authuser",
-      "source_file": "frontend/src/hooks/useAuth.ts",
-      "source_location": "L14"
-    },
-    {
-      "id": "frontend_src_hooks_useauth_loginrequestbody",
-      "label": "LoginRequestBody",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 40,
-      "community_name": "useAuth.ts",
-      "file_type": "code",
-      "norm_label": "loginrequestbody",
-      "source_file": "frontend/src/hooks/useAuth.ts",
-      "source_location": "L5"
-    },
-    {
-      "id": "frontend_src_hooks_useauth_loginresponse",
-      "label": "LoginResponse",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 40,
-      "community_name": "useAuth.ts",
-      "file_type": "code",
-      "norm_label": "loginresponse",
-      "source_file": "frontend/src/hooks/useAuth.ts",
-      "source_location": "L10"
-    },
-    {
-      "id": "frontend_src_hooks_useauth_useauthreturn",
-      "label": "UseAuthReturn",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 40,
-      "community_name": "useAuth.ts",
-      "file_type": "code",
-      "norm_label": "useauthreturn",
-      "source_file": "frontend/src/hooks/useAuth.ts",
-      "source_location": "L26"
-    },
-    {
-      "id": "frontend_src_hooks_useuser_user",
-      "label": "User",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "adminOnly",
-      "file_type": "code",
-      "norm_label": "user",
-      "source_file": "frontend/src/hooks/useUser.ts",
-      "source_location": "L6"
-    },
-    {
       "id": "frontend_src_hooks_useapplydetail_applydetail",
       "label": "ApplyDetail",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 43,
-      "community_name": "AdminTechnicalTeam",
+      "community": 4,
+      "community_name": "Projeye \u00f6zel kurallar",
       "file_type": "code",
       "norm_label": "applydetail",
       "source_file": "frontend/src/hooks/useApplyDetail.ts",
@@ -1049,38 +1179,12 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 43,
-      "community_name": "AdminTechnicalTeam",
+      "community": 4,
+      "community_name": "Projeye \u00f6zel kurallar",
       "file_type": "code",
       "norm_label": "formfield",
       "source_file": "frontend/src/hooks/useApplyDetail.ts",
       "source_location": "L4"
-    },
-    {
-      "id": "frontend_src_components_layout_rich_text_editor_richtexteditorprops",
-      "label": "RichTextEditorProps",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "rich-text-editor.tsx",
-      "file_type": "code",
-      "norm_label": "richtexteditorprops",
-      "source_file": "frontend/src/components/layout/rich-text-editor.tsx",
-      "source_location": "L10"
-    },
-    {
-      "id": "frontend_src_components_layout_rich_text_editor_richtexteditorref",
-      "label": "RichTextEditorRef",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "rich-text-editor.tsx",
-      "file_type": "code",
-      "norm_label": "richtexteditorref",
-      "source_file": "frontend/src/components/layout/rich-text-editor.tsx",
-      "source_location": "L17"
     },
     {
       "id": "frontend_src_providers_themeprovider_themeproviderprops",
@@ -1088,116 +1192,12 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 45,
-      "community_name": "app/layout.tsx",
+      "community": 4,
+      "community_name": "Projeye \u00f6zel kurallar",
       "file_type": "code",
       "norm_label": "themeproviderprops",
       "source_file": "frontend/src/providers/ThemeProvider.tsx",
       "source_location": "L4"
-    },
-    {
-      "id": "frontend_src_hooks_useannouncements_announcement",
-      "label": "Announcement",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 49,
-      "community_name": "useAnnouncements.ts",
-      "file_type": "code",
-      "norm_label": "announcement",
-      "source_file": "frontend/src/hooks/useAnnouncements.ts",
-      "source_location": "L7"
-    },
-    {
-      "id": "frontend_src_hooks_useannouncements_apiresponse",
-      "label": "ApiResponse",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 49,
-      "community_name": "useAnnouncements.ts",
-      "file_type": "code",
-      "norm_label": "apiresponse",
-      "source_file": "frontend/src/hooks/useAnnouncements.ts",
-      "source_location": "L37"
-    },
-    {
-      "id": "frontend_src_hooks_useannouncements_createannouncementrequest",
-      "label": "CreateAnnouncementRequest",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 49,
-      "community_name": "useAnnouncements.ts",
-      "file_type": "code",
-      "norm_label": "createannouncementrequest",
-      "source_file": "frontend/src/hooks/useAnnouncements.ts",
-      "source_location": "L19"
-    },
-    {
-      "id": "frontend_src_hooks_useannouncements_updateannouncementrequest",
-      "label": "UpdateAnnouncementRequest",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 49,
-      "community_name": "useAnnouncements.ts",
-      "file_type": "code",
-      "norm_label": "updateannouncementrequest",
-      "source_file": "frontend/src/hooks/useAnnouncements.ts",
-      "source_location": "L28"
-    },
-    {
-      "id": "frontend_src_hooks_useuser_createuserrequest",
-      "label": "CreateUserRequest",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 50,
-      "community_name": "useUser.ts",
-      "file_type": "code",
-      "norm_label": "createuserrequest",
-      "source_file": "frontend/src/hooks/useUser.ts",
-      "source_location": "L14"
-    },
-    {
-      "id": "frontend_src_hooks_useuser_updateuserrequest",
-      "label": "UpdateUserRequest",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 50,
-      "community_name": "useUser.ts",
-      "file_type": "code",
-      "norm_label": "updateuserrequest",
-      "source_file": "frontend/src/hooks/useUser.ts",
-      "source_location": "L21"
-    },
-    {
-      "id": "frontend_src_hooks_useuser_userresponse",
-      "label": "UserResponse",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 50,
-      "community_name": "useUser.ts",
-      "file_type": "code",
-      "norm_label": "userresponse",
-      "source_file": "frontend/src/hooks/useUser.ts",
-      "source_location": "L27"
-    },
-    {
-      "id": "frontend_src_hooks_useuser_useuserreturn",
-      "label": "UseUserReturn",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 50,
-      "community_name": "useUser.ts",
-      "file_type": "code",
-      "norm_label": "useuserreturn",
-      "source_file": "frontend/src/hooks/useUser.ts",
-      "source_location": "L32"
     },
     {
       "id": "frontend_src_lib_aboutdata_boardmember",
@@ -1408,30 +1408,6 @@
       "source_location": "L5"
     },
     {
-      "id": "frontend_src_app_routes_admin_layout_admin_page_adminindexpage",
-      "label": "AdminIndexPage()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "applyDetail.tsx",
-      "file_type": "code",
-      "norm_label": "adminindexpage()",
-      "source_file": "frontend/src/app/(routes)/(admin-layout)/admin/page.tsx",
-      "source_location": "L6"
-    },
-    {
-      "id": "frontend_src_app_routes_apply_layout_apply_applyslug_page_applyroute",
-      "label": "ApplyRoute()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "applyDetail.tsx",
-      "file_type": "code",
-      "norm_label": "applyroute()",
-      "source_file": "frontend/src/app/(routes)/(apply-layout)/apply/[applySlug]/page.tsx",
-      "source_location": "L3"
-    },
-    {
       "id": "frontend_src_app_routes_apply_layout_layout_routeslayout",
       "label": "RoutesLayout()",
       "_callable": true,
@@ -1504,18 +1480,6 @@
       "source_location": "L20"
     },
     {
-      "id": "frontend_src_components_layout_contactform_contactform",
-      "label": "ContactForm()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "applyDetail.tsx",
-      "file_type": "code",
-      "norm_label": "contactform()",
-      "source_file": "frontend/src/components/layout/ContactForm.tsx",
-      "source_location": "L24"
-    },
-    {
       "id": "frontend_src_components_layout_rsssection_rsssection",
       "label": "RssSection()",
       "_callable": true,
@@ -1586,18 +1550,6 @@
       "norm_label": "publications()",
       "source_file": "frontend/src/components/pages/publications.tsx",
       "source_location": "L13"
-    },
-    {
-      "id": "frontend_src_components_theme_themetoggle_themetoggle",
-      "label": "ThemeToggle()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "applyDetail.tsx",
-      "file_type": "code",
-      "norm_label": "themetoggle()",
-      "source_file": "frontend/src/components/theme/ThemeToggle.tsx",
-      "source_location": "L14"
     },
     {
       "id": "frontend_src_components_ui_aspect_ratio_aspectratio",
@@ -1828,6 +1780,30 @@
       "source_location": "L49"
     },
     {
+      "id": "frontend_src_lib_sanitizehtml_cleannode",
+      "label": "cleanNode()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "applyDetail.tsx",
+      "file_type": "code",
+      "norm_label": "cleannode()",
+      "source_file": "frontend/src/lib/sanitizeHTML.ts",
+      "source_location": "L11"
+    },
+    {
+      "id": "frontend_src_lib_sanitizehtml_sanitizehtml",
+      "label": "sanitizeHTML()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "applyDetail.tsx",
+      "file_type": "code",
+      "norm_label": "sanitizehtml()",
+      "source_file": "frontend/src/lib/sanitizeHTML.ts",
+      "source_location": "L32"
+    },
+    {
       "id": "frontend_src_components_layout_adminsidebar_adminsidebar",
       "label": "AdminSidebar()",
       "_callable": true,
@@ -1838,6 +1814,18 @@
       "norm_label": "adminsidebar()",
       "source_file": "frontend/src/components/layout/AdminSidebar.tsx",
       "source_location": "L155"
+    },
+    {
+      "id": "frontend_src_components_theme_themetoggle_themetoggle",
+      "label": "ThemeToggle()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "cn",
+      "file_type": "code",
+      "norm_label": "themetoggle()",
+      "source_file": "frontend/src/components/theme/ThemeToggle.tsx",
+      "source_location": "L14"
     },
     {
       "id": "frontend_src_components_ui_card_cardaction",
@@ -1874,6 +1862,186 @@
       "norm_label": "dialogtrigger()",
       "source_file": "frontend/src/components/ui/dialog.tsx",
       "source_location": "L16"
+    },
+    {
+      "id": "frontend_src_components_ui_dropdown_menu_dropdownmenu",
+      "label": "DropdownMenu()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "cn",
+      "file_type": "code",
+      "norm_label": "dropdownmenu()",
+      "source_file": "frontend/src/components/ui/dropdown-menu.tsx",
+      "source_location": "L9"
+    },
+    {
+      "id": "frontend_src_components_ui_dropdown_menu_dropdownmenucheckboxitem",
+      "label": "DropdownMenuCheckboxItem()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "cn",
+      "file_type": "code",
+      "norm_label": "dropdownmenucheckboxitem()",
+      "source_file": "frontend/src/components/ui/dropdown-menu.tsx",
+      "source_location": "L85"
+    },
+    {
+      "id": "frontend_src_components_ui_dropdown_menu_dropdownmenucontent",
+      "label": "DropdownMenuContent()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "cn",
+      "file_type": "code",
+      "norm_label": "dropdownmenucontent()",
+      "source_file": "frontend/src/components/ui/dropdown-menu.tsx",
+      "source_location": "L34"
+    },
+    {
+      "id": "frontend_src_components_ui_dropdown_menu_dropdownmenugroup",
+      "label": "DropdownMenuGroup()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "cn",
+      "file_type": "code",
+      "norm_label": "dropdownmenugroup()",
+      "source_file": "frontend/src/components/ui/dropdown-menu.tsx",
+      "source_location": "L54"
+    },
+    {
+      "id": "frontend_src_components_ui_dropdown_menu_dropdownmenuitem",
+      "label": "DropdownMenuItem()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "cn",
+      "file_type": "code",
+      "norm_label": "dropdownmenuitem()",
+      "source_file": "frontend/src/components/ui/dropdown-menu.tsx",
+      "source_location": "L62"
+    },
+    {
+      "id": "frontend_src_components_ui_dropdown_menu_dropdownmenulabel",
+      "label": "DropdownMenuLabel()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "cn",
+      "file_type": "code",
+      "norm_label": "dropdownmenulabel()",
+      "source_file": "frontend/src/components/ui/dropdown-menu.tsx",
+      "source_location": "L146"
+    },
+    {
+      "id": "frontend_src_components_ui_dropdown_menu_dropdownmenuportal",
+      "label": "DropdownMenuPortal()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "cn",
+      "file_type": "code",
+      "norm_label": "dropdownmenuportal()",
+      "source_file": "frontend/src/components/ui/dropdown-menu.tsx",
+      "source_location": "L15"
+    },
+    {
+      "id": "frontend_src_components_ui_dropdown_menu_dropdownmenuradiogroup",
+      "label": "DropdownMenuRadioGroup()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "cn",
+      "file_type": "code",
+      "norm_label": "dropdownmenuradiogroup()",
+      "source_file": "frontend/src/components/ui/dropdown-menu.tsx",
+      "source_location": "L111"
+    },
+    {
+      "id": "frontend_src_components_ui_dropdown_menu_dropdownmenuradioitem",
+      "label": "DropdownMenuRadioItem()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "cn",
+      "file_type": "code",
+      "norm_label": "dropdownmenuradioitem()",
+      "source_file": "frontend/src/components/ui/dropdown-menu.tsx",
+      "source_location": "L122"
+    },
+    {
+      "id": "frontend_src_components_ui_dropdown_menu_dropdownmenuseparator",
+      "label": "DropdownMenuSeparator()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "cn",
+      "file_type": "code",
+      "norm_label": "dropdownmenuseparator()",
+      "source_file": "frontend/src/components/ui/dropdown-menu.tsx",
+      "source_location": "L166"
+    },
+    {
+      "id": "frontend_src_components_ui_dropdown_menu_dropdownmenushortcut",
+      "label": "DropdownMenuShortcut()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "cn",
+      "file_type": "code",
+      "norm_label": "dropdownmenushortcut()",
+      "source_file": "frontend/src/components/ui/dropdown-menu.tsx",
+      "source_location": "L179"
+    },
+    {
+      "id": "frontend_src_components_ui_dropdown_menu_dropdownmenusub",
+      "label": "DropdownMenuSub()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "cn",
+      "file_type": "code",
+      "norm_label": "dropdownmenusub()",
+      "source_file": "frontend/src/components/ui/dropdown-menu.tsx",
+      "source_location": "L195"
+    },
+    {
+      "id": "frontend_src_components_ui_dropdown_menu_dropdownmenusubcontent",
+      "label": "DropdownMenuSubContent()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "cn",
+      "file_type": "code",
+      "norm_label": "dropdownmenusubcontent()",
+      "source_file": "frontend/src/components/ui/dropdown-menu.tsx",
+      "source_location": "L225"
+    },
+    {
+      "id": "frontend_src_components_ui_dropdown_menu_dropdownmenusubtrigger",
+      "label": "DropdownMenuSubTrigger()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "cn",
+      "file_type": "code",
+      "norm_label": "dropdownmenusubtrigger()",
+      "source_file": "frontend/src/components/ui/dropdown-menu.tsx",
+      "source_location": "L201"
+    },
+    {
+      "id": "frontend_src_components_ui_dropdown_menu_dropdownmenutrigger",
+      "label": "DropdownMenuTrigger()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "cn",
+      "file_type": "code",
+      "norm_label": "dropdownmenutrigger()",
+      "source_file": "frontend/src/components/ui/dropdown-menu.tsx",
+      "source_location": "L23"
     },
     {
       "id": "frontend_src_components_ui_sheet_sheet",
@@ -2764,6 +2932,42 @@
       "source_location": "L80"
     },
     {
+      "id": "frontend_src_app_routes_admin_layout_admin_dashboard_announcements_page_adminannouncementsroute",
+      "label": "AdminAnnouncementsRoute()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 18,
+      "community_name": "react",
+      "file_type": "code",
+      "norm_label": "adminannouncementsroute()",
+      "source_file": "frontend/src/app/(routes)/(admin-layout)/admin/dashboard/announcements/page.tsx",
+      "source_location": "L3"
+    },
+    {
+      "id": "frontend_src_components_pages_admin_announcements_adminannouncements",
+      "label": "AdminAnnouncements()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 18,
+      "community_name": "react",
+      "file_type": "code",
+      "norm_label": "adminannouncements()",
+      "source_file": "frontend/src/components/pages/admin/announcements.tsx",
+      "source_location": "L40"
+    },
+    {
+      "id": "frontend_src_components_pages_admin_announcements_formatdate",
+      "label": "formatDate()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 18,
+      "community_name": "react",
+      "file_type": "code",
+      "norm_label": "formatdate()",
+      "source_file": "frontend/src/components/pages/admin/announcements.tsx",
+      "source_location": "L30"
+    },
+    {
       "id": "frontend_src_components_ui_dialog_dialog",
       "label": "Dialog()",
       "_callable": true,
@@ -2968,124 +3172,88 @@
       "source_location": "L135"
     },
     {
-      "id": "backend_controllers_submissionscontroller_creategeneralsubmission",
-      "label": "createGeneralSubmission()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 21,
-      "community_name": "submissionsController.js",
-      "file_type": "code",
-      "norm_label": "creategeneralsubmission()",
-      "source_file": "backend/controllers/submissionsController.js",
-      "source_location": "L23"
-    },
-    {
-      "id": "backend_controllers_submissionscontroller_createtechnicalsubmission",
-      "label": "createTechnicalSubmission()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 21,
-      "community_name": "submissionsController.js",
-      "file_type": "code",
-      "norm_label": "createtechnicalsubmission()",
-      "source_file": "backend/controllers/submissionsController.js",
-      "source_location": "L86"
-    },
-    {
-      "id": "backend_controllers_submissionscontroller_csvstring",
-      "label": "csvString()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 21,
-      "community_name": "submissionsController.js",
-      "file_type": "code",
-      "norm_label": "csvstring()",
-      "source_file": "backend/controllers/submissionsController.js",
-      "source_location": "L17"
-    },
-    {
-      "id": "backend_controllers_submissionscontroller_exportsubmissionstocsv",
-      "label": "exportSubmissionsToCSV()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 21,
-      "community_name": "submissionsController.js",
-      "file_type": "code",
-      "norm_label": "exportsubmissionstocsv()",
-      "source_file": "backend/controllers/submissionsController.js",
-      "source_location": "L290"
-    },
-    {
-      "id": "backend_controllers_submissionscontroller_getallsubmissions",
-      "label": "getAllSubmissions()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 21,
-      "community_name": "submissionsController.js",
-      "file_type": "code",
-      "norm_label": "getallsubmissions()",
-      "source_file": "backend/controllers/submissionsController.js",
-      "source_location": "L187"
-    },
-    {
-      "id": "backend_controllers_submissionscontroller_getsubmissionbyid",
-      "label": "getSubmissionById()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 21,
-      "community_name": "submissionsController.js",
-      "file_type": "code",
-      "norm_label": "getsubmissionbyid()",
-      "source_file": "backend/controllers/submissionsController.js",
-      "source_location": "L250"
-    },
-    {
-      "id": "backend_controllers_submissionscontroller_istext",
-      "label": "isText()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 21,
-      "community_name": "submissionsController.js",
-      "file_type": "code",
-      "norm_label": "istext()",
-      "source_file": "backend/controllers/submissionsController.js",
-      "source_location": "L9"
-    },
-    {
-      "id": "backend_controllers_submissionscontroller_purgesubmissions",
-      "label": "purgeSubmissions()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 21,
-      "community_name": "submissionsController.js",
-      "file_type": "code",
-      "norm_label": "purgesubmissions()",
-      "source_file": "backend/controllers/submissionsController.js",
-      "source_location": "L457"
-    },
-    {
-      "id": "backend_controllers_submissionscontroller_updatesubmission",
-      "label": "updateSubmission()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 21,
-      "community_name": "submissionsController.js",
-      "file_type": "code",
-      "norm_label": "updatesubmission()",
-      "source_file": "backend/controllers/submissionsController.js",
-      "source_location": "L370"
-    },
-    {
       "id": "backend_helpers_searchpattern_tosearchpattern",
       "label": "toSearchPattern()",
       "_callable": true,
       "_origin": "ast",
-      "community": 21,
-      "community_name": "submissionsController.js",
+      "community": 19,
+      "community_name": "announcementsController.js",
       "file_type": "code",
       "norm_label": "tosearchpattern()",
       "source_file": "backend/helpers/searchPattern.js",
       "source_location": "L5"
+    },
+    {
+      "id": "backend_routes_mailroutes_uploadmiddleware",
+      "label": "uploadMiddleware()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 21,
+      "community_name": "mailRoutes.js",
+      "file_type": "code",
+      "norm_label": "uploadmiddleware()",
+      "source_file": "backend/routes/mailRoutes.js",
+      "source_location": "L28"
+    },
+    {
+      "id": "backend_controllers_usercontroller_createuser",
+      "label": "createUser()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "authMiddleware.js",
+      "file_type": "code",
+      "norm_label": "createuser()",
+      "source_file": "backend/controllers/userController.js",
+      "source_location": "L30"
+    },
+    {
+      "id": "backend_controllers_usercontroller_deleteuser",
+      "label": "deleteUser()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "authMiddleware.js",
+      "file_type": "code",
+      "norm_label": "deleteuser()",
+      "source_file": "backend/controllers/userController.js",
+      "source_location": "L116"
+    },
+    {
+      "id": "backend_controllers_usercontroller_getallusers",
+      "label": "getAllUsers()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "authMiddleware.js",
+      "file_type": "code",
+      "norm_label": "getallusers()",
+      "source_file": "backend/controllers/userController.js",
+      "source_location": "L8"
+    },
+    {
+      "id": "backend_controllers_usercontroller_updateuser",
+      "label": "updateUser()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "authMiddleware.js",
+      "file_type": "code",
+      "norm_label": "updateuser()",
+      "source_file": "backend/controllers/userController.js",
+      "source_location": "L80"
+    },
+    {
+      "id": "backend_middlewares_authmiddleware_adminonly",
+      "label": "adminOnly()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "authMiddleware.js",
+      "file_type": "code",
+      "norm_label": "adminonly()",
+      "source_file": "backend/middlewares/authMiddleware.js",
+      "source_location": "L22"
     },
     {
       "id": "backend_middlewares_authmiddleware_firstusercreation",
@@ -3321,35 +3489,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 28,
-      "community_name": "useAuth",
+      "community_name": "useUser.ts",
       "file_type": "code",
       "norm_label": "adminmanagementroute()",
       "source_file": "frontend/src/app/(routes)/(admin-layout)/admin/dashboard/admin-management/page.tsx",
       "source_location": "L3"
-    },
-    {
-      "id": "frontend_src_app_routes_admin_layout_admin_dashboard_layout_admindashboardlayout",
-      "label": "AdminDashboardLayout()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 28,
-      "community_name": "useAuth",
-      "file_type": "code",
-      "norm_label": "admindashboardlayout()",
-      "source_file": "frontend/src/app/(routes)/(admin-layout)/admin/dashboard/layout.tsx",
-      "source_location": "L14"
-    },
-    {
-      "id": "frontend_src_components_layout_adminsidebar_changepassworddialog",
-      "label": "ChangePasswordDialog()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 28,
-      "community_name": "useAuth",
-      "file_type": "code",
-      "norm_label": "changepassworddialog()",
-      "source_file": "frontend/src/components/layout/AdminSidebar.tsx",
-      "source_location": "L45"
     },
     {
       "id": "frontend_src_components_pages_admin_admin_management_adminmanagement",
@@ -3357,7 +3501,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 28,
-      "community_name": "useAuth",
+      "community_name": "useUser.ts",
       "file_type": "code",
       "norm_label": "adminmanagement()",
       "source_file": "frontend/src/components/pages/admin/admin-management.tsx",
@@ -3369,35 +3513,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 28,
-      "community_name": "useAuth",
+      "community_name": "useUser.ts",
       "file_type": "code",
       "norm_label": "formatrole()",
       "source_file": "frontend/src/components/pages/admin/admin-management.tsx",
       "source_location": "L15"
-    },
-    {
-      "id": "frontend_src_hooks_useauth_getstoredtoken",
-      "label": "getStoredToken()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 28,
-      "community_name": "useAuth",
-      "file_type": "code",
-      "norm_label": "getstoredtoken()",
-      "source_file": "frontend/src/hooks/useAuth.ts",
-      "source_location": "L44"
-    },
-    {
-      "id": "frontend_src_hooks_useauth_useauth",
-      "label": "useAuth()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 28,
-      "community_name": "useAuth",
-      "file_type": "code",
-      "norm_label": "useauth()",
-      "source_file": "frontend/src/hooks/useAuth.ts",
-      "source_location": "L66"
     },
     {
       "id": "frontend_src_hooks_useuser_useuser",
@@ -3405,7 +3525,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 28,
-      "community_name": "useAuth",
+      "community_name": "useUser.ts",
       "file_type": "code",
       "norm_label": "useuser()",
       "source_file": "frontend/src/hooks/useUser.ts",
@@ -3422,6 +3542,18 @@
       "norm_label": "admincontactroute()",
       "source_file": "frontend/src/app/(routes)/(admin-layout)/admin/dashboard/contact/page.tsx",
       "source_location": "L3"
+    },
+    {
+      "id": "frontend_src_components_layout_contactform_contactform",
+      "label": "ContactForm()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 29,
+      "community_name": "useContact.ts",
+      "file_type": "code",
+      "norm_label": "contactform()",
+      "source_file": "frontend/src/components/layout/ContactForm.tsx",
+      "source_location": "L24"
     },
     {
       "id": "frontend_src_components_pages_admin_contact_admincontact",
@@ -3554,6 +3686,18 @@
       "norm_label": "dimensions()",
       "source_file": "frontend/scripts/check-content.mjs",
       "source_location": "L44"
+    },
+    {
+      "id": "frontend_scripts_check_content_ok",
+      "label": "ok()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "purge-submissions.js",
+      "file_type": "code",
+      "norm_label": "ok()",
+      "source_file": "frontend/scripts/check-content.mjs",
+      "source_location": "L25"
     },
     {
       "id": "frontend_scripts_check_content_sniff",
@@ -3712,52 +3856,16 @@
       "source_location": "L59"
     },
     {
-      "id": "backend_controllers_usercontroller_createuser",
-      "label": "createUser()",
+      "id": "frontend_src_app_routes_admin_layout_admin_page_adminindexpage",
+      "label": "AdminIndexPage()",
       "_callable": true,
       "_origin": "ast",
       "community": 33,
-      "community_name": "userRoutes.js",
+      "community_name": "admin/page.tsx",
       "file_type": "code",
-      "norm_label": "createuser()",
-      "source_file": "backend/controllers/userController.js",
-      "source_location": "L30"
-    },
-    {
-      "id": "backend_controllers_usercontroller_deleteuser",
-      "label": "deleteUser()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 33,
-      "community_name": "userRoutes.js",
-      "file_type": "code",
-      "norm_label": "deleteuser()",
-      "source_file": "backend/controllers/userController.js",
-      "source_location": "L116"
-    },
-    {
-      "id": "backend_controllers_usercontroller_getallusers",
-      "label": "getAllUsers()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 33,
-      "community_name": "userRoutes.js",
-      "file_type": "code",
-      "norm_label": "getallusers()",
-      "source_file": "backend/controllers/userController.js",
-      "source_location": "L8"
-    },
-    {
-      "id": "backend_controllers_usercontroller_updateuser",
-      "label": "updateUser()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 33,
-      "community_name": "userRoutes.js",
-      "file_type": "code",
-      "norm_label": "updateuser()",
-      "source_file": "backend/controllers/userController.js",
-      "source_location": "L80"
+      "norm_label": "adminindexpage()",
+      "source_file": "frontend/src/app/(routes)/(admin-layout)/admin/page.tsx",
+      "source_location": "L6"
     },
     {
       "id": "backend_helpers_clientip_clientip",
@@ -3796,16 +3904,52 @@
       "source_location": "L56"
     },
     {
+      "id": "frontend_src_app_routes_admin_layout_admin_dashboard_layout_admindashboardlayout",
+      "label": "AdminDashboardLayout()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "useAuth",
+      "file_type": "code",
+      "norm_label": "admindashboardlayout()",
+      "source_file": "frontend/src/app/(routes)/(admin-layout)/admin/dashboard/layout.tsx",
+      "source_location": "L14"
+    },
+    {
       "id": "frontend_src_app_routes_admin_layout_admin_dashboard_page_admindashboardroute",
       "label": "AdminDashboardRoute()",
       "_callable": true,
       "_origin": "ast",
       "community": 35,
-      "community_name": "useStatus.ts",
+      "community_name": "useAuth",
       "file_type": "code",
       "norm_label": "admindashboardroute()",
       "source_file": "frontend/src/app/(routes)/(admin-layout)/admin/dashboard/page.tsx",
       "source_location": "L3"
+    },
+    {
+      "id": "frontend_src_app_routes_admin_layout_admin_login_page_adminloginroute",
+      "label": "AdminLoginRoute()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "useAuth",
+      "file_type": "code",
+      "norm_label": "adminloginroute()",
+      "source_file": "frontend/src/app/(routes)/(admin-layout)/admin/login/page.tsx",
+      "source_location": "L4"
+    },
+    {
+      "id": "frontend_src_components_layout_adminsidebar_changepassworddialog",
+      "label": "ChangePasswordDialog()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "useAuth",
+      "file_type": "code",
+      "norm_label": "changepassworddialog()",
+      "source_file": "frontend/src/components/layout/AdminSidebar.tsx",
+      "source_location": "L45"
     },
     {
       "id": "frontend_src_components_pages_admin_dashboard_admindashboard",
@@ -3813,11 +3957,59 @@
       "_callable": true,
       "_origin": "ast",
       "community": 35,
-      "community_name": "useStatus.ts",
+      "community_name": "useAuth",
       "file_type": "code",
       "norm_label": "admindashboard()",
       "source_file": "frontend/src/components/pages/admin/dashboard.tsx",
       "source_location": "L16"
+    },
+    {
+      "id": "frontend_src_components_pages_admin_login_adminlogin",
+      "label": "AdminLogin()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "useAuth",
+      "file_type": "code",
+      "norm_label": "adminlogin()",
+      "source_file": "frontend/src/components/pages/admin/login.tsx",
+      "source_location": "L26"
+    },
+    {
+      "id": "frontend_src_hooks_useauth_getstoredtoken",
+      "label": "getStoredToken()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "useAuth",
+      "file_type": "code",
+      "norm_label": "getstoredtoken()",
+      "source_file": "frontend/src/hooks/useAuth.ts",
+      "source_location": "L44"
+    },
+    {
+      "id": "frontend_src_hooks_useauth_setstoredtoken",
+      "label": "setStoredToken()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "useAuth",
+      "file_type": "code",
+      "norm_label": "setstoredtoken()",
+      "source_file": "frontend/src/hooks/useAuth.ts",
+      "source_location": "L53"
+    },
+    {
+      "id": "frontend_src_hooks_useauth_useauth",
+      "label": "useAuth()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "useAuth",
+      "file_type": "code",
+      "norm_label": "useauth()",
+      "source_file": "frontend/src/hooks/useAuth.ts",
+      "source_location": "L66"
     },
     {
       "id": "frontend_src_hooks_usestatus_usestatus",
@@ -3825,191 +4017,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 35,
-      "community_name": "useStatus.ts",
+      "community_name": "useAuth",
       "file_type": "code",
       "norm_label": "usestatus()",
       "source_file": "frontend/src/hooks/useStatus.ts",
       "source_location": "L40"
-    },
-    {
-      "id": "frontend_src_components_ui_dropdown_menu_dropdownmenu",
-      "label": "DropdownMenu()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 36,
-      "community_name": "dropdown-menu.tsx",
-      "file_type": "code",
-      "norm_label": "dropdownmenu()",
-      "source_file": "frontend/src/components/ui/dropdown-menu.tsx",
-      "source_location": "L9"
-    },
-    {
-      "id": "frontend_src_components_ui_dropdown_menu_dropdownmenucheckboxitem",
-      "label": "DropdownMenuCheckboxItem()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 36,
-      "community_name": "dropdown-menu.tsx",
-      "file_type": "code",
-      "norm_label": "dropdownmenucheckboxitem()",
-      "source_file": "frontend/src/components/ui/dropdown-menu.tsx",
-      "source_location": "L85"
-    },
-    {
-      "id": "frontend_src_components_ui_dropdown_menu_dropdownmenucontent",
-      "label": "DropdownMenuContent()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 36,
-      "community_name": "dropdown-menu.tsx",
-      "file_type": "code",
-      "norm_label": "dropdownmenucontent()",
-      "source_file": "frontend/src/components/ui/dropdown-menu.tsx",
-      "source_location": "L34"
-    },
-    {
-      "id": "frontend_src_components_ui_dropdown_menu_dropdownmenugroup",
-      "label": "DropdownMenuGroup()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 36,
-      "community_name": "dropdown-menu.tsx",
-      "file_type": "code",
-      "norm_label": "dropdownmenugroup()",
-      "source_file": "frontend/src/components/ui/dropdown-menu.tsx",
-      "source_location": "L54"
-    },
-    {
-      "id": "frontend_src_components_ui_dropdown_menu_dropdownmenuitem",
-      "label": "DropdownMenuItem()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 36,
-      "community_name": "dropdown-menu.tsx",
-      "file_type": "code",
-      "norm_label": "dropdownmenuitem()",
-      "source_file": "frontend/src/components/ui/dropdown-menu.tsx",
-      "source_location": "L62"
-    },
-    {
-      "id": "frontend_src_components_ui_dropdown_menu_dropdownmenulabel",
-      "label": "DropdownMenuLabel()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 36,
-      "community_name": "dropdown-menu.tsx",
-      "file_type": "code",
-      "norm_label": "dropdownmenulabel()",
-      "source_file": "frontend/src/components/ui/dropdown-menu.tsx",
-      "source_location": "L146"
-    },
-    {
-      "id": "frontend_src_components_ui_dropdown_menu_dropdownmenuportal",
-      "label": "DropdownMenuPortal()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 36,
-      "community_name": "dropdown-menu.tsx",
-      "file_type": "code",
-      "norm_label": "dropdownmenuportal()",
-      "source_file": "frontend/src/components/ui/dropdown-menu.tsx",
-      "source_location": "L15"
-    },
-    {
-      "id": "frontend_src_components_ui_dropdown_menu_dropdownmenuradiogroup",
-      "label": "DropdownMenuRadioGroup()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 36,
-      "community_name": "dropdown-menu.tsx",
-      "file_type": "code",
-      "norm_label": "dropdownmenuradiogroup()",
-      "source_file": "frontend/src/components/ui/dropdown-menu.tsx",
-      "source_location": "L111"
-    },
-    {
-      "id": "frontend_src_components_ui_dropdown_menu_dropdownmenuradioitem",
-      "label": "DropdownMenuRadioItem()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 36,
-      "community_name": "dropdown-menu.tsx",
-      "file_type": "code",
-      "norm_label": "dropdownmenuradioitem()",
-      "source_file": "frontend/src/components/ui/dropdown-menu.tsx",
-      "source_location": "L122"
-    },
-    {
-      "id": "frontend_src_components_ui_dropdown_menu_dropdownmenuseparator",
-      "label": "DropdownMenuSeparator()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 36,
-      "community_name": "dropdown-menu.tsx",
-      "file_type": "code",
-      "norm_label": "dropdownmenuseparator()",
-      "source_file": "frontend/src/components/ui/dropdown-menu.tsx",
-      "source_location": "L166"
-    },
-    {
-      "id": "frontend_src_components_ui_dropdown_menu_dropdownmenushortcut",
-      "label": "DropdownMenuShortcut()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 36,
-      "community_name": "dropdown-menu.tsx",
-      "file_type": "code",
-      "norm_label": "dropdownmenushortcut()",
-      "source_file": "frontend/src/components/ui/dropdown-menu.tsx",
-      "source_location": "L179"
-    },
-    {
-      "id": "frontend_src_components_ui_dropdown_menu_dropdownmenusub",
-      "label": "DropdownMenuSub()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 36,
-      "community_name": "dropdown-menu.tsx",
-      "file_type": "code",
-      "norm_label": "dropdownmenusub()",
-      "source_file": "frontend/src/components/ui/dropdown-menu.tsx",
-      "source_location": "L195"
-    },
-    {
-      "id": "frontend_src_components_ui_dropdown_menu_dropdownmenusubcontent",
-      "label": "DropdownMenuSubContent()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 36,
-      "community_name": "dropdown-menu.tsx",
-      "file_type": "code",
-      "norm_label": "dropdownmenusubcontent()",
-      "source_file": "frontend/src/components/ui/dropdown-menu.tsx",
-      "source_location": "L225"
-    },
-    {
-      "id": "frontend_src_components_ui_dropdown_menu_dropdownmenusubtrigger",
-      "label": "DropdownMenuSubTrigger()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 36,
-      "community_name": "dropdown-menu.tsx",
-      "file_type": "code",
-      "norm_label": "dropdownmenusubtrigger()",
-      "source_file": "frontend/src/components/ui/dropdown-menu.tsx",
-      "source_location": "L201"
-    },
-    {
-      "id": "frontend_src_components_ui_dropdown_menu_dropdownmenutrigger",
-      "label": "DropdownMenuTrigger()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 36,
-      "community_name": "dropdown-menu.tsx",
-      "file_type": "code",
-      "norm_label": "dropdownmenutrigger()",
-      "source_file": "frontend/src/components/ui/dropdown-menu.tsx",
-      "source_location": "L23"
     },
     {
       "id": "frontend_src_lib_api_fetchannouncements",
@@ -4036,12 +4048,168 @@
       "source_location": "L47"
     },
     {
+      "id": "backend_controllers_applicationwindowscontroller_getwindow",
+      "label": "getWindow()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 38,
+      "community_name": "submissionsController.js",
+      "file_type": "code",
+      "norm_label": "getwindow()",
+      "source_file": "backend/controllers/applicationWindowsController.js",
+      "source_location": "L6"
+    },
+    {
+      "id": "backend_controllers_applicationwindowscontroller_getwindows",
+      "label": "getWindows()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 38,
+      "community_name": "submissionsController.js",
+      "file_type": "code",
+      "norm_label": "getwindows()",
+      "source_file": "backend/controllers/applicationWindowsController.js",
+      "source_location": "L22"
+    },
+    {
+      "id": "backend_controllers_applicationwindowscontroller_todate",
+      "label": "toDate()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 38,
+      "community_name": "submissionsController.js",
+      "file_type": "code",
+      "norm_label": "todate()",
+      "source_file": "backend/controllers/applicationWindowsController.js",
+      "source_location": "L13"
+    },
+    {
+      "id": "backend_controllers_applicationwindowscontroller_updatewindow",
+      "label": "updateWindow()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 38,
+      "community_name": "submissionsController.js",
+      "file_type": "code",
+      "norm_label": "updatewindow()",
+      "source_file": "backend/controllers/applicationWindowsController.js",
+      "source_location": "L39"
+    },
+    {
+      "id": "backend_controllers_submissionscontroller_creategeneralsubmission",
+      "label": "createGeneralSubmission()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 38,
+      "community_name": "submissionsController.js",
+      "file_type": "code",
+      "norm_label": "creategeneralsubmission()",
+      "source_file": "backend/controllers/submissionsController.js",
+      "source_location": "L23"
+    },
+    {
+      "id": "backend_controllers_submissionscontroller_createtechnicalsubmission",
+      "label": "createTechnicalSubmission()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 38,
+      "community_name": "submissionsController.js",
+      "file_type": "code",
+      "norm_label": "createtechnicalsubmission()",
+      "source_file": "backend/controllers/submissionsController.js",
+      "source_location": "L86"
+    },
+    {
+      "id": "backend_controllers_submissionscontroller_csvstring",
+      "label": "csvString()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 38,
+      "community_name": "submissionsController.js",
+      "file_type": "code",
+      "norm_label": "csvstring()",
+      "source_file": "backend/controllers/submissionsController.js",
+      "source_location": "L17"
+    },
+    {
+      "id": "backend_controllers_submissionscontroller_exportsubmissionstocsv",
+      "label": "exportSubmissionsToCSV()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 38,
+      "community_name": "submissionsController.js",
+      "file_type": "code",
+      "norm_label": "exportsubmissionstocsv()",
+      "source_file": "backend/controllers/submissionsController.js",
+      "source_location": "L290"
+    },
+    {
+      "id": "backend_controllers_submissionscontroller_getallsubmissions",
+      "label": "getAllSubmissions()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 38,
+      "community_name": "submissionsController.js",
+      "file_type": "code",
+      "norm_label": "getallsubmissions()",
+      "source_file": "backend/controllers/submissionsController.js",
+      "source_location": "L187"
+    },
+    {
+      "id": "backend_controllers_submissionscontroller_getsubmissionbyid",
+      "label": "getSubmissionById()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 38,
+      "community_name": "submissionsController.js",
+      "file_type": "code",
+      "norm_label": "getsubmissionbyid()",
+      "source_file": "backend/controllers/submissionsController.js",
+      "source_location": "L250"
+    },
+    {
+      "id": "backend_controllers_submissionscontroller_istext",
+      "label": "isText()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 38,
+      "community_name": "submissionsController.js",
+      "file_type": "code",
+      "norm_label": "istext()",
+      "source_file": "backend/controllers/submissionsController.js",
+      "source_location": "L9"
+    },
+    {
+      "id": "backend_controllers_submissionscontroller_purgesubmissions",
+      "label": "purgeSubmissions()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 38,
+      "community_name": "submissionsController.js",
+      "file_type": "code",
+      "norm_label": "purgesubmissions()",
+      "source_file": "backend/controllers/submissionsController.js",
+      "source_location": "L457"
+    },
+    {
+      "id": "backend_controllers_submissionscontroller_updatesubmission",
+      "label": "updateSubmission()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 38,
+      "community_name": "submissionsController.js",
+      "file_type": "code",
+      "norm_label": "updatesubmission()",
+      "source_file": "backend/controllers/submissionsController.js",
+      "source_location": "L370"
+    },
+    {
       "id": "backend_helpers_applicationwindow_iswindowopen",
       "label": "isWindowOpen()",
       "_callable": true,
       "_origin": "ast",
       "community": 38,
-      "community_name": "applicationWindow.test.js",
+      "community_name": "submissionsController.js",
       "file_type": "code",
       "norm_label": "iswindowopen()",
       "source_file": "backend/helpers/applicationWindow.js",
@@ -4053,7 +4221,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 38,
-      "community_name": "applicationWindow.test.js",
+      "community_name": "submissionsController.js",
       "file_type": "code",
       "norm_label": "topublicwindow()",
       "source_file": "backend/helpers/applicationWindow.js",
@@ -4065,23 +4233,71 @@
       "_callable": true,
       "_origin": "ast",
       "community": 38,
-      "community_name": "applicationWindow.test.js",
+      "community_name": "submissionsController.js",
       "file_type": "code",
       "norm_label": "windowstate()",
       "source_file": "backend/helpers/applicationWindow.js",
       "source_location": "L19"
     },
     {
-      "id": "frontend_scripts_check_content_ok",
-      "label": "ok()",
+      "id": "backend_scripts_windows_smoke_api",
+      "label": "api()",
       "_callable": true,
       "_origin": "ast",
       "community": 38,
-      "community_name": "applicationWindow.test.js",
+      "community_name": "submissionsController.js",
       "file_type": "code",
-      "norm_label": "ok()",
-      "source_file": "frontend/scripts/check-content.mjs",
-      "source_location": "L25"
+      "norm_label": "api()",
+      "source_file": "backend/scripts/windows-smoke.js",
+      "source_location": "L22"
+    },
+    {
+      "id": "backend_scripts_windows_smoke_byslug",
+      "label": "bySlug()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 38,
+      "community_name": "submissionsController.js",
+      "file_type": "code",
+      "norm_label": "byslug()",
+      "source_file": "backend/scripts/windows-smoke.js",
+      "source_location": "L45"
+    },
+    {
+      "id": "backend_scripts_windows_smoke_expectstatus",
+      "label": "expectStatus()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 38,
+      "community_name": "submissionsController.js",
+      "file_type": "code",
+      "norm_label": "expectstatus()",
+      "source_file": "backend/scripts/windows-smoke.js",
+      "source_location": "L41"
+    },
+    {
+      "id": "backend_scripts_windows_smoke_iso",
+      "label": "iso()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 38,
+      "community_name": "submissionsController.js",
+      "file_type": "code",
+      "norm_label": "iso()",
+      "source_file": "backend/scripts/windows-smoke.js",
+      "source_location": "L44"
+    },
+    {
+      "id": "backend_scripts_windows_smoke_step",
+      "label": "step()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 38,
+      "community_name": "submissionsController.js",
+      "file_type": "code",
+      "norm_label": "step()",
+      "source_file": "backend/scripts/windows-smoke.js",
+      "source_location": "L31"
     },
     {
       "id": "frontend_src_app_routes_admin_layout_layout_routeslayout",
@@ -4108,28 +4324,76 @@
       "source_location": "L5"
     },
     {
-      "id": "frontend_src_hooks_useauth_setstoredtoken",
-      "label": "setStoredToken()",
+      "id": "frontend_src_app_layout_rootlayout",
+      "label": "RootLayout()",
       "_callable": true,
       "_origin": "ast",
-      "community": 40,
-      "community_name": "useAuth.ts",
+      "community": 4,
+      "community_name": "Projeye \u00f6zel kurallar",
       "file_type": "code",
-      "norm_label": "setstoredtoken()",
-      "source_file": "frontend/src/hooks/useAuth.ts",
-      "source_location": "L53"
+      "norm_label": "rootlayout()",
+      "source_file": "frontend/src/app/layout.tsx",
+      "source_location": "L16"
     },
     {
-      "id": "backend_middlewares_authmiddleware_adminonly",
-      "label": "adminOnly()",
+      "id": "frontend_src_app_routes_apply_layout_apply_applyslug_page_applyroute",
+      "label": "ApplyRoute()",
       "_callable": true,
       "_origin": "ast",
-      "community": 41,
-      "community_name": "adminOnly",
+      "community": 4,
+      "community_name": "Projeye \u00f6zel kurallar",
       "file_type": "code",
-      "norm_label": "adminonly()",
-      "source_file": "backend/middlewares/authMiddleware.js",
-      "source_location": "L22"
+      "norm_label": "applyroute()",
+      "source_file": "frontend/src/app/(routes)/(apply-layout)/apply/[applySlug]/page.tsx",
+      "source_location": "L3"
+    },
+    {
+      "id": "frontend_src_components_pages_applydetail_applydetail",
+      "label": "ApplyDetail()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "Projeye \u00f6zel kurallar",
+      "file_type": "code",
+      "norm_label": "applydetail()",
+      "source_file": "frontend/src/components/pages/applyDetail.tsx",
+      "source_location": "L19"
+    },
+    {
+      "id": "frontend_src_hooks_useapplydetail_useapplydetail",
+      "label": "useApplyDetail()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "Projeye \u00f6zel kurallar",
+      "file_type": "code",
+      "norm_label": "useapplydetail()",
+      "source_file": "frontend/src/hooks/useApplyDetail.ts",
+      "source_location": "L27"
+    },
+    {
+      "id": "frontend_src_providers_themeprovider_themeprovider",
+      "label": "ThemeProvider()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "Projeye \u00f6zel kurallar",
+      "file_type": "code",
+      "norm_label": "themeprovider()",
+      "source_file": "frontend/src/providers/ThemeProvider.tsx",
+      "source_location": "L6"
+    },
+    {
+      "id": "frontend_src_app_routes_admin_layout_admin_dashboard_data_page_admindataroute",
+      "label": "AdminDataRoute()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 43,
+      "community_name": "technical-team.tsx",
+      "file_type": "code",
+      "norm_label": "admindataroute()",
+      "source_file": "frontend/src/app/(routes)/(admin-layout)/admin/dashboard/data/page.tsx",
+      "source_location": "L3"
     },
     {
       "id": "frontend_src_app_routes_admin_layout_admin_dashboard_technical_team_category_page_admintechnicalteamroute",
@@ -4137,11 +4401,23 @@
       "_callable": true,
       "_origin": "ast",
       "community": 43,
-      "community_name": "AdminTechnicalTeam",
+      "community_name": "technical-team.tsx",
       "file_type": "code",
       "norm_label": "admintechnicalteamroute()",
       "source_file": "frontend/src/app/(routes)/(admin-layout)/admin/dashboard/technical-team/[category]/page.tsx",
       "source_location": "L3"
+    },
+    {
+      "id": "frontend_src_components_pages_admin_data_management_admindatamanagement",
+      "label": "AdminDataManagement()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 43,
+      "community_name": "technical-team.tsx",
+      "file_type": "code",
+      "norm_label": "admindatamanagement()",
+      "source_file": "frontend/src/components/pages/admin/data-management.tsx",
+      "source_location": "L25"
     },
     {
       "id": "frontend_src_components_pages_admin_technical_team_admintechnicalteam",
@@ -4149,7 +4425,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 43,
-      "community_name": "AdminTechnicalTeam",
+      "community_name": "technical-team.tsx",
       "file_type": "code",
       "norm_label": "admintechnicalteam()",
       "source_file": "frontend/src/components/pages/admin/technical-team.tsx",
@@ -4161,7 +4437,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 43,
-      "community_name": "AdminTechnicalTeam",
+      "community_name": "technical-team.tsx",
       "file_type": "code",
       "norm_label": "formatcustomfields()",
       "source_file": "frontend/src/components/pages/admin/technical-team.tsx",
@@ -4173,7 +4449,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 43,
-      "community_name": "AdminTechnicalTeam",
+      "community_name": "technical-team.tsx",
       "file_type": "code",
       "norm_label": "formatgrade()",
       "source_file": "frontend/src/components/pages/admin/technical-team.tsx",
@@ -4185,7 +4461,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 43,
-      "community_name": "AdminTechnicalTeam",
+      "community_name": "technical-team.tsx",
       "file_type": "code",
       "norm_label": "formatstatus()",
       "source_file": "frontend/src/components/pages/admin/technical-team.tsx",
@@ -4197,7 +4473,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 43,
-      "community_name": "AdminTechnicalTeam",
+      "community_name": "technical-team.tsx",
       "file_type": "code",
       "norm_label": "isemail()",
       "source_file": "frontend/src/components/pages/admin/technical-team.tsx",
@@ -4209,7 +4485,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 43,
-      "community_name": "AdminTechnicalTeam",
+      "community_name": "technical-team.tsx",
       "file_type": "code",
       "norm_label": "isphone()",
       "source_file": "frontend/src/components/pages/admin/technical-team.tsx",
@@ -4221,7 +4497,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 43,
-      "community_name": "AdminTechnicalTeam",
+      "community_name": "technical-team.tsx",
       "file_type": "code",
       "norm_label": "isprobablyurl()",
       "source_file": "frontend/src/components/pages/admin/technical-team.tsx",
@@ -4233,131 +4509,35 @@
       "_callable": true,
       "_origin": "ast",
       "community": 43,
-      "community_name": "AdminTechnicalTeam",
+      "community_name": "technical-team.tsx",
       "file_type": "code",
       "norm_label": "rendervalue()",
       "source_file": "frontend/src/components/pages/admin/technical-team.tsx",
       "source_location": "L100"
     },
     {
-      "id": "frontend_src_components_pages_applydetail_applydetail",
-      "label": "ApplyDetail()",
+      "id": "frontend_src_hooks_use_mobile_useismobile",
+      "label": "useIsMobile()",
       "_callable": true,
       "_origin": "ast",
       "community": 43,
-      "community_name": "AdminTechnicalTeam",
+      "community_name": "technical-team.tsx",
       "file_type": "code",
-      "norm_label": "applydetail()",
-      "source_file": "frontend/src/components/pages/applyDetail.tsx",
-      "source_location": "L19"
+      "norm_label": "useismobile()",
+      "source_file": "frontend/src/hooks/use-mobile.ts",
+      "source_location": "L5"
     },
     {
-      "id": "frontend_src_hooks_useapplydetail_useapplydetail",
-      "label": "useApplyDetail()",
+      "id": "frontend_src_hooks_usesubmissions_usesubmissions",
+      "label": "useSubmissions()",
       "_callable": true,
       "_origin": "ast",
       "community": 43,
-      "community_name": "AdminTechnicalTeam",
+      "community_name": "technical-team.tsx",
       "file_type": "code",
-      "norm_label": "useapplydetail()",
-      "source_file": "frontend/src/hooks/useApplyDetail.ts",
-      "source_location": "L27"
-    },
-    {
-      "id": "frontend_src_app_routes_admin_layout_admin_dashboard_announcements_page_adminannouncementsroute",
-      "label": "AdminAnnouncementsRoute()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "rich-text-editor.tsx",
-      "file_type": "code",
-      "norm_label": "adminannouncementsroute()",
-      "source_file": "frontend/src/app/(routes)/(admin-layout)/admin/dashboard/announcements/page.tsx",
-      "source_location": "L3"
-    },
-    {
-      "id": "frontend_src_components_pages_admin_announcements_adminannouncements",
-      "label": "AdminAnnouncements()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "rich-text-editor.tsx",
-      "file_type": "code",
-      "norm_label": "adminannouncements()",
-      "source_file": "frontend/src/components/pages/admin/announcements.tsx",
-      "source_location": "L40"
-    },
-    {
-      "id": "frontend_src_components_pages_admin_announcements_formatdate",
-      "label": "formatDate()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "rich-text-editor.tsx",
-      "file_type": "code",
-      "norm_label": "formatdate()",
-      "source_file": "frontend/src/components/pages/admin/announcements.tsx",
-      "source_location": "L30"
-    },
-    {
-      "id": "frontend_src_lib_sanitizehtml_cleannode",
-      "label": "cleanNode()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "rich-text-editor.tsx",
-      "file_type": "code",
-      "norm_label": "cleannode()",
-      "source_file": "frontend/src/lib/sanitizeHTML.ts",
-      "source_location": "L11"
-    },
-    {
-      "id": "frontend_src_lib_sanitizehtml_sanitizehtml",
-      "label": "sanitizeHTML()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "rich-text-editor.tsx",
-      "file_type": "code",
-      "norm_label": "sanitizehtml()",
-      "source_file": "frontend/src/lib/sanitizeHTML.ts",
-      "source_location": "L32"
-    },
-    {
-      "id": "frontend_src_app_layout_rootlayout",
-      "label": "RootLayout()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 45,
-      "community_name": "app/layout.tsx",
-      "file_type": "code",
-      "norm_label": "rootlayout()",
-      "source_file": "frontend/src/app/layout.tsx",
-      "source_location": "L16"
-    },
-    {
-      "id": "frontend_src_providers_themeprovider_themeprovider",
-      "label": "ThemeProvider()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 45,
-      "community_name": "app/layout.tsx",
-      "file_type": "code",
-      "norm_label": "themeprovider()",
-      "source_file": "frontend/src/providers/ThemeProvider.tsx",
-      "source_location": "L6"
-    },
-    {
-      "id": "frontend_src_app_routes_admin_layout_admin_dashboard_data_page_admindataroute",
-      "label": "AdminDataRoute()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "general-membership.tsx",
-      "file_type": "code",
-      "norm_label": "admindataroute()",
-      "source_file": "frontend/src/app/(routes)/(admin-layout)/admin/dashboard/data/page.tsx",
-      "source_location": "L3"
+      "norm_label": "usesubmissions()",
+      "source_file": "frontend/src/hooks/useSubmissions.ts",
+      "source_location": "L107"
     },
     {
       "id": "frontend_src_app_routes_admin_layout_admin_dashboard_general_membership_page_admingeneralmembershiproute",
@@ -4370,18 +4550,6 @@
       "norm_label": "admingeneralmembershiproute()",
       "source_file": "frontend/src/app/(routes)/(admin-layout)/admin/dashboard/general-membership/page.tsx",
       "source_location": "L3"
-    },
-    {
-      "id": "frontend_src_components_pages_admin_data_management_admindatamanagement",
-      "label": "AdminDataManagement()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "general-membership.tsx",
-      "file_type": "code",
-      "norm_label": "admindatamanagement()",
-      "source_file": "frontend/src/components/pages/admin/data-management.tsx",
-      "source_location": "L25"
     },
     {
       "id": "frontend_src_components_pages_admin_general_membership_admingeneralmembership",
@@ -4492,54 +4660,6 @@
       "source_location": "L5"
     },
     {
-      "id": "frontend_src_hooks_use_mobile_useismobile",
-      "label": "useIsMobile()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "general-membership.tsx",
-      "file_type": "code",
-      "norm_label": "useismobile()",
-      "source_file": "frontend/src/hooks/use-mobile.ts",
-      "source_location": "L5"
-    },
-    {
-      "id": "frontend_src_hooks_usesubmissions_usesubmissions",
-      "label": "useSubmissions()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "general-membership.tsx",
-      "file_type": "code",
-      "norm_label": "usesubmissions()",
-      "source_file": "frontend/src/hooks/useSubmissions.ts",
-      "source_location": "L107"
-    },
-    {
-      "id": "frontend_src_app_routes_admin_layout_admin_login_page_adminloginroute",
-      "label": "AdminLoginRoute()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 52,
-      "community_name": "login/page.tsx",
-      "file_type": "code",
-      "norm_label": "adminloginroute()",
-      "source_file": "frontend/src/app/(routes)/(admin-layout)/admin/login/page.tsx",
-      "source_location": "L4"
-    },
-    {
-      "id": "frontend_src_components_pages_admin_login_adminlogin",
-      "label": "AdminLogin()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 52,
-      "community_name": "login/page.tsx",
-      "file_type": "code",
-      "norm_label": "adminlogin()",
-      "source_file": "frontend/src/components/pages/admin/login.tsx",
-      "source_location": "L26"
-    },
-    {
       "id": "backend_controllers_mailcontroller_sendsponsormail",
       "label": "sendSponsorMail()",
       "_callable": true,
@@ -4622,18 +4742,6 @@
       "norm_label": "inittransporter()",
       "source_file": "backend/helpers/mailTransporter.js",
       "source_location": "L35"
-    },
-    {
-      "id": "backend_routes_mailroutes_uploadmiddleware",
-      "label": "uploadMiddleware()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "mailQueueProcessor.js",
-      "file_type": "code",
-      "norm_label": "uploadmiddleware()",
-      "source_file": "backend/routes/mailRoutes.js",
-      "source_location": "L28"
     },
     {
       "id": "backend_services_mailqueueprocessor_processjob",
@@ -4816,28 +4924,6 @@
       "source_location": "L85"
     },
     {
-      "id": "frontend_src_app_routes_admin_layout_admin_page",
-      "label": "admin/page.tsx",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "applyDetail.tsx",
-      "file_type": "code",
-      "norm_label": "admin/page.tsx",
-      "source_file": "frontend/src/app/(routes)/(admin-layout)/admin/page.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "frontend_src_app_routes_apply_layout_apply_applyslug_page",
-      "label": "[applySlug]/page.tsx",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "applyDetail.tsx",
-      "file_type": "code",
-      "norm_label": "[applyslug]/page.tsx",
-      "source_file": "frontend/src/app/(routes)/(apply-layout)/apply/[applySlug]/page.tsx",
-      "source_location": "L1"
-    },
-    {
       "id": "frontend_src_app_routes_apply_layout_layout",
       "label": "(apply-layout)/layout.tsx",
       "_origin": "ast",
@@ -4946,6 +5032,28 @@
       "norm_label": "navitems",
       "source_file": "frontend/src/components/layout/Header.tsx",
       "source_location": "L15"
+    },
+    {
+      "id": "frontend_src_components_layout_rich_text_editor",
+      "label": "rich-text-editor.tsx",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "applyDetail.tsx",
+      "file_type": "code",
+      "norm_label": "rich-text-editor.tsx",
+      "source_file": "frontend/src/components/layout/rich-text-editor.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "frontend_src_components_layout_rich_text_editor_richtexteditor",
+      "label": "RichTextEditor",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "applyDetail.tsx",
+      "file_type": "code",
+      "norm_label": "richtexteditor",
+      "source_file": "frontend/src/components/layout/rich-text-editor.tsx",
+      "source_location": "L22"
     },
     {
       "id": "frontend_src_components_layout_rsssection",
@@ -5179,6 +5287,39 @@
       "source_location": "L1"
     },
     {
+      "id": "frontend_src_lib_sanitizehtml",
+      "label": "sanitizeHTML.ts",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "applyDetail.tsx",
+      "file_type": "code",
+      "norm_label": "sanitizehtml.ts",
+      "source_file": "frontend/src/lib/sanitizeHTML.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "frontend_src_lib_sanitizehtml_allowed_tags",
+      "label": "ALLOWED_TAGS",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "applyDetail.tsx",
+      "file_type": "code",
+      "norm_label": "allowed_tags",
+      "source_file": "frontend/src/lib/sanitizeHTML.ts",
+      "source_location": "L9"
+    },
+    {
+      "id": "frontend_src_lib_utils",
+      "label": "utils.ts",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "applyDetail.tsx",
+      "file_type": "code",
+      "norm_label": "utils.ts",
+      "source_file": "frontend/src/lib/utils.ts",
+      "source_location": "L1"
+    },
+    {
       "id": "frontend_src_lib_utils_rss_enabled",
       "label": "RSS_ENABLED",
       "_origin": "ast",
@@ -5188,6 +5329,17 @@
       "norm_label": "rss_enabled",
       "source_file": "frontend/src/lib/utils.ts",
       "source_location": "L11"
+    },
+    {
+      "id": "ref_clsx",
+      "label": "clsx",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "applyDetail.tsx",
+      "file_type": "concept",
+      "norm_label": "clsx",
+      "source_file": "frontend/package.json",
+      "source_location": "L30"
     },
     {
       "id": "ref_date_fns",
@@ -5267,17 +5419,6 @@
       "source_location": "L33"
     },
     {
-      "id": "ref_radix_ui_react_slot",
-      "label": "@radix-ui/react-slot",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "applyDetail.tsx",
-      "file_type": "concept",
-      "norm_label": "@radix-ui/react-slot",
-      "source_file": "frontend/package.json",
-      "source_location": "L27"
-    },
-    {
       "id": "ref_react_hook_form",
       "label": "react-hook-form",
       "_origin": "ast",
@@ -5287,6 +5428,17 @@
       "norm_label": "react-hook-form",
       "source_file": "frontend/package.json",
       "source_location": "L37"
+    },
+    {
+      "id": "ref_tailwind_merge",
+      "label": "tailwind-merge",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "applyDetail.tsx",
+      "file_type": "concept",
+      "norm_label": "tailwind-merge",
+      "source_file": "frontend/package.json",
+      "source_location": "L38"
     },
     {
       "id": "ref_zod",
@@ -5331,6 +5483,28 @@
       "norm_label": "navitems",
       "source_file": "frontend/src/components/layout/AdminSidebar.tsx",
       "source_location": "L33"
+    },
+    {
+      "id": "frontend_src_components_theme_themetoggle",
+      "label": "ThemeToggle.tsx",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "cn",
+      "file_type": "code",
+      "norm_label": "themetoggle.tsx",
+      "source_file": "frontend/src/components/theme/ThemeToggle.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "frontend_src_components_ui_dropdown_menu",
+      "label": "dropdown-menu.tsx",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "cn",
+      "file_type": "code",
+      "norm_label": "dropdown-menu.tsx",
+      "source_file": "frontend/src/components/ui/dropdown-menu.tsx",
+      "source_location": "L1"
     },
     {
       "id": "frontend_src_components_ui_sheet",
@@ -5399,26 +5573,15 @@
       "source_location": "L1"
     },
     {
-      "id": "frontend_src_hooks_useauth_min_password_length",
-      "label": "MIN_PASSWORD_LENGTH",
+      "id": "ref_lucide_react",
+      "label": "lucide-react",
       "_origin": "ast",
       "community": 1,
       "community_name": "cn",
-      "file_type": "code",
-      "norm_label": "min_password_length",
-      "source_file": "frontend/src/hooks/useAuth.ts",
-      "source_location": "L42"
-    },
-    {
-      "id": "frontend_src_lib_utils",
-      "label": "utils.ts",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "cn",
-      "file_type": "code",
-      "norm_label": "utils.ts",
-      "source_file": "frontend/src/lib/utils.ts",
-      "source_location": "L1"
+      "file_type": "concept",
+      "norm_label": "lucide-react",
+      "source_file": "frontend/package.json",
+      "source_location": "L32"
     },
     {
       "id": "ref_radix_ui_react_dialog",
@@ -6017,6 +6180,17 @@
       "source_location": "L22"
     },
     {
+      "id": "ref_json2csv",
+      "label": "json2csv",
+      "_origin": "ast",
+      "community": 12,
+      "community_name": "backend/package.json",
+      "file_type": "concept",
+      "norm_label": "json2csv",
+      "source_file": "backend/package.json",
+      "source_location": "L23"
+    },
+    {
       "id": "ref_nodemon",
       "label": "nodemon",
       "_origin": "ast",
@@ -6026,28 +6200,6 @@
       "norm_label": "nodemon",
       "source_file": "backend/package.json",
       "source_location": "L32"
-    },
-    {
-      "id": "ref_rss_parser",
-      "label": "rss-parser",
-      "_origin": "ast",
-      "community": 12,
-      "community_name": "backend/package.json",
-      "file_type": "concept",
-      "norm_label": "rss-parser",
-      "source_file": "backend/package.json",
-      "source_location": "L28"
-    },
-    {
-      "id": "ref_sanitize_html",
-      "label": "sanitize-html",
-      "_origin": "ast",
-      "community": 12,
-      "community_name": "backend/package.json",
-      "file_type": "concept",
-      "norm_label": "sanitize-html",
-      "source_file": "backend/package.json",
-      "source_location": "L29"
     },
     {
       "id": "backend_config_dbconnection",
@@ -6191,6 +6343,17 @@
       "norm_label": "router",
       "source_file": "backend/routes/healthRoutes.js",
       "source_location": "L4"
+    },
+    {
+      "id": "backend_routes_submissionsroutes_router",
+      "label": "router",
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "index.js",
+      "file_type": "code",
+      "norm_label": "router",
+      "source_file": "backend/routes/submissionsRoutes.js",
+      "source_location": "L14"
     },
     {
       "id": "ref_express",
@@ -6677,6 +6840,28 @@
       "source_location": "L1"
     },
     {
+      "id": "backend_models_submission",
+      "label": "Submission.js",
+      "_origin": "ast",
+      "community": 16,
+      "community_name": "authController.js",
+      "file_type": "code",
+      "norm_label": "submission.js",
+      "source_file": "backend/models/Submission.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "backend_models_submission_submissionschema",
+      "label": "submissionSchema",
+      "_origin": "ast",
+      "community": 16,
+      "community_name": "authController.js",
+      "file_type": "code",
+      "norm_label": "submissionschema",
+      "source_file": "backend/models/Submission.js",
+      "source_location": "L4"
+    },
+    {
       "id": "backend_routes_authroutes",
       "label": "authRoutes.js",
       "_origin": "ast",
@@ -6697,6 +6882,17 @@
       "norm_label": "router",
       "source_file": "backend/routes/authRoutes.js",
       "source_location": "L5"
+    },
+    {
+      "id": "ref_bcryptjs",
+      "label": "bcryptjs",
+      "_origin": "ast",
+      "community": 16,
+      "community_name": "authController.js",
+      "file_type": "concept",
+      "norm_label": "bcryptjs",
+      "source_file": "backend/package.json",
+      "source_location": "L18"
     },
     {
       "id": "frontend_src_app_page",
@@ -6787,6 +6983,17 @@
       "source_location": "L73"
     },
     {
+      "id": "frontend_src_app_routes_admin_layout_admin_dashboard_announcements_page",
+      "label": "dashboard/announcements/page.tsx",
+      "_origin": "ast",
+      "community": 18,
+      "community_name": "react",
+      "file_type": "code",
+      "norm_label": "dashboard/announcements/page.tsx",
+      "source_file": "frontend/src/app/(routes)/(admin-layout)/admin/dashboard/announcements/page.tsx",
+      "source_location": "L1"
+    },
+    {
       "id": "frontend_src_components_pages_admin_admin_management",
       "label": "admin-management.tsx",
       "_origin": "ast",
@@ -6851,17 +7058,6 @@
       "norm_label": "scopes",
       "source_file": "frontend/src/components/pages/admin/data-management.tsx",
       "source_location": "L15"
-    },
-    {
-      "id": "frontend_src_components_pages_admin_technical_team",
-      "label": "technical-team.tsx",
-      "_origin": "ast",
-      "community": 18,
-      "community_name": "react",
-      "file_type": "code",
-      "norm_label": "technical-team.tsx",
-      "source_file": "frontend/src/components/pages/admin/technical-team.tsx",
-      "source_location": "L1"
     },
     {
       "id": "frontend_src_components_ui_dialog",
@@ -6930,6 +7126,17 @@
       "source_location": "L1"
     },
     {
+      "id": "backend_helpers_searchpattern",
+      "label": "searchPattern.js",
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "announcementsController.js",
+      "file_type": "code",
+      "norm_label": "searchpattern.js",
+      "source_file": "backend/helpers/searchPattern.js",
+      "source_location": "L1"
+    },
+    {
       "id": "backend_models_announcement",
       "label": "Announcement.js",
       "_origin": "ast",
@@ -6985,6 +7192,39 @@
       "source_location": "L25"
     },
     {
+      "id": "ref_sanitize_html",
+      "label": "sanitize-html",
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "announcementsController.js",
+      "file_type": "concept",
+      "norm_label": "sanitize-html",
+      "source_file": "backend/package.json",
+      "source_location": "L29"
+    },
+    {
+      "id": "frontend_eslint_config",
+      "label": "eslint.config.mjs",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "frontend/package.json",
+      "file_type": "code",
+      "norm_label": "eslint.config.mjs",
+      "source_file": "frontend/eslint.config.mjs",
+      "source_location": "L1"
+    },
+    {
+      "id": "frontend_eslint_config_eslintconfig",
+      "label": "eslintConfig",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "frontend/package.json",
+      "file_type": "code",
+      "norm_label": "eslintconfig",
+      "source_file": "frontend/eslint.config.mjs",
+      "source_location": "L4"
+    },
+    {
       "id": "frontend_package",
       "label": "frontend/package.json",
       "_origin": "ast",
@@ -6994,6 +7234,116 @@
       "norm_label": "frontend/package.json",
       "source_file": "frontend/package.json",
       "source_location": "L1"
+    },
+    {
+      "id": "frontend_package_devdependencies",
+      "label": "devDependencies",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "frontend/package.json",
+      "file_type": "code",
+      "norm_label": "devdependencies",
+      "source_file": "frontend/package.json",
+      "source_location": "L41"
+    },
+    {
+      "id": "frontend_package_devdependencies_eslint",
+      "label": "eslint",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "frontend/package.json",
+      "file_type": "code",
+      "norm_label": "eslint",
+      "source_file": "frontend/package.json",
+      "source_location": "L46"
+    },
+    {
+      "id": "frontend_package_devdependencies_eslint_config_next",
+      "label": "eslint-config-next",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "frontend/package.json",
+      "file_type": "code",
+      "norm_label": "eslint-config-next",
+      "source_file": "frontend/package.json",
+      "source_location": "L47"
+    },
+    {
+      "id": "frontend_package_devdependencies_tailwindcss",
+      "label": "tailwindcss",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "frontend/package.json",
+      "file_type": "code",
+      "norm_label": "tailwindcss",
+      "source_file": "frontend/package.json",
+      "source_location": "L48"
+    },
+    {
+      "id": "frontend_package_devdependencies_tailwindcss_postcss",
+      "label": "@tailwindcss/postcss",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "frontend/package.json",
+      "file_type": "code",
+      "norm_label": "@tailwindcss/postcss",
+      "source_file": "frontend/package.json",
+      "source_location": "L42"
+    },
+    {
+      "id": "frontend_package_devdependencies_tw_animate_css",
+      "label": "tw-animate-css",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "frontend/package.json",
+      "file_type": "code",
+      "norm_label": "tw-animate-css",
+      "source_file": "frontend/package.json",
+      "source_location": "L49"
+    },
+    {
+      "id": "frontend_package_devdependencies_types_node",
+      "label": "@types/node",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "frontend/package.json",
+      "file_type": "code",
+      "norm_label": "@types/node",
+      "source_file": "frontend/package.json",
+      "source_location": "L43"
+    },
+    {
+      "id": "frontend_package_devdependencies_types_react",
+      "label": "@types/react",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "frontend/package.json",
+      "file_type": "code",
+      "norm_label": "@types/react",
+      "source_file": "frontend/package.json",
+      "source_location": "L44"
+    },
+    {
+      "id": "frontend_package_devdependencies_types_react_dom",
+      "label": "@types/react-dom",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "frontend/package.json",
+      "file_type": "code",
+      "norm_label": "@types/react-dom",
+      "source_file": "frontend/package.json",
+      "source_location": "L45"
+    },
+    {
+      "id": "frontend_package_devdependencies_typescript",
+      "label": "typescript",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "frontend/package.json",
+      "file_type": "code",
+      "norm_label": "typescript",
+      "source_file": "frontend/package.json",
+      "source_location": "L50"
     },
     {
       "id": "frontend_package_name",
@@ -7040,6 +7390,105 @@
       "source_location": "L4"
     },
     {
+      "id": "frontend_package_scripts",
+      "label": "scripts",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "frontend/package.json",
+      "file_type": "code",
+      "norm_label": "scripts",
+      "source_file": "frontend/package.json",
+      "source_location": "L5"
+    },
+    {
+      "id": "frontend_package_scripts_build",
+      "label": "build",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "frontend/package.json",
+      "file_type": "code",
+      "norm_label": "build",
+      "source_file": "frontend/package.json",
+      "source_location": "L7"
+    },
+    {
+      "id": "frontend_package_scripts_check_content",
+      "label": "check:content",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "frontend/package.json",
+      "file_type": "code",
+      "norm_label": "check:content",
+      "source_file": "frontend/package.json",
+      "source_location": "L13"
+    },
+    {
+      "id": "frontend_package_scripts_dev",
+      "label": "dev",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "frontend/package.json",
+      "file_type": "code",
+      "norm_label": "dev",
+      "source_file": "frontend/package.json",
+      "source_location": "L6"
+    },
+    {
+      "id": "frontend_package_scripts_lint",
+      "label": "lint",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "frontend/package.json",
+      "file_type": "code",
+      "norm_label": "lint",
+      "source_file": "frontend/package.json",
+      "source_location": "L12"
+    },
+    {
+      "id": "frontend_package_scripts_pm2_restart",
+      "label": "pm2:restart",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "frontend/package.json",
+      "file_type": "code",
+      "norm_label": "pm2:restart",
+      "source_file": "frontend/package.json",
+      "source_location": "L11"
+    },
+    {
+      "id": "frontend_package_scripts_pm2_start",
+      "label": "pm2:start",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "frontend/package.json",
+      "file_type": "code",
+      "norm_label": "pm2:start",
+      "source_file": "frontend/package.json",
+      "source_location": "L9"
+    },
+    {
+      "id": "frontend_package_scripts_pm2_stop",
+      "label": "pm2:stop",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "frontend/package.json",
+      "file_type": "code",
+      "norm_label": "pm2:stop",
+      "source_file": "frontend/package.json",
+      "source_location": "L10"
+    },
+    {
+      "id": "frontend_package_scripts_start",
+      "label": "start",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "frontend/package.json",
+      "file_type": "code",
+      "norm_label": "start",
+      "source_file": "frontend/package.json",
+      "source_location": "L8"
+    },
+    {
       "id": "frontend_package_version",
       "label": "version",
       "_origin": "ast",
@@ -7073,17 +7522,6 @@
       "source_location": "L29"
     },
     {
-      "id": "ref_clsx",
-      "label": "clsx",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "frontend/package.json",
-      "file_type": "concept",
-      "norm_label": "clsx",
-      "source_file": "frontend/package.json",
-      "source_location": "L30"
-    },
-    {
       "id": "ref_eslint",
       "label": "eslint",
       "_origin": "ast",
@@ -7093,6 +7531,17 @@
       "norm_label": "eslint",
       "source_file": "frontend/package.json",
       "source_location": "L46"
+    },
+    {
+      "id": "ref_eslint_config_next",
+      "label": "eslint-config-next",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "frontend/package.json",
+      "file_type": "concept",
+      "norm_label": "eslint-config-next",
+      "source_file": "frontend/package.json",
+      "source_location": "L47"
     },
     {
       "id": "ref_fortawesome_free_regular_svg_icons",
@@ -7117,6 +7566,17 @@
       "source_location": "L22"
     },
     {
+      "id": "ref_radix_ui_react_dropdown_menu",
+      "label": "@radix-ui/react-dropdown-menu",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "frontend/package.json",
+      "file_type": "concept",
+      "norm_label": "@radix-ui/react-dropdown-menu",
+      "source_file": "frontend/package.json",
+      "source_location": "L24"
+    },
+    {
       "id": "ref_radix_ui_react_label",
       "label": "@radix-ui/react-label",
       "_origin": "ast",
@@ -7139,6 +7599,17 @@
       "source_location": "L26"
     },
     {
+      "id": "ref_radix_ui_react_slot",
+      "label": "@radix-ui/react-slot",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "frontend/package.json",
+      "file_type": "concept",
+      "norm_label": "@radix-ui/react-slot",
+      "source_file": "frontend/package.json",
+      "source_location": "L27"
+    },
+    {
       "id": "ref_react_dom",
       "label": "react-dom",
       "_origin": "ast",
@@ -7148,17 +7619,6 @@
       "norm_label": "react-dom",
       "source_file": "frontend/package.json",
       "source_location": "L36"
-    },
-    {
-      "id": "ref_tailwind_merge",
-      "label": "tailwind-merge",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "frontend/package.json",
-      "file_type": "concept",
-      "norm_label": "tailwind-merge",
-      "source_file": "frontend/package.json",
-      "source_location": "L38"
     },
     {
       "id": "ref_tailwindcss",
@@ -7406,105 +7866,48 @@
       "source_location": "L5"
     },
     {
-      "id": "backend_controllers_submissionscontroller",
-      "label": "submissionsController.js",
+      "id": "backend_routes_mailroutes",
+      "label": "mailRoutes.js",
       "_origin": "ast",
       "community": 21,
-      "community_name": "submissionsController.js",
+      "community_name": "mailRoutes.js",
       "file_type": "code",
-      "norm_label": "submissionscontroller.js",
-      "source_file": "backend/controllers/submissionsController.js",
+      "norm_label": "mailroutes.js",
+      "source_file": "backend/routes/mailRoutes.js",
       "source_location": "L1"
     },
     {
-      "id": "backend_controllers_submissionscontroller_purge_scopes",
-      "label": "PURGE_SCOPES",
-      "_origin": "ast",
-      "community": 21,
-      "community_name": "submissionsController.js",
-      "file_type": "code",
-      "norm_label": "purge_scopes",
-      "source_file": "backend/controllers/submissionsController.js",
-      "source_location": "L446"
-    },
-    {
-      "id": "backend_controllers_submissionscontroller_quotecsvstring",
-      "label": "quoteCsvString",
-      "_origin": "ast",
-      "community": 21,
-      "community_name": "submissionsController.js",
-      "file_type": "code",
-      "norm_label": "quotecsvstring",
-      "source_file": "backend/controllers/submissionsController.js",
-      "source_location": "L16"
-    },
-    {
-      "id": "backend_helpers_searchpattern",
-      "label": "searchPattern.js",
-      "_origin": "ast",
-      "community": 21,
-      "community_name": "submissionsController.js",
-      "file_type": "code",
-      "norm_label": "searchpattern.js",
-      "source_file": "backend/helpers/searchPattern.js",
-      "source_location": "L1"
-    },
-    {
-      "id": "backend_routes_submissionsroutes",
-      "label": "submissionsRoutes.js",
-      "_origin": "ast",
-      "community": 21,
-      "community_name": "submissionsController.js",
-      "file_type": "code",
-      "norm_label": "submissionsroutes.js",
-      "source_file": "backend/routes/submissionsRoutes.js",
-      "source_location": "L1"
-    },
-    {
-      "id": "backend_routes_submissionsroutes_router",
+      "id": "backend_routes_mailroutes_router",
       "label": "router",
       "_origin": "ast",
       "community": 21,
-      "community_name": "submissionsController.js",
+      "community_name": "mailRoutes.js",
       "file_type": "code",
       "norm_label": "router",
-      "source_file": "backend/routes/submissionsRoutes.js",
-      "source_location": "L13"
+      "source_file": "backend/routes/mailRoutes.js",
+      "source_location": "L6"
     },
     {
-      "id": "ref_json2csv",
-      "label": "json2csv",
+      "id": "backend_routes_mailroutes_upload",
+      "label": "upload",
       "_origin": "ast",
       "community": 21,
-      "community_name": "submissionsController.js",
+      "community_name": "mailRoutes.js",
+      "file_type": "code",
+      "norm_label": "upload",
+      "source_file": "backend/routes/mailRoutes.js",
+      "source_location": "L8"
+    },
+    {
+      "id": "ref_multer",
+      "label": "multer",
+      "_origin": "ast",
+      "community": 21,
+      "community_name": "mailRoutes.js",
       "file_type": "concept",
-      "norm_label": "json2csv",
+      "norm_label": "multer",
       "source_file": "backend/package.json",
-      "source_location": "L23"
-    },
-    {
-      "id": "claude_ba\u015fvuru_formuna_alan_ekleme",
-      "label": "Ba\u015fvuru formuna alan ekleme",
-      "_origin": "ast",
-      "community": 21,
-      "community_name": "submissionsController.js",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "basvuru formuna alan ekleme",
-      "source_file": "CLAUDE.md",
-      "source_location": "L338"
-    },
-    {
-      "id": "docs_superpowers_specs_2026_09_28_basvuru_donemleri_design_ba\u015fvurulara_uygulanmas\u0131",
-      "label": "Ba\u015fvurulara uygulanmas\u0131",
-      "_origin": "ast",
-      "community": 21,
-      "community_name": "submissionsController.js",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "basvurulara uygulanmas\u0131",
-      "source_file": "docs/superpowers/specs/2026-09-28-basvuru-donemleri-design.md",
-      "source_location": "L92"
+      "source_location": "L26"
     },
     {
       "id": "backend_package_dependencies",
@@ -7650,6 +8053,17 @@
       "source_location": "L29"
     },
     {
+      "id": "backend_controllers_usercontroller",
+      "label": "userController.js",
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "authMiddleware.js",
+      "file_type": "code",
+      "norm_label": "usercontroller.js",
+      "source_file": "backend/controllers/userController.js",
+      "source_location": "L1"
+    },
+    {
       "id": "backend_middlewares_authmiddleware",
       "label": "authMiddleware.js",
       "_origin": "ast",
@@ -7661,26 +8075,59 @@
       "source_location": "L1"
     },
     {
-      "id": "backend_models_submission",
-      "label": "Submission.js",
+      "id": "backend_models_user",
+      "label": "User.js",
       "_origin": "ast",
       "community": 23,
       "community_name": "authMiddleware.js",
       "file_type": "code",
-      "norm_label": "submission.js",
-      "source_file": "backend/models/Submission.js",
+      "norm_label": "user.js",
+      "source_file": "backend/models/User.js",
       "source_location": "L1"
     },
     {
-      "id": "backend_models_submission_submissionschema",
-      "label": "submissionSchema",
+      "id": "backend_models_user_min_password_length",
+      "label": "MIN_PASSWORD_LENGTH",
       "_origin": "ast",
       "community": 23,
       "community_name": "authMiddleware.js",
       "file_type": "code",
-      "norm_label": "submissionschema",
-      "source_file": "backend/models/Submission.js",
-      "source_location": "L4"
+      "norm_label": "min_password_length",
+      "source_file": "backend/models/User.js",
+      "source_location": "L6"
+    },
+    {
+      "id": "backend_models_user_userschema",
+      "label": "UserSchema",
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "authMiddleware.js",
+      "file_type": "code",
+      "norm_label": "userschema",
+      "source_file": "backend/models/User.js",
+      "source_location": "L8"
+    },
+    {
+      "id": "backend_routes_userroutes",
+      "label": "userRoutes.js",
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "authMiddleware.js",
+      "file_type": "code",
+      "norm_label": "userroutes.js",
+      "source_file": "backend/routes/userRoutes.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "backend_routes_userroutes_router",
+      "label": "router",
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "authMiddleware.js",
+      "file_type": "code",
+      "norm_label": "router",
+      "source_file": "backend/routes/userRoutes.js",
+      "source_location": "L5"
     },
     {
       "id": "claude_backend_backend",
@@ -7707,16 +8154,64 @@
       "source_location": "L266"
     },
     {
-      "id": "claude_tak\u0131m_slug_\u0131_\u00fc\u00e7_kimli\u011fi_birden_ta\u015f\u0131yor",
-      "label": "Tak\u0131m slug'\u0131 \u00fc\u00e7 kimli\u011fi birden ta\u015f\u0131yor",
+      "id": "docs_superpowers_plans_2026_09_28_basvuru_donemleri",
+      "label": "2026-09-28-basvuru-donemleri.md",
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "authMiddleware.js",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "2026-09-28-basvuru-donemleri.md",
+      "source_file": "docs/superpowers/plans/2026-09-28-basvuru-donemleri.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_superpowers_plans_2026_09_28_basvuru_donemleri_ba\u015fvuru_d\u00f6nemleri_uygulama_plan\u0131",
+      "label": "Ba\u015fvuru D\u00f6nemleri \u2014 Uygulama Plan\u0131",
       "_origin": "ast",
       "community": 23,
       "community_name": "authMiddleware.js",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "tak\u0131m slug'\u0131 uc kimligi birden tas\u0131yor",
-      "source_file": "CLAUDE.md",
-      "source_location": "L240"
+      "norm_label": "basvuru donemleri \u2014 uygulama plan\u0131",
+      "source_file": "docs/superpowers/plans/2026-09-28-basvuru-donemleri.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_superpowers_plans_2026_09_28_basvuru_donemleri_global_constraints",
+      "label": "Global Constraints",
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "authMiddleware.js",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "global constraints",
+      "source_file": "docs/superpowers/plans/2026-09-28-basvuru-donemleri.md",
+      "source_location": "L17"
+    },
+    {
+      "id": "docs_superpowers_specs_2026_09_28_basvuru_donemleri_design_backend",
+      "label": "Backend",
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "authMiddleware.js",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "backend",
+      "source_file": "docs/superpowers/specs/2026-09-28-basvuru-donemleri-design.md",
+      "source_location": "L42"
+    },
+    {
+      "id": "docs_superpowers_specs_2026_09_28_basvuru_donemleri_design_endpoint_ler",
+      "label": "Endpoint'ler",
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "authMiddleware.js",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "endpoint'ler",
+      "source_file": "docs/superpowers/specs/2026-09-28-basvuru-donemleri-design.md",
+      "source_location": "L70"
     },
     {
       "id": "docs_superpowers_specs_2026_09_28_basvuru_donemleri_design",
@@ -7813,6 +8308,18 @@
       "norm_label": "frontend",
       "source_file": "docs/superpowers/specs/2026-09-28-basvuru-donemleri-design.md",
       "source_location": "L100"
+    },
+    {
+      "id": "docs_superpowers_specs_2026_09_28_basvuru_donemleri_design_g\u00fcvenlik",
+      "label": "G\u00fcvenlik",
+      "_origin": "ast",
+      "community": 24,
+      "community_name": "Ba\u015fvuru D\u00f6nemleri \u2014 Tasar\u0131m",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "guvenlik",
+      "source_file": "docs/superpowers/specs/2026-09-28-basvuru-donemleri-design.md",
+      "source_location": "L146"
     },
     {
       "id": "docs_superpowers_specs_2026_09_28_basvuru_donemleri_design_kapsam_d\u0131\u015f\u0131",
@@ -7918,6 +8425,17 @@
       "source_location": "L4"
     },
     {
+      "id": "ref_rss_parser",
+      "label": "rss-parser",
+      "_origin": "ast",
+      "community": 26,
+      "community_name": "publicationsController.js",
+      "file_type": "concept",
+      "norm_label": "rss-parser",
+      "source_file": "backend/package.json",
+      "source_location": "L28"
+    },
+    {
       "id": "backend_controllers_mailqueuecontroller",
       "label": "mailQueueController.js",
       "_origin": "ast",
@@ -8021,11 +8539,34 @@
       "label": "admin-management/page.tsx",
       "_origin": "ast",
       "community": 28,
-      "community_name": "useAuth",
+      "community_name": "useUser.ts",
       "file_type": "code",
       "norm_label": "admin-management/page.tsx",
       "source_file": "frontend/src/app/(routes)/(admin-layout)/admin/dashboard/admin-management/page.tsx",
       "source_location": "L1"
+    },
+    {
+      "id": "frontend_src_hooks_useuser",
+      "label": "useUser.ts",
+      "_origin": "ast",
+      "community": 28,
+      "community_name": "useUser.ts",
+      "file_type": "code",
+      "norm_label": "useuser.ts",
+      "source_file": "frontend/src/hooks/useUser.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_superpowers_specs_2026_09_28_basvuru_donemleri_design_veri",
+      "label": "Veri",
+      "_origin": "ast",
+      "community": 28,
+      "community_name": "useUser.ts",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "veri",
+      "source_file": "docs/superpowers/specs/2026-09-28-basvuru-donemleri-design.md",
+      "source_location": "L44"
     },
     {
       "id": "frontend_src_app_routes_admin_layout_admin_dashboard_contact_page",
@@ -8523,7 +9064,7 @@
       "node_kind": "heading",
       "norm_label": "duyurular (announcements) - yapildi",
       "source_file": "backend/ENDPOINTS.md",
-      "source_location": "L77"
+      "source_location": "L87"
     },
     {
       "id": "backend_endpoints_gelen_ba\u015fvurular_submissions",
@@ -8547,7 +9088,7 @@
       "node_kind": "heading",
       "norm_label": "iletisim mesajlar\u0131 (contact messages) - yapildi",
       "source_file": "backend/ENDPOINTS.md",
-      "source_location": "L101"
+      "source_location": "L111"
     },
     {
       "id": "backend_endpoints_kimlik_do\u011frulama_authentication_yapildi",
@@ -8583,84 +9124,18 @@
       "node_kind": "heading",
       "norm_label": "yay\u0131nlar (publications) - yapildi",
       "source_file": "backend/ENDPOINTS.md",
-      "source_location": "L117"
+      "source_location": "L127"
     },
     {
-      "id": "backend_controllers_usercontroller",
-      "label": "userController.js",
+      "id": "frontend_src_app_routes_admin_layout_admin_page",
+      "label": "admin/page.tsx",
       "_origin": "ast",
       "community": 33,
-      "community_name": "userRoutes.js",
+      "community_name": "admin/page.tsx",
       "file_type": "code",
-      "norm_label": "usercontroller.js",
-      "source_file": "backend/controllers/userController.js",
+      "norm_label": "admin/page.tsx",
+      "source_file": "frontend/src/app/(routes)/(admin-layout)/admin/page.tsx",
       "source_location": "L1"
-    },
-    {
-      "id": "backend_models_user",
-      "label": "User.js",
-      "_origin": "ast",
-      "community": 33,
-      "community_name": "userRoutes.js",
-      "file_type": "code",
-      "norm_label": "user.js",
-      "source_file": "backend/models/User.js",
-      "source_location": "L1"
-    },
-    {
-      "id": "backend_models_user_min_password_length",
-      "label": "MIN_PASSWORD_LENGTH",
-      "_origin": "ast",
-      "community": 33,
-      "community_name": "userRoutes.js",
-      "file_type": "code",
-      "norm_label": "min_password_length",
-      "source_file": "backend/models/User.js",
-      "source_location": "L6"
-    },
-    {
-      "id": "backend_models_user_userschema",
-      "label": "UserSchema",
-      "_origin": "ast",
-      "community": 33,
-      "community_name": "userRoutes.js",
-      "file_type": "code",
-      "norm_label": "userschema",
-      "source_file": "backend/models/User.js",
-      "source_location": "L8"
-    },
-    {
-      "id": "backend_routes_userroutes",
-      "label": "userRoutes.js",
-      "_origin": "ast",
-      "community": 33,
-      "community_name": "userRoutes.js",
-      "file_type": "code",
-      "norm_label": "userroutes.js",
-      "source_file": "backend/routes/userRoutes.js",
-      "source_location": "L1"
-    },
-    {
-      "id": "backend_routes_userroutes_router",
-      "label": "router",
-      "_origin": "ast",
-      "community": 33,
-      "community_name": "userRoutes.js",
-      "file_type": "code",
-      "norm_label": "router",
-      "source_file": "backend/routes/userRoutes.js",
-      "source_location": "L5"
-    },
-    {
-      "id": "ref_bcryptjs",
-      "label": "bcryptjs",
-      "_origin": "ast",
-      "community": 33,
-      "community_name": "userRoutes.js",
-      "file_type": "concept",
-      "norm_label": "bcryptjs",
-      "source_file": "backend/package.json",
-      "source_location": "L18"
     },
     {
       "id": "backend_helpers_clientip",
@@ -8711,66 +9186,66 @@
       "label": "dashboard/page.tsx",
       "_origin": "ast",
       "community": 35,
-      "community_name": "useStatus.ts",
+      "community_name": "useAuth",
       "file_type": "code",
       "norm_label": "dashboard/page.tsx",
       "source_file": "frontend/src/app/(routes)/(admin-layout)/admin/dashboard/page.tsx",
       "source_location": "L1"
     },
     {
+      "id": "frontend_src_app_routes_admin_layout_admin_login_page",
+      "label": "login/page.tsx",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "useAuth",
+      "file_type": "code",
+      "norm_label": "login/page.tsx",
+      "source_file": "frontend/src/app/(routes)/(admin-layout)/admin/login/page.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "frontend_src_hooks_useannouncements",
+      "label": "useAnnouncements.ts",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "useAuth",
+      "file_type": "code",
+      "norm_label": "useannouncements.ts",
+      "source_file": "frontend/src/hooks/useAnnouncements.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "frontend_src_hooks_useauth",
+      "label": "useAuth.ts",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "useAuth",
+      "file_type": "code",
+      "norm_label": "useauth.ts",
+      "source_file": "frontend/src/hooks/useAuth.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "frontend_src_hooks_useauth_min_password_length",
+      "label": "MIN_PASSWORD_LENGTH",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "useAuth",
+      "file_type": "code",
+      "norm_label": "min_password_length",
+      "source_file": "frontend/src/hooks/useAuth.ts",
+      "source_location": "L42"
+    },
+    {
       "id": "frontend_src_hooks_usestatus",
       "label": "useStatus.ts",
       "_origin": "ast",
       "community": 35,
-      "community_name": "useStatus.ts",
+      "community_name": "useAuth",
       "file_type": "code",
       "norm_label": "usestatus.ts",
       "source_file": "frontend/src/hooks/useStatus.ts",
       "source_location": "L1"
-    },
-    {
-      "id": "frontend_src_components_theme_themetoggle",
-      "label": "ThemeToggle.tsx",
-      "_origin": "ast",
-      "community": 36,
-      "community_name": "dropdown-menu.tsx",
-      "file_type": "code",
-      "norm_label": "themetoggle.tsx",
-      "source_file": "frontend/src/components/theme/ThemeToggle.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "frontend_src_components_ui_dropdown_menu",
-      "label": "dropdown-menu.tsx",
-      "_origin": "ast",
-      "community": 36,
-      "community_name": "dropdown-menu.tsx",
-      "file_type": "code",
-      "norm_label": "dropdown-menu.tsx",
-      "source_file": "frontend/src/components/ui/dropdown-menu.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "ref_lucide_react",
-      "label": "lucide-react",
-      "_origin": "ast",
-      "community": 36,
-      "community_name": "dropdown-menu.tsx",
-      "file_type": "concept",
-      "norm_label": "lucide-react",
-      "source_file": "frontend/package.json",
-      "source_location": "L32"
-    },
-    {
-      "id": "ref_radix_ui_react_dropdown_menu",
-      "label": "@radix-ui/react-dropdown-menu",
-      "_origin": "ast",
-      "community": 36,
-      "community_name": "dropdown-menu.tsx",
-      "file_type": "concept",
-      "norm_label": "@radix-ui/react-dropdown-menu",
-      "source_file": "frontend/package.json",
-      "source_location": "L24"
     },
     {
       "id": "frontend_src_lib_api",
@@ -8784,11 +9259,55 @@
       "source_location": "L1"
     },
     {
+      "id": "backend_controllers_applicationwindowscontroller",
+      "label": "applicationWindowsController.js",
+      "_origin": "ast",
+      "community": 38,
+      "community_name": "submissionsController.js",
+      "file_type": "code",
+      "norm_label": "applicationwindowscontroller.js",
+      "source_file": "backend/controllers/applicationWindowsController.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "backend_controllers_submissionscontroller",
+      "label": "submissionsController.js",
+      "_origin": "ast",
+      "community": 38,
+      "community_name": "submissionsController.js",
+      "file_type": "code",
+      "norm_label": "submissionscontroller.js",
+      "source_file": "backend/controllers/submissionsController.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "backend_controllers_submissionscontroller_purge_scopes",
+      "label": "PURGE_SCOPES",
+      "_origin": "ast",
+      "community": 38,
+      "community_name": "submissionsController.js",
+      "file_type": "code",
+      "norm_label": "purge_scopes",
+      "source_file": "backend/controllers/submissionsController.js",
+      "source_location": "L446"
+    },
+    {
+      "id": "backend_controllers_submissionscontroller_quotecsvstring",
+      "label": "quoteCsvString",
+      "_origin": "ast",
+      "community": 38,
+      "community_name": "submissionsController.js",
+      "file_type": "code",
+      "norm_label": "quotecsvstring",
+      "source_file": "backend/controllers/submissionsController.js",
+      "source_location": "L16"
+    },
+    {
       "id": "backend_helpers_applicationwindow",
       "label": "applicationWindow.js",
       "_origin": "ast",
       "community": 38,
-      "community_name": "applicationWindow.test.js",
+      "community_name": "submissionsController.js",
       "file_type": "code",
       "norm_label": "applicationwindow.js",
       "source_file": "backend/helpers/applicationWindow.js",
@@ -8799,7 +9318,7 @@
       "label": "APPLICATION_SLUGS",
       "_origin": "ast",
       "community": 38,
-      "community_name": "applicationWindow.test.js",
+      "community_name": "submissionsController.js",
       "file_type": "code",
       "norm_label": "application_slugs",
       "source_file": "backend/helpers/applicationWindow.js",
@@ -8810,7 +9329,7 @@
       "label": "DEFAULT_WINDOWS",
       "_origin": "ast",
       "community": 38,
-      "community_name": "applicationWindow.test.js",
+      "community_name": "submissionsController.js",
       "file_type": "code",
       "norm_label": "default_windows",
       "source_file": "backend/helpers/applicationWindow.js",
@@ -8821,7 +9340,7 @@
       "label": "applicationWindow.test.js",
       "_origin": "ast",
       "community": 38,
-      "community_name": "applicationWindow.test.js",
+      "community_name": "submissionsController.js",
       "file_type": "code",
       "norm_label": "applicationwindow.test.js",
       "source_file": "backend/helpers/applicationWindow.test.js",
@@ -8832,18 +9351,73 @@
       "label": "T",
       "_origin": "ast",
       "community": 38,
-      "community_name": "applicationWindow.test.js",
+      "community_name": "submissionsController.js",
       "file_type": "code",
       "norm_label": "t",
       "source_file": "backend/helpers/applicationWindow.test.js",
       "source_location": "L5"
     },
     {
+      "id": "backend_models_applicationwindow",
+      "label": "ApplicationWindow.js",
+      "_origin": "ast",
+      "community": 38,
+      "community_name": "submissionsController.js",
+      "file_type": "code",
+      "norm_label": "applicationwindow.js",
+      "source_file": "backend/models/ApplicationWindow.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "backend_models_applicationwindow_applicationwindowschema",
+      "label": "applicationWindowSchema",
+      "_origin": "ast",
+      "community": 38,
+      "community_name": "submissionsController.js",
+      "file_type": "code",
+      "norm_label": "applicationwindowschema",
+      "source_file": "backend/models/ApplicationWindow.js",
+      "source_location": "L5"
+    },
+    {
+      "id": "backend_routes_submissionsroutes",
+      "label": "submissionsRoutes.js",
+      "_origin": "ast",
+      "community": 38,
+      "community_name": "submissionsController.js",
+      "file_type": "code",
+      "norm_label": "submissionsroutes.js",
+      "source_file": "backend/routes/submissionsRoutes.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "backend_scripts_windows_smoke",
+      "label": "windows-smoke.js",
+      "_origin": "ast",
+      "community": 38,
+      "community_name": "submissionsController.js",
+      "file_type": "code",
+      "norm_label": "windows-smoke.js",
+      "source_file": "backend/scripts/windows-smoke.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "backend_scripts_windows_smoke_base",
+      "label": "BASE",
+      "_origin": "ast",
+      "community": 38,
+      "community_name": "submissionsController.js",
+      "file_type": "code",
+      "norm_label": "base",
+      "source_file": "backend/scripts/windows-smoke.js",
+      "source_location": "L15"
+    },
+    {
       "id": "docs_superpowers_plans_2026_09_28_basvuru_donemleri_review_focus",
       "label": "Review Focus",
       "_origin": "ast",
       "community": 38,
-      "community_name": "applicationWindow.test.js",
+      "community_name": "submissionsController.js",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "review focus",
@@ -8855,7 +9429,7 @@
       "label": "Task 1: Pencere kural\u0131 (saf fonksiyonlar) ve birim testleri",
       "_origin": "ast",
       "community": 38,
-      "community_name": "applicationWindow.test.js",
+      "community_name": "submissionsController.js",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "task 1: pencere kural\u0131 (saf fonksiyonlar) ve birim testleri",
@@ -8867,7 +9441,7 @@
       "label": "Task 2: Model, GET/PATCH endpoint'leri ve smoke beti\u011finin yetki/do\u011frulama k\u0131sm\u0131",
       "_origin": "ast",
       "community": 38,
-      "community_name": "applicationWindow.test.js",
+      "community_name": "submissionsController.js",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "task 2: model, get/patch endpoint'leri ve smoke betiginin yetki/dogrulama k\u0131sm\u0131",
@@ -8879,7 +9453,7 @@
       "label": "Task 3: Ba\u015fvurulara 403 uygulamas\u0131, smoke'un kalan\u0131 ve CI",
       "_origin": "ast",
       "community": 38,
-      "community_name": "applicationWindow.test.js",
+      "community_name": "submissionsController.js",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "task 3: basvurulara 403 uygulamas\u0131, smoke'un kalan\u0131 ve ci",
@@ -8891,7 +9465,7 @@
       "label": "Task 4: Frontend veri katman\u0131",
       "_origin": "ast",
       "community": 38,
-      "community_name": "applicationWindow.test.js",
+      "community_name": "submissionsController.js",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "task 4: frontend veri katman\u0131",
@@ -8903,7 +9477,7 @@
       "label": "Task 5: Ba\u015fvuru sayfalar\u0131 durumu backend'den okur, JSON temizli\u011fi",
       "_origin": "ast",
       "community": 38,
-      "community_name": "applicationWindow.test.js",
+      "community_name": "submissionsController.js",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "task 5: basvuru sayfalar\u0131 durumu backend'den okur, json temizligi",
@@ -8915,12 +9489,36 @@
       "label": "Task 6: Admin paneli \"Ba\u015fvuru D\u00f6nemleri\" sayfas\u0131",
       "_origin": "ast",
       "community": 38,
-      "community_name": "applicationWindow.test.js",
+      "community_name": "submissionsController.js",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "task 6: admin paneli \"basvuru donemleri\" sayfas\u0131",
       "source_file": "docs/superpowers/plans/2026-09-28-basvuru-donemleri.md",
       "source_location": "L249"
+    },
+    {
+      "id": "docs_superpowers_specs_2026_09_28_basvuru_donemleri_design_ba\u015fvurulara_uygulanmas\u0131",
+      "label": "Ba\u015fvurulara uygulanmas\u0131",
+      "_origin": "ast",
+      "community": 38,
+      "community_name": "submissionsController.js",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "basvurulara uygulanmas\u0131",
+      "source_file": "docs/superpowers/specs/2026-09-28-basvuru-donemleri-design.md",
+      "source_location": "L92"
+    },
+    {
+      "id": "docs_superpowers_specs_2026_09_28_basvuru_donemleri_design_mant\u0131k",
+      "label": "Mant\u0131k",
+      "_origin": "ast",
+      "community": 38,
+      "community_name": "submissionsController.js",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "mant\u0131k",
+      "source_file": "docs/superpowers/specs/2026-09-28-basvuru-donemleri-design.md",
+      "source_location": "L58"
     },
     {
       "id": "frontend_src_app_routes_admin_layout_layout",
@@ -8945,6 +9543,95 @@
       "source_location": "L1"
     },
     {
+      "id": "frontend_src_app_layout",
+      "label": "app/layout.tsx",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "Projeye \u00f6zel kurallar",
+      "file_type": "code",
+      "norm_label": "app/layout.tsx",
+      "source_file": "frontend/src/app/layout.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "frontend_src_app_layout_inter",
+      "label": "inter",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "Projeye \u00f6zel kurallar",
+      "file_type": "code",
+      "norm_label": "inter",
+      "source_file": "frontend/src/app/layout.tsx",
+      "source_location": "L6"
+    },
+    {
+      "id": "frontend_src_app_layout_metadata",
+      "label": "metadata",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "Projeye \u00f6zel kurallar",
+      "file_type": "code",
+      "norm_label": "metadata",
+      "source_file": "frontend/src/app/layout.tsx",
+      "source_location": "L11"
+    },
+    {
+      "id": "frontend_src_app_routes_apply_layout_apply_applyslug_page",
+      "label": "[applySlug]/page.tsx",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "Projeye \u00f6zel kurallar",
+      "file_type": "code",
+      "norm_label": "[applyslug]/page.tsx",
+      "source_file": "frontend/src/app/(routes)/(apply-layout)/apply/[applySlug]/page.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "frontend_src_hooks_useapplydetail",
+      "label": "useApplyDetail.ts",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "Projeye \u00f6zel kurallar",
+      "file_type": "code",
+      "norm_label": "useapplydetail.ts",
+      "source_file": "frontend/src/hooks/useApplyDetail.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "frontend_src_providers_themeprovider",
+      "label": "ThemeProvider.tsx",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "Projeye \u00f6zel kurallar",
+      "file_type": "code",
+      "norm_label": "themeprovider.tsx",
+      "source_file": "frontend/src/providers/ThemeProvider.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "ref_next_themes",
+      "label": "next-themes",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "Projeye \u00f6zel kurallar",
+      "file_type": "concept",
+      "norm_label": "next-themes",
+      "source_file": "frontend/package.json",
+      "source_location": "L34"
+    },
+    {
+      "id": "claude",
+      "label": "CLAUDE.md",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "Projeye \u00f6zel kurallar",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "claude.md",
+      "source_file": "CLAUDE.md",
+      "source_location": "L1"
+    },
+    {
       "id": "claude_backend_esm_node_check_yalan_s\u00f6yl\u00fcyor",
       "label": "Backend ESM \u2014 `node --check` yalan s\u00f6yl\u00fcyor",
       "_origin": "ast",
@@ -8955,6 +9642,18 @@
       "norm_label": "backend esm \u2014 `node --check` yalan soyluyor",
       "source_file": "CLAUDE.md",
       "source_location": "L295"
+    },
+    {
+      "id": "claude_ba\u015fvuru_formuna_alan_ekleme",
+      "label": "Ba\u015fvuru formuna alan ekleme",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "Projeye \u00f6zel kurallar",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "basvuru formuna alan ekleme",
+      "source_file": "CLAUDE.md",
+      "source_location": "L338"
     },
     {
       "id": "claude_ba\u015fvurular\u0131_silme_saklama_s\u00fcresi",
@@ -8993,6 +9692,18 @@
       "source_location": "L219"
     },
     {
+      "id": "claude_claude_md",
+      "label": "CLAUDE.md",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "Projeye \u00f6zel kurallar",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "claude.md",
+      "source_file": "CLAUDE.md",
+      "source_location": "L1"
+    },
+    {
       "id": "claude_duyuru_html_i_ve_csp",
       "label": "Duyuru HTML'i ve CSP",
       "_origin": "ast",
@@ -9003,6 +9714,18 @@
       "norm_label": "duyuru html'i ve csp",
       "source_file": "CLAUDE.md",
       "source_location": "L380"
+    },
+    {
+      "id": "claude_frontend_frontend",
+      "label": "Frontend (`frontend/`)",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "Projeye \u00f6zel kurallar",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "frontend (`frontend/`)",
+      "source_file": "CLAUDE.md",
+      "source_location": "L50"
     },
     {
       "id": "claude_graphify",
@@ -9029,6 +9752,18 @@
       "source_location": "L208"
     },
     {
+      "id": "claude_i_\u00e7erik_frontend_public_data",
+      "label": "\u0130\u00e7erik (`frontend/public/data/`)",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "Projeye \u00f6zel kurallar",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "icerik (`frontend/public/data/`)",
+      "source_file": "CLAUDE.md",
+      "source_location": "L108"
+    },
+    {
       "id": "claude_i_\u00e7erik_ve_ki\u015fi_kartlar\u0131",
       "label": "\u0130\u00e7erik ve ki\u015fi kartlar\u0131",
       "_origin": "ast",
@@ -9039,6 +9774,30 @@
       "norm_label": "icerik ve kisi kartlar\u0131",
       "source_file": "CLAUDE.md",
       "source_location": "L167"
+    },
+    {
+      "id": "claude_klas\u00f6r_yap\u0131s\u0131",
+      "label": "Klas\u00f6r yap\u0131s\u0131",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "Projeye \u00f6zel kurallar",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "klasor yap\u0131s\u0131",
+      "source_file": "CLAUDE.md",
+      "source_location": "L48"
+    },
+    {
+      "id": "claude_komutlar",
+      "label": "Komutlar",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "Projeye \u00f6zel kurallar",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "komutlar",
+      "source_file": "CLAUDE.md",
+      "source_location": "L13"
     },
     {
       "id": "claude_lint",
@@ -9065,6 +9824,18 @@
       "source_location": "L324"
     },
     {
+      "id": "claude_ortam_de\u011fi\u015fkenleri",
+      "label": "Ortam de\u011fi\u015fkenleri",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "Projeye \u00f6zel kurallar",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "ortam degiskenleri",
+      "source_file": "CLAUDE.md",
+      "source_location": "L120"
+    },
+    {
       "id": "claude_paket_y\u00f6neticisi_npm",
       "label": "Paket y\u00f6neticisi: npm",
       "_origin": "ast",
@@ -9075,6 +9846,18 @@
       "norm_label": "paket yoneticisi: npm",
       "source_file": "CLAUDE.md",
       "source_location": "L148"
+    },
+    {
+      "id": "claude_proje",
+      "label": "Proje",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "Projeye \u00f6zel kurallar",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "proje",
+      "source_file": "CLAUDE.md",
+      "source_location": "L3"
     },
     {
       "id": "claude_projeye_\u00f6zel_kurallar",
@@ -9113,111 +9896,16 @@
       "source_location": "L195"
     },
     {
-      "id": "frontend_src_hooks_useauth",
-      "label": "useAuth.ts",
+      "id": "claude_tak\u0131m_slug_\u0131_\u00fc\u00e7_kimli\u011fi_birden_ta\u015f\u0131yor",
+      "label": "Tak\u0131m slug'\u0131 \u00fc\u00e7 kimli\u011fi birden ta\u015f\u0131yor",
       "_origin": "ast",
-      "community": 40,
-      "community_name": "useAuth.ts",
-      "file_type": "code",
-      "norm_label": "useauth.ts",
-      "source_file": "frontend/src/hooks/useAuth.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_superpowers_plans_2026_09_28_basvuru_donemleri",
-      "label": "2026-09-28-basvuru-donemleri.md",
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "adminOnly",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "2026-09-28-basvuru-donemleri.md",
-      "source_file": "docs/superpowers/plans/2026-09-28-basvuru-donemleri.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_superpowers_plans_2026_09_28_basvuru_donemleri_ba\u015fvuru_d\u00f6nemleri_uygulama_plan\u0131",
-      "label": "Ba\u015fvuru D\u00f6nemleri \u2014 Uygulama Plan\u0131",
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "adminOnly",
+      "community": 4,
+      "community_name": "Projeye \u00f6zel kurallar",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "basvuru donemleri \u2014 uygulama plan\u0131",
-      "source_file": "docs/superpowers/plans/2026-09-28-basvuru-donemleri.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_superpowers_plans_2026_09_28_basvuru_donemleri_global_constraints",
-      "label": "Global Constraints",
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "adminOnly",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "global constraints",
-      "source_file": "docs/superpowers/plans/2026-09-28-basvuru-donemleri.md",
-      "source_location": "L17"
-    },
-    {
-      "id": "docs_superpowers_specs_2026_09_28_basvuru_donemleri_design_backend",
-      "label": "Backend",
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "adminOnly",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "backend",
-      "source_file": "docs/superpowers/specs/2026-09-28-basvuru-donemleri-design.md",
-      "source_location": "L42"
-    },
-    {
-      "id": "docs_superpowers_specs_2026_09_28_basvuru_donemleri_design_endpoint_ler",
-      "label": "Endpoint'ler",
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "adminOnly",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "endpoint'ler",
-      "source_file": "docs/superpowers/specs/2026-09-28-basvuru-donemleri-design.md",
-      "source_location": "L70"
-    },
-    {
-      "id": "docs_superpowers_specs_2026_09_28_basvuru_donemleri_design_g\u00fcvenlik",
-      "label": "G\u00fcvenlik",
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "adminOnly",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "guvenlik",
-      "source_file": "docs/superpowers/specs/2026-09-28-basvuru-donemleri-design.md",
-      "source_location": "L146"
-    },
-    {
-      "id": "docs_superpowers_specs_2026_09_28_basvuru_donemleri_design_mant\u0131k",
-      "label": "Mant\u0131k",
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "adminOnly",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "mant\u0131k",
-      "source_file": "docs/superpowers/specs/2026-09-28-basvuru-donemleri-design.md",
-      "source_location": "L58"
-    },
-    {
-      "id": "docs_superpowers_specs_2026_09_28_basvuru_donemleri_design_veri",
-      "label": "Veri",
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "adminOnly",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "veri",
-      "source_file": "docs/superpowers/specs/2026-09-28-basvuru-donemleri-design.md",
-      "source_location": "L44"
+      "norm_label": "tak\u0131m slug'\u0131 uc kimligi birden tas\u0131yor",
+      "source_file": "CLAUDE.md",
+      "source_location": "L240"
     },
     {
       "id": "frontend_postcss_config",
@@ -9242,462 +9930,47 @@
       "source_location": "L1"
     },
     {
+      "id": "frontend_src_app_routes_admin_layout_admin_dashboard_data_page",
+      "label": "data/page.tsx",
+      "_origin": "ast",
+      "community": 43,
+      "community_name": "technical-team.tsx",
+      "file_type": "code",
+      "norm_label": "data/page.tsx",
+      "source_file": "frontend/src/app/(routes)/(admin-layout)/admin/dashboard/data/page.tsx",
+      "source_location": "L1"
+    },
+    {
       "id": "frontend_src_app_routes_admin_layout_admin_dashboard_technical_team_category_page",
       "label": "[category]/page.tsx",
       "_origin": "ast",
       "community": 43,
-      "community_name": "AdminTechnicalTeam",
+      "community_name": "technical-team.tsx",
       "file_type": "code",
       "norm_label": "[category]/page.tsx",
       "source_file": "frontend/src/app/(routes)/(admin-layout)/admin/dashboard/technical-team/[category]/page.tsx",
       "source_location": "L1"
     },
     {
-      "id": "frontend_src_hooks_useapplydetail",
-      "label": "useApplyDetail.ts",
+      "id": "frontend_src_components_pages_admin_technical_team",
+      "label": "technical-team.tsx",
       "_origin": "ast",
       "community": 43,
-      "community_name": "AdminTechnicalTeam",
+      "community_name": "technical-team.tsx",
       "file_type": "code",
-      "norm_label": "useapplydetail.ts",
-      "source_file": "frontend/src/hooks/useApplyDetail.ts",
+      "norm_label": "technical-team.tsx",
+      "source_file": "frontend/src/components/pages/admin/technical-team.tsx",
       "source_location": "L1"
     },
     {
-      "id": "frontend_src_app_routes_admin_layout_admin_dashboard_announcements_page",
-      "label": "dashboard/announcements/page.tsx",
+      "id": "frontend_src_hooks_use_mobile",
+      "label": "use-mobile.ts",
       "_origin": "ast",
-      "community": 44,
-      "community_name": "rich-text-editor.tsx",
+      "community": 43,
+      "community_name": "technical-team.tsx",
       "file_type": "code",
-      "norm_label": "dashboard/announcements/page.tsx",
-      "source_file": "frontend/src/app/(routes)/(admin-layout)/admin/dashboard/announcements/page.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "frontend_src_components_layout_rich_text_editor",
-      "label": "rich-text-editor.tsx",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "rich-text-editor.tsx",
-      "file_type": "code",
-      "norm_label": "rich-text-editor.tsx",
-      "source_file": "frontend/src/components/layout/rich-text-editor.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "frontend_src_components_layout_rich_text_editor_richtexteditor",
-      "label": "RichTextEditor",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "rich-text-editor.tsx",
-      "file_type": "code",
-      "norm_label": "richtexteditor",
-      "source_file": "frontend/src/components/layout/rich-text-editor.tsx",
-      "source_location": "L22"
-    },
-    {
-      "id": "frontend_src_lib_sanitizehtml",
-      "label": "sanitizeHTML.ts",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "rich-text-editor.tsx",
-      "file_type": "code",
-      "norm_label": "sanitizehtml.ts",
-      "source_file": "frontend/src/lib/sanitizeHTML.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "frontend_src_lib_sanitizehtml_allowed_tags",
-      "label": "ALLOWED_TAGS",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "rich-text-editor.tsx",
-      "file_type": "code",
-      "norm_label": "allowed_tags",
-      "source_file": "frontend/src/lib/sanitizeHTML.ts",
-      "source_location": "L9"
-    },
-    {
-      "id": "frontend_src_app_layout",
-      "label": "app/layout.tsx",
-      "_origin": "ast",
-      "community": 45,
-      "community_name": "app/layout.tsx",
-      "file_type": "code",
-      "norm_label": "app/layout.tsx",
-      "source_file": "frontend/src/app/layout.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "frontend_src_app_layout_inter",
-      "label": "inter",
-      "_origin": "ast",
-      "community": 45,
-      "community_name": "app/layout.tsx",
-      "file_type": "code",
-      "norm_label": "inter",
-      "source_file": "frontend/src/app/layout.tsx",
-      "source_location": "L6"
-    },
-    {
-      "id": "frontend_src_app_layout_metadata",
-      "label": "metadata",
-      "_origin": "ast",
-      "community": 45,
-      "community_name": "app/layout.tsx",
-      "file_type": "code",
-      "norm_label": "metadata",
-      "source_file": "frontend/src/app/layout.tsx",
-      "source_location": "L11"
-    },
-    {
-      "id": "frontend_src_providers_themeprovider",
-      "label": "ThemeProvider.tsx",
-      "_origin": "ast",
-      "community": 45,
-      "community_name": "app/layout.tsx",
-      "file_type": "code",
-      "norm_label": "themeprovider.tsx",
-      "source_file": "frontend/src/providers/ThemeProvider.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "ref_next_themes",
-      "label": "next-themes",
-      "_origin": "ast",
-      "community": 45,
-      "community_name": "app/layout.tsx",
-      "file_type": "concept",
-      "norm_label": "next-themes",
-      "source_file": "frontend/package.json",
-      "source_location": "L34"
-    },
-    {
-      "id": "claude_frontend_frontend",
-      "label": "Frontend (`frontend/`)",
-      "_origin": "ast",
-      "community": 45,
-      "community_name": "app/layout.tsx",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "frontend (`frontend/`)",
-      "source_file": "CLAUDE.md",
-      "source_location": "L50"
-    },
-    {
-      "id": "frontend_package_devdependencies",
-      "label": "devDependencies",
-      "_origin": "ast",
-      "community": 46,
-      "community_name": "devDependencies",
-      "file_type": "code",
-      "norm_label": "devdependencies",
-      "source_file": "frontend/package.json",
-      "source_location": "L41"
-    },
-    {
-      "id": "frontend_package_devdependencies_eslint",
-      "label": "eslint",
-      "_origin": "ast",
-      "community": 46,
-      "community_name": "devDependencies",
-      "file_type": "code",
-      "norm_label": "eslint",
-      "source_file": "frontend/package.json",
-      "source_location": "L46"
-    },
-    {
-      "id": "frontend_package_devdependencies_eslint_config_next",
-      "label": "eslint-config-next",
-      "_origin": "ast",
-      "community": 46,
-      "community_name": "devDependencies",
-      "file_type": "code",
-      "norm_label": "eslint-config-next",
-      "source_file": "frontend/package.json",
-      "source_location": "L47"
-    },
-    {
-      "id": "frontend_package_devdependencies_tailwindcss",
-      "label": "tailwindcss",
-      "_origin": "ast",
-      "community": 46,
-      "community_name": "devDependencies",
-      "file_type": "code",
-      "norm_label": "tailwindcss",
-      "source_file": "frontend/package.json",
-      "source_location": "L48"
-    },
-    {
-      "id": "frontend_package_devdependencies_tailwindcss_postcss",
-      "label": "@tailwindcss/postcss",
-      "_origin": "ast",
-      "community": 46,
-      "community_name": "devDependencies",
-      "file_type": "code",
-      "norm_label": "@tailwindcss/postcss",
-      "source_file": "frontend/package.json",
-      "source_location": "L42"
-    },
-    {
-      "id": "frontend_package_devdependencies_tw_animate_css",
-      "label": "tw-animate-css",
-      "_origin": "ast",
-      "community": 46,
-      "community_name": "devDependencies",
-      "file_type": "code",
-      "norm_label": "tw-animate-css",
-      "source_file": "frontend/package.json",
-      "source_location": "L49"
-    },
-    {
-      "id": "frontend_package_devdependencies_types_node",
-      "label": "@types/node",
-      "_origin": "ast",
-      "community": 46,
-      "community_name": "devDependencies",
-      "file_type": "code",
-      "norm_label": "@types/node",
-      "source_file": "frontend/package.json",
-      "source_location": "L43"
-    },
-    {
-      "id": "frontend_package_devdependencies_types_react",
-      "label": "@types/react",
-      "_origin": "ast",
-      "community": 46,
-      "community_name": "devDependencies",
-      "file_type": "code",
-      "norm_label": "@types/react",
-      "source_file": "frontend/package.json",
-      "source_location": "L44"
-    },
-    {
-      "id": "frontend_package_devdependencies_types_react_dom",
-      "label": "@types/react-dom",
-      "_origin": "ast",
-      "community": 46,
-      "community_name": "devDependencies",
-      "file_type": "code",
-      "norm_label": "@types/react-dom",
-      "source_file": "frontend/package.json",
-      "source_location": "L45"
-    },
-    {
-      "id": "frontend_package_devdependencies_typescript",
-      "label": "typescript",
-      "_origin": "ast",
-      "community": 46,
-      "community_name": "devDependencies",
-      "file_type": "code",
-      "norm_label": "typescript",
-      "source_file": "frontend/package.json",
-      "source_location": "L50"
-    },
-    {
-      "id": "frontend_package_scripts",
-      "label": "scripts",
-      "_origin": "ast",
-      "community": 47,
-      "community_name": "scripts",
-      "file_type": "code",
-      "norm_label": "scripts",
-      "source_file": "frontend/package.json",
-      "source_location": "L5"
-    },
-    {
-      "id": "frontend_package_scripts_build",
-      "label": "build",
-      "_origin": "ast",
-      "community": 47,
-      "community_name": "scripts",
-      "file_type": "code",
-      "norm_label": "build",
-      "source_file": "frontend/package.json",
-      "source_location": "L7"
-    },
-    {
-      "id": "frontend_package_scripts_check_content",
-      "label": "check:content",
-      "_origin": "ast",
-      "community": 47,
-      "community_name": "scripts",
-      "file_type": "code",
-      "norm_label": "check:content",
-      "source_file": "frontend/package.json",
-      "source_location": "L13"
-    },
-    {
-      "id": "frontend_package_scripts_dev",
-      "label": "dev",
-      "_origin": "ast",
-      "community": 47,
-      "community_name": "scripts",
-      "file_type": "code",
-      "norm_label": "dev",
-      "source_file": "frontend/package.json",
-      "source_location": "L6"
-    },
-    {
-      "id": "frontend_package_scripts_lint",
-      "label": "lint",
-      "_origin": "ast",
-      "community": 47,
-      "community_name": "scripts",
-      "file_type": "code",
-      "norm_label": "lint",
-      "source_file": "frontend/package.json",
-      "source_location": "L12"
-    },
-    {
-      "id": "frontend_package_scripts_pm2_restart",
-      "label": "pm2:restart",
-      "_origin": "ast",
-      "community": 47,
-      "community_name": "scripts",
-      "file_type": "code",
-      "norm_label": "pm2:restart",
-      "source_file": "frontend/package.json",
-      "source_location": "L11"
-    },
-    {
-      "id": "frontend_package_scripts_pm2_start",
-      "label": "pm2:start",
-      "_origin": "ast",
-      "community": 47,
-      "community_name": "scripts",
-      "file_type": "code",
-      "norm_label": "pm2:start",
-      "source_file": "frontend/package.json",
-      "source_location": "L9"
-    },
-    {
-      "id": "frontend_package_scripts_pm2_stop",
-      "label": "pm2:stop",
-      "_origin": "ast",
-      "community": 47,
-      "community_name": "scripts",
-      "file_type": "code",
-      "norm_label": "pm2:stop",
-      "source_file": "frontend/package.json",
-      "source_location": "L10"
-    },
-    {
-      "id": "frontend_package_scripts_start",
-      "label": "start",
-      "_origin": "ast",
-      "community": 47,
-      "community_name": "scripts",
-      "file_type": "code",
-      "norm_label": "start",
-      "source_file": "frontend/package.json",
-      "source_location": "L8"
-    },
-    {
-      "id": "claude",
-      "label": "CLAUDE.md",
-      "_origin": "ast",
-      "community": 48,
-      "community_name": "CLAUDE.md",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "claude.md",
-      "source_file": "CLAUDE.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "claude_claude_md",
-      "label": "CLAUDE.md",
-      "_origin": "ast",
-      "community": 48,
-      "community_name": "CLAUDE.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "claude.md",
-      "source_file": "CLAUDE.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "claude_i_\u00e7erik_frontend_public_data",
-      "label": "\u0130\u00e7erik (`frontend/public/data/`)",
-      "_origin": "ast",
-      "community": 48,
-      "community_name": "CLAUDE.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "icerik (`frontend/public/data/`)",
-      "source_file": "CLAUDE.md",
-      "source_location": "L108"
-    },
-    {
-      "id": "claude_klas\u00f6r_yap\u0131s\u0131",
-      "label": "Klas\u00f6r yap\u0131s\u0131",
-      "_origin": "ast",
-      "community": 48,
-      "community_name": "CLAUDE.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "klasor yap\u0131s\u0131",
-      "source_file": "CLAUDE.md",
-      "source_location": "L48"
-    },
-    {
-      "id": "claude_komutlar",
-      "label": "Komutlar",
-      "_origin": "ast",
-      "community": 48,
-      "community_name": "CLAUDE.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "komutlar",
-      "source_file": "CLAUDE.md",
-      "source_location": "L13"
-    },
-    {
-      "id": "claude_ortam_de\u011fi\u015fkenleri",
-      "label": "Ortam de\u011fi\u015fkenleri",
-      "_origin": "ast",
-      "community": 48,
-      "community_name": "CLAUDE.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "ortam degiskenleri",
-      "source_file": "CLAUDE.md",
-      "source_location": "L120"
-    },
-    {
-      "id": "claude_proje",
-      "label": "Proje",
-      "_origin": "ast",
-      "community": 48,
-      "community_name": "CLAUDE.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "proje",
-      "source_file": "CLAUDE.md",
-      "source_location": "L3"
-    },
-    {
-      "id": "frontend_src_hooks_useannouncements",
-      "label": "useAnnouncements.ts",
-      "_origin": "ast",
-      "community": 49,
-      "community_name": "useAnnouncements.ts",
-      "file_type": "code",
-      "norm_label": "useannouncements.ts",
-      "source_file": "frontend/src/hooks/useAnnouncements.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "frontend_src_app_routes_admin_layout_admin_dashboard_data_page",
-      "label": "data/page.tsx",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "general-membership.tsx",
-      "file_type": "code",
-      "norm_label": "data/page.tsx",
-      "source_file": "frontend/src/app/(routes)/(admin-layout)/admin/dashboard/data/page.tsx",
+      "norm_label": "use-mobile.ts",
+      "source_file": "frontend/src/hooks/use-mobile.ts",
       "source_location": "L1"
     },
     {
@@ -9731,72 +10004,6 @@
       "file_type": "code",
       "norm_label": "textarea.tsx",
       "source_file": "frontend/src/components/ui/textarea.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "frontend_src_hooks_use_mobile",
-      "label": "use-mobile.ts",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "general-membership.tsx",
-      "file_type": "code",
-      "norm_label": "use-mobile.ts",
-      "source_file": "frontend/src/hooks/use-mobile.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "frontend_src_hooks_useuser",
-      "label": "useUser.ts",
-      "_origin": "ast",
-      "community": 50,
-      "community_name": "useUser.ts",
-      "file_type": "code",
-      "norm_label": "useuser.ts",
-      "source_file": "frontend/src/hooks/useUser.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "frontend_eslint_config",
-      "label": "eslint.config.mjs",
-      "_origin": "ast",
-      "community": 51,
-      "community_name": "eslint.config.mjs",
-      "file_type": "code",
-      "norm_label": "eslint.config.mjs",
-      "source_file": "frontend/eslint.config.mjs",
-      "source_location": "L1"
-    },
-    {
-      "id": "frontend_eslint_config_eslintconfig",
-      "label": "eslintConfig",
-      "_origin": "ast",
-      "community": 51,
-      "community_name": "eslint.config.mjs",
-      "file_type": "code",
-      "norm_label": "eslintconfig",
-      "source_file": "frontend/eslint.config.mjs",
-      "source_location": "L4"
-    },
-    {
-      "id": "ref_eslint_config_next",
-      "label": "eslint-config-next",
-      "_origin": "ast",
-      "community": 51,
-      "community_name": "eslint.config.mjs",
-      "file_type": "concept",
-      "norm_label": "eslint-config-next",
-      "source_file": "frontend/package.json",
-      "source_location": "L47"
-    },
-    {
-      "id": "frontend_src_app_routes_admin_layout_admin_login_page",
-      "label": "login/page.tsx",
-      "_origin": "ast",
-      "community": 52,
-      "community_name": "login/page.tsx",
-      "file_type": "code",
-      "norm_label": "login/page.tsx",
-      "source_file": "frontend/src/app/(routes)/(admin-layout)/admin/login/page.tsx",
       "source_location": "L1"
     },
     {
@@ -9855,39 +10062,6 @@
       "source_location": "L1"
     },
     {
-      "id": "backend_routes_mailroutes",
-      "label": "mailRoutes.js",
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "mailQueueProcessor.js",
-      "file_type": "code",
-      "norm_label": "mailroutes.js",
-      "source_file": "backend/routes/mailRoutes.js",
-      "source_location": "L1"
-    },
-    {
-      "id": "backend_routes_mailroutes_router",
-      "label": "router",
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "mailQueueProcessor.js",
-      "file_type": "code",
-      "norm_label": "router",
-      "source_file": "backend/routes/mailRoutes.js",
-      "source_location": "L6"
-    },
-    {
-      "id": "backend_routes_mailroutes_upload",
-      "label": "upload",
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "mailQueueProcessor.js",
-      "file_type": "code",
-      "norm_label": "upload",
-      "source_file": "backend/routes/mailRoutes.js",
-      "source_location": "L8"
-    },
-    {
       "id": "backend_services_mailqueueprocessor",
       "label": "mailQueueProcessor.js",
       "_origin": "ast",
@@ -9919,17 +10093,6 @@
       "norm_label": "__dirname",
       "source_file": "backend/services/mailQueueProcessor.js",
       "source_location": "L8"
-    },
-    {
-      "id": "ref_multer",
-      "label": "multer",
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "mailQueueProcessor.js",
-      "file_type": "concept",
-      "norm_label": "multer",
-      "source_file": "backend/package.json",
-      "source_location": "L26"
     },
     {
       "id": "ref_nodemailer",
@@ -10736,14 +10899,50 @@
       "type": "external"
     },
     {
+      "id": "ref_node_assert",
+      "label": "ref_node_assert",
+      "_origin": "semantic",
+      "community": 38,
+      "community_name": "submissionsController.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "ref_node_assert",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "ref_node_test",
+      "label": "ref_node_test",
+      "_origin": "semantic",
+      "community": 38,
+      "community_name": "submissionsController.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "ref_node_test",
+      "source_file": "",
+      "type": "external"
+    },
+    {
       "id": "frontend_src_app_globals",
       "label": "frontend_src_app_globals",
       "_origin": "semantic",
-      "community": 45,
-      "community_name": "app/layout.tsx",
+      "community": 4,
+      "community_name": "Projeye \u00f6zel kurallar",
       "external": true,
       "file_type": "concept",
       "norm_label": "frontend_src_app_globals",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "ref_path",
+      "label": "ref_path",
+      "_origin": "semantic",
+      "community": 6,
+      "community_name": "mailQueueProcessor.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "ref_path",
       "source_file": "",
       "type": "external"
     },
@@ -10768,40 +10967,6 @@
       "external": true,
       "file_type": "concept",
       "norm_label": "ref_fs",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "ref_path",
-      "label": "ref_path",
-      "_origin": "semantic",
-      "community": 9,
-      "community_name": "aboutData.ts",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "ref_path",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "ref_node_assert",
-      "label": "ref_node_assert",
-      "community": 38,
-      "community_name": "applicationWindow.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "ref_node_assert",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "ref_node_test",
-      "label": "ref_node_test",
-      "community": 38,
-      "community_name": "applicationWindow.test.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "ref_node_test",
       "source_file": "",
       "type": "external"
     }
@@ -10841,6 +11006,42 @@
       "context": "call",
       "source_file": "backend/controllers/announcementsController.js",
       "source_location": "L152",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_controllers_applicationwindowscontroller_getwindows",
+      "target": "backend_helpers_applicationwindow_topublicwindow",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "backend/controllers/applicationWindowsController.js",
+      "source_location": "L27",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_controllers_applicationwindowscontroller_updatewindow",
+      "target": "backend_controllers_applicationwindowscontroller_todate",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "backend/controllers/applicationWindowsController.js",
+      "source_location": "L44",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_controllers_applicationwindowscontroller_updatewindow",
+      "target": "backend_helpers_applicationwindow_topublicwindow",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "backend/controllers/applicationWindowsController.js",
+      "source_location": "L64",
       "weight": 1.0
     },
     {
@@ -13232,6 +13433,54 @@
       "weight": 1.0
     },
     {
+      "source": "backend_controllers_applicationwindowscontroller",
+      "target": "backend_helpers_logger_logger",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "backend/controllers/applicationWindowsController.js",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_controllers_applicationwindowscontroller",
+      "target": "backend_helpers_applicationwindow_application_slugs",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "backend/controllers/applicationWindowsController.js",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_controllers_applicationwindowscontroller",
+      "target": "backend_helpers_applicationwindow_default_windows",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "backend/controllers/applicationWindowsController.js",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_controllers_applicationwindowscontroller",
+      "target": "backend_helpers_applicationwindow_topublicwindow",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "backend/controllers/applicationWindowsController.js",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
       "source": "backend_controllers_authcontroller",
       "target": "backend_helpers_generatetoken_generatetoken",
       "relation": "imports",
@@ -13709,6 +13958,18 @@
       "context": "import",
       "source_file": "backend/middlewares/authMiddleware.js",
       "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_models_applicationwindow",
+      "target": "backend_helpers_applicationwindow_application_slugs",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "backend/models/ApplicationWindow.js",
+      "source_location": "L2",
       "weight": 1.0
     },
     {
@@ -18788,6 +19049,42 @@
       "weight": 1.0
     },
     {
+      "source": "backend_controllers_applicationwindowscontroller",
+      "target": "backend_models_applicationwindow",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "backend/controllers/applicationWindowsController.js",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_controllers_applicationwindowscontroller",
+      "target": "backend_helpers_logger",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "backend/controllers/applicationWindowsController.js",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_controllers_applicationwindowscontroller",
+      "target": "backend_helpers_applicationwindow",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "backend/controllers/applicationWindowsController.js",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
       "source": "backend_controllers_authcontroller",
       "target": "backend_helpers_generatetoken",
       "relation": "imports_from",
@@ -19568,6 +19865,30 @@
       "weight": 1.0
     },
     {
+      "source": "backend_models_applicationwindow",
+      "target": "ref_mongoose",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "backend/models/ApplicationWindow.js",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_models_applicationwindow",
+      "target": "backend_helpers_applicationwindow",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "backend/models/ApplicationWindow.js",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
       "source": "backend_models_contact",
       "target": "ref_mongoose",
       "relation": "imports_from",
@@ -19893,7 +20214,7 @@
     },
     {
       "source": "backend_routes_submissionsroutes",
-      "target": "backend_middlewares_authmiddleware",
+      "target": "backend_controllers_applicationwindowscontroller",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -19901,6 +20222,18 @@
       "context": "import",
       "source_file": "backend/routes/submissionsRoutes.js",
       "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_routes_submissionsroutes",
+      "target": "backend_middlewares_authmiddleware",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "backend/routes/submissionsRoutes.js",
+      "source_location": "L12",
       "weight": 1.0
     },
     {
@@ -20057,6 +20390,18 @@
       "context": "import",
       "source_file": "backend/scripts/purge-submissions.js",
       "source_location": "L32",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_scripts_windows_smoke",
+      "target": "ref_node_assert",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "backend/scripts/windows-smoke.js",
+      "source_location": "L13",
       "weight": 1.0
     },
     {
@@ -24634,6 +24979,50 @@
       "weight": 1.0
     },
     {
+      "source": "backend_controllers_applicationwindowscontroller",
+      "target": "backend_controllers_applicationwindowscontroller_todate",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/controllers/applicationWindowsController.js",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_controllers_applicationwindowscontroller",
+      "target": "backend_controllers_applicationwindowscontroller_getwindows",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/controllers/applicationWindowsController.js",
+      "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_controllers_applicationwindowscontroller",
+      "target": "backend_controllers_applicationwindowscontroller_updatewindow",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/controllers/applicationWindowsController.js",
+      "source_location": "L39",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_controllers_applicationwindowscontroller",
+      "target": "backend_controllers_applicationwindowscontroller_getwindow",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/controllers/applicationWindowsController.js",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
       "source": "backend_controllers_authcontroller",
       "target": "backend_controllers_authcontroller_getme",
       "relation": "contains",
@@ -25081,7 +25470,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/ENDPOINTS.md",
-      "source_location": "L101",
+      "source_location": "L111",
       "weight": 1.0
     },
     {
@@ -25092,7 +25481,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/ENDPOINTS.md",
-      "source_location": "L117",
+      "source_location": "L127",
       "weight": 1.0
     },
     {
@@ -25136,7 +25525,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/ENDPOINTS.md",
-      "source_location": "L77",
+      "source_location": "L87",
       "weight": 1.0
     },
     {
@@ -25544,6 +25933,17 @@
       "confidence_score": 1.0,
       "source_file": "backend/models/Announcement.js",
       "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_models_applicationwindow",
+      "target": "backend_models_applicationwindow_applicationwindowschema",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/models/ApplicationWindow.js",
+      "source_location": "L5",
       "weight": 1.0
     },
     {
@@ -26313,7 +26713,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/routes/submissionsRoutes.js",
-      "source_location": "L13",
+      "source_location": "L14",
       "weight": 1.0
     },
     {
@@ -26644,6 +27044,72 @@
       "confidence_score": 1.0,
       "source_file": "backend/scripts/purge-submissions.js",
       "source_location": "L72",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_scripts_windows_smoke",
+      "target": "backend_scripts_windows_smoke_base",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/scripts/windows-smoke.js",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_scripts_windows_smoke",
+      "target": "backend_scripts_windows_smoke_api",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/scripts/windows-smoke.js",
+      "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_scripts_windows_smoke",
+      "target": "backend_scripts_windows_smoke_step",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/scripts/windows-smoke.js",
+      "source_location": "L31",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_scripts_windows_smoke",
+      "target": "backend_scripts_windows_smoke_expectstatus",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/scripts/windows-smoke.js",
+      "source_location": "L41",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_scripts_windows_smoke",
+      "target": "backend_scripts_windows_smoke_iso",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/scripts/windows-smoke.js",
+      "source_location": "L44",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_scripts_windows_smoke",
+      "target": "backend_scripts_windows_smoke_byslug",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/scripts/windows-smoke.js",
+      "source_location": "L45",
       "weight": 1.0
     },
     {
@@ -32826,7 +33292,7 @@
       "confidence_score": 0.85,
       "context": "argument",
       "source_file": "backend/routes/submissionsRoutes.js",
-      "source_location": "L16",
+      "source_location": "L17",
       "weight": 1.0
     },
     {
@@ -32838,7 +33304,7 @@
       "confidence_score": 0.85,
       "context": "argument",
       "source_file": "backend/routes/submissionsRoutes.js",
-      "source_location": "L19",
+      "source_location": "L20",
       "weight": 1.0
     },
     {
@@ -32850,7 +33316,7 @@
       "confidence_score": 0.85,
       "context": "argument",
       "source_file": "backend/routes/submissionsRoutes.js",
-      "source_location": "L22",
+      "source_location": "L23",
       "weight": 1.0
     },
     {
@@ -32862,7 +33328,7 @@
       "confidence_score": 0.85,
       "context": "argument",
       "source_file": "backend/routes/submissionsRoutes.js",
-      "source_location": "L22",
+      "source_location": "L23",
       "weight": 1.0
     },
     {
@@ -32874,7 +33340,7 @@
       "confidence_score": 0.85,
       "context": "argument",
       "source_file": "backend/routes/submissionsRoutes.js",
-      "source_location": "L22",
+      "source_location": "L23",
       "weight": 1.0
     },
     {
@@ -32886,7 +33352,7 @@
       "confidence_score": 0.85,
       "context": "argument",
       "source_file": "backend/routes/submissionsRoutes.js",
-      "source_location": "L25",
+      "source_location": "L26",
       "weight": 1.0
     },
     {
@@ -32898,7 +33364,7 @@
       "confidence_score": 0.85,
       "context": "argument",
       "source_file": "backend/routes/submissionsRoutes.js",
-      "source_location": "L25",
+      "source_location": "L26",
       "weight": 1.0
     },
     {
@@ -32910,7 +33376,31 @@
       "confidence_score": 0.85,
       "context": "argument",
       "source_file": "backend/routes/submissionsRoutes.js",
-      "source_location": "L28",
+      "source_location": "L29",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_routes_submissionsroutes",
+      "target": "backend_controllers_applicationwindowscontroller_getwindows",
+      "relation": "indirect_call",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "argument",
+      "source_file": "backend/routes/submissionsRoutes.js",
+      "source_location": "L33",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_routes_submissionsroutes",
+      "target": "backend_controllers_applicationwindowscontroller_updatewindow",
+      "relation": "indirect_call",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "argument",
+      "source_file": "backend/routes/submissionsRoutes.js",
+      "source_location": "L34",
       "weight": 1.0
     },
     {
@@ -32922,7 +33412,7 @@
       "confidence_score": 0.85,
       "context": "argument",
       "source_file": "backend/routes/submissionsRoutes.js",
-      "source_location": "L32",
+      "source_location": "L38",
       "weight": 1.0
     },
     {
@@ -32934,7 +33424,7 @@
       "confidence_score": 0.85,
       "context": "argument",
       "source_file": "backend/routes/submissionsRoutes.js",
-      "source_location": "L33",
+      "source_location": "L39",
       "weight": 1.0
     },
     {
@@ -32946,7 +33436,7 @@
       "confidence_score": 0.85,
       "context": "argument",
       "source_file": "backend/routes/submissionsRoutes.js",
-      "source_location": "L33",
+      "source_location": "L39",
       "weight": 1.0
     },
     {
@@ -33263,6 +33753,42 @@
     },
     {
       "source": "docs_superpowers_plans_2026_09_28_basvuru_donemleri_task_3_ba\u015fvurulara_403_uygulamas\u0131_smoke_un_kalan\u0131_ve_ci",
+      "target": "backend_controllers_applicationwindowscontroller_getwindow",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "context": "getWindow",
+      "source_file": "docs/superpowers/plans/2026-09-28-basvuru-donemleri.md",
+      "source_location": "L137",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_plans_2026_09_28_basvuru_donemleri_task_2_model_get_patch_endpoint_leri_ve_smoke_beti\u011finin_yetki_do\u011frulama_k\u0131sm\u0131",
+      "target": "backend_controllers_applicationwindowscontroller_getwindows",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "context": "getWindows",
+      "source_file": "docs/superpowers/plans/2026-09-28-basvuru-donemleri.md",
+      "source_location": "L123",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_09_28_basvuru_donemleri_design_mant\u0131k",
+      "target": "backend_controllers_applicationwindowscontroller_getwindows",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "context": "getWindows",
+      "source_file": "docs/superpowers/specs/2026-09-28-basvuru-donemleri-design.md",
+      "source_location": "L68",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_plans_2026_09_28_basvuru_donemleri_task_3_ba\u015fvurulara_403_uygulamas\u0131_smoke_un_kalan\u0131_ve_ci",
       "target": "backend_helpers_applicationwindow_iswindowopen",
       "relation": "references",
       "_origin": "ast",
@@ -33430,6 +33956,42 @@
       "weight": 1.0
     },
     {
+      "source": "docs_superpowers_plans_2026_09_28_basvuru_donemleri_task_2_model_get_patch_endpoint_leri_ve_smoke_beti\u011finin_yetki_do\u011frulama_k\u0131sm\u0131",
+      "target": "backend_controllers_applicationwindowscontroller_updatewindow",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "context": "updateWindow",
+      "source_file": "docs/superpowers/plans/2026-09-28-basvuru-donemleri.md",
+      "source_location": "L124",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_09_28_basvuru_donemleri_design_mant\u0131k",
+      "target": "backend_controllers_applicationwindowscontroller_updatewindow",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "context": "updateWindow",
+      "source_file": "docs/superpowers/specs/2026-09-28-basvuru-donemleri-design.md",
+      "source_location": "L68",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_09_28_basvuru_donemleri_design_veri_katman\u0131",
+      "target": "backend_controllers_applicationwindowscontroller_updatewindow",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "context": "updateWindow",
+      "source_file": "docs/superpowers/specs/2026-09-28-basvuru-donemleri-design.md",
+      "source_location": "L111",
+      "weight": 1.0
+    },
+    {
       "source": "claude_tak\u0131m_slug_\u0131_\u00fc\u00e7_kimli\u011fi_birden_ta\u015f\u0131yor",
       "target": "frontend_src_hooks_useapplydetail_useapplydetail",
       "relation": "references",
@@ -33443,5 +34005,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "3d3a6a8cd45a0e12d0164b34d40605c848cec388"
+  "built_at_commit": "d6714596eccf10a1dfa3c6c5386a8d4de70bacbd"
 }

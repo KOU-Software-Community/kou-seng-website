@@ -49,13 +49,23 @@ dosyalarında tanımlı; forma alan eklerken CLAUDE.md'deki "Başvuru formuna al
 listesine bak.
 
 - **POST** `/submissions/general`
-  - **Açıklama:** Genel üyelik başvurusunu alır ve kaydeder.
+  - **Açıklama:** Genel üyelik başvurusunu alır ve kaydeder. Form kapalıysa (bkz. `/submissions/windows`) 403 döner.
   - **Request Body:** `{ "name": "string", "studentId": "string", "email": "string", "phone": "string", "faculty": "string", "department": "string", "grade": "number" }`
 
 - **POST** `/submissions/technical/:slug`
   - **Açıklama:** Teknik takım başvurusunu alır ve kaydeder. `slug`: `mobil-web`, `ai` veya `game` (form dosyasının adı).
   - **Request Body:** Genel başvurudaki öğrenci alanları + formdaki diğer her alan için `"question_<id>": "string"` (en fazla 5000 karakter). Kabul edilen anahtarlar `controllers/submissionsController.js` → `allowedCustomFields`; listede olmayan anahtar 400 döner.
-  - **Yanıtlar:** 201 kaydedildi; 400 eksik veya geçersiz alan; 409 aynı kategoride aynı öğrenci no, e-posta ya da telefonla önceki başvuru; 429 istek sınırı.
+  - **Yanıtlar:** 201 kaydedildi; 400 eksik veya geçersiz alan; 403 form şu anda kapalı (`"Bu başvuru şu anda kapalı."`); 409 aynı kategoride aynı öğrenci no, e-posta ya da telefonla önceki başvuru; 429 istek sınırı.
+
+- **GET** `/submissions/windows`
+  - **Açıklama:** Başvuru formlarının açık/kapalı durumu, herkese açık. Form `[opensAt, closesAt)` aralığında açık: `opensAt` yoksa kapalı, `closesAt` yoksa süresiz açık. Veritabanında kayıt yoksa genel üyelik açık, teknik formlar kapalı. Karar sunucu saatiyle verilir; yanıt önbelleğe alınmaz.
+  - **Yanıt:** `{ "success": true, "data": [{ "slug": "general" | "mobil-web" | "ai" | "game", "opensAt": "ISO 8601" | null, "closesAt": "ISO 8601" | null, "state": "open" | "scheduled" | "closed", "isOpen": boolean }] }`
+
+- **PATCH** `/submissions/windows/:slug`
+  - **Açıklama:** Formun açılış ve kapanış tarihini ayarlar (yalnızca admin). İkisi de `null` ise form kapalıdır. Tarih, saat dilimi belirtilmiş ISO 8601 metni olmalı (`2026-10-05T15:00:00.000Z` ya da `2026-10-05T18:00:00+03:00`).
+  - **Gerekli Header:** `Authorization: Bearer <token>`
+  - **Request Body:** `{ "opensAt": "string" | null, "closesAt": "string" | null }`
+  - **Yanıtlar:** 200 `{ "success": true, "data": { ... } }` (GET'teki biçim); 400 geçersiz form, geçersiz tarih, açılışsız kapanış ya da kapanış ≤ açılış; 401 token yok; 403 admin değil.
 
 - **GET** `/submissions`
   - **Açıklama:** Tüm gelen başvuruları listeler. Filtreleme için query parametreleri kullanılabilir.

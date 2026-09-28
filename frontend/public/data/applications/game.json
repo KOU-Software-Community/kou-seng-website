@@ -4,8 +4,6 @@
   "slug": "game",
   "title": "Oyun Geliştirme Takımı Başvurusu",
   "description": "Oyun projelerinde yer almak için teknik başvuru formu. Takıma başvurmak için lütfen aşağıdaki bilgileri eksiksiz doldurunuz.",
-  "isOpen": false,
-  "deadline": "5 Ekim 2025",
   "icon": "faGamepad",
   "fields": [
     {

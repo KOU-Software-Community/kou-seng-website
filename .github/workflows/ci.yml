@@ -61,6 +61,10 @@ jobs:
 
     env:
       MONGODB_URI: mongodb://127.0.0.1:27017/ci
+      # Yalnızca bu geçici veritabanı için: windows-smoke ilk admini KEY ile
+      # oluşturup giriş yapıyor. KEY en az 32 karakter.
+      JWT_SECRET: ci-jwt-secret
+      KEY: ci-ilk-admin-anahtari-0123456789abcdef
 
     steps:
     - uses: actions/checkout@v5
@@ -71,12 +75,19 @@ jobs:
         cache-dependency-path: backend/package-lock.json
 
     - run: npm ci
+    # Birim testleri (node:test, bağımlılık yok): **/*.test.js
+    - run: node --test
     # `node --check` ESM hatalarını kaçırıyor (CLAUDE.md); sunucuyu production'daki
     # komutla (npm start) gerçekten ayağa kaldır.
     - run: nohup npm start > server.log 2>&1 &
     - run: timeout 30 bash -c 'until curl -sf 127.0.0.1:3001/health > /dev/null; do sleep 1; done'
-    # Genel limit IP başına 15 dk'da 100 istek, formlar ayrıca 15 dk'da 30:
-    # --submit 40 → 30×201 + 10×429 (429 beklenen). Kalan genel kota /health'e.
+    # Başvuru dönemleri: GET/PATCH /submissions/windows, yetki, kapalı forma 403.
+    # Boş veritabanı ister ve genel formu açık bırakır. loadtest'ten önce koşmalı,
+    # sonrasında form limiti dolmuş olur.
+    - run: node scripts/windows-smoke.js
+    # Formların kendi limiti var (15 dk'da 100, genel limite sayılmaz):
+    # --submit 40 → 40×201 (smoke önce 7 form isteği harcıyor). Genel limit
+    # (15 dk'da 100) /health'e.
     - run: node scripts/loadtest.js --submit --n 40
     - run: node scripts/loadtest.js --n 100
     - if: failure()

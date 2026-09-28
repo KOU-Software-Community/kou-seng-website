@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faLock, faClock, faUsers, faCode, faLaptopCode, faRobot } from '@fortawesome/free-solid-svg-icons';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
+import { useApplicationWindows } from '@/hooks/useApplicationWindows';
+import { windowSummary } from '@/lib/applicationWindow';
 
 // İkon eşleştirme fonksiyonu
 const getIconByName = (iconName: string) => {
@@ -30,8 +32,6 @@ interface Application {
     slug: string;
     title: string;
     description: string;
-    isOpen: boolean;
-    deadline: string;
     type: string;
     icon: string;
 }
@@ -40,6 +40,9 @@ export default function Apply() {
     const [applications, setApplications] = useState<(Application & {icon: IconDefinition})[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [filter, setFilter] = useState<'all' | 'open' | 'closed'>('all');
+    // Açık/kapalı kararı backend'de; alınamazsa hepsi kapalı görünür
+    const { windows, isLoading: windowsLoading, error: windowsError } = useApplicationWindows();
+    const isOpen = (slug: string) => windows?.[slug]?.isOpen === true;
     
     // JSON dosyasından başvuru verilerini yükleme
     useEffect(() => {
@@ -69,8 +72,8 @@ export default function Apply() {
     }, []);
     
     const filteredApplications = applications.filter(app => {
-        if (filter === 'open') return app.isOpen;
-        if (filter === 'closed') return !app.isOpen;
+        if (filter === 'open') return isOpen(app.slug);
+        if (filter === 'closed') return !isOpen(app.slug);
         return true; // 'all' durumunda tüm başvuruları göster
     });
 
@@ -89,6 +92,9 @@ export default function Apply() {
 
             {/* Filtreleme Düğmeleri */}
             <section className="container">
+                {windowsError && (
+                    <p className="mb-6 text-center text-sm text-destructive" role="alert">{windowsError}</p>
+                )}
                 <div className="flex justify-center gap-4 mb-6">
                     <Button 
                         variant={filter === 'all' ? 'default' : 'outline'}
@@ -119,7 +125,7 @@ export default function Apply() {
             {/* Başvuru Kartları */}
             <section className="container">
                 <div className="mx-auto max-w-6xl grid gap-6 sm:grid-cols-2 lg:grid-cols-2">
-                    {isLoading ? (
+                    {isLoading || windowsLoading ? (
                         <div className="col-span-full text-center py-12">
                             <p className="text-muted-foreground">Başvurular yükleniyor...</p>
                         </div>
@@ -144,12 +150,12 @@ export default function Apply() {
                                         <div className="flex items-center justify-between text-sm">
                                             <span className="flex items-center text-muted-foreground">
                                                 <FontAwesomeIcon icon={faClock} className="mr-2 h-4 w-4" />
-                                                Son Başvuru: {application.deadline}
+                                                {windows?.[application.slug] ? windowSummary(windows[application.slug]) : 'Başvurular kapalı'}
                                             </span>
                                         </div>
                                     </div>
                                     <div className="flex justify-end">
-                                        {application.isOpen ? (
+                                        {isOpen(application.slug) ? (
                                             <Button 
                                                 asChild
                                                 variant="default"

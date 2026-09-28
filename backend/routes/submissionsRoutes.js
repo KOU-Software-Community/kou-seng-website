@@ -8,6 +8,7 @@ import {
   updateSubmission,
   purgeSubmissions
 } from '../controllers/submissionsController.js';
+import { getWindows, updateWindow } from '../controllers/applicationWindowsController.js';
 import { protect, adminOnly, roleOnlyForCategory, roleOnlyForSubmission } from '../middlewares/authMiddleware.js';
 
 const router = express.Router();
@@ -26,6 +27,11 @@ router.get('/export', protect, adminOnly, exportSubmissionsToCSV);
 
 // Seçilen kapsamdaki başvuruları kalıcı olarak sil (önce yedek alınmalı)
 router.post('/purge', protect, adminOnly, purgeSubmissions);
+
+// Başvuru dönemleri: herkes okur, yalnızca admin değiştirir. /:id'den önce olmalı,
+// yoksa /windows başvuru ID'si sanılır.
+router.get('/windows', getWindows);
+router.patch('/windows/:slug', protect, adminOnly, updateWindow);
 
 // Role only yapmak lazım burayı
 router.route('/:id')

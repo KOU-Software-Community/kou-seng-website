@@ -23,6 +23,7 @@ npm run check:content   # public/data JSON'ları + görseller
 # backend/
 npm run dev             # nodemon, port 3001
 npm start               # production komutu: node --experimental-require-module index.js
+node --test             # birim testleri (node:test): **/*.test.js
 node scripts/loadtest.js --n 150           # GET /health, rate limit duvarını bulur
 node scripts/loadtest.js --submit --n 40   # gerçek kayıt yazar — production DB'ye ASLA
 ```
@@ -30,14 +31,17 @@ node scripts/loadtest.js --submit --n 40   # gerçek kayıt yazar — production
 İki pakette de `pm2:start` / `pm2:stop` / `pm2:restart` script'leri var;
 production deploy'u Coolify'da.
 
-Unit test altyapısı yok. Push'tan önce:
+Backend'de birim testleri `node:test` ile (`backend/**/*.test.js`, yeni
+bağımlılık yok); frontend'de unit test yok. Push'tan önce:
 
 ```bash
 cd frontend && npm run check:content && npm run lint && npm run build
+cd ../backend && node --test
 ```
 
-CI her PR'da ve `main`'e push'ta frontend'de bu üçünü koşturur; backend'i
-geçici bir MongoDB ile `npm start` üzerinden gerçekten ayağa kaldırıp
+CI her PR'da ve `main`'e push'ta frontend'de bu üçünü koşturur; backend'de
+`node --test` koşar, backend'i geçici bir MongoDB ile `npm start` üzerinden
+gerçekten ayağa kaldırıp önce `scripts/windows-smoke.js`'i, sonra
 `scripts/loadtest.js`'i (`--submit --n 40`, ardından `/health`'e `--n 100`)
 smoke test olarak çalıştırır; iki pakette `npm audit --omit=dev
 --audit-level=high` koşar.
@@ -127,6 +131,20 @@ backend değişkenleri: `MAIL_USER`, `MAIL_APP_PASSWORD`, `MAIL_SENDER_NAME`
 - `KEY` en az 32 karakter olmalı (bkz. İlk admin oluşturma).
 
 ## Projeye özel kurallar
+
+### Branch'ler
+
+Branch adı yaptığı işi anlatır: `<tür>/<kısa-açıklama>`. Tür `feature`, `fix`,
+`security`, `chore`, `ci`, `deps` ya da `docs`; açıklama küçük harf, ASCII
+(Türkçe karakter yok), kelimeler tireyle: `feature/basvuru-donemi-yonetimi`,
+`fix/tunnel-client-ip`. `claude/` gibi bir araç adıyla ya da rastgele adla
+başlamaz; oturum böyle bir branch atamışsa işe başlamadan uygun adlı yeni bir
+branch aç.
+
+Bir branch tek bir iş taşır; araya giren ilgisiz değişiklik kendi branch'ine
+gider. Henüz merge edilmemiş bir PR'ın üstüne iş gerekiyorsa yeni branch o PR'ın
+branch'inden açılır, PR `main`'e açılır ve açıklamasına önce hangi PR'ın merge
+edilmesi gerektiği yazılır.
 
 ### Paket yöneticisi: npm
 
@@ -235,10 +253,13 @@ sitemap kendiliğinden güncelleniyor.
 
 **Slug değiştirirken sırayla:** JSON dosya adları → `slug` alanları → görsel
 klasörü + JSON yolları → `User.js` role enum → `submissionsController`
-`validCategories` → `statusController` sorgusu → frontend tip birleşimleri
-(`useUser.ts`, `admin-management.tsx`) → `AdminSidebar` `limitedRoles`/
+`validCategories` → `helpers/applicationWindow.js` `APPLICATION_SLUGS` (`ApplicationWindow`
+enum'u buradan) → `statusController` sorgusu → frontend tip birleşimleri
+(`useUser.ts`, `admin-management.tsx`) → `lib/applicationWindow.ts`
+`APPLICATION_LABELS` → `AdminSidebar` `limitedRoles`/
 `roleToSlug`/alt menü → dashboard `layout.tsx` rol listesi → `Header.tsx` →
-`next.config.ts` redirect → **veritabanı migration'ı**.
+`next.config.ts` redirect → **veritabanı migration'ı** (`ApplicationWindow.slug`
+dahil).
 
 Migration örneği: Web → Mobil Web geçişi için
 `backend/scripts/migrate-web-to-mobil-web.js` (`--dry-run` ve `--rollback`
@@ -318,6 +339,32 @@ tamamını değil operatör nesnesini sarar: `{ _id: mongoose.trusted({ $in: ids
 Tüm filtre sarılırsa koruma yine devreye girer: ObjectId alanında CastError,
 string alanında boş sonuç.
 
+### Başvuru dönemleri
+
+Formların (`general`, `mobil-web`, `ai`, `game`) açık/kapalı durumu backend'de,
+form başına bir `ApplicationWindow` kaydında durur. Kural
+`helpers/applicationWindow.js`'te (birim testi yanında): form
+`[opensAt, closesAt)` aralığında açık; `opensAt` yoksa kapalı, `closesAt` yoksa
+süresiz açık. Kayıt yoksa genel üyelik açık, teknik formlar kapalı. Karar
+sunucu saatiyle verilir; kapalı forma gelen başvuru, gövdeye bakılmadan 403
+alır ("Bu başvuru şu anda kapalı."). Tarihleri `PATCH /submissions/windows/:slug`
+değiştirir, yalnızca admin.
+
+Panelde: **Başvuru Dönemleri** (`/admin/dashboard/application-windows`, yalnızca
+admin). Alanlar tarayıcının saatiyle girilir, sitede Türkiye saatiyle gösterilir;
+"Kapat" iki tarihi de siler. `/apply` ve form sayfası durumu
+`GET /submissions/windows`'tan okur; alınamazsa ya da 10 sn'de cevap gelmezse
+formlar kapalı görünür ve "Başvuru durumu alınamadı" uyarısı çıkar. Bu isteğin
+kendi limiti var (bkz. "Rate limit ve Cloudflare"). Deploy sırası: önce
+backend, sonra frontend; frontend önce giderse backend gelene kadar formlar
+kapalı görünür.
+
+`scripts/windows-smoke.js` bunları çalışan backend'e karşı sınar. İlk admini
+`KEY` ile oluşturduğu için kullanıcısı olmayan boş bir veritabanı ister ve
+yalnızca `localhost`/`127.0.0.1`'e koşar (başka adreste exit 2). Tarih değiştirip
+başvuru yazar, 5 form isteği harcar ve genel formu açık bırakır; CI'da bu yüzden
+`loadtest`'ten önce koşar, sonrasında form limiti dolmuş olurdu.
+
 ### Başvuru formuna alan ekleme
 
 Form `applications/<slug>.json` → `fields[]`'ten render ediliyor;
@@ -344,10 +391,9 @@ Tuzaklar:
   sessizce atılır.
 - `customFields` değerleri yalnızca string (≤5000 karakter): dizi dönen alan
   (çoklu seçim) 400 alır, `type: "number"` alan da (zod değeri sayıya çeviriyor).
-- `isOpen` ve `deadline` hem `index.json`'da (`/apply` listesi) hem
-  `<slug>.json`'da (form sayfası); ikisi birlikte güncellenmeli, yoksa liste
-  "Başvur" gösterirken form "kapanmıştır" der ya da tersi. Backend `isOpen`'a
-  bakmıyor.
+- Formun açık/kapalı durumu ve tarihleri JSON'da değil, backend'de: admin paneli
+  → **Başvuru Dönemleri** (bkz. "Başvuru dönemleri"). JSON'a `isOpen` ya da
+  `deadline` eklemek bir şey değiştirmez.
 - Mongo'da migration gerekmez (`customFields` `Mixed`); CSV dışa aktarımı yeni
   anahtarı kendiliğinden sütun yapar.
 
@@ -377,8 +423,12 @@ engeller ve yalnızca konsola "Refused to …" yazar. Görseller `next/image`
 `backend/index.js`: genel limit IP başına 15 dk'da 100 istek (geçerli token'lı
 istekler sayılmaz, mail kuyruğu sık yokluyor). Ek olarak, muafiyetsiz:
 `POST /auth/login` ve `PATCH /auth/password` birlikte 15 dk'da 10 **hatalı**
-deneme, başvuru ve iletişim formları birlikte 15 dk'da 30. Smoke testte
-`--submit --n 40`'ın son 10'u bu yüzden 429 alır; loadtest 429'u hata saymaz.
+deneme. Başvuru akışının kendi limitleri var ve genel limite **sayılmaz**:
+`GET /submissions/windows` 15 dk'da 600, başvuru ve iletişim formları birlikte
+15 dk'da 100. Sebep kampüs Wi-Fi'ı: yüzlerce öğrenci aynı dış IP'yi paylaşıyor;
+başvuru akışı genel limite sayılsaydı ~30 başvurandan sonra o ağdaki herkes
+formları kapalı görürdü. CI'da `windows-smoke` önce 7 form isteği harcıyor,
+`--submit --n 40`'ın hepsi 201 alır; loadtest 429'u hata saymaz.
 
 Site ve API Cloudflare arkasında. Production'da istek Express'e
 `ziyaretçi → Cloudflare → 10.0.1.1 → Coolify proxy` yoluyla ulaşıyor; `10.0.1.1`

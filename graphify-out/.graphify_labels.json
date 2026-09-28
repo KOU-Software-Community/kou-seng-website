@@ -3,7 +3,7 @@
   "1": "cn",
   "2": "frontend/package.json",
   "3": "purge-submissions.js",
-  "4": "Projeye özel kurallar",
+  "4": "apply.tsx",
   "5": "general-membership.tsx",
   "6": "mailQueueProcessor.js",
   "7": "Frontend - KOU SENG Website",
@@ -17,7 +17,7 @@
   "15": "compilerOptions",
   "16": "authController.js",
   "17": "homeData.ts",
-  "18": "react",
+  "18": "app/layout.tsx",
   "19": "announcementsController.js",
   "20": "KOU SENG Website",
   "21": "devDependencies",
@@ -39,8 +39,10 @@
   "37": "api.ts",
   "38": "submissionsController.js",
   "39": "(admin-layout)/layout.tsx",
+  "40": "clientIp.js",
+  "41": "useContact.ts",
   "42": "postcss.config.mjs",
-  "43": "technical-team.tsx",
+  "43": "react",
   "44": "admin/announcements.tsx",
-  "46": "data-management.tsx"
+  "46": "button.tsx"
 }

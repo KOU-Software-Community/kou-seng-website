@@ -11,6 +11,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { useApplyDetail, type FormField } from '@/hooks/useApplyDetail';
 import useSubmissions, { type SubmissionData } from '@/hooks/useSubmissions';
+import { useApplicationWindows } from '@/hooks/useApplicationWindows';
+import { windowSummary } from '@/lib/applicationWindow';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faSpinner, faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import React from "react";
@@ -24,6 +26,9 @@ export default function ApplyDetail(props: { slug: string }) {
     errorMessage, 
     submitApplication 
   } = useSubmissions();
+  // Açık/kapalı kararı backend'de; alınamazsa form kapalı görünür
+  const { windows, isLoading: windowsLoading, error: windowsError } = useApplicationWindows();
+  const appWindow = windows?.[props.slug];
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [referenceId, setReferenceId] = useState<string | null>(null);
 
@@ -181,7 +186,7 @@ export default function ApplyDetail(props: { slug: string }) {
   };
 
   // Yükleniyor durumu
-  if (isLoading) {
+  if (isLoading || windowsLoading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] p-6">
         <FontAwesomeIcon icon={faSpinner} className="h-12 w-12 text-primary mb-4" spin />
@@ -205,7 +210,7 @@ export default function ApplyDetail(props: { slug: string }) {
   }
 
   // Başvuru kapalıysa
-  if (!application.isOpen) {
+  if (!appWindow?.isOpen) {
     return (
       <Card className="w-full max-w-3xl mx-auto my-8">
         <CardHeader>
@@ -214,8 +219,10 @@ export default function ApplyDetail(props: { slug: string }) {
         </CardHeader>
         <CardContent>
           <div className="p-4 bg-muted rounded-md text-center">
-            <p className="text-lg font-semibold">Bu başvuru dönemi kapanmıştır.</p>
-            <p className="text-muted-foreground mt-2">{application.deadline}</p>
+            <p className="text-lg font-semibold">
+              {appWindow?.state === 'scheduled' ? 'Başvurular henüz açılmadı.' : 'Bu başvuru şu anda kapalı.'}
+            </p>
+            <p className="text-muted-foreground mt-2">{appWindow ? windowSummary(appWindow) : windowsError}</p>
           </div>
         </CardContent>
       </Card>
@@ -367,7 +374,7 @@ export default function ApplyDetail(props: { slug: string }) {
       <CardContent>
         <div className="mb-6">
           <p className="text-sm text-muted-foreground">
-            <span className="font-semibold">Son Başvuru Tarihi:</span> {application.deadline}
+            {windowSummary(appWindow)}
           </p>
         </div>
 

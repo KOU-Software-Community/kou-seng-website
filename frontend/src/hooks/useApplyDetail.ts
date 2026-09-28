@@ -16,8 +16,6 @@ export type ApplyDetail = {
   slug: string;
   title: string;
   description: string;
-  isOpen: boolean;
-  deadline: string;
   submissionType: 'general' | 'technical';
   icon: string;
   fields: FormField[];

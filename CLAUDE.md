@@ -381,10 +381,9 @@ Tuzaklar:
   sessizce atılır.
 - `customFields` değerleri yalnızca string (≤5000 karakter): dizi dönen alan
   (çoklu seçim) 400 alır, `type: "number"` alan da (zod değeri sayıya çeviriyor).
-- `isOpen` ve `deadline` hem `index.json`'da (`/apply` listesi) hem
-  `<slug>.json`'da (form sayfası); ikisi birlikte güncellenmeli, yoksa liste
-  "Başvur" gösterirken form "kapanmıştır" der ya da tersi. Backend `isOpen`'a
-  bakmıyor.
+- Formun açık/kapalı durumu ve tarihleri JSON'da değil, backend'de: admin paneli
+  → **Başvuru Dönemleri** (bkz. "Başvuru dönemleri"). JSON'a `isOpen` ya da
+  `deadline` eklemek bir şey değiştirmez.
 - Mongo'da migration gerekmez (`customFields` `Mixed`); CSV dışa aktarımı yeni
   anahtarı kendiliğinden sütun yapar.
 

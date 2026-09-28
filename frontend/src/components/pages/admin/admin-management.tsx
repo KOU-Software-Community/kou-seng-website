@@ -21,7 +21,7 @@ const formatRole = (role: string): string => {
         case 'ai':
             return 'Yapay Zeka Takımı';
         case 'game':
-            return 'Oyun Takımı';
+            return 'Oyun Geliştirme Takımı';
         case 'sponsor':
             return 'Sponsorluk Ekibi';
         default:
@@ -363,7 +363,7 @@ export default function AdminManagement() {
                                 <option value="admin">Admin</option>
                                 <option value="mobil-web">Mobil ve Web Geliştirme Takımı</option>
                                 <option value="ai">Yapay Zeka Takımı</option>
-                                <option value="game">Oyun Takımı</option>
+                                <option value="game">Oyun Geliştirme Takımı</option>
                                 <option value="sponsor">Sponsorluk Ekibi</option>
                             </select>
                         </div>
@@ -438,7 +438,7 @@ export default function AdminManagement() {
                                 <option value="admin">Admin</option>
                                 <option value="mobil-web">Mobil ve Web Geliştirme Takımı</option>
                                 <option value="ai">Yapay Zeka Takımı</option>
-                                <option value="game">Oyun Takımı</option>
+                                <option value="game">Oyun Geliştirme Takımı</option>
                                 <option value="sponsor">Sponsorluk Ekibi</option>
                             </select>
                         </div>

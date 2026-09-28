@@ -20,7 +20,7 @@ const navItems: NavItem[] = [
     children: [
       { title: "Mobil ve Web", href: "/technical-team/mobil-web" },
       { title: "Yapay Zeka", href: "/technical-team/ai" },
-      { title: "Game", href: "/technical-team/game" },
+      { title: "Oyun", href: "/technical-team/game" },
     ],
   },
   ...(RSS_ENABLED ? [{ title: "Yayınlar", href: "/publications" }] : []),

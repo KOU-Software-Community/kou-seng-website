@@ -276,7 +276,7 @@ export default function AdminSidebar() {
                           {[
                             { label: 'Mobil ve Web', slug: 'mobil-web' },
                             { label: 'Yapay Zeka', slug: 'ai' },
-                            { label: 'Game', slug: 'game' },
+                            { label: 'Oyun', slug: 'game' },
                           ]
                             .filter((sub) => {
                               // admin tüm altları görür; diğer roller sadece kendi alanını görür

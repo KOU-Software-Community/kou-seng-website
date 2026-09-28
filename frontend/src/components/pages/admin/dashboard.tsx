@@ -120,19 +120,19 @@ export default function AdminDashboard() {
           </CardHeader>
           <CardContent>
             <div className="flex justify-between items-center">
-              <span className="text-sm text-muted-foreground">Web:</span>
+              <span className="text-sm text-muted-foreground">Mobil ve Web:</span>
               <span className="text-2xl font-bold">
                 {statusData?.technicalSubmissions.web ?? 0}
               </span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-sm text-muted-foreground">AI:</span>
+              <span className="text-sm text-muted-foreground">Yapay Zeka:</span>
               <span className="text-2xl font-bold">
                 {statusData?.technicalSubmissions.ai ?? 0}
               </span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-sm text-muted-foreground">Game:</span>
+              <span className="text-sm text-muted-foreground">Oyun:</span>
               <span className="text-2xl font-bold">
                 {statusData?.technicalSubmissions.game ?? 0}
               </span>

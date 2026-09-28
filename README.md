@@ -79,4 +79,4 @@ npm run dev
 
 ---
 
-**Geliştirici**: Kocaeli Üniversitesi Yazılım Kulübü Web Takımı
+**Geliştirici**: Kocaeli Üniversitesi Yazılım Kulübü Mobil ve Web Geliştirme Takımı

@@ -15,7 +15,7 @@ type ScopeOption = { key: PurgeScope; label: string; type?: 'general' | 'technic
 const SCOPES: ScopeOption[] = [
     { key: 'general', label: 'Genel Üyelik', type: 'general' },
     { key: 'mobil-web', label: 'Mobil ve Web', type: 'technical', category: 'mobil-web' },
-    { key: 'ai', label: 'AI', type: 'technical', category: 'ai' },
+    { key: 'ai', label: 'Yapay Zeka', type: 'technical', category: 'ai' },
     { key: 'game', label: 'Game', type: 'technical', category: 'game' },
     { key: 'all', label: 'Tümü' },
 ];

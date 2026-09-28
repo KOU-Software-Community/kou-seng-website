@@ -275,7 +275,7 @@ export default function AdminSidebar() {
                         <SidebarMenuSub id="technical-team-submenu">
                           {[
                             { label: 'Mobil ve Web', slug: 'mobil-web' },
-                            { label: 'AI', slug: 'ai' },
+                            { label: 'Yapay Zeka', slug: 'ai' },
                             { label: 'Game', slug: 'game' },
                           ]
                             .filter((sub) => {

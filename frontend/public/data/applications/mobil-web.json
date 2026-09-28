@@ -117,7 +117,7 @@
     },
     {
       "id": "motivation",
-      "label": "Mobil ve Web Takımı'na neden katılmak istiyorsunuz?",
+      "label": "Mobil ve Web Geliştirme Takımı'na neden katılmak istiyorsunuz?",
       "type": "textarea",
       "placeholder": "Takıma katılma motivasyonunuzu ve yıl sonunda hangi konularda kendinizi geliştirmiş veya neler üretmiş olmak istediğinizi kısaca açıklayınız.",
       "required": true
@@ -133,7 +133,7 @@
       "id": "linkedin",
       "label": "LinkedIn profil linkiniz",
       "type": "url",
-      "placeholder": "Linkedin profilinizin URL'ini giriniz",
+      "placeholder": "LinkedIn profilinizin URL'ini giriniz",
       "required": true
     },
     {

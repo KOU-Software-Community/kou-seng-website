@@ -128,6 +128,20 @@ backend değişkenleri: `MAIL_USER`, `MAIL_APP_PASSWORD`, `MAIL_SENDER_NAME`
 
 ## Projeye özel kurallar
 
+### Branch'ler
+
+Branch adı yaptığı işi anlatır: `<tür>/<kısa-açıklama>`. Tür `feature`, `fix`,
+`security`, `chore`, `ci`, `deps` ya da `docs`; açıklama küçük harf, ASCII
+(Türkçe karakter yok), kelimeler tireyle: `feature/basvuru-donemi-yonetimi`,
+`fix/tunnel-client-ip`. `claude/` gibi bir araç adıyla ya da rastgele adla
+başlamaz; oturum böyle bir branch atamışsa işe başlamadan uygun adlı yeni bir
+branch aç.
+
+Bir branch tek bir iş taşır; araya giren ilgisiz değişiklik kendi branch'ine
+gider. Henüz merge edilmemiş bir PR'ın üstüne iş gerekiyorsa yeni branch o PR'ın
+branch'inden açılır, PR `main`'e açılır ve açıklamasına önce hangi PR'ın merge
+edilmesi gerektiği yazılır.
+
 ### Paket yöneticisi: npm
 
 Her pakette tek lockfile `package-lock.json`, CI `npm ci` kullanıyor.

@@ -18,9 +18,9 @@ const navItems: NavItem[] = [
   {
     title: "Takımlarımız",
     children: [
-      { title: "Mobil Web", href: "/technical-team/mobil-web" },
-      { title: "AI", href: "/technical-team/ai" },
-      { title: "Game", href: "/technical-team/game" },
+      { title: "Mobil ve Web", href: "/technical-team/mobil-web" },
+      { title: "Yapay Zeka", href: "/technical-team/ai" },
+      { title: "Oyun", href: "/technical-team/game" },
     ],
   },
   ...(RSS_ENABLED ? [{ title: "Yayınlar", href: "/publications" }] : []),

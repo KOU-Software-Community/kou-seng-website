@@ -2,7 +2,7 @@
   "id": 2,
   "submissionType": "technical",
   "slug": "mobil-web",
-  "title": "Mobil Web Geliştirme Takımı Başvurusu",
+  "title": "Mobil ve Web Geliştirme Takımı Başvurusu",
   "description": "Mobil uygulama ve web geliştirme projelerinde yer almak için teknik başvuru formu. Takıma katılmak için lütfen aşağıdaki bilgileri eksiksiz doldurunuz.",
   "isOpen": false,
   "deadline": "5 Ekim 2025",
@@ -80,6 +80,7 @@
       "required": true,
       "options": [
         { "value": "", "label": "Seçiniz" },
+        { "value": "mobile", "label": "Mobil Uygulama Geliştirme" },
         { "value": "frontend", "label": "Frontend Geliştirme" },
         { "value": "backend", "label": "Backend Geliştirme" },
         { "value": "fullstack", "label": "Full-stack Geliştirme" },
@@ -87,10 +88,52 @@
       ]
     },
     {
+      "id": "ai_tools",
+      "label": "Coding agent'ları ve yeni nesil AI destekli geliştirme araçlarıyla deneyiminizi anlatınız.",
+      "type": "textarea",
+      "placeholder": "Claude Code, Codex, Cursor, Windsurf vb. araçlardan kullandıklarınızı belirtiniz. Mümkünse bu araçları kullandığınız bir proje, görev veya kullanım senaryosundan kısaca bahsediniz.",
+      "required": true
+    },
+    {
+      "id": "experience",
+      "label": "Mobil ve web geliştirme deneyiminizi anlatınız.",
+      "type": "textarea",
+      "placeholder": "Kullandığınız dil, framework ve araçları (örn. React, Next.js, React Native, Flutter, Swift, Kotlin, Node.js); varsa yaptığınız proje ve çalışmalardan örneklerle birlikte belirtiniz.",
+      "required": true
+    },
+    {
+      "id": "api",
+      "label": "API ve backend deneyiminizi anlatınız (opsiyonel)",
+      "type": "textarea",
+      "placeholder": "REST API tasarladıysanız veya kullandıysanız, Firebase, Supabase gibi servislerle ya da veritabanlarıyla çalıştıysanız kısaca açıklayınız.",
+      "required": false
+    },
+    {
+      "id": "cloud",
+      "label": "Uygulama yayınlama ve cloud deneyiminizi anlatınız (opsiyonel)",
+      "type": "textarea",
+      "placeholder": "App Store veya Google Play'de uygulama yayınladıysanız ya da Vercel, AWS, Google Cloud gibi platformlarda proje yayına aldıysanız kısaca belirtiniz.",
+      "required": false
+    },
+    {
+      "id": "motivation",
+      "label": "Mobil ve Web Geliştirme Takımı'na neden katılmak istiyorsunuz?",
+      "type": "textarea",
+      "placeholder": "Takıma katılma motivasyonunuzu ve yıl sonunda hangi konularda kendinizi geliştirmiş veya neler üretmiş olmak istediğinizi kısaca açıklayınız.",
+      "required": true
+    },
+    {
       "id": "github",
-      "label": "GitHub URL",
+      "label": "GitHub profil linkiniz",
       "type": "url",
       "placeholder": "GitHub profilinizin URL'ini giriniz",
+      "required": true
+    },
+    {
+      "id": "linkedin",
+      "label": "LinkedIn profil linkiniz",
+      "type": "url",
+      "placeholder": "LinkedIn profilinizin URL'ini giriniz",
       "required": true
     },
     {
@@ -99,20 +142,6 @@
       "type": "url",
       "placeholder": "Portfolyo sitenizin URL'ini giriniz",
       "required": false
-    },
-    {
-      "id": "experience",
-      "label": "Mobil / Web Geliştirme Deneyiminiz",
-      "type": "textarea",
-      "placeholder": "Daha önce çalıştığınız projeler, kullandığınız teknolojiler ve deneyim süreniz hakkında bilgi veriniz",
-      "required": true
-    },
-    {
-      "id": "motivation",
-      "label": "Neden Mobil Web Geliştirme Takımına katılmak istiyorsunuz?",
-      "type": "textarea",
-      "placeholder": "Motivasyonunuzu kısaca açıklayınız",
-      "required": true
     }
   ]
 }

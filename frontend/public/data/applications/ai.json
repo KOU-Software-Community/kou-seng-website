@@ -73,32 +73,60 @@
       ]
     },
     {
+      "id": "ai_tools",
+      "label": "Coding agent'ları ve yeni nesil AI destekli geliştirme araçlarıyla deneyiminizi anlatınız.",
+      "type": "textarea",
+      "placeholder": "Claude Code, Codex, Cursor, Windsurf vb. araçlardan kullandıklarınızı belirtiniz. Mümkünse bu araçları kullandığınız bir proje, görev veya kullanım senaryosundan kısaca bahsediniz.",
+      "required": true
+    },
+    {
+      "id": "experience",
+      "label": "Python, veri bilimi ve yapay zeka alanlarındaki deneyiminizi anlatınız.",
+      "type": "textarea",
+      "placeholder": "Kullandığınız kütüphane, framework veya araçları (örn. NumPy, Pandas, scikit-learn, PyTorch, TensorFlow); varsa yaptığınız proje ve çalışmalardan örneklerle birlikte belirtiniz.",
+      "required": true
+    },
+    {
+      "id": "api",
+      "label": "API kullanımıyla ilgili deneyiminizi anlatınız (opsiyonel)",
+      "type": "textarea",
+      "placeholder": "Özellikle yapay zeka modeli API'leriyle deneyiminiz varsa kısaca açıklayınız.",
+      "required": false
+    },
+    {
+      "id": "cloud",
+      "label": "Cloud platformlarıyla ilgili deneyiminizi anlatınız (opsiyonel)",
+      "type": "textarea",
+      "placeholder": "AWS, Microsoft Azure, Google Cloud veya benzeri platformları kullandıysanız hangi servislerle ve ne amaçla çalıştığınızı belirtiniz.",
+      "required": false
+    },
+    {
+      "id": "motivation",
+      "label": "Yapay Zeka Takımı'na neden katılmak istiyorsunuz?",
+      "type": "textarea",
+      "placeholder": "Takıma katılma motivasyonunuzu ve yıl sonunda hangi konularda kendinizi geliştirmiş veya neler üretmiş olmak istediğinizi kısaca açıklayınız.",
+      "required": true
+    },
+    {
       "id": "github",
-      "label": "GitHub URL",
+      "label": "GitHub profil linkiniz",
       "type": "url",
       "placeholder": "GitHub profilinizin URL'ini giriniz",
       "required": true
     },
     {
       "id": "linkedin",
-      "label": "Linkedin URL",
+      "label": "LinkedIn profil linkiniz",
       "type": "url",
-      "placeholder": "Linkedin profilinizin URL'ini giriniz",
+      "placeholder": "LinkedIn profilinizin URL'ini giriniz",
       "required": true
     },
     {
-      "id": "experience",
-      "label": "Geçmiş Deneyiminiz",
-      "type": "textarea",
-      "placeholder": "Daha önce çalıştığınız projeler, kullandığınız teknolojiler ve deneyim süreniz hakkında bilgi veriniz",
-      "required": true
-    },
-    {
-      "id": "motivation",
-      "label": "Neden Yapay Zeka Takımına katılmak istiyorsunuz?",
-      "type": "textarea",
-      "placeholder": "Motivasyonunuzu kısaca açıklayınız",
-      "required": true
+      "id": "kaggle",
+      "label": "Kaggle profil linkiniz (opsiyonel)",
+      "type": "url",
+      "placeholder": "Kaggle profilinizin URL'ini giriniz",
+      "required": false
     }
   ]
 }

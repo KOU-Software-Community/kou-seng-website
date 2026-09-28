@@ -17,11 +17,11 @@ const formatRole = (role: string): string => {
         case 'admin':
             return 'Admin';
         case 'mobil-web':
-            return 'Mobil Web Geliştirme Takımı';
+            return 'Mobil ve Web Geliştirme Takımı';
         case 'ai':
-            return 'AI Takımı';
+            return 'Yapay Zeka Takımı';
         case 'game':
-            return 'Oyun Takımı';
+            return 'Oyun Geliştirme Takımı';
         case 'sponsor':
             return 'Sponsorluk Ekibi';
         default:
@@ -361,9 +361,9 @@ export default function AdminManagement() {
                                 aria-label="Kullanıcı rolü"
                             >
                                 <option value="admin">Admin</option>
-                                <option value="mobil-web">Mobil Web Geliştirme Takımı</option>
-                                <option value="ai">AI Takımı</option>
-                                <option value="game">Oyun Takımı</option>
+                                <option value="mobil-web">Mobil ve Web Geliştirme Takımı</option>
+                                <option value="ai">Yapay Zeka Takımı</option>
+                                <option value="game">Oyun Geliştirme Takımı</option>
                                 <option value="sponsor">Sponsorluk Ekibi</option>
                             </select>
                         </div>
@@ -436,9 +436,9 @@ export default function AdminManagement() {
                                 aria-label="Kullanıcı rolü"
                             >
                                 <option value="admin">Admin</option>
-                                <option value="mobil-web">Mobil Web Geliştirme Takımı</option>
-                                <option value="ai">AI Takımı</option>
-                                <option value="game">Oyun Takımı</option>
+                                <option value="mobil-web">Mobil ve Web Geliştirme Takımı</option>
+                                <option value="ai">Yapay Zeka Takımı</option>
+                                <option value="game">Oyun Geliştirme Takımı</option>
                                 <option value="sponsor">Sponsorluk Ekibi</option>
                             </select>
                         </div>

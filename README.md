@@ -9,7 +9,7 @@ Kocaeli Üniversitesi Yazılım Kulübü'nün resmi web sitesi. Kulüp üyelerin
 - **Başvuru Sistemi**: Yeni üyelik başvurularının online yönetimi
 - **Duyuru Sistemi**: Kulüp duyurularının dinamik paylaşımı
 - **İletişim Formu**: Ziyaretçilerle etkili iletişim
-- **Teknik Takım Sayfaları**: AI, Game ve Web geliştirme ekiplerinin tanıtımı
+- **Teknik Takım Sayfaları**: Mobil ve Web Geliştirme, Yapay Zeka ve Oyun Geliştirme takımlarının tanıtımı
 - **RSS Feed Entegrasyonu**: Haber ve güncelleme takibi
 - **Koyu/Açık Tema**: Kullanıcı tercihine göre tema seçimi
 
@@ -79,4 +79,4 @@ npm run dev
 
 ---
 
-**Geliştirici**: Kocaeli Üniversitesi Yazılım Kulübü Web Takımı
+**Geliştirici**: Kocaeli Üniversitesi Yazılım Kulübü Mobil ve Web Geliştirme Takımı

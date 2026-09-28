@@ -2,7 +2,7 @@
   "id": 4,
   "submissionType": "technical",
   "slug": "game",
-  "title": "Oyun Takımı Başvurusu",
+  "title": "Oyun Geliştirme Takımı Başvurusu",
   "description": "Oyun projelerinde yer almak için teknik başvuru formu. Takıma başvurmak için lütfen aşağıdaki bilgileri eksiksiz doldurunuz.",
   "isOpen": false,
   "deadline": "5 Ekim 2025",
@@ -88,7 +88,7 @@
     },
     {
       "id": "motivation",
-      "label": "Neden Oyun geliştirme takımına katılmak istiyorsunuz?",
+      "label": "Oyun Geliştirme Takımı'na neden katılmak istiyorsunuz?",
       "type": "textarea",
       "placeholder": "Motivasyonunuzu kısaca açıklayınız",
       "required": true

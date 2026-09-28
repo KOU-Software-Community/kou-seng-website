@@ -64,9 +64,17 @@ const formatCustomFields = (field: string): string => {
       case 'question_portfolio':
         return 'Portfolyo URL';
       case 'question_linkedin':
-        return 'Linkedin URL';
+        return 'LinkedIn URL';
       case 'question_itchio':
         return 'Itch.io URL';
+      case 'question_ai_tools':
+        return 'AI Araçları Deneyimi';
+      case 'question_api':
+        return 'API Deneyimi';
+      case 'question_cloud':
+        return 'Cloud / Yayınlama Deneyimi';
+      case 'question_kaggle':
+        return 'Kaggle URL';
       default:
         return field;
     }

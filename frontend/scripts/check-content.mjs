@@ -9,6 +9,7 @@
 //   - leaderMessage.author uyelerde yok  -> ayrilmis bir liderin adi sayfada kalir
 //   - skills alani eksik                 -> teamDetail.tsx `member.skills.length` ile patlar
 //   - projects[].stores dizi degil       -> teamDetail.tsx `project.stores?.map` ile patlar
+//   - forma eklenen alan allowlist'te yok -> her basvuru 400 doner, build ve form sessiz gecer
 //
 // ÖNEMLİ: bu betik hiçbir zaman sessizce atlamaz. Ölçemedigi her sey FAIL'dir.
 
@@ -168,6 +169,39 @@ console.log('\nteams/*.json — takimlar');
           else ok(label, `${s.name} ${s.url ?? '(yakinda)'}`);
         }
       }
+    }
+  }
+}
+
+console.log('\napplications/*.json — basvuru formlari ↔ backend');
+{
+  // applyDetail.tsx kisisel alanlar disindaki her alani `question_<id>` olarak
+  // gonderir. Backend yalnizca allowedCustomFields'i kabul eder: eksik anahtar her
+  // gonderimde 400 doner, ama build ve form ekranda normal gorunur.
+  const PERSONAL = ['name', 'surname', 'studentId', 'email', 'phone', 'faculty', 'department', 'grade'];
+  const read = (p) => (existsSync(p) ? readFileSync(p, 'utf8') : '');
+  const allowed = read(join(ROOT, '..', 'backend', 'controllers', 'submissionsController.js'))
+    .match(/allowedCustomFields\s*=\s*\[([^\]]*)\]/)?.[1].match(/question_[a-z0-9_]+/g);
+  const labelSwitch = (f) => read(join(ROOT, 'src', 'components', 'pages', 'admin', f)).match(/const formatCustomFields[\s\S]*?\n {2}};/)?.[0];
+  const labels = labelSwitch('technical-team.tsx');
+  if (!allowed) bad('applications', 'backend allowedCustomFields okunamadi (olculemedi)');
+  else if (!labels) bad('applications', 'technical-team.tsx formatCustomFields okunamadi (olculemedi)');
+  else {
+    if (labels !== labelSwitch('general-membership.tsx')) bad('applications', 'formatCustomFields: general-membership.tsx kopyasi technical-team.tsx ile ayni degil');
+    const dir = join(DATA, 'applications');
+    for (const f of readdirSync(dir).filter((x) => x.endsWith('.json') && x !== 'index.json')) {
+      const d = JSON.parse(readFileSync(join(dir, f), 'utf8'));
+      const extra = d.fields.filter((x) => !PERSONAL.includes(x.id));
+      const before = failures.length;
+      for (const x of extra) {
+        const key = `question_${x.id}`;
+        // createGeneralSubmission customFields okumuyor: 201 doner, alan sessizce atilir
+        if (d.submissionType !== 'technical') bad(f, `"${x.id}" genel formda kaydedilmez (customFields kabul etmiyor)`);
+        else if (!allowed.includes(key)) bad(f, `${key} backend allowedCustomFields'te yok — her gonderim 400 doner`);
+        else if (x.type === 'number') bad(f, `${key} type number — backend yalniz string kabul eder, 400 doner`);
+        else if (!labels.includes(`case '${key}'`)) bad(f, `${key} formatCustomFields'te yok — panelde ham anahtar gorunur`);
+      }
+      if (failures.length === before) ok(f, extra.length ? `${extra.length} alan: allowlist + admin etiketi tamam` : 'yalniz kisisel alanlar');
     }
   }
 }

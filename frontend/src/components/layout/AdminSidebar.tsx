@@ -274,9 +274,9 @@ export default function AdminSidebar() {
                       {isTechnicalTeamOpen && (
                         <SidebarMenuSub id="technical-team-submenu">
                           {[
-                            { label: 'Mobil Web', slug: 'mobil-web' },
-                            { label: 'AI', slug: 'ai' },
-                            { label: 'Game', slug: 'game' },
+                            { label: 'Mobil ve Web', slug: 'mobil-web' },
+                            { label: 'Yapay Zeka', slug: 'ai' },
+                            { label: 'Oyun', slug: 'game' },
                           ]
                             .filter((sub) => {
                               // admin tüm altları görür; diğer roller sadece kendi alanını görür

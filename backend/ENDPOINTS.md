@@ -41,41 +41,21 @@ Yönetim panelindeki diğer yöneticileri yönetmek için kullanılır.
   - **Açıklama:** Belirtilen ID'ye sahip yöneticiyi siler.
   - **Gerekli Header:** `Authorization: Bearer <token>`
 
-## Başvuru Formları Yönetimi (Recruitments)
-
-Yönetim panelinden dinamik olarak teknik takım başvuru formları oluşturmak için kullanılır.
-
-- **GET** `/recruitments`
-  - **Açıklama:** Aktif olan tüm teknik takım başvuru formlarını listeler. (Public)
-
-- **GET** `/recruitments/:slug`
-  - **Açıklama:** Belirtilen `slug`'a sahip başvuru formunun detaylarını getirir. (Public)
-
-- **POST** `/recruitments`
-  - **Açıklama:** Yeni bir teknik takım başvuru formu oluşturur.
-  - **Gerekli Header:** `Authorization: Bearer <token>`
-  - **Request Body:** `{ "title": "string", "slug": "string", "description": "string", "questions": ["string"], "isOpen": "boolean" }`
-
-- **PUT** `/recruitments/:slug`
-  - **Açıklama:** Bir başvuru formunu günceller.
-  - **Gerekli Header:** `Authorization: Bearer <token>`
-  - **Request Body:** `{ "title": "string", "slug": "string", "description": "string", "questions": ["string"], "isOpen": "boolean" }`
-
-- **DELETE** `/recruitments/:id`
-  - **Açıklama:** Bir başvuru formunu siler.
-  - **Gerekli Header:** `Authorization: Bearer <token>`
-
 ## Gelen Başvurular (Submissions)
 
 Kullanıcıların doldurduğu genel ve teknik başvuruları yönetmek için kullanılır.
+Başvuru formlarının kendisi backend'de değil, `frontend/public/data/applications/<slug>.json`
+dosyalarında tanımlı; forma alan eklerken CLAUDE.md'deki "Başvuru formuna alan ekleme"
+listesine bak.
 
 - **POST** `/submissions/general`
   - **Açıklama:** Genel üyelik başvurusunu alır ve kaydeder.
   - **Request Body:** `{ "name": "string", "studentId": "string", "email": "string", "phone": "string", "faculty": "string", "department": "string", "grade": "number" }`
 
-- **POST** `/submissions/technical/:recruitmentId`
-  - **Açıklama:** Teknik takım başvurusunu alır ve kaydeder.
-  - **Request Body:** `{ "answers": ["string"] }`
+- **POST** `/submissions/technical/:slug`
+  - **Açıklama:** Teknik takım başvurusunu alır ve kaydeder. `slug`: `mobil-web`, `ai` veya `game` (form dosyasının adı).
+  - **Request Body:** Genel başvurudaki öğrenci alanları + formdaki diğer her alan için `"question_<id>": "string"` (en fazla 5000 karakter). Kabul edilen anahtarlar `controllers/submissionsController.js` → `allowedCustomFields`; listede olmayan anahtar 400 döner.
+  - **Yanıtlar:** 201 kaydedildi; 400 eksik veya geçersiz alan; 409 aynı kategoride aynı öğrenci no, e-posta ya da telefonla önceki başvuru; 429 istek sınırı.
 
 - **GET** `/submissions`
   - **Açıklama:** Tüm gelen başvuruları listeler. Filtreleme için query parametreleri kullanılabilir.

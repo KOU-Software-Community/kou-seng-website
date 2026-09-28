@@ -416,7 +416,10 @@ Listeyi değiştirirsen ikisini birlikte değiştir.
 `next.config.ts` bir Content-Security-Policy gönderiyor. Yeni bir dış kaynak
 (script, iframe, API adresi) eklenirse oraya da eklenmeli; yoksa tarayıcı onu
 engeller ve yalnızca konsola "Refused to …" yazar. Görseller `next/image`
-üzerinden geldiği için `img-src 'self'` yeterli.
+üzerinden geldiği için `img-src 'self'` yeterli. Cloudflare Web Analytics
+beacon'ını Cloudflare her sayfaya kendisi ekliyor; `script-src`'deki
+`static.cloudflareinsights.com` ve `connect-src`'deki `cloudflareinsights.com`
+bu yüzden var. Kaldırılırsa analitik toplanmaz ve her sayfada konsol hatası çıkar.
 
 ### Rate limit ve Cloudflare
 

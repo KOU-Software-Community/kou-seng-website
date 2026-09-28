@@ -7007,7 +7007,7 @@
       "node_kind": "heading",
       "norm_label": "lint",
       "source_file": "CLAUDE.md",
-      "source_location": "L447"
+      "source_location": "L450"
     },
     {
       "id": "claude_mongoose_sanitizefilter_a\u00e7\u0131k_operat\u00f6rl\u00fc_sorgu_trusted_ister",
@@ -7079,7 +7079,7 @@
       "node_kind": "heading",
       "norm_label": "rate limit ve cloudflare",
       "source_file": "CLAUDE.md",
-      "source_location": "L421"
+      "source_location": "L424"
     },
     {
       "id": "claude_sosyal_medya_linkleri",
@@ -8753,7 +8753,7 @@
       "file_type": "code",
       "norm_label": "contentsecuritypolicy",
       "source_file": "frontend/next.config.ts",
-      "source_location": "L11"
+      "source_location": "L13"
     },
     {
       "id": "frontend_next_config_nextconfig",
@@ -8764,7 +8764,7 @@
       "file_type": "code",
       "norm_label": "nextconfig",
       "source_file": "frontend/next.config.ts",
-      "source_location": "L25"
+      "source_location": "L27"
     },
     {
       "id": "frontend_scripts_check_content",
@@ -28604,7 +28604,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L421",
+      "source_location": "L424",
       "weight": 1.0
     },
     {
@@ -28615,7 +28615,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L447",
+      "source_location": "L450",
       "weight": 1.0
     },
     {
@@ -29121,7 +29121,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/next.config.ts",
-      "source_location": "L11",
+      "source_location": "L13",
       "weight": 1.0
     },
     {
@@ -29132,7 +29132,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/next.config.ts",
-      "source_location": "L25",
+      "source_location": "L27",
       "weight": 1.0
     },
     {
@@ -35480,5 +35480,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "db081026c33f186610ab4d655b4de921e18a87f5"
+  "built_at_commit": "583b9e8d31d30b35fde75139a041b96d138a6b0d"
 }

@@ -32,12 +32,17 @@ export const useApplicationWindows = (): UseApplicationWindowsReturn => {
   const refresh = useCallback(
     async (signal?: AbortSignal) => {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/submissions/windows`, {
-          cache: 'no-store',
-          headers: getAuthHeader(),
-          signal,
-        });
-        const data = await response.json().catch(() => null);
+        // Backend askıda kalırsa sayfa "yükleniyor"da beklemesin: 10 sn'de yanıt yoksa hata sayılır
+        const deadline = new Promise<never>((_, reject) => setTimeout(() => reject(new Error('zaman aşımı')), 10_000));
+        const response = await Promise.race([
+          fetch(`${process.env.NEXT_PUBLIC_API_URL}/submissions/windows`, {
+            cache: 'no-store',
+            headers: getAuthHeader(),
+            signal,
+          }),
+          deadline,
+        ]);
+        const data = await Promise.race([response.json().catch(() => null), deadline]);
         if (!response.ok || !Array.isArray(data?.data)) throw new Error(`HTTP ${response.status}`);
         setWindows(Object.fromEntries((data.data as ApplicationWindow[]).map((w) => [w.slug, w])));
         setError(null);

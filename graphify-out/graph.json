@@ -6851,7 +6851,7 @@
       "node_kind": "heading",
       "norm_label": "basvuru formuna alan ekleme",
       "source_file": "CLAUDE.md",
-      "source_location": "L366"
+      "source_location": "L368"
     },
     {
       "id": "claude_ba\u015fvurular\u0131_silme_saklama_s\u00fcresi",
@@ -6863,7 +6863,7 @@
       "node_kind": "heading",
       "norm_label": "basvurular\u0131 silme (saklama suresi)",
       "source_file": "CLAUDE.md",
-      "source_location": "L398"
+      "source_location": "L400"
     },
     {
       "id": "claude_branch_ler",
@@ -6911,7 +6911,7 @@
       "node_kind": "heading",
       "norm_label": "duyuru html'i ve csp",
       "source_file": "CLAUDE.md",
-      "source_location": "L407"
+      "source_location": "L409"
     },
     {
       "id": "claude_frontend_frontend",
@@ -7007,7 +7007,7 @@
       "node_kind": "heading",
       "norm_label": "lint",
       "source_file": "CLAUDE.md",
-      "source_location": "L445"
+      "source_location": "L447"
     },
     {
       "id": "claude_mongoose_sanitizefilter_a\u00e7\u0131k_operat\u00f6rl\u00fc_sorgu_trusted_ister",
@@ -7079,7 +7079,7 @@
       "node_kind": "heading",
       "norm_label": "rate limit ve cloudflare",
       "source_file": "CLAUDE.md",
-      "source_location": "L419"
+      "source_location": "L421"
     },
     {
       "id": "claude_sosyal_medya_linkleri",
@@ -28571,7 +28571,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L366",
+      "source_location": "L368",
       "weight": 1.0
     },
     {
@@ -28582,7 +28582,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L398",
+      "source_location": "L400",
       "weight": 1.0
     },
     {
@@ -28593,7 +28593,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L407",
+      "source_location": "L409",
       "weight": 1.0
     },
     {
@@ -28604,7 +28604,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L419",
+      "source_location": "L421",
       "weight": 1.0
     },
     {
@@ -28615,7 +28615,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L445",
+      "source_location": "L447",
       "weight": 1.0
     },
     {
@@ -35067,7 +35067,7 @@
       "confidence_score": 0.95,
       "context": "createGeneralSubmission",
       "source_file": "CLAUDE.md",
-      "source_location": "L387",
+      "source_location": "L389",
       "weight": 1.0
     },
     {
@@ -35480,5 +35480,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "714a8fcd20c05d655556f5cf5e5a1ed0ba81080a"
+  "built_at_commit": "db081026c33f186610ab4d655b4de921e18a87f5"
 }

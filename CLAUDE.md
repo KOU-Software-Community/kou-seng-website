@@ -353,7 +353,9 @@ Panelde: **Başvuru Dönemleri** (`/admin/dashboard/application-windows`, yalnı
 admin). Alanlar tarayıcının saatiyle girilir, sitede Türkiye saatiyle gösterilir;
 "Kapat" iki tarihi de siler. `/apply` ve form sayfası durumu
 `GET /submissions/windows`'tan okur (genel limite tabi); alınamazsa formlar
-kapalı görünür ve "Başvuru durumu alınamadı" uyarısı çıkar. Deploy sırası: önce
+kapalı görünür ve "Başvuru durumu alınamadı" uyarısı çıkar. Oturum açıksa istek
+token'la gider: geçerli token'lı istek genel limite sayılmadığı için admin
+sayfası, kampüs gibi paylaşılan bir IP'de limit dolsa da açılır. Deploy sırası: önce
 backend, sonra frontend; frontend önce giderse backend gelene kadar formlar
 kapalı görünür.
 

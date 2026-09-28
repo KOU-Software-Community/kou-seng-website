@@ -27,23 +27,37 @@ export const useApplicationWindows = (): UseApplicationWindowsReturn => {
   const [error, setError] = useState<string | null>(null);
   const { getAuthHeader } = useAuth();
 
-  const refresh = useCallback(async () => {
-    try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/submissions/windows`, { cache: 'no-store' });
-      const data = await response.json().catch(() => null);
-      if (!response.ok || !Array.isArray(data?.data)) throw new Error(`HTTP ${response.status}`);
-      setWindows(Object.fromEntries((data.data as ApplicationWindow[]).map((w) => [w.slug, w])));
-      setError(null);
-    } catch {
-      setWindows(null);
-      setError('Başvuru durumu alınamadı. Lütfen daha sonra tekrar deneyiniz.');
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
+  // Token varsa gönderilir: genel istek sınırı geçerli token'lı istekleri saymaz, böylece
+  // admin sayfası kampüs gibi paylaşılan bir IP'de sınır dolsa da açılır. Ziyaretçide header yok.
+  const refresh = useCallback(
+    async (signal?: AbortSignal) => {
+      try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/submissions/windows`, {
+          cache: 'no-store',
+          headers: getAuthHeader(),
+          signal,
+        });
+        const data = await response.json().catch(() => null);
+        if (!response.ok || !Array.isArray(data?.data)) throw new Error(`HTTP ${response.status}`);
+        setWindows(Object.fromEntries((data.data as ApplicationWindow[]).map((w) => [w.slug, w])));
+        setError(null);
+      } catch {
+        if (signal?.aborted) return;
+        setWindows(null);
+        setError('Başvuru durumu alınamadı. Lütfen daha sonra tekrar deneyiniz.');
+      } finally {
+        if (!signal?.aborted) setIsLoading(false);
+      }
+    },
+    [getAuthHeader]
+  );
 
+  // Token localStorage'dan bir render sonra okunur; getAuthHeader değişince istek token'la
+  // yenilenir ve öncekisi iptal edilir ki geç gelen eski yanıt yenisinin üstüne yazmasın.
   useEffect(() => {
-    refresh();
+    const controller = new AbortController();
+    refresh(controller.signal);
+    return () => controller.abort();
   }, [refresh]);
 
   const updateWindow = async (slug: string, opensAt: string | null, closesAt: string | null) => {

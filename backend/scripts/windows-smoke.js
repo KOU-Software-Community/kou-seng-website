@@ -6,7 +6,8 @@
 //
 // Yalnızca yerelde ve kullanıcısı olmayan boş bir veritabanında çalışır: ilk
 // admini KEY ile oluşturur (kullanıcı varsa 3. adım 401 alır), pencere
-// tarihlerini değiştirir. CI'da loadtest'ten önce koşar.
+// tarihlerini değiştirir, başvuru kaydı yazar. CI'da loadtest'ten önce koşar:
+// 5 form isteği harcar (form limiti 15 dk'da 30) ve genel formu açık bırakır.
 //
 // Çıkış kodu: 0 hepsi geçti, 1 bir adım başarısız, 2 ortam uygun değil.
 
@@ -45,6 +46,25 @@ const iso = (offsetMs) => new Date(Date.now() + offsetMs).toISOString();
 const bySlug = (list) => Object.fromEntries(list.map((w) => [w.slug, w]));
 const PASSWORD = 'smoke-password-123';
 let adminToken;
+
+// loadtest.js'teki başvuru gövdesiyle aynı alanlar; başka alan (ör. surname)
+// teknik uçta allowlist'e takılır. Öğrenci no / e-posta / telefon her başvuruda farklı.
+const RUN = Date.now().toString(36);
+let seq = 0;
+const applicant = () => {
+  const id = `${RUN}-${++seq}`;
+  return {
+    name: `Smoke Aday${seq}`, studentId: id, email: `smoke+${id}@example.invalid`, phone: id,
+    faculty: 'Mühendislik', department: 'Yazılım Mühendisliği', grade: 2,
+  };
+};
+const submit = (path) => api('POST', `/submissions/${path}`, { body: applicant() });
+const expectClosed = (res) => {
+  expectStatus(res, 403);
+  assert.equal(res.body.message, 'Bu başvuru şu anda kapalı.');
+};
+const setWindow = async (slug, opensAt, closesAt) =>
+  expectStatus(await api('PATCH', `/submissions/windows/${slug}`, { token: adminToken, body: { opensAt, closesAt } }), 200);
 
 await step('GET /submissions/windows: varsayılanlar (genel açık, teknikler kapalı)', async () => {
   const res = await api('GET', '/submissions/windows');
@@ -107,4 +127,24 @@ await step('ai açık: açılış 1 dk önce, kapanış 1 sa sonra', async () =>
   const res = await api('PATCH', '/submissions/windows/ai', { token: adminToken, body: { opensAt: iso(-60e3), closesAt: iso(H) } });
   expectStatus(res, 200);
   assert.equal(res.body.data.isOpen, true);
+});
+
+await step('açık teknik forma (ai) başvuru → 201', async () => {
+  expectStatus(await submit('technical/ai'), 201);
+});
+
+await step('ai kapatılınca başvuru → 403', async () => {
+  await setWindow('ai', null, null);
+  expectClosed(await submit('technical/ai'));
+});
+
+await step('planlanmış forma (game) başvuru → 403', async () => {
+  expectClosed(await submit('technical/game'));
+});
+
+await step('genel üyelik kapatılınca 403, yeniden açılınca 201', async () => {
+  await setWindow('general', null, null);
+  expectClosed(await submit('general'));
+  await setWindow('general', new Date(0).toISOString(), null);
+  expectStatus(await submit('general'), 201);
 });

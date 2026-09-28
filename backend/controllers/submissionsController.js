@@ -3,11 +3,15 @@ import Submission from "../models/Submission.js";
 import logger from "../helpers/logger.js";
 import toSearchPattern from "../helpers/searchPattern.js";
 import { Parser, formatters } from "json2csv";
+import { getWindow } from "./applicationWindowsController.js";
+import { isWindowOpen } from "../helpers/applicationWindow.js";
 
 // Formdan gelen alanlar düz metin olmalı: nesne/dizi gibi değerler sorguya
 // ulaşmadan reddedilir, uzunluk da sınırlanır.
 const isText = (value, max = 200) => typeof value === "string" && value.length <= max;
 const INVALID_FIELD_MESSAGE = "Gönderilen alanlardan biri geçersiz veya çok uzun.";
+// Başvuru dönemi dışındaki gönderim gövdeye bakılmadan reddedilir (admin paneli → Başvuru Dönemleri).
+const CLOSED_MESSAGE = "Bu başvuru şu anda kapalı.";
 
 // CSV Excel/Sheets'te açıldığında başvurandan gelen metin formül olarak
 // çalışmasın: = + - @ tab veya CR ile başlayan hücrenin başına ' eklenir.
@@ -22,6 +26,10 @@ const csvString = (value) =>
 // @access  Public
 export const createGeneralSubmission = async (req, res) => {
   try {
+    if (!isWindowOpen(await getWindow("general"))) {
+      return res.status(403).json({ success: false, message: CLOSED_MESSAGE });
+    }
+
     const { name, studentId, email, phone, faculty, department, grade } = req.body;
 
     // Zorunlu alanları kontrol et
@@ -86,15 +94,6 @@ export const createGeneralSubmission = async (req, res) => {
 export const createTechnicalSubmission = async (req, res) => {
   try {
     const { slug } = req.params;
-    const { name, studentId, email, phone, faculty, department, grade, ...customFields } = req.body;
-
-    // Zorunlu alanları kontrol et
-    if (!name || !studentId || !email || !phone || !faculty || !department || grade === undefined || grade === null || grade === '') {
-      return res.status(400).json({
-        success: false,
-        message: "Lütfen tüm zorunlu alanları doldurunuz."
-      });
-    }
 
     // Geçerli bir teknik kategori mi kontrol et
     const validCategories = ["mobil-web", "ai", "game"];
@@ -102,6 +101,20 @@ export const createTechnicalSubmission = async (req, res) => {
       return res.status(400).json({
         success: false,
         message: "Geçersiz başvuru kategorisi."
+      });
+    }
+
+    if (!isWindowOpen(await getWindow(slug))) {
+      return res.status(403).json({ success: false, message: CLOSED_MESSAGE });
+    }
+
+    const { name, studentId, email, phone, faculty, department, grade, ...customFields } = req.body;
+
+    // Zorunlu alanları kontrol et
+    if (!name || !studentId || !email || !phone || !faculty || !department || grade === undefined || grade === null || grade === '') {
+      return res.status(400).json({
+        success: false,
+        message: "Lütfen tüm zorunlu alanları doldurunuz."
       });
     }
 

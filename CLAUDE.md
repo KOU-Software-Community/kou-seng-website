@@ -39,8 +39,9 @@ cd frontend && npm run check:content && npm run lint && npm run build
 cd ../backend && node --test
 ```
 
-CI her PR'da ve `main`'e push'ta frontend'de bu üçünü koşturur; backend'i
-geçici bir MongoDB ile `npm start` üzerinden gerçekten ayağa kaldırıp
+CI her PR'da ve `main`'e push'ta frontend'de bu üçünü koşturur; backend'de
+`node --test` koşar, backend'i geçici bir MongoDB ile `npm start` üzerinden
+gerçekten ayağa kaldırıp önce `scripts/windows-smoke.js`'i, sonra
 `scripts/loadtest.js`'i (`--submit --n 40`, ardından `/health`'e `--n 100`)
 smoke test olarak çalıştırır; iki pakette `npm audit --omit=dev
 --audit-level=high` koşar.
@@ -252,10 +253,12 @@ sitemap kendiliğinden güncelleniyor.
 
 **Slug değiştirirken sırayla:** JSON dosya adları → `slug` alanları → görsel
 klasörü + JSON yolları → `User.js` role enum → `submissionsController`
-`validCategories` → `statusController` sorgusu → frontend tip birleşimleri
+`validCategories` → `helpers/applicationWindow.js` `APPLICATION_SLUGS` (`ApplicationWindow`
+enum'u buradan) → `statusController` sorgusu → frontend tip birleşimleri
 (`useUser.ts`, `admin-management.tsx`) → `AdminSidebar` `limitedRoles`/
 `roleToSlug`/alt menü → dashboard `layout.tsx` rol listesi → `Header.tsx` →
-`next.config.ts` redirect → **veritabanı migration'ı**.
+`next.config.ts` redirect → **veritabanı migration'ı** (`ApplicationWindow.slug`
+dahil).
 
 Migration örneği: Web → Mobil Web geçişi için
 `backend/scripts/migrate-web-to-mobil-web.js` (`--dry-run` ve `--rollback`
@@ -335,6 +338,23 @@ tamamını değil operatör nesnesini sarar: `{ _id: mongoose.trusted({ $in: ids
 Tüm filtre sarılırsa koruma yine devreye girer: ObjectId alanında CastError,
 string alanında boş sonuç.
 
+### Başvuru dönemleri
+
+Formların (`general`, `mobil-web`, `ai`, `game`) açık/kapalı durumu backend'de,
+form başına bir `ApplicationWindow` kaydında durur. Kural
+`helpers/applicationWindow.js`'te (birim testi yanında): form
+`[opensAt, closesAt)` aralığında açık; `opensAt` yoksa kapalı, `closesAt` yoksa
+süresiz açık. Kayıt yoksa genel üyelik açık, teknik formlar kapalı. Karar
+sunucu saatiyle verilir; kapalı forma gelen başvuru, gövdeye bakılmadan 403
+alır ("Bu başvuru şu anda kapalı."). Tarihleri `PATCH /submissions/windows/:slug`
+değiştirir, yalnızca admin.
+
+`scripts/windows-smoke.js` bunları çalışan backend'e karşı sınar. İlk admini
+`KEY` ile oluşturduğu için kullanıcısı olmayan boş bir veritabanı ister ve
+yalnızca `localhost`/`127.0.0.1`'e koşar (başka adreste exit 2). Tarih değiştirip
+başvuru yazar, 5 form isteği harcar ve genel formu açık bırakır; CI'da bu yüzden
+`loadtest`'ten önce koşar, sonrasında form limiti dolmuş olurdu.
+
 ### Başvuru formuna alan ekleme
 
 Form `applications/<slug>.json` → `fields[]`'ten render ediliyor;
@@ -394,8 +414,9 @@ engeller ve yalnızca konsola "Refused to …" yazar. Görseller `next/image`
 `backend/index.js`: genel limit IP başına 15 dk'da 100 istek (geçerli token'lı
 istekler sayılmaz, mail kuyruğu sık yokluyor). Ek olarak, muafiyetsiz:
 `POST /auth/login` ve `PATCH /auth/password` birlikte 15 dk'da 10 **hatalı**
-deneme, başvuru ve iletişim formları birlikte 15 dk'da 30. Smoke testte
-`--submit --n 40`'ın son 10'u bu yüzden 429 alır; loadtest 429'u hata saymaz.
+deneme, başvuru ve iletişim formları birlikte 15 dk'da 30. CI'da
+`windows-smoke` önce 5 form isteği harcadığı için `--submit --n 40`'ın son 15'i
+429 alır; loadtest 429'u hata saymaz.
 
 Site ve API Cloudflare arkasında. Production'da istek Express'e
 `ziyaretçi → Cloudflare → 10.0.1.1 → Coolify proxy` yoluyla ulaşıyor; `10.0.1.1`

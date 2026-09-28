@@ -353,10 +353,9 @@ değiştirir, yalnızca admin.
 Panelde: **Başvuru Dönemleri** (`/admin/dashboard/application-windows`, yalnızca
 admin). Alanlar tarayıcının saatiyle girilir, sitede Türkiye saatiyle gösterilir;
 "Kapat" iki tarihi de siler. `/apply` ve form sayfası durumu
-`GET /submissions/windows`'tan okur (genel limite tabi); alınamazsa formlar
-kapalı görünür ve "Başvuru durumu alınamadı" uyarısı çıkar. Oturum açıksa istek
-token'la gider: geçerli token'lı istek genel limite sayılmadığı için admin
-sayfası, kampüs gibi paylaşılan bir IP'de limit dolsa da açılır. Deploy sırası: önce
+`GET /submissions/windows`'tan okur; alınamazsa ya da 10 sn'de cevap gelmezse
+formlar kapalı görünür ve "Başvuru durumu alınamadı" uyarısı çıkar. Bu isteğin
+kendi limiti var (bkz. "Rate limit ve Cloudflare"). Deploy sırası: önce
 backend, sonra frontend; frontend önce giderse backend gelene kadar formlar
 kapalı görünür.
 
@@ -424,9 +423,12 @@ engeller ve yalnızca konsola "Refused to …" yazar. Görseller `next/image`
 `backend/index.js`: genel limit IP başına 15 dk'da 100 istek (geçerli token'lı
 istekler sayılmaz, mail kuyruğu sık yokluyor). Ek olarak, muafiyetsiz:
 `POST /auth/login` ve `PATCH /auth/password` birlikte 15 dk'da 10 **hatalı**
-deneme, başvuru ve iletişim formları birlikte 15 dk'da 30. CI'da
-`windows-smoke` önce 5 form isteği harcadığı için `--submit --n 40`'ın son 15'i
-429 alır; loadtest 429'u hata saymaz.
+deneme. Başvuru akışının kendi limitleri var ve genel limite **sayılmaz**:
+`GET /submissions/windows` 15 dk'da 600, başvuru ve iletişim formları birlikte
+15 dk'da 100. Sebep kampüs Wi-Fi'ı: yüzlerce öğrenci aynı dış IP'yi paylaşıyor;
+başvuru akışı genel limite sayılsaydı ~30 başvurandan sonra o ağdaki herkes
+formları kapalı görürdü. CI'da `windows-smoke` önce 7 form isteği harcıyor,
+`--submit --n 40`'ın hepsi 201 alır; loadtest 429'u hata saymaz.
 
 Site ve API Cloudflare arkasında. Production'da istek Express'e
 `ziyaretçi → Cloudflare → 10.0.1.1 → Coolify proxy` yoluyla ulaşıyor; `10.0.1.1`

@@ -73,8 +73,7 @@ Migration gerekmez. Kayıt yoksa varsayılan geçerli, admin ilk kaydettiğinde 
 
 - **`GET /submissions/windows`** (herkese açık)
   - Yanıt: `{ success: true, data: [{ slug, opensAt, closesAt, state, isOpen }] }`. Dört form `APPLICATION_SLUGS` sırasıyla gelir.
-  - `Cache-Control: no-store`. Genel istek sınırına tabi (IP başına 15 dk'da 100).
-  - Başvuru gönderimi zaten aynı sınıra tabi olduğu için kapasite değişmez. Sınır dolarsa ziyaretçi, formu doldurmadan önce "Başvuru durumu alınamadı" uyarısını görür.
+  - `Cache-Control: no-store`. Kendi limiti var (IP başına 15 dk'da 600) ve genel limite sayılmaz; başvuru gönderimleri de yalnızca form limitine (15 dk'da 100) sayılır. Kampüs Wi-Fi'ı gibi paylaşılan bir IP'de genel limit dolsa da başvuru akışı çalışır (canlı testte bulundu, 2026-09-28).
 - **`PATCH /submissions/windows/:slug`** (`protect`, `adminOnly`)
   - Gövde: `{ opensAt: string | null, closesAt: string | null }`.
   - Doğrulama (hepsi 400):

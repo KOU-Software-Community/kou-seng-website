@@ -3925,7 +3925,7 @@
       "file_type": "code",
       "norm_label": "bad()",
       "source_file": "frontend/scripts/check-content.mjs",
-      "source_location": "L25"
+      "source_location": "L26"
     },
     {
       "id": "frontend_scripts_check_content_checkimage",
@@ -3937,7 +3937,7 @@
       "file_type": "code",
       "norm_label": "checkimage()",
       "source_file": "frontend/scripts/check-content.mjs",
-      "source_location": "L66"
+      "source_location": "L67"
     },
     {
       "id": "frontend_scripts_check_content_checkperson",
@@ -3949,7 +3949,7 @@
       "file_type": "code",
       "norm_label": "checkperson()",
       "source_file": "frontend/scripts/check-content.mjs",
-      "source_location": "L101"
+      "source_location": "L102"
     },
     {
       "id": "frontend_scripts_check_content_dimensions",
@@ -3961,7 +3961,7 @@
       "file_type": "code",
       "norm_label": "dimensions()",
       "source_file": "frontend/scripts/check-content.mjs",
-      "source_location": "L43"
+      "source_location": "L44"
     },
     {
       "id": "frontend_scripts_check_content_ok",
@@ -3973,7 +3973,7 @@
       "file_type": "code",
       "norm_label": "ok()",
       "source_file": "frontend/scripts/check-content.mjs",
-      "source_location": "L24"
+      "source_location": "L25"
     },
     {
       "id": "frontend_scripts_check_content_sniff",
@@ -3985,7 +3985,7 @@
       "file_type": "code",
       "norm_label": "sniff()",
       "source_file": "frontend/scripts/check-content.mjs",
-      "source_location": "L28"
+      "source_location": "L29"
     },
     {
       "id": "backend_scripts_loadtest_arg",
@@ -7798,7 +7798,7 @@
       "node_kind": "heading",
       "norm_label": "basvuru formuna alan ekleme",
       "source_file": "CLAUDE.md",
-      "source_location": "L320"
+      "source_location": "L321"
     },
     {
       "id": "claude_i_lk_admin_olu\u015fturma_deploy_edilmi\u015f_sunucuda",
@@ -7810,7 +7810,7 @@
       "node_kind": "heading",
       "norm_label": "ilk admin olusturma (deploy edilmis sunucuda)",
       "source_file": "CLAUDE.md",
-      "source_location": "L248"
+      "source_location": "L249"
     },
     {
       "id": "backend_package_dependencies",
@@ -8492,7 +8492,7 @@
       "file_type": "code",
       "norm_label": "data",
       "source_file": "frontend/scripts/check-content.mjs",
-      "source_location": "L21"
+      "source_location": "L22"
     },
     {
       "id": "frontend_scripts_check_content_failures",
@@ -8503,7 +8503,7 @@
       "file_type": "code",
       "norm_label": "failures",
       "source_file": "frontend/scripts/check-content.mjs",
-      "source_location": "L23"
+      "source_location": "L24"
     },
     {
       "id": "frontend_scripts_check_content_public",
@@ -8514,7 +8514,7 @@
       "file_type": "code",
       "norm_label": "public",
       "source_file": "frontend/scripts/check-content.mjs",
-      "source_location": "L20"
+      "source_location": "L21"
     },
     {
       "id": "frontend_scripts_check_content_root",
@@ -8525,7 +8525,7 @@
       "file_type": "code",
       "norm_label": "root",
       "source_file": "frontend/scripts/check-content.mjs",
-      "source_location": "L19"
+      "source_location": "L20"
     },
     {
       "id": "backend_scripts_loadtest",
@@ -9019,7 +9019,7 @@
       "node_kind": "heading",
       "norm_label": "backend esm \u2014 `node --check` yalan soyluyor",
       "source_file": "CLAUDE.md",
-      "source_location": "L277"
+      "source_location": "L278"
     },
     {
       "id": "claude_ba\u015fvurular\u0131_silme_saklama_s\u00fcresi",
@@ -9031,7 +9031,7 @@
       "node_kind": "heading",
       "norm_label": "basvurular\u0131 silme (saklama suresi)",
       "source_file": "CLAUDE.md",
-      "source_location": "L350"
+      "source_location": "L354"
     },
     {
       "id": "claude_check_content",
@@ -9067,7 +9067,7 @@
       "node_kind": "heading",
       "norm_label": "duyuru html'i ve csp",
       "source_file": "CLAUDE.md",
-      "source_location": "L359"
+      "source_location": "L363"
     },
     {
       "id": "claude_frontend_frontend",
@@ -9163,7 +9163,7 @@
       "node_kind": "heading",
       "norm_label": "lint",
       "source_file": "CLAUDE.md",
-      "source_location": "L396"
+      "source_location": "L400"
     },
     {
       "id": "claude_mongoose_sanitizefilter_a\u00e7\u0131k_operat\u00f6rl\u00fc_sorgu_trusted_ister",
@@ -9175,7 +9175,7 @@
       "node_kind": "heading",
       "norm_label": "mongoose `sanitizefilter` ac\u0131k \u2014 operatorlu sorgu `trusted()` ister",
       "source_file": "CLAUDE.md",
-      "source_location": "L306"
+      "source_location": "L307"
     },
     {
       "id": "claude_ortam_de\u011fi\u015fkenleri",
@@ -9235,7 +9235,7 @@
       "node_kind": "heading",
       "norm_label": "rate limit ve cloudflare",
       "source_file": "CLAUDE.md",
-      "source_location": "L371"
+      "source_location": "L375"
     },
     {
       "id": "claude_sosyal_medya_linkleri",
@@ -9259,7 +9259,7 @@
       "node_kind": "heading",
       "norm_label": "tak\u0131m slug'\u0131 uc kimligi birden tas\u0131yor",
       "source_file": "CLAUDE.md",
-      "source_location": "L222"
+      "source_location": "L223"
     },
     {
       "id": "frontend_src_hooks_useannouncements",
@@ -10787,7 +10787,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "frontend/scripts/check-content.mjs",
-      "source_location": "L69",
+      "source_location": "L70",
       "weight": 1.0
     },
     {
@@ -10799,7 +10799,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "frontend/scripts/check-content.mjs",
-      "source_location": "L70",
+      "source_location": "L71",
       "weight": 1.0
     },
     {
@@ -10811,7 +10811,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "frontend/scripts/check-content.mjs",
-      "source_location": "L78",
+      "source_location": "L79",
       "weight": 1.0
     },
     {
@@ -10823,7 +10823,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "frontend/scripts/check-content.mjs",
-      "source_location": "L86",
+      "source_location": "L87",
       "weight": 1.0
     },
     {
@@ -10835,7 +10835,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "frontend/scripts/check-content.mjs",
-      "source_location": "L103",
+      "source_location": "L104",
       "weight": 1.0
     },
     {
@@ -10847,7 +10847,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "frontend/scripts/check-content.mjs",
-      "source_location": "L118",
+      "source_location": "L119",
       "weight": 1.0
     },
     {
@@ -19584,7 +19584,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "frontend/scripts/check-content.mjs",
-      "source_location": "L15",
+      "source_location": "L16",
       "weight": 1.0
     },
     {
@@ -19596,7 +19596,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "frontend/scripts/check-content.mjs",
-      "source_location": "L16",
+      "source_location": "L17",
       "weight": 1.0
     },
     {
@@ -19608,7 +19608,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "frontend/scripts/check-content.mjs",
-      "source_location": "L17",
+      "source_location": "L18",
       "weight": 1.0
     },
     {
@@ -26248,7 +26248,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L222",
+      "source_location": "L223",
       "weight": 1.0
     },
     {
@@ -26259,7 +26259,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L248",
+      "source_location": "L249",
       "weight": 1.0
     },
     {
@@ -26270,7 +26270,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L277",
+      "source_location": "L278",
       "weight": 1.0
     },
     {
@@ -26281,7 +26281,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L306",
+      "source_location": "L307",
       "weight": 1.0
     },
     {
@@ -26292,7 +26292,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L320",
+      "source_location": "L321",
       "weight": 1.0
     },
     {
@@ -26303,7 +26303,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L350",
+      "source_location": "L354",
       "weight": 1.0
     },
     {
@@ -26314,7 +26314,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L359",
+      "source_location": "L363",
       "weight": 1.0
     },
     {
@@ -26325,7 +26325,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L371",
+      "source_location": "L375",
       "weight": 1.0
     },
     {
@@ -26336,7 +26336,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L396",
+      "source_location": "L400",
       "weight": 1.0
     },
     {
@@ -27425,7 +27425,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/scripts/check-content.mjs",
-      "source_location": "L101",
+      "source_location": "L102",
       "weight": 1.0
     },
     {
@@ -27436,7 +27436,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/scripts/check-content.mjs",
-      "source_location": "L19",
+      "source_location": "L20",
       "weight": 1.0
     },
     {
@@ -27447,7 +27447,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/scripts/check-content.mjs",
-      "source_location": "L20",
+      "source_location": "L21",
       "weight": 1.0
     },
     {
@@ -27458,7 +27458,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/scripts/check-content.mjs",
-      "source_location": "L21",
+      "source_location": "L22",
       "weight": 1.0
     },
     {
@@ -27469,7 +27469,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/scripts/check-content.mjs",
-      "source_location": "L23",
+      "source_location": "L24",
       "weight": 1.0
     },
     {
@@ -27480,7 +27480,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/scripts/check-content.mjs",
-      "source_location": "L24",
+      "source_location": "L25",
       "weight": 1.0
     },
     {
@@ -27491,7 +27491,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/scripts/check-content.mjs",
-      "source_location": "L25",
+      "source_location": "L26",
       "weight": 1.0
     },
     {
@@ -27502,7 +27502,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/scripts/check-content.mjs",
-      "source_location": "L28",
+      "source_location": "L29",
       "weight": 1.0
     },
     {
@@ -27513,7 +27513,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/scripts/check-content.mjs",
-      "source_location": "L43",
+      "source_location": "L44",
       "weight": 1.0
     },
     {
@@ -27524,7 +27524,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/scripts/check-content.mjs",
-      "source_location": "L66",
+      "source_location": "L67",
       "weight": 1.0
     },
     {
@@ -32110,7 +32110,7 @@
       "confidence_score": 0.95,
       "context": "AdminSidebar",
       "source_file": "CLAUDE.md",
-      "source_location": "L238",
+      "source_location": "L239",
       "weight": 1.0
     },
     {
@@ -32158,7 +32158,7 @@
       "confidence_score": 0.95,
       "context": "createGeneralSubmission",
       "source_file": "CLAUDE.md",
-      "source_location": "L338",
+      "source_location": "L342",
       "weight": 1.0
     },
     {
@@ -32170,7 +32170,7 @@
       "confidence_score": 0.95,
       "context": "createUser",
       "source_file": "CLAUDE.md",
-      "source_location": "L267",
+      "source_location": "L268",
       "weight": 1.0
     },
     {
@@ -32182,7 +32182,7 @@
       "confidence_score": 0.95,
       "context": "firstUserCreation()",
       "source_file": "CLAUDE.md",
-      "source_location": "L251",
+      "source_location": "L252",
       "weight": 1.0
     },
     {
@@ -32194,7 +32194,7 @@
       "confidence_score": 0.95,
       "context": "getTeamDetail",
       "source_file": "CLAUDE.md",
-      "source_location": "L230",
+      "source_location": "L231",
       "weight": 1.0
     },
     {
@@ -32206,7 +32206,7 @@
       "confidence_score": 0.95,
       "context": "matchesSystemKey",
       "source_file": "CLAUDE.md",
-      "source_location": "L252",
+      "source_location": "L253",
       "weight": 1.0
     },
     {
@@ -32230,7 +32230,7 @@
       "confidence_score": 0.95,
       "context": "protect",
       "source_file": "CLAUDE.md",
-      "source_location": "L251",
+      "source_location": "L252",
       "weight": 1.0
     },
     {
@@ -32254,7 +32254,7 @@
       "confidence_score": 0.95,
       "context": "roleOnlyForCategory",
       "source_file": "CLAUDE.md",
-      "source_location": "L225",
+      "source_location": "L226",
       "weight": 1.0
     },
     {
@@ -32290,10 +32290,10 @@
       "confidence_score": 0.95,
       "context": "useApplyDetail",
       "source_file": "CLAUDE.md",
-      "source_location": "L231",
+      "source_location": "L232",
       "weight": 1.0
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "b10374f412628c625860efb68ec8b419ebed0bb4"
+  "built_at_commit": "24c08c9aa5438bef4a640e3a7f15c8601ce39dbd"
 }

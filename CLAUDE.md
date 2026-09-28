@@ -213,6 +213,7 @@ geldi. `check:content` bu yüzden magic byte'a bakıyor.
 | `leaderMessage.author` ∈ `members[]` | Lider adı iki yerde duruyor; biri unutulursa ayrılmış kişi sayfada kalır |
 | `skills` dizi mi | `member.skills.length` runtime tuzağı |
 | `projects[].stores` dizi mi, `name` `App Store`/`Google Play` mı, `url` https ya da `null` mı | `stores.map` runtime tuzağı; yanlış `name` sessizce yanlış ikon verir. `url: null` → "Yakında" pasif buton |
+| Teknik formdaki her alan `question_<id>` olarak backend `allowedCustomFields`'te mi, `type: number` değil mi, `formatCustomFields`'te etiketi var mı (iki kopya aynı mı); genel formda kişisel olmayan alan var mı | Eksik anahtar her gönderimde 400 döner, build ve form sessiz geçer; etiketsiz alan panelde ham `question_<id>` görünür; genel form özel alanı sessizce atar |
 | `github` / `linkedin` / `kaggle` mutlak URL mi | Çıplak kullanıcı adı kırık link olur |
 
 Betik hiçbir zaman sessizce atlamaz: ölçemediği her durum FAIL, çıkış kodu 1.
@@ -328,6 +329,9 @@ anahtarıyla gönderiyor. Teknik forma yeni alan için:
 - `formatCustomFields` etiket switch'i: `admin/technical-team.tsx` ve kopyası
   `general-membership.tsx`; eklenmezse panelde ham `question_<id>` görünür
 - `kvkk/data.json` → "2. İşlenen Kişisel Veriler" ve `lastUpdated`
+
+İlk üçünün birbirini tutmasını `check:content` denetler (allowlist, etiket,
+`number` tipi, genel formda özel alan); KVKK metnini denetlemez.
 
 Tuzaklar:
 

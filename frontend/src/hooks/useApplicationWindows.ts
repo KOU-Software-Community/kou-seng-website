@@ -27,8 +27,8 @@ export const useApplicationWindows = (): UseApplicationWindowsReturn => {
   const [error, setError] = useState<string | null>(null);
   const { getAuthHeader } = useAuth();
 
-  // Token varsa gönderilir: genel istek sınırı geçerli token'lı istekleri saymaz, böylece
-  // admin sayfası kampüs gibi paylaşılan bir IP'de sınır dolsa da açılır. Ziyaretçide header yok.
+  // Durum isteğinin backend'de kendi limiti var ve genel limite sayılmaz (kampüs gibi
+  // paylaşılan IP'de de açılır); token gerekmez.
   const refresh = useCallback(
     async (signal?: AbortSignal) => {
       try {
@@ -37,7 +37,6 @@ export const useApplicationWindows = (): UseApplicationWindowsReturn => {
         const response = await Promise.race([
           fetch(`${process.env.NEXT_PUBLIC_API_URL}/submissions/windows`, {
             cache: 'no-store',
-            headers: getAuthHeader(),
             signal,
           }),
           deadline,
@@ -54,11 +53,10 @@ export const useApplicationWindows = (): UseApplicationWindowsReturn => {
         if (!signal?.aborted) setIsLoading(false);
       }
     },
-    [getAuthHeader]
+    []
   );
 
-  // Token localStorage'dan bir render sonra okunur; getAuthHeader değişince istek token'la
-  // yenilenir ve öncekisi iptal edilir ki geç gelen eski yanıt yenisinin üstüne yazmasın.
+  // Sayfadan çıkılınca istek iptal edilir; geç gelen yanıt state'e yazılmaz.
   useEffect(() => {
     const controller = new AbortController();
     refresh(controller.signal);

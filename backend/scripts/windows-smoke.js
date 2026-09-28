@@ -7,7 +7,9 @@
 // Yalnızca yerelde ve kullanıcısı olmayan boş bir veritabanında çalışır: ilk
 // admini KEY ile oluşturur (kullanıcı varsa 3. adım 401 alır), pencere
 // tarihlerini değiştirir, başvuru kaydı yazar. CI'da loadtest'ten önce koşar:
-// 5 form isteği harcar (form limiti 15 dk'da 30) ve genel formu açık bırakır.
+// 7 form isteği harcar (form limiti 15 dk'da 100) ve genel formu açık bırakır.
+// Kampüs adımı ayrı bir istemci IP'siyle (CF-Connecting-IP) genel limiti doldurur;
+// CI'daki loadtest'in kovalarına dokunmaz.
 //
 // Çıkış kodu: 0 hepsi geçti, 1 bir adım başarısız, 2 ortam uygun değil.
 
@@ -20,10 +22,10 @@ if (!['localhost', '127.0.0.1'].includes(new URL(BASE).hostname) || !KEY) {
   process.exit(2);
 }
 
-const api = async (method, path, { token, body } = {}) => {
+const api = async (method, path, { token, body, headers } = {}) => {
   const res = await fetch(BASE + path, {
     method,
-    headers: { 'Content-Type': 'application/json', ...(token && { Authorization: `Bearer ${token}` }) },
+    headers: { 'Content-Type': 'application/json', ...(token && { Authorization: `Bearer ${token}` }), ...headers },
     body: body === undefined ? undefined : JSON.stringify(body),
   });
   return { status: res.status, body: await res.json().catch(() => null) };
@@ -147,4 +149,21 @@ await step('genel üyelik kapatılınca 403, yeniden açılınca 201', async () 
   expectClosed(await submit('general'));
   await setWindow('general', new Date(0).toISOString(), null);
   expectStatus(await submit('general'), 201);
+});
+
+await step('geçersiz sınıf ve JSON olmayan gövde → 400 (500 değil)', async () => {
+  expectStatus(await api('POST', '/submissions/general', { body: { ...applicant(), grade: 99 } }), 400);
+  const res = await fetch(`${BASE}/submissions/general`, { method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: 'merhaba' });
+  assert.equal(res.status, 400, `text/plain gövde: ${res.status}`);
+});
+
+// Kampüs Wi-Fi'ı gibi paylaşılan IP: genel limit dolsa da başvuru akışı çalışmalı.
+// 127.0.0.1 iç ağ sayıldığı için backend CF-Connecting-IP'yi ziyaretçi adresi olarak okur.
+await step('genel limit dolunca durum isteği ve başvuru yine çalışır', async () => {
+  const campus = { 'CF-Connecting-IP': '203.0.113.10' };
+  let status;
+  for (let i = 0; i < 150 && status !== 429; i++) status = (await fetch(`${BASE}/health`, { headers: campus })).status;
+  assert.equal(status, 429, 'genel limit dolmadı');
+  expectStatus(await api('GET', '/submissions/windows', { headers: campus }), 200);
+  expectStatus(await api('POST', '/submissions/general', { body: applicant(), headers: campus }), 201);
 });

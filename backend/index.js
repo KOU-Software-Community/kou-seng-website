@@ -54,21 +54,48 @@ app.use(cors(corsOptions));
 // Limitler Cloudflare arkasındaki gerçek ziyaretçi adresine göre sayılır
 // (helpers/clientIp.js); IPv6 adresleri kütüphanenin varsayılanı gibi /56 ağına göre.
 const keyGenerator = (req) => ipKeyGenerator(clientIp(req));
+
+// Başvuru akışının kendi limitleri var ve genel limite sayılmaz: kampüs Wi-Fi'ı
+// gibi paylaşılan bir IP'de genel limit dolunca herkes formları kapalı görür ve
+// başvuramazdı. Durum isteği (GET /submissions/windows) her başvuru sayfası
+// açılışında gidiyor: IP başına 15 dk'da 600. Başvuru ve iletişim formları
+// birlikte 15 dk'da 100; aynı öğrenci no/e-posta/telefon tekrarı ayrıca 409.
+const windowsLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 600,
+  standardHeaders: true,
+  legacyHeaders: false,
+  keyGenerator,
+});
+const formLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 100,
+  standardHeaders: true,
+  legacyHeaders: false,
+  keyGenerator,
+  message: { success: false, message: 'Çok fazla gönderim yapıldı. Lütfen 15 dakika sonra tekrar deneyin.' },
+});
+const skipGeneralLimit = (req, res, next) => {
+  req.skipGeneralLimit = true;
+  next();
+};
+app.get('/submissions/windows', windowsLimiter, skipGeneralLimit);
+app.post(['/submissions/general', '/submissions/technical/:slug', '/contact'], formLimiter, skipGeneralLimit);
+
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100, // Limit each IP to 100 requests per window
   standardHeaders: true,
   legacyHeaders: false,
   keyGenerator,
-  skip: (req) => rateSkip(req)
+  skip: (req) => req.skipGeneralLimit || rateSkip(req)
 });
 app.use(limiter);
 
 // Genel limit oturumlu kullanıcıları saymıyor (mail kuyruğu 3 sn'de bir
-// yokluyor), bu yüzden login ve herkese açık formlar ayrıca, muafiyetsiz
-// sınırlanır. Şifre değiştirme login'le aynı kovayı kullanır; yoksa ele
-// geçirilmiş bir token'la mevcut şifre sınırsız denenebilirdi. Kampüs ağında
-// çok sayıda öğrenci aynı IP'yi paylaşabildiği için form limiti 15 dakikada 30.
+// yokluyor), bu yüzden login ayrıca, muafiyetsiz sınırlanır. Şifre değiştirme
+// login'le aynı kovayı kullanır; yoksa ele geçirilmiş bir token'la mevcut şifre
+// sınırsız denenebilirdi.
 const loginLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   limit: 10,
@@ -78,17 +105,8 @@ const loginLimiter = rateLimit({
   keyGenerator,
   message: { message: 'Çok fazla hatalı giriş denemesi. Lütfen 15 dakika sonra tekrar deneyin.' },
 });
-const formLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  limit: 30,
-  standardHeaders: true,
-  legacyHeaders: false,
-  keyGenerator,
-  message: { success: false, message: 'Çok fazla gönderim yapıldı. Lütfen 15 dakika sonra tekrar deneyin.' },
-});
 app.post('/auth/login', loginLimiter);
 app.patch('/auth/password', loginLimiter);
-app.post(['/submissions/general', '/submissions/technical/:slug', '/contact'], formLimiter);
 
 app.use((req, res, next) => {
   logger.debug(`${req.method} ${req.url} [${clientIp(req)}] (req.ip: ${req.ip})`);

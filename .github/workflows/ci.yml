@@ -85,9 +85,9 @@ jobs:
     # Boş veritabanı ister ve genel formu açık bırakır. loadtest'ten önce koşmalı,
     # sonrasında form limiti dolmuş olur.
     - run: node scripts/windows-smoke.js
-    # Genel limit IP başına 15 dk'da 100 istek, formlar ayrıca 15 dk'da 30:
-    # --submit 40 → 25×201 + 15×429 (429 beklenen; smoke önce 5 form isteği
-    # harcıyor). Kalan genel kota /health'e.
+    # Formların kendi limiti var (15 dk'da 100, genel limite sayılmaz):
+    # --submit 40 → 40×201 (smoke önce 7 form isteği harcıyor). Genel limit
+    # (15 dk'da 100) /health'e.
     - run: node scripts/loadtest.js --submit --n 40
     - run: node scripts/loadtest.js --n 100
     - if: failure()

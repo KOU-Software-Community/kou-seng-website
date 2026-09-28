@@ -31,6 +31,14 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: path.resolve(__dirname),
   },
+  experimental: {
+    // Next 16.3 Turbopack'in build cache'ini .next/cache'e kalıcı yazıyor;
+    // Coolify (Nixpacks) de bu klasörü deploy'lar arasında saklıyor. Turbopack,
+    // PostCSS worker'ında yüklenen native modülü (lightningcss) bağımlılık
+    // olarak izlemediği için eksik paketle düşen tek bir build'in hatası cache'e
+    // yazılıp sonraki her deploy'da tekrar oynatılıyordu. 16.2'deki gibi kapalı.
+    turbopackFileSystemCacheForBuild: false,
+  },
   images: {
     // Backend yalnızca Medium CDN'deki kapak görsellerini döndürüyor
     // (publicationsController). Daha geniş bir kalıp, görsel optimizer'ı

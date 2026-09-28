@@ -5,9 +5,9 @@
     "icon": "faLaptopCode",
     "leaderMessage": {
       "title": "Takım Lideri Mesajı",
-      "content": "Mobil Web takımı olarak ağırlıklı mobil uygulamalar geliştiriyor, web tarafında da kullanıcı dostu ve performanslı arayüzler üretiyoruz. React Native, Flutter gibi mobil teknolojilerin yanında React, Next.js ve Node.js ile projeler yürütüyoruz. Takımımız hem mobil hem de web geliştirme konularında deneyim kazanmak isteyen arkadaşları bekliyor.",
+      "content": "Mobil Web Geliştirme Takımı olarak yıl boyunca yapay zeka destekli yazılım geliştirme üzerine proje bazlı çalışmalar yürütüyoruz. React Native (Expo), Firebase ve modern web teknolojilerini kullanarak mobil uygulamalar, web siteleri ve backend ile frontend'i birlikte içeren tam kapsamlı projeler geliştiriyoruz. Claude Code, Cursor gibi yapay zeka araçlarını geliştirme sürecinin merkezine alıyor, fikirden yayına kadar tüm aşamaları birlikte deneyimliyoruz. App Store'da yayında olan ve yakında Google Play'e de gelecek kulüp uygulamamız KOU SENG üzerinde gerçek katkılar yaparken sunucuya deploy ve mağaza dağıtım süreçlerini de öğreniyoruz. Eğitim süreci boyunca hem sağlam bir geliştirme temeli kazanmayı hem de yayında olan projelerle güçlü bir portföy oluşturmayı hedefliyoruz.",
       "author": "Abdülkadir İvenç",
-      "role": "Mobil Web Takımı Lideri"
+      "role": "Mobil Web Geliştirme Takımı Lideri"
     },
     "members": [
       {
@@ -35,7 +35,19 @@
     "competitions": [],
     "projects": [
       {
-        "title": "KOU-SENG Web Sitesi",
+        "title": "KOU SENG Mobil Uygulaması",
+        "description": "Kulübümüzün resmi etkinlik uygulaması: etkinlik takvimi, QR ile yoklama, katılım sertifikası ve yapay zeka destekli teknoloji gündemi.",
+        "technologies": ["React Native", "Expo", "TypeScript", "Firebase"],
+        "status": "Yayınlandı",
+        "github": "https://github.com/KOU-Software-Community/app_seng",
+        "demo": null,
+        "stores": [
+          { "name": "App Store", "url": "https://apps.apple.com/tr/app/kou-seng/id6800271760" },
+          { "name": "Google Play", "url": null }
+        ]
+      },
+      {
+        "title": "KOU SENG Web Sitesi",
         "description": "Kulübümüzün resmi web sitesi. Modern teknolojiler kullanılarak geliştirildi.",
         "technologies": ["Next.js", "TypeScript", "TailwindCSS", "Node.js"],
         "status": "Aktif",

@@ -45,6 +45,8 @@ export type Project = {
   status: string;
   github: string;
   demo: string | null;
+  // url null ise buton "Yakında" yazısıyla pasif gösterilir
+  stores?: { name: 'App Store' | 'Google Play'; url: string | null }[];
 };
 
 // Team detail type

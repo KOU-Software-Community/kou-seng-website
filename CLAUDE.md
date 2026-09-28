@@ -212,6 +212,7 @@ geldi. `check:content` bu yüzden magic byte'a bakıyor.
 | Dosya boyutu < 300KB | Telefon fotoğrafları 2MB+ geliyor |
 | `leaderMessage.author` ∈ `members[]` | Lider adı iki yerde duruyor; biri unutulursa ayrılmış kişi sayfada kalır |
 | `skills` dizi mi | `member.skills.length` runtime tuzağı |
+| `projects[].stores` dizi mi, `name` `App Store`/`Google Play` mı, `url` https ya da `null` mı | `stores.map` runtime tuzağı; yanlış `name` sessizce yanlış ikon verir. `url: null` → "Yakında" pasif buton |
 | `github` / `linkedin` / `kaggle` mutlak URL mi | Çıplak kullanıcı adı kırık link olur |
 
 Betik hiçbir zaman sessizce atlamaz: ölçemediği her durum FAIL, çıkış kodu 1.

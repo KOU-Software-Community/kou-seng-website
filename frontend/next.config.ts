@@ -7,14 +7,16 @@ import type { NextConfig } from "next";
 // istek atmayı, yabancı görseli ve sitenin iframe'e gömülmesini engeller.
 // Yeni bir dış kaynak (script, iframe, API adresi) eklenirse buraya da
 // eklenmeli; yoksa tarayıcı onu konsola hata yazarak engeller.
+// Cloudflare Web Analytics: Cloudflare her HTML yanıtına beacon betiğini ekliyor;
+// betik static.cloudflareinsights.com'dan gelir, veriyi cloudflareinsights.com'a gönderir.
 const apiOrigin = process.env.NEXT_PUBLIC_API_URL ? new URL(process.env.NEXT_PUBLIC_API_URL).origin : '';
 const contentSecurityPolicy = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-inline'${process.env.NODE_ENV === 'development' ? " 'unsafe-eval'" : ''}`,
+  `script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com${process.env.NODE_ENV === 'development' ? " 'unsafe-eval'" : ''}`,
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob:",
   "font-src 'self'",
-  `connect-src 'self' ${apiOrigin}`,
+  `connect-src 'self' ${apiOrigin} https://cloudflareinsights.com`,
   "frame-src https://www.google.com",
   "frame-ancestors 'none'",
   "base-uri 'self'",

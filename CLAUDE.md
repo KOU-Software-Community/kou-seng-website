@@ -255,7 +255,8 @@ sitemap kendiliğinden güncelleniyor.
 klasörü + JSON yolları → `User.js` role enum → `submissionsController`
 `validCategories` → `helpers/applicationWindow.js` `APPLICATION_SLUGS` (`ApplicationWindow`
 enum'u buradan) → `statusController` sorgusu → frontend tip birleşimleri
-(`useUser.ts`, `admin-management.tsx`) → `AdminSidebar` `limitedRoles`/
+(`useUser.ts`, `admin-management.tsx`) → `lib/applicationWindow.ts`
+`APPLICATION_LABELS` → `AdminSidebar` `limitedRoles`/
 `roleToSlug`/alt menü → dashboard `layout.tsx` rol listesi → `Header.tsx` →
 `next.config.ts` redirect → **veritabanı migration'ı** (`ApplicationWindow.slug`
 dahil).

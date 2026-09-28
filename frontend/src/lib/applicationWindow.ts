@@ -45,4 +45,10 @@ export const toLocalInput = (iso: string | null): string => {
   return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
 };
 
-export const fromLocalInput = (value: string): string | null => (value ? new Date(value).toISOString() : null);
+// Tarayıcının kabul edip Date'in anlamadığı değer (ör. 5 haneli yıl) olduğu gibi gider;
+// backend "Tarih geçersiz." der ve admin mesajı görür.
+export const fromLocalInput = (value: string): string | null => {
+  if (!value) return null;
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? value : date.toISOString();
+};

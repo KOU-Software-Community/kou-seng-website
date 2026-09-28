@@ -49,7 +49,7 @@ function WindowCard({
         <Card>
             <CardHeader>
                 <div className="flex items-center justify-between gap-2">
-                    <CardTitle>{APPLICATION_LABELS[item.slug]}</CardTitle>
+                    <CardTitle>{APPLICATION_LABELS[item.slug] ?? item.slug}</CardTitle>
                     <span className={cn('rounded-full px-2.5 py-0.5 text-xs font-medium', badge.className)}>{badge.label}</span>
                 </div>
                 <CardDescription>{windowSummary(item)}</CardDescription>
@@ -118,16 +118,15 @@ export default function AdminApplicationWindows() {
                 <p className="text-destructive" role="alert">{error}</p>
             ) : (
                 <div className="grid gap-6 md:grid-cols-2">
-                    {Object.keys(APPLICATION_LABELS)
-                        .filter((slug) => windows[slug])
-                        .map((slug) => (
-                            <WindowCard
-                                key={`${slug}-${windows[slug].opensAt}-${windows[slug].closesAt}`}
-                                item={windows[slug]}
-                                message={messages[slug]}
-                                onSave={(opensAt, closesAt) => save(slug, opensAt, closesAt)}
-                            />
-                        ))}
+                    {/* Kartlar backend'in döndürdüğü formlardan: adı bilinmeyen (slug'ı değişmiş) form da görünür */}
+                    {Object.values(windows).map((item) => (
+                        <WindowCard
+                            key={`${item.slug}-${item.opensAt}-${item.closesAt}`}
+                            item={item}
+                            message={messages[item.slug]}
+                            onSave={(opensAt, closesAt) => save(item.slug, opensAt, closesAt)}
+                        />
+                    ))}
                 </div>
             )}
         </div>

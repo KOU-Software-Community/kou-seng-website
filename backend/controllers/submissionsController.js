@@ -113,7 +113,11 @@ export const createTechnicalSubmission = async (req, res) => {
       "question_experience",
       "question_motivation",
       "question_linkedin",
-      "question_itchio"
+      "question_itchio",
+      "question_ai_tools",
+      "question_api",
+      "question_cloud",
+      "question_kaggle"
     ];
 
     const customFieldKeys = Object.keys(customFields);

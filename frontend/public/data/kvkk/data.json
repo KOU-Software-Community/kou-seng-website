@@ -1,6 +1,6 @@
 {
   "title": "Kişisel Verilerin Korunması Hakkında Aydınlatma Metni",
-  "lastUpdated": "25 Eylül 2026",
+  "lastUpdated": "28 Eylül 2026",
   "intro": [
     "KOÜ Yazılım Kulübü (KOU SENG) olarak, internet sitemiz (kouseng.com) üzerinden ilettiğiniz kişisel verileri 6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK) ve ilgili mevzuata uygun olarak işliyoruz.",
     "Bu metin, KVKK'nın 10. maddesi ve Aydınlatma Yükümlülüğünün Yerine Getirilmesinde Uyulacak Usul ve Esaslar Hakkında Tebliğ uyarınca; sitedeki genel üyelik ve teknik takım başvuru formlarını, iletişim formunu kullanan ve siteyi ziyaret eden kişileri bilgilendirmek amacıyla hazırlanmıştır."
@@ -25,7 +25,7 @@
         "Kimlik bilgileri: ad, soyad.",
         "İletişim bilgileri: e-posta adresi, telefon numarası.",
         "Eğitim bilgileri: öğrenci numarası, fakülte, bölüm, sınıf.",
-        "Teknik takım başvurularına özgü bilgiler: GitHub, LinkedIn, Itch.io ve portfolyo bağlantıları; ilgi alanları, deneyim ve motivasyon sorularına verdiğiniz yanıtlar.",
+        "Teknik takım başvurularına özgü bilgiler: GitHub, LinkedIn, Kaggle, Itch.io ve portfolyo bağlantıları; ilgi alanları, deneyim (yapay zeka destekli geliştirme araçları, API ve cloud deneyimi dahil) ve motivasyon sorularına verdiğiniz yanıtlar.",
         "Başvuru değerlendirme bilgileri: başvurunuzun tarihi, durumu (beklemede, incelendi, kabul edildi, reddedildi) ve kulüp yöneticilerinin değerlendirme notları.",
         "İletişim formu bilgileri: ad, e-posta adresi, mesajınızın konusu ve içeriği.",
         "İşlem güvenliği bilgisi: IP adresi."

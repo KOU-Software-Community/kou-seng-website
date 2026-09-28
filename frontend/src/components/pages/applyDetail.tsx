@@ -52,7 +52,8 @@ export default function ApplyDetail(props: { slug: string }) {
           fieldSchema = z.coerce.number().pipe(z.number().min(0, { message: 'Geçerli bir sayı giriniz.' }));
           break;
         case 'textarea':
-          fieldSchema = z.string().min(10, { message: 'En az 10 karakter giriniz.' });
+          // Opsiyonel alanda "Yok" gibi kısa yanıt da geçerli
+          fieldSchema = field.required ? z.string().min(10, { message: 'En az 10 karakter giriniz.' }) : z.string();
           break;
         case 'select':
           fieldSchema = z.string();

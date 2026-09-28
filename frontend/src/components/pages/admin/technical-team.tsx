@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useSubmissions } from '@/hooks/useSubmissions';
+import { useApplyDetail } from '@/hooks/useApplyDetail';
 import { useAuth } from '@/hooks/useAuth';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Card } from '@/components/ui/card';
@@ -157,6 +158,11 @@ export default function AdminTechnicalTeam({ category }: { category?: string }) 
     const [reviewNotes, setReviewNotes] = useState<string>('');
 
     const selectedSubmission = useMemo(() => submissions.find((s) => s._id === selectedId) || null, [selectedId, submissions]);
+
+    // Seçim alanlarında başvuranın gördüğü etiketi göster (ör. mobile → Mobil Uygulama Geliştirme)
+    const { application } = useApplyDetail(category);
+    const optionLabel = (key: string, value: string) =>
+        application?.fields.find((f) => `question_${f.id}` === key)?.options?.find((o) => o.value === value)?.label ?? value;
 
     // StrictMode tekrarlı çağrıyı engellemek için guard
     const hasFetchedRef = useRef<boolean>(false);
@@ -390,7 +396,7 @@ export default function AdminTechnicalTeam({ category }: { category?: string }) 
                                 Object.entries(selectedSubmission.customFields).map(([key, value]) => (
                                     <div key={key}>
                                         <div className="text-muted-foreground">{formatCustomFields(key)}</div>
-                                        <div className="font-medium break-words break-all">{renderValue(String(value))}</div>
+                                        <div className="font-medium break-words break-all">{renderValue(optionLabel(key, String(value)))}</div>
                                     </div>
                                 ))
                             : null}

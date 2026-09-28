@@ -23,6 +23,7 @@ npm run check:content   # public/data JSON'ları + görseller
 # backend/
 npm run dev             # nodemon, port 3001
 npm start               # production komutu: node --experimental-require-module index.js
+node --test             # birim testleri (node:test): **/*.test.js
 node scripts/loadtest.js --n 150           # GET /health, rate limit duvarını bulur
 node scripts/loadtest.js --submit --n 40   # gerçek kayıt yazar — production DB'ye ASLA
 ```
@@ -30,10 +31,12 @@ node scripts/loadtest.js --submit --n 40   # gerçek kayıt yazar — production
 İki pakette de `pm2:start` / `pm2:stop` / `pm2:restart` script'leri var;
 production deploy'u Coolify'da.
 
-Unit test altyapısı yok. Push'tan önce:
+Backend'de birim testleri `node:test` ile (`backend/**/*.test.js`, yeni
+bağımlılık yok); frontend'de unit test yok. Push'tan önce:
 
 ```bash
 cd frontend && npm run check:content && npm run lint && npm run build
+cd ../backend && node --test
 ```
 
 CI her PR'da ve `main`'e push'ta frontend'de bu üçünü koşturur; backend'i

@@ -71,6 +71,8 @@ jobs:
         cache-dependency-path: backend/package-lock.json
 
     - run: npm ci
+    # Birim testleri (node:test, bağımlılık yok): **/*.test.js
+    - run: node --test
     # `node --check` ESM hatalarını kaçırıyor (CLAUDE.md); sunucuyu production'daki
     # komutla (npm start) gerçekten ayağa kaldır.
     - run: nohup npm start > server.log 2>&1 &

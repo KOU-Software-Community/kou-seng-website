@@ -349,6 +349,14 @@ sunucu saatiyle verilir; kapalı forma gelen başvuru, gövdeye bakılmadan 403
 alır ("Bu başvuru şu anda kapalı."). Tarihleri `PATCH /submissions/windows/:slug`
 değiştirir, yalnızca admin.
 
+Panelde: **Başvuru Dönemleri** (`/admin/dashboard/application-windows`, yalnızca
+admin). Alanlar tarayıcının saatiyle girilir, sitede Türkiye saatiyle gösterilir;
+"Kapat" iki tarihi de siler. `/apply` ve form sayfası durumu
+`GET /submissions/windows`'tan okur (genel limite tabi); alınamazsa formlar
+kapalı görünür ve "Başvuru durumu alınamadı" uyarısı çıkar. Deploy sırası: önce
+backend, sonra frontend; frontend önce giderse backend gelene kadar formlar
+kapalı görünür.
+
 `scripts/windows-smoke.js` bunları çalışan backend'e karşı sınar. İlk admini
 `KEY` ile oluşturduğu için kullanıcısı olmayan boş bir veritabanı ister ve
 yalnızca `localhost`/`127.0.0.1`'e koşar (başka adreste exit 2). Tarih değiştirip

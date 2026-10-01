@@ -105,7 +105,7 @@ Footer başlığına gelmez.
   - birincil düğme: aynen (`bg-cta`),
   - ikinci düğme: koyu zemine uygun, yarı saydam ve açık mavi kenarlı.
 - **Sağ sütun:**
-  - kutusuz logo (`priority`),
+  - kutusuz logo; `next/image` `preload` ile önceden yüklenir,
   - arkasında turkuaz parıltı,
   - çevresinde 11 dağınık piksel kare; bir kısmı `animate-pxspin` ile yanıp söner.
   - Kare panel ve kutu yok.

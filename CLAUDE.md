@@ -272,6 +272,22 @@ planı büyük video sunumunu ücretli ürünlerine (Stream, R2) yönlendiriyor.
   görününce iner (`preload="none"`). Hareket azaltma açıksa kendiliğinden
   başlamaz. Tarayıcının kendi kontrolleri açık kalmalı: kendiliğinden başlayan
   hareketli içerik durdurulabilmeli.
+- **Coolify'da frontend uygulamasının gzip'i kapalı olmalı** (Configuration →
+  Advanced → Enable Gzip Compression). Açıkken Coolify proxy'si (Traefik)
+  videoyu ve görselleri de gzip'liyor. Cloudflare sıkıştırılmış yanıtı açmak
+  zorunda kalınca byte-range isteğini yok sayıp dosyanın tamamını 200 ile
+  dönüyor; iPhone Safari 206 almadan videoyu oynatmıyor, üstünde üstü çizili
+  oynat simgesi çıkıyor. Masaüstü tarayıcılar 200'ü kabul ettiği için sorun
+  yalnızca iOS'ta görünür. HTML, JS, CSS ve SVG'yi Next zaten kendisi
+  sıkıştırıyor; ayar kapalıyken kaybedilen bir şey yok. Ayarı değiştirince
+  uygulamayı yeniden deploy et. Kontrol (`206` ve `content-range` beklenir;
+  200 dönerse Cloudflare'de bu adresi Purge et):
+
+  ```bash
+  curl -s -o /dev/null -D - -r 0-1 -H 'Accept-Encoding: identity' \
+    https://kouseng.com/video/kou-seng-tanitim.mp4
+  ```
+
 - Video değişirse kaynaktan 720p'ye dönüştür, metadata'yı at, `moov` başa
   gelsin (Safari ve hızlı başlangıç için). Poster videonun son karesi:
 

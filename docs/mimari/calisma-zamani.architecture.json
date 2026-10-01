@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "KOU SENG çalışma zamanı mimarisi",
+    "quality_profile": "showcase",
+    "views": [
+      { "id": "basvurudan-panele", "label": "Başvurudan panele", "focus": ["form", "cloudflare", "proxy", "api", "mongo", "panel"], "note": "Başvuru POST ile API'ye gider ve MongoDB'ye yazılır; admin paneli aynı API'den JWT ile okur." },
+      { "id": "mail-kuyrugu", "label": "Sponsor maili", "focus": ["panel", "api", "mongo", "worker", "gmail"], "note": "Mail MailJob olarak MongoDB'ye yazılır; API ile aynı süreçteki işleyici Gmail SMTP ile gönderir." },
+      { "id": "sayfalar", "label": "Sayfalar ve içerik", "focus": ["cloudflare", "proxy", "next"], "note": "Next.js sayfaları, JS'i ve public/ altındaki JSON içerikle tanıtım videosunu sunar." },
+      { "id": "dis-bagimliliklar", "label": "Dış bağımlılıklar", "focus": ["cloudflare", "mongo", "gmail", "medium"], "note": "Coolify dışındaki servisler: Cloudflare, MongoDB, Gmail SMTP ve Medium RSS." }
+    ]
+  },
+  "components": [
+    { "id": "form", "type": "frontend", "label": "Başvuru formu", "sublabel": "/apply/[slug] · tarayıcı", "pos": [40,  130], "size": [170,  60] },
+    { "id": "panel", "type": "frontend", "label": "Admin paneli", "sublabel": "/admin/dashboard · tarayıcı", "pos": [40,  370], "size": [170,  60] },
+    { "id": "cloudflare", "type": "cloud", "label": "Cloudflare", "sublabel": "DNS + proxy", "brand": "cloudflare", "pos": [370,  250], "size": [150,  60] },
+    { "id": "proxy", "type": "cloud", "label": "Coolify proxy", "sublabel": "10.0.1.1 → container", "pos": [640,  250], "size": [150,  60] },
+    { "id": "next", "type": "frontend", "label": "Next.js 16", "sublabel": "next start :3000", "brand": "next-js", "pos": [640,  90], "size": [150,  60] },
+    { "id": "api", "type": "backend", "label": "Express 5 API", "sublabel": ":3001 · limit + JWT", "pos": [900,  250], "size": [160,  60] },
+    { "id": "worker", "type": "backend", "label": "Mail kuyruğu", "sublabel": "API ile aynı süreç", "pos": [900,  410], "size": [160,  60] },
+    { "id": "medium", "type": "external", "label": "Medium RSS", "sublabel": "rss-parser", "pos": [1170,  90], "size": [150,  60] },
+    { "id": "mongo", "type": "database", "label": "MongoDB", "sublabel": "Mongoose", "brand": "mongodb", "pos": [1170,  250], "size": [150,  60] },
+    { "id": "gmail", "type": "external", "label": "Gmail SMTP", "sublabel": "nodemailer", "pos": [900,  560], "size": [160,  60] }
+  ],
+  "boundaries": [
+    { "kind": "region", "label": "Coolify sunucusu · Nixpacks", "wraps": ["proxy", "next", "api", "worker"] }
+  ],
+  "connections": [
+    { "id": "basvuru-gonder", "from": "form", "to": "cloudflare", "label": "POST /submissions", "variant": "emphasis" },
+    { "id": "panel-oku", "from": "panel", "to": "cloudflare", "label": "GET /submissions · JWT", "variant": "emphasis" },
+    { "id": "cf-coolify", "from": "cloudflare", "to": "proxy", "label": "CF-Connecting-IP", "variant": "emphasis" },
+    { "id": "sayfa-sun", "from": "proxy", "to": "next", "label": "kouseng.com" },
+    { "id": "api-yonlendir", "from": "proxy", "to": "api", "label": "api.kouseng.com", "variant": "emphasis" },
+    { "id": "kayit", "from": "api", "to": "mongo", "label": "kayıt yaz · oku", "variant": "emphasis" },
+    { "id": "rss", "from": "api", "to": "medium", "label": "RSS", "variant": "dashed", "fromSide": "top", "toSide": "left" },
+    { "id": "mailjob", "from": "worker", "to": "mongo", "label": "MailJob al", "variant": "dashed" },
+    { "id": "smtp", "from": "worker", "to": "gmail", "label": "SMTP", "fromSide": "bottom", "toSide": "top", "labelAt": [980, 515] }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "Başvuru akışı", "items": ["Form: POST /submissions/general ya da /technical/:slug", "Dönem kapalıysa 403; açıklık ApplicationWindow kaydından", "Panel: GET /submissions, JWT ile protect ve rol kontrolü"] },
+    { "dot": "emerald", "title": "Koruma", "items": ["Limitler CF-Connecting-IP ile ziyaretçi başına sayılır", "Formlar 15 dk'da 100, dönem isteği 600, genel limit 100", "Mongoose sanitizeFilter açık"] },
+    { "dot": "amber", "title": "Dağıtım", "items": ["Frontend ve backend iki ayrı Coolify uygulaması", "Önce backend, sonra frontend deploy edilir", "MongoDB, Gmail ve Medium Coolify dışında"] }
+  ]
+}

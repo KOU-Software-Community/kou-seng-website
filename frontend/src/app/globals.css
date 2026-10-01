@@ -6,8 +6,11 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-jakarta-sans);
+  --font-pixel: var(--font-press-start);
+  --shadow-sm: 0 6px 16px rgb(0 27 74 / 0.07);
+  --shadow-featured: 0 10px 24px rgb(0 27 74 / 0.13);
+  --shadow-cta: 0 10px 22px rgb(3 137 188 / 0.30);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -44,7 +47,7 @@
 }
 
 :root {
-  --radius: 0.625rem;
+  --radius: 0.75rem;
   /* Ana renkler */
   --koyu-lacivert: #001B4A; /* En koyu */
   --lacivert: #014576;      /* Orta koyu */
@@ -53,23 +56,23 @@
   --en-acik: #D2E7EC;       /* En açık */
 
   /* Tema değişkenleri */
-  --background: var(--en-acik);
-  --foreground: var(--koyu-lacivert);
+  --background: #F4F9FB;
+  --foreground: #0B1F3A;
   --card: white;
-  --card-foreground: var(--koyu-lacivert);
+  --card-foreground: var(--foreground);
   --popover: white;
-  --popover-foreground: var(--koyu-lacivert);
+  --popover-foreground: var(--foreground);
   --primary: var(--lacivert);
   --primary-foreground: white;
   --secondary: var(--turkuaz);
   --secondary-foreground: white;
-  --muted: var(--acik-mavi);
-  --muted-foreground: var(--lacivert);
+  --muted: var(--en-acik);
+  --muted-foreground: #41586B;
   --accent: var(--turkuaz);
   --accent-foreground: white;
   --destructive: #e11d48;
-  --border: color-mix(in srgb, var(--lacivert) 20%, transparent);
-  --input: color-mix(in srgb, var(--lacivert) 20%, transparent);
+  --border: #E4EEF3;
+  --input: #CBD9E1;
   --ring: var(--turkuaz);
   --chart-1: var(--koyu-lacivert);
   --chart-2: var(--lacivert);
@@ -121,12 +124,20 @@
   --sidebar-ring: var(--turkuaz);
 }
 
+@utility bg-hero {
+  background-image: linear-gradient(140deg, var(--koyu-lacivert), var(--turkuaz));
+}
+
+@utility bg-cta {
+  background-image: linear-gradient(135deg, var(--lacivert), var(--turkuaz));
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
   }
   .container {
     @apply mx-auto max-w-6xl px-4 w-full;

@@ -1,33 +1,33 @@
 # Graph Report - kou-seng-website  (2026-10-01)
 
 ## Corpus Check
-- 168 files · ~94,095 words
+- 168 files · ~94,118 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 8 file(s) not represented in the graph (top: (none) 4, .example 2, .ico 1)
 
 ## Summary
-- 983 nodes · 2098 edges · 49 communities (46 shown, 3 thin omitted)
+- 984 nodes · 2099 edges · 45 communities (43 shown, 2 thin omitted)
 - Extraction: 95% EXTRACTED · 5% INFERRED · 0% AMBIGUOUS · INFERRED: 108 edges (avg confidence: 0.9)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `b57615ed`
+- Built from commit: `31e719e4`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
-- react
+- applyDetail.tsx
 - mailQueueRoutes.js
 - frontend/package.json
 - purge-submissions.js
-- applicationWindow.ts
+- react
 - mongoose
 - mailQueueProcessor.js
 - Frontend - KOU SENG Website
 - dependencies
 - aboutData.ts
 - Backend - KOU SENG Website API
-- MailQueueContext.tsx
+- sponsor-mail.tsx
 - backend/package.json
 - index.js
 - components.json
@@ -37,33 +37,29 @@
 - Projeye özel kurallar
 - announcementsController.js
 - KOU SENG Website
-- devDependencies
+- technical-team.tsx
 - dependencies
 - authMiddleware.js
-- teamData.ts
+- general-membership.tsx
 - useSubmissions.ts
 - publicationsController.js
 - cn
-- useStatus.ts
-- scripts
+- useAuth
+- submissionsController.js
 - loadtest.js
-- contactRoutes.js
+- Başvuru Dönemleri — Tasarım
 - Backend API Endpoints
 - windows-smoke.js
-- eslint.config.mjs
-- utils.ts
-- contactData.ts
+- sanitizeHTML
+- clientIp.js
+- Review Focus
 - api.ts
-- submissionsController.js
+- applicationWindowsController.js
 - (admin-layout)/layout.tsx
-- useAuth
+- admin-management.tsx
 - Uygulama Tasarım Dili — Tasarım
 - postcss.config.mjs
-- useAuth.ts
-- useAnnouncements.ts
-- useApplicationWindows.ts
-- useUser.ts
-- kvkk/page.tsx
+- createGeneralSubmission
 - useContact.ts
 
 ## God Nodes (most connected - your core abstractions)
@@ -79,45 +75,45 @@
 10. `CardTitle()` - 21 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `Güvenlik` --references--> `adminOnly()`  [INFERRED]
-  docs/superpowers/specs/2026-09-28-basvuru-donemleri-design.md → backend/middlewares/authMiddleware.js
 - `Veri katmanı` --references--> `updateWindow()`  [INFERRED]
   docs/superpowers/specs/2026-09-28-basvuru-donemleri-design.md → backend/controllers/applicationWindowsController.js
+- `Başvuru dönemleri` --references--> `ApplicationWindow`  [INFERRED]
+  CLAUDE.md → frontend/src/lib/applicationWindow.ts
+- `Dokümantasyon` --references--> `ApplicationWindow`  [INFERRED]
+  docs/superpowers/specs/2026-09-28-basvuru-donemleri-design.md → frontend/src/lib/applicationWindow.ts
 - `Başvuru formuna alan ekleme` --references--> `createGeneralSubmission()`  [INFERRED]
   CLAUDE.md → backend/controllers/submissionsController.js
-- `Endpoint'ler` --references--> `adminOnly()`  [INFERRED]
-  docs/superpowers/specs/2026-09-28-basvuru-donemleri-design.md → backend/middlewares/authMiddleware.js
-- `Takım slug'ı üç kimliği birden taşıyor` --references--> `roleOnlyForCategory()`  [INFERRED]
-  CLAUDE.md → backend/middlewares/authMiddleware.js
+- `Task 3: Başvurulara 403 uygulaması, smoke'un kalanı ve CI` --references--> `isWindowOpen()`  [INFERRED]
+  docs/superpowers/plans/2026-09-28-basvuru-donemleri.md → backend/helpers/applicationWindow.js
 
 ## Import Cycles
 - None detected.
 
-## Communities (49 total, 3 thin omitted)
+## Communities (45 total, 2 thin omitted)
 
-### Community 0 - "react"
+### Community 0 - "applyDetail.tsx"
 Cohesion: 0.05
-Nodes (93): AnnouncementsSection(), AnnouncementsSectionProps, ContactForm(), formSchema, FormValues, RichTextEditor, RichTextEditorProps, RichTextEditorRef (+85 more)
+Nodes (78): Task 5: Başvuru sayfaları durumu backend'den okur, JSON temizliği, Task 6: Admin paneli "Başvuru Dönemleri" sayfası, AnnouncementsSection(), AnnouncementsSectionProps, formSchema, FormValues, NavItem, navItems (+70 more)
 
 ### Community 1 - "mailQueueRoutes.js"
 Cohesion: 0.19
 Nodes (12): cancelMailJob(), createMailJob(), deleteMailJob(), getMailJobs(), sanitizeJob(), attachmentSchema, MailJob, mailJobSchema (+4 more)
 
 ### Community 2 - "frontend/package.json"
-Cohesion: 0.09
-Nodes (20): name, overrides, postcss, private, version, class-variance-authority, eslint, @fortawesome/free-regular-svg-icons (+12 more)
+Cohesion: 0.04
+Nodes (45): eslintConfig, devDependencies, eslint, eslint-config-next, tailwindcss, @tailwindcss/postcss, tw-animate-css, @types/node (+37 more)
 
 ### Community 3 - "purge-submissions.js"
-Cohesion: 0.06
-Nodes (35): all, args, BACKEND_ROOT, category, confirmed, __dirname, dryRun, expect (+27 more)
+Cohesion: 0.05
+Nodes (41): args, __dirname, dryRun, rollback, all, args, BACKEND_ROOT, category (+33 more)
 
-### Community 4 - "applicationWindow.ts"
+### Community 4 - "react"
 Cohesion: 0.19
-Nodes (12): Task 6: Admin paneli "Başvuru Dönemleri" sayfası, WindowCard(), Apply(), getIconByName(), APPLICATION_LABELS, dateFormat, formatWindowDate(), fromLocalInput() (+4 more)
+Nodes (16): RichTextEditorRef, AnnouncementFormData, announcementSchema, Notice, ScopeOption, SCOPES, Dialog(), DialogContent() (+8 more)
 
 ### Community 5 - "mongoose"
-Cohesion: 0.12
-Nodes (11): getSystemStatus(), announcementSchema, contactSchema, submissionSchema, args, __dirname, dryRun, rollback (+3 more)
+Cohesion: 0.19
+Nodes (9): createContactMessage(), deleteContactMessage(), getContactMessages(), updateContactIsRead(), announcementSchema, contactSchema, submissionSchema, router (+1 more)
 
 ### Community 6 - "mailQueueProcessor.js"
 Cohesion: 0.13
@@ -132,24 +128,24 @@ Cohesion: 0.08
 Nodes (25): dependencies, class-variance-authority, clsx, date-fns, @fortawesome/fontawesome-svg-core, @fortawesome/free-brands-svg-icons, @fortawesome/free-regular-svg-icons, @fortawesome/free-solid-svg-icons (+17 more)
 
 ### Community 9 - "aboutData.ts"
-Cohesion: 0.18
-Nodes (11): AboutRoute(), About(), AboutProps, AboutData, BoardMember, FocusArea, getAboutData(), iconMap (+3 more)
+Cohesion: 0.06
+Nodes (34): AboutRoute(), KvkkRoute(), metadata, TeamDetailRoute(), About(), AboutProps, Kvkk(), TeamDetail() (+26 more)
 
 ### Community 10 - "Backend - KOU SENG Website API"
 Cohesion: 0.08
 Nodes (23): 1. Bağımlılıkları Yükleme, 2. Environment Variables, 3. Server'ı Başlatma, Ana Package Dosyaları, Announcements, 📚 API Endpoints, Authentication, Backend - KOU SENG Website API (+15 more)
 
-### Community 11 - "MailQueueContext.tsx"
-Cohesion: 0.09
-Nodes (21): AdminSponsorMail(), createBlock(), formatDate(), parseEmails(), QueueJobCard(), authHeaders(), EnqueueInput, MailQueueContext (+13 more)
+### Community 11 - "sponsor-mail.tsx"
+Cohesion: 0.10
+Nodes (25): AdminSponsorMail(), BLOCK_LABELS, BlockType, createBlock(), formatDate(), parseEmails(), QueueJobCard(), authHeaders() (+17 more)
 
 ### Community 12 - "backend/package.json"
 Cohesion: 0.10
 Nodes (20): author, description, devDependencies, nodemon, keywords, license, main, name (+12 more)
 
 ### Community 13 - "index.js"
-Cohesion: 0.10
-Nodes (22): ConnectDB(), getHealthStatus(), clientIp(), CLOUDFLARE_RANGES, fromTrustedHop(), LOCAL_RANGES, trustedHops, logger (+14 more)
+Cohesion: 0.14
+Nodes (16): ConnectDB(), getHealthStatus(), logger, TODO: Telegram ile loglama yapılacak, rateSkip(), rateSkipAuth(), rateSkipIP(), app (+8 more)
 
 ### Community 14 - "components.json"
 Cohesion: 0.11
@@ -161,27 +157,27 @@ Nodes (18): compilerOptions, allowJs, esModuleInterop, incremental, isolatedModu
 
 ### Community 16 - "authController.js"
 Cohesion: 0.29
-Nodes (7): changePassword(), getMe(), loginUser(), generateToken(), MIN_PASSWORD_LENGTH, UserSchema, router
+Nodes (7): changePassword(), getMe(), loginUser(), getSystemStatus(), generateToken(), router, bcryptjs
 
 ### Community 17 - "homeData.ts"
-Cohesion: 0.15
-Nodes (13): RootPage(), Home(), AnnouncementsData, ClubFeature, ClubIntroductionData, getHomeData(), HeroButton, HeroData (+5 more)
+Cohesion: 0.10
+Nodes (20): RootPage(), Footer(), Header(), Home(), MainLayout(), MainLayoutProps, FooterData, getFooterData() (+12 more)
 
 ### Community 18 - "Projeye özel kurallar"
-Cohesion: 0.04
-Nodes (37): Backend ESM — `node --check` yalan söylüyor, Başvuruları silme (saklama süresi), Branch'ler, `check:content`, Duyuru HTML'i ve CSP, Frontend (`frontend/`), graphify, Görsel hazırlama (+29 more)
+Cohesion: 0.05
+Nodes (32): Backend ESM — `node --check` yalan söylüyor, Başvuru dönemleri, Başvuruları silme (saklama süresi), Branch'ler, `check:content`, Duyuru HTML'i ve CSP, Frontend (`frontend/`), graphify (+24 more)
 
 ### Community 19 - "announcementsController.js"
-Cohesion: 0.30
-Nodes (9): cleanContent(), createAnnouncement(), deleteAnnouncement(), getAnnouncement(), getAnnouncements(), updateAnnouncement(), getAllSubmissions(), toSearchPattern() (+1 more)
+Cohesion: 0.36
+Nodes (8): cleanContent(), createAnnouncement(), deleteAnnouncement(), getAnnouncement(), getAnnouncements(), updateAnnouncement(), router, sanitize-html
 
 ### Community 20 - "KOU SENG Website"
 Cohesion: 0.14
 Nodes (13): Admin Paneli, Backend, Backend Kurulumu, Frontend, Frontend Kurulumu, Genel Sayfalar, 📋 Gereksinimler, 📞 İletişim (+5 more)
 
-### Community 21 - "devDependencies"
-Cohesion: 0.20
-Nodes (10): devDependencies, eslint, eslint-config-next, tailwindcss, @tailwindcss/postcss, tw-animate-css, @types/node, @types/react (+2 more)
+### Community 21 - "technical-team.tsx"
+Cohesion: 0.22
+Nodes (11): AdminTechnicalTeam(), formatCustomFields(), formatGrade(), formatStatus(), isEmail(), isPhone(), isProbablyUrl(), renderValue() (+3 more)
 
 ### Community 22 - "dependencies"
 Cohesion: 0.15
@@ -189,39 +185,39 @@ Nodes (13): dependencies, bcryptjs, cors, dotenv, express, express-rate-limit, j
 
 ### Community 23 - "authMiddleware.js"
 Cohesion: 0.16
-Nodes (18): createUser(), deleteUser(), getAllUsers(), updateUser(), adminOnly(), firstUserCreation(), matchesSystemKey(), protect() (+10 more)
+Nodes (19): createUser(), deleteUser(), getAllUsers(), updateUser(), adminOnly(), firstUserCreation(), matchesSystemKey(), protect() (+11 more)
 
-### Community 24 - "teamData.ts"
-Cohesion: 0.19
-Nodes (11): TeamDetailRoute(), TeamDetail(), TeamDetailProps, Achievement, Competition, getTeamDetail(), getTeamSlugs(), LeaderMessage (+3 more)
+### Community 24 - "general-membership.tsx"
+Cohesion: 0.22
+Nodes (10): AdminDataManagement(), AdminGeneralMembership(), formatCustomFields(), formatGrade(), formatStatus(), isEmail(), isPhone(), isProbablyUrl() (+2 more)
 
 ### Community 25 - "useSubmissions.ts"
 Cohesion: 0.15
 Nodes (12): BaseSubmissionData, GeneralSubmissionData, ListSubmissionsParams, PurgeScope, SubmissionData, SubmissionListItem, SubmissionListResponse, SubmissionPagination (+4 more)
 
 ### Community 26 - "publicationsController.js"
-Cohesion: 0.26
-Nodes (10): customFields, extractCoverImage(), extractExcerpt(), extractSourceName(), fetchAllRssFeeds(), formatDate(), getRssFeed(), router (+2 more)
+Cohesion: 0.33
+Nodes (8): customFields, extractCoverImage(), extractExcerpt(), extractSourceName(), fetchAllRssFeeds(), formatDate(), getRssFeed(), router
 
 ### Community 27 - "cn"
-Cohesion: 0.05
-Nodes (61): DashboardLayoutProps, AdminSidebar(), NavItem, navItems, DialogOverlay(), DialogTrigger(), DropdownMenu(), DropdownMenuCheckboxItem() (+53 more)
+Cohesion: 0.06
+Nodes (54): NavItem, navItems, CardAction(), DialogOverlay(), DialogTrigger(), DropdownMenuCheckboxItem(), DropdownMenuContent(), DropdownMenuItem() (+46 more)
 
-### Community 28 - "useStatus.ts"
-Cohesion: 0.25
-Nodes (5): AdminDashboard(), StatusData, StatusResponse, useStatus(), UseStatusReturn
+### Community 28 - "useAuth"
+Cohesion: 0.08
+Nodes (24): AdminDashboardLayout(), DashboardLayoutProps, AdminSidebar(), ChangePasswordDialog(), AdminDashboard(), AdminLogin(), SidebarInset(), Announcement (+16 more)
 
-### Community 29 - "scripts"
-Cohesion: 0.22
-Nodes (9): scripts, build, check:content, dev, lint, pm2:restart, pm2:start, pm2:stop (+1 more)
+### Community 29 - "submissionsController.js"
+Cohesion: 0.24
+Nodes (11): csvString(), exportSubmissionsToCSV(), getAllSubmissions(), getSubmissionById(), PURGE_SCOPES, purgeSubmissions(), quoteCsvString, updateSubmission() (+3 more)
 
 ### Community 30 - "loadtest.js"
 Cohesion: 0.12
 Nodes (13): BASE, body(), C, N, one(), RUN, SUBMIT, Global Constraints (+5 more)
 
-### Community 31 - "contactRoutes.js"
-Cohesion: 0.48
-Nodes (5): createContactMessage(), deleteContactMessage(), getContactMessages(), updateContactIsRead(), router
+### Community 31 - "Başvuru Dönemleri — Tasarım"
+Cohesion: 0.17
+Nodes (11): Admin paneli, Amaç, Başvuru Dönemleri — Tasarım, Başvuru sayfaları, Deploy, Dokümantasyon, Frontend, Kapsam dışı (+3 more)
 
 ### Community 32 - "Backend API Endpoints"
 Cohesion: 0.25
@@ -231,73 +227,61 @@ Nodes (7): Backend API Endpoints, Duyurular (Announcements) - YAPILDI, Gelen Ba�
 Cohesion: 0.22
 Nodes (9): api(), applicant(), BASE, expectClosed(), expectStatus(), RUN, setWindow(), submit() (+1 more)
 
-### Community 35 - "utils.ts"
-Cohesion: 0.13
-Nodes (14): Footer(), Header(), NavItem, navItems, NavLinkItem, ThemeToggle(), MainLayout(), MainLayoutProps (+6 more)
+### Community 34 - "sanitizeHTML"
+Cohesion: 0.25
+Nodes (6): RichTextEditor, AdminAnnouncements(), formatDate(), ALLOWED_TAGS, cleanNode(), sanitizeHTML()
 
-### Community 36 - "contactData.ts"
-Cohesion: 0.18
-Nodes (8): Contact(), ContactData, ContactInfo, getContactData(), MapData, PageContent, SocialMediaLink, ref_fs
+### Community 35 - "clientIp.js"
+Cohesion: 0.29
+Nodes (7): clientIp(), CLOUDFLARE_RANGES, fromTrustedHop(), LOCAL_RANGES, trustedHops, keyGenerator(), ref_node_net
+
+### Community 36 - "Review Focus"
+Cohesion: 0.33
+Nodes (5): Başvuru Dönemleri — Uygulama Planı, Global Constraints, Review Focus, Task 1: Pencere kuralı (saf fonksiyonlar) ve birim testleri, Task 4: Frontend veri katmanı
 
 ### Community 37 - "api.ts"
 Cohesion: 0.29
 Nodes (4): Announcement, AnnouncementsResponse, RssFeedResponse, RssItem
 
-### Community 38 - "submissionsController.js"
-Cohesion: 0.07
-Nodes (51): getWindow(), getWindows(), toDate(), updateWindow(), createGeneralSubmission(), createTechnicalSubmission(), csvString(), exportSubmissionsToCSV() (+43 more)
+### Community 38 - "applicationWindowsController.js"
+Cohesion: 0.26
+Nodes (13): getWindows(), toDate(), updateWindow(), APPLICATION_SLUGS, DEFAULT_WINDOWS, isWindowOpen(), T, toPublicWindow() (+5 more)
 
-### Community 40 - "useAuth"
-Cohesion: 0.18
-Nodes (10): AdminDashboardLayout(), ChangePasswordDialog(), AdminManagement(), formatRole(), getStoredToken(), useAuth(), SendMailPayload, useSponsorMail() (+2 more)
+### Community 40 - "admin-management.tsx"
+Cohesion: 0.26
+Nodes (8): AdminManagement(), formatRole(), MIN_PASSWORD_LENGTH, CreateUserRequest, UpdateUserRequest, UserResponse, useUser(), UseUserReturn
 
 ### Community 41 - "Uygulama Tasarım Dili — Tasarım"
 Cohesion: 0.22
 Nodes (8): Amaç, Deploy, Doğrulama, Erişilebilirlik, Kapsam dışı, Tasarım kuralları, Uygulama Tasarım Dili — Tasarım, Uygulamaya özgü dokunuşlar
 
-### Community 43 - "useAuth.ts"
-Cohesion: 0.25
-Nodes (7): AuthError, AuthUser, LoginRequestBody, LoginResponse, MIN_PASSWORD_LENGTH, setStoredToken(), UseAuthReturn
-
-### Community 44 - "useAnnouncements.ts"
-Cohesion: 0.40
-Nodes (4): Announcement, ApiResponse, CreateAnnouncementRequest, UpdateAnnouncementRequest
-
-### Community 45 - "useApplicationWindows.ts"
-Cohesion: 0.33
-Nodes (3): AdminApplicationWindows(), useApplicationWindows(), UseApplicationWindowsReturn
-
-### Community 46 - "useUser.ts"
-Cohesion: 0.29
-Nodes (6): Veri, CreateUserRequest, UpdateUserRequest, User, UserResponse, UseUserReturn
-
-### Community 47 - "kvkk/page.tsx"
-Cohesion: 0.36
-Nodes (6): KvkkRoute(), metadata, Kvkk(), getKvkkData(), KvkkData, KvkkSection
+### Community 46 - "createGeneralSubmission"
+Cohesion: 0.27
+Nodes (11): getWindow(), createGeneralSubmission(), createTechnicalSubmission(), isGrade(), isText(), Başvuru formuna alan ekleme, Task 3: Başvurulara 403 uygulaması, smoke'un kalanı ve CI, Backend (+3 more)
 
 ### Community 50 - "useContact.ts"
-Cohesion: 0.33
-Nodes (5): ContactFormValues, ContactListResponse, ContactMessage, ContactResponse, UseContactReturn
+Cohesion: 0.18
+Nodes (8): ContactForm(), AdminContact(), ContactFormValues, ContactListResponse, ContactMessage, ContactResponse, useContact(), UseContactReturn
 
 ## Knowledge Gaps
-- **370 isolated node(s):** `__dirname`, `assetsDir`, `customFields`, `PURGE_SCOPES`, `T` (+365 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 431 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **3 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **371 isolated node(s):** `__dirname`, `assetsDir`, `customFields`, `PURGE_SCOPES`, `T` (+366 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 432 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **2 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `react` connect `react` to `frontend/package.json`, `utils.ts`, `useAuth`, `MailQueueContext.tsx`, `useAnnouncements.ts`, `useApplicationWindows.ts`, `useAuth.ts`, `useUser.ts`, `useContact.ts`, `useSubmissions.ts`, `cn`, `useStatus.ts`?**
+- **Why does `react` connect `react` to `applyDetail.tsx`, `frontend/package.json`, `admin-management.tsx`, `sponsor-mail.tsx`, `homeData.ts`, `Projeye özel kurallar`, `useContact.ts`, `technical-team.tsx`, `general-membership.tsx`, `useSubmissions.ts`, `cn`, `useAuth`?**
   _High betweenness centrality (0.105) - this node is a cross-community bridge._
-- **Why does `ApplicationWindow` connect `submissionsController.js` to `react`, `applicationWindow.ts`, `useApplicationWindows.ts`, `Projeye özel kurallar`, `authMiddleware.js`?**
+- **Why does `ApplicationWindow` connect `applyDetail.tsx` to `Review Focus`, `applicationWindowsController.js`, `createGeneralSubmission`, `Projeye özel kurallar`, `Başvuru Dönemleri — Tasarım`?**
   _High betweenness centrality (0.088) - this node is a cross-community bridge._
-- **Why does `next` connect `react` to `frontend/package.json`, `purge-submissions.js`, `utils.ts`, `MailQueueContext.tsx`, `kvkk/page.tsx`, `Projeye özel kurallar`, `teamData.ts`, `cn`?**
-  _High betweenness centrality (0.081) - this node is a cross-community bridge._
+- **Why does `next` connect `applyDetail.tsx` to `frontend/package.json`, `purge-submissions.js`, `aboutData.ts`, `sponsor-mail.tsx`, `homeData.ts`, `Projeye özel kurallar`, `cn`, `useAuth`?**
+  _High betweenness centrality (0.083) - this node is a cross-community bridge._
 - **What connects `__dirname`, `assetsDir`, `customFields` to the rest of the system?**
-  _370 weakly-connected nodes found - possible documentation gaps or missing edges._
-- **Should `react` be split into smaller, more focused modules?**
-  _Cohesion score 0.050652693509836366 - nodes in this community are weakly interconnected._
+  _371 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Should `applyDetail.tsx` be split into smaller, more focused modules?**
+  _Cohesion score 0.051400560224089634 - nodes in this community are weakly interconnected._
 - **Should `frontend/package.json` be split into smaller, more focused modules?**
-  _Cohesion score 0.09090909090909091 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.041666666666666664 - nodes in this community are weakly interconnected._
 - **Should `purge-submissions.js` be split into smaller, more focused modules?**
-  _Cohesion score 0.06341463414634146 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.05357142857142857 - nodes in this community are weakly interconnected._

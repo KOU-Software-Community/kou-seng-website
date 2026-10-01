@@ -8,6 +8,7 @@ import { faScroll, faSpinner, faBullhorn } from '@fortawesome/free-solid-svg-ico
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import useAnnouncements from '@/hooks/useAnnouncements';
+import { PixelMark } from "@/components/layout/Pixel";
 
 type AnnouncementsSectionProps = {
   title: string;
@@ -38,6 +39,7 @@ export default function AnnouncementsSection({
   return (
     <section className="container">
       <div className="mb-12 mx-auto text-center max-w-3xl">
+        <PixelMark />
         <h2 className="mb-2 text-3xl font-bold tracking-tight">{title}</h2>
         <p className="mx-auto max-w-2xl text-muted-foreground">
           {description}

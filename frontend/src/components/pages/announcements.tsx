@@ -11,6 +11,7 @@ import { Input } from '@/components/ui/input';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import useAnnouncements from '@/hooks/useAnnouncements';
 import { sanitizeHTML } from '@/lib/sanitizeHTML';
+import { PixelMark } from "@/components/layout/Pixel";
 
 export default function Announcements() {
     const {
@@ -58,6 +59,7 @@ export default function Announcements() {
         <main className="flex flex-col">
             <div className="container py-8 md:py-12">
                 <div className="mb-8 mx-auto text-center max-w-3xl">
+                    <PixelMark />
                     <h1 className="mb-2 text-3xl font-bold tracking-tight md:text-4xl">Duyurular</h1>
                     <p className="text-muted-foreground">
                         Kulübümüze ait en güncel duyurular ve etkinlik bilgilerine buradan ulaşabilirsiniz.
@@ -89,7 +91,7 @@ export default function Announcements() {
                 ) : announcements.length > 0 ? (
                     <div className="space-y-4">
                         {announcements.map((announcement) => (
-                            <Card key={announcement._id} className="gap-0 hover:shadow-md transition-shadow">
+                            <Card key={announcement._id} className="gap-0 hover:shadow-featured transition-shadow">
                                 <CardHeader className="pb-2">
                                     <div className="flex justify-between items-start">
                                         <div>

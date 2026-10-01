@@ -46,6 +46,16 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
+@theme {
+  /* Uygulamadaki BlinkSquare: kare döngünün ilk çeyreğinde yanar, kalanında %25 opak. */
+  --animate-pxspin: pxspin 1s steps(1) infinite;
+
+  @keyframes pxspin {
+    0% { opacity: 1; }
+    25%, 100% { opacity: 0.25; }
+  }
+}
+
 :root {
   --radius: 0.75rem;
   /* Ana renkler */
@@ -71,7 +81,7 @@
   --accent: var(--turkuaz);
   --accent-foreground: white;
   --destructive: #e11d48;
-  --border: #E4EEF3;
+  --border: #CBD9E1;
   --input: #CBD9E1;
   --ring: var(--turkuaz);
   --chart-1: var(--koyu-lacivert);

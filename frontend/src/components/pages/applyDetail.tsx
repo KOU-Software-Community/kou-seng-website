@@ -17,6 +17,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faSpinner, faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import React from "react";
 import Link from "next/link";
+import { PixelLoader } from "@/components/layout/Pixel";
 
 export default function ApplyDetail(props: { slug: string }) {
   const { application, isLoading, error } = useApplyDetail(props.slug);
@@ -190,8 +191,7 @@ export default function ApplyDetail(props: { slug: string }) {
   if (isLoading || windowsLoading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] p-6">
-        <FontAwesomeIcon icon={faSpinner} className="h-12 w-12 text-primary mb-4" spin />
-        <p className="text-lg text-muted-foreground">Başvuru bilgileri yükleniyor...</p>
+        <PixelLoader label="başvuru bilgileri yükleniyor" />
       </div>
     );
   }

@@ -9,6 +9,7 @@ import { faCheck, faLock, faClock, faUsers, faCode, faLaptopCode, faRobot } from
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { useApplicationWindows } from '@/hooks/useApplicationWindows';
 import { windowSummary } from '@/lib/applicationWindow';
+import { PixelMark, PixelLoader } from "@/components/layout/Pixel";
 
 // İkon eşleştirme fonksiyonu
 const getIconByName = (iconName: string) => {
@@ -82,6 +83,7 @@ export default function Apply() {
             {/* Başlık ve Açıklama */}
             <section className="container">
                 <div className="mb-8 mx-auto text-center max-w-3xl">
+                    <PixelMark />
                     <h2 className="mb-3 text-3xl font-bold tracking-tight">Başvurular</h2>
                     <p className="mx-auto max-w-2xl text-muted-foreground">
                         Yazılım Kulübü&apos;ne üyelik ve teknik takımlar için açık başvurularımızı inceleyebilirsiniz.
@@ -126,12 +128,12 @@ export default function Apply() {
             <section className="container">
                 <div className="mx-auto max-w-6xl grid gap-6 sm:grid-cols-2 lg:grid-cols-2">
                     {isLoading || windowsLoading ? (
-                        <div className="col-span-full text-center py-12">
-                            <p className="font-pixel text-xs text-muted-foreground">Başvurular yükleniyor...</p>
+                        <div className="col-span-full py-12">
+                            <PixelLoader label="başvurular yükleniyor" />
                         </div>
                     ) : filteredApplications.length > 0 ? (
                         filteredApplications.map((application) => (
-                            <Card key={application.id} className="overflow-hidden transition-all hover:shadow-md">
+                            <Card key={application.id} className="overflow-hidden transition-all hover:shadow-featured">
                                 <CardHeader className="pb-4">
                                     <div className="mb-2 flex h-12 w-12 items-center justify-center rounded-md bg-primary/10 text-primary">
                                         <FontAwesomeIcon icon={application.icon} className="h-6 w-6" />

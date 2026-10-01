@@ -1,4 +1,5 @@
 import type { KvkkData } from '@/lib/kvkkData';
+import { PixelMark } from "@/components/layout/Pixel";
 
 export default function Kvkk({ data }: { data: KvkkData }) {
   return (
@@ -6,6 +7,7 @@ export default function Kvkk({ data }: { data: KvkkData }) {
       <section className="container">
         <article className="mx-auto max-w-3xl">
           <header className="mb-10 text-center">
+            <PixelMark />
             <h2 className="mb-2 text-3xl font-bold tracking-tight">{data.title}</h2>
             <p className="text-sm text-muted-foreground">Son güncelleme: {data.lastUpdated}</p>
           </header>

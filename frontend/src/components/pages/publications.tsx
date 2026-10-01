@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { useRssFeed } from '@/hooks/useRssFeed';
+import { PixelMark } from "@/components/layout/Pixel";
 
 export default function Publications() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -72,6 +73,7 @@ export default function Publications() {
       {/* Başlık ve Açıklama */}
       <section className="container">
         <div className="mb-6 mx-auto text-center max-w-3xl">
+          <PixelMark />
           <h1 className="mb-2 text-3xl font-bold tracking-tight">Yayınlar</h1>
           <p className="mx-auto max-w-2xl text-muted-foreground">
             Kulüp üyelerimizin yazılım dünyasına dair bilgi ve deneyimlerini paylaştıkları makaleler. 
@@ -182,7 +184,7 @@ export default function Publications() {
         ) : (
           <div className="mx-auto max-w-6xl grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {articles.map((article, index) => (
-              <Card key={index} className="overflow-hidden flex flex-col h-full gap-4 py-0 pb-6 transition-all hover:shadow-md">
+              <Card key={index} className="overflow-hidden flex flex-col h-full gap-4 py-0 pb-6 transition-all hover:shadow-featured">
                 <AspectRatio ratio={16 / 9}>
                   {article.coverImage ? (
                     <Image

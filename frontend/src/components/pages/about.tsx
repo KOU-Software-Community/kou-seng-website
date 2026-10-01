@@ -7,6 +7,7 @@ import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { AboutData } from '@/lib/aboutData';
+import { PixelMark } from "@/components/layout/Pixel";
 
 interface AboutProps {
   data: AboutData;
@@ -25,6 +26,7 @@ export default function About({ data }: AboutProps) {
       {/* Misyon ve Vizyon */}
       <section className="container">
         <div className="mb-12 mx-auto text-center max-w-3xl">
+          <PixelMark />
           <h2 className="mb-2 text-3xl font-bold tracking-tight">{pageContent.missionVision.title}</h2>
         </div>
         
@@ -62,6 +64,7 @@ export default function About({ data }: AboutProps) {
       {/* Yönetim Kurulu */}
       <section className="container">
         <div className="mb-12 mx-auto text-center max-w-3xl">
+          <PixelMark />
           <h2 className="mb-2 text-3xl font-bold tracking-tight">{pageContent.boardMembers.title}</h2>
           <p className="mx-auto max-w-2xl text-muted-foreground">
             {pageContent.boardMembers.description}
@@ -273,6 +276,7 @@ export default function About({ data }: AboutProps) {
       <section className="bg-muted py-16">
         <div className="container">
           <div className="mb-12 mx-auto text-center max-w-3xl">
+            <PixelMark />
             <h2 className="mb-2 text-3xl font-bold tracking-tight">{pageContent.timeline.title}</h2>
             <p className="mx-auto max-w-2xl text-muted-foreground">
               {pageContent.timeline.description}
@@ -313,6 +317,7 @@ export default function About({ data }: AboutProps) {
       {/* Çalışma Alanları */}
       <section className="container py-8">
         <div className="mb-12 mx-auto text-center max-w-3xl">
+          <PixelMark />
           <h2 className="mb-2 text-3xl font-bold tracking-tight">{pageContent.focusAreas.title}</h2>
           <p className="mx-auto max-w-2xl text-muted-foreground">
             {pageContent.focusAreas.description}
@@ -321,7 +326,7 @@ export default function About({ data }: AboutProps) {
         
         <div className="mx-auto max-w-6xl grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {focusAreas.map((area, index) => (
-            <Card key={index} className="hover:shadow-md transition-shadow">
+            <Card key={index} className="hover:shadow-featured transition-shadow">
               <CardHeader className="pb-2">
                 <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-md bg-primary/10 text-primary">
                   <FontAwesomeIcon icon={area.icon} className="h-5 w-5" />
@@ -341,6 +346,7 @@ export default function About({ data }: AboutProps) {
       {/* Katılım Çağrısı */}
       <section className="bg-muted py-16">
         <div className="container text-center">
+          <PixelMark />
           <h2 className="mb-4 text-3xl font-bold tracking-tight">{pageContent.cta.title}</h2>
           <p className="text-muted-foreground mx-auto max-w-2xl mb-8">
             {pageContent.cta.description}

@@ -68,7 +68,7 @@
 
 **Files:**
 - Modify:
-  - `frontend/src/components/pages/home.tsx`: hero sağ sütunu (satır 59–106) ve rozet (satır 28–31)
+  - `frontend/src/components/pages/home.tsx`: hero sağ sütunu (`aspect-square` div; `bg-red-500` noktalı kod editörü burada) ve rozet
   - `frontend/src/components/pages/apply.tsx`: "Başvur" düğmesi ve yükleniyor satırı
   - `frontend/src/components/pages/applyDetail.tsx`: gönder düğmesi
   - `frontend/src/components/layout/RssSection.tsx`: "Henüz Yayın Yok" başlığı

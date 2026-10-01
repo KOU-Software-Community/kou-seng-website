@@ -83,7 +83,7 @@ ortak.
   - kart köşesi 16 px,
   - hero'da kod editörü çizimi yok, logo panelinde `font-pixel` yazı var,
   - birincil düğmelerde gradyan.
-- **Önce/sonra ekran görüntüleri:** ana sayfa, `/apply`, `/apply/ai` ve
+- **Önce/sonra ekran görüntüleri:** ana sayfa, `/apply`, `/apply/general` ve
   hakkında; masaüstü ve iPhone; açık ve karanlık tema.
 - **Regresyon:**
   - başvuru ve admin kabul senaryoları,

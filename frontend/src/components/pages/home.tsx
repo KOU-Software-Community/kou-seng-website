@@ -79,8 +79,9 @@ export default function Home({ homeData }: HomeProps) {
                 <span
                   key={i}
                   aria-hidden="true"
-                  className={cn("absolute bg-(--acik-mavi)", delay !== undefined && "motion-safe:animate-pxspin [animation-duration:2.4s]")}
-                  style={{ left: `${left}%`, top: `${top}%`, width: size, height: size, opacity, animationDelay: delay === undefined ? undefined : `${delay}s` }}
+                  className={cn("absolute bg-(--acik-mavi)", delay !== undefined && "motion-safe:animate-pxspin")}
+                  // Süre inline: animate-pxspin'in animation kısaltması bir sınıfla verilen süreyi eziyor.
+                  style={{ left: `${left}%`, top: `${top}%`, width: size, height: size, opacity, ...(delay !== undefined && { animationDuration: '2.4s', animationDelay: `${delay}s` }) }}
                 />
               ))}
               <Image

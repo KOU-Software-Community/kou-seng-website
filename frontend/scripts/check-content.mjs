@@ -10,6 +10,8 @@
 //   - skills alani eksik                 -> teamDetail.tsx `member.skills.length` ile patlar
 //   - projects[].stores dizi degil       -> teamDetail.tsx `project.stores?.map` ile patlar
 //   - forma eklenen alan allowlist'te yok -> her basvuru 400 doner, build ve form sessiz gecer
+//   - ana sayfa video/poster yolu diskte yok -> video 404, build sessiz gecer
+//   - home app.stores takim projesinden ayristi -> Google Play linki bir yerde unutulur
 //
 // ÖNEMLİ: bu betik hiçbir zaman sessizce atlamaz. Ölçemedigi her sey FAIL'dir.
 
@@ -134,6 +136,18 @@ console.log('about/data.json — yonetim kurulu');
   }
 }
 
+/** stores dizisi: takim sayfasi ve ana sayfa map'liyor, ikonu name'e gore seciyor. url null = "Yakinda". */
+function checkStores(label, stores) {
+  if (!Array.isArray(stores)) { bad(label, 'stores dizi degil — sayfa stores.map ile patlar'); return; }
+  const names = stores.map((s) => s?.name);
+  if (new Set(names).size !== names.length) bad(label, `stores name tekrar ediyor: ${names.join(', ')}`);
+  for (const s of stores) {
+    if (!['App Store', 'Google Play'].includes(s?.name)) bad(label, `stores name "${s?.name}" — "App Store" ya da "Google Play" olmali`);
+    else if (s.url !== null && !/^https:\/\//.test(s.url)) bad(label, `${s.name} url https ile baslamali ya da null olmali: ${s.url}`);
+    else ok(label, `${s.name} ${s.url ?? '(yakinda)'}`);
+  }
+}
+
 console.log('\nteams/*.json — takimlar');
 {
   const dir = join(DATA, 'teams');
@@ -158,18 +172,38 @@ console.log('\nteams/*.json — takimlar');
       // kontrolunden gecmez: nesne yazilirsa sayfa runtime'da patlar, yanlis name
       // sessizce yanlis ikon gosterir. url null = "Yakinda" pasif buton.
       for (const p of d.projects ?? []) {
-        if (p.stores === undefined) continue;
-        const label = `${slug}/${p.title || '(basliksiz)'}`;
-        if (!Array.isArray(p.stores)) { bad(label, 'stores dizi degil — teamDetail.tsx stores.map ile patlar'); continue; }
-        const names = p.stores.map((s) => s?.name);
-        if (new Set(names).size !== names.length) bad(label, `stores name tekrar ediyor: ${names.join(', ')}`);
-        for (const s of p.stores) {
-          if (!['App Store', 'Google Play'].includes(s?.name)) bad(label, `stores name "${s?.name}" — "App Store" ya da "Google Play" olmali`);
-          else if (s.url !== null && !/^https:\/\//.test(s.url)) bad(label, `${s.name} url https ile baslamali ya da null olmali: ${s.url}`);
-          else ok(label, `${s.name} ${s.url ?? '(yakinda)'}`);
-        }
+        if (p.stores !== undefined) checkStores(`${slug}/${p.title || '(basliksiz)'}`, p.stores);
       }
     }
+  }
+}
+
+console.log('\nhome/data.json — mobil uygulama bolumu');
+{
+  // Video ve poster public/ altindan servis ediliyor; Next bu yollari build'de dogrulamaz.
+  // app.stores, teams/mobil-web.json'daki KOU SENG projesinin kopyasi: Google Play
+  // linki gelince iki yer birlikte guncellenmeli.
+  const hp = join(DATA, 'home', 'data.json');
+  const app = existsSync(hp) ? JSON.parse(readFileSync(hp, 'utf8')).app : undefined;
+  if (!app) bad('home/app', 'app yok');
+  else {
+    checkStores('home/app', app.stores);
+    const tp = join(DATA, 'teams', 'mobil-web.json');
+    const projects = existsSync(tp) ? JSON.parse(readFileSync(tp, 'utf8')).projects ?? [] : [];
+    if (projects.some((pr) => pr.stores && JSON.stringify(pr.stores) === JSON.stringify(app.stores))) ok('home/app', 'stores teams/mobil-web.json ile ayni');
+    else bad('home/app', "stores teams/mobil-web.json'daki KOU SENG projesiyle ayni degil; Google Play linki iki yerde birlikte guncellenir");
+    const file = (key, webPath, prefix, isKind, maxBytes) => {
+      if (typeof webPath !== 'string' || !webPath.startsWith(prefix)) { bad('home/app', `${key} "${prefix}" ile baslamali: ${webPath}`); return; }
+      const fp = join(PUBLIC, webPath.slice(1));
+      if (!existsSync(fp)) { bad('home/app', `${key} diskte yok: ${webPath}`); return; }
+      const size = statSync(fp).size;
+      const kind = sniff(readFileSync(fp));
+      if (!isKind(kind)) bad('home/app', `${key} formati yanlis (${kind}): ${webPath}`);
+      else if (size > maxBytes) bad('home/app', `${key} cok buyuk: ${(size / 1024).toFixed(0)} KB > ${(maxBytes / 1024).toFixed(0)} KB`);
+      else ok('home/app', `${key} ${webPath} ${kind} ${(size / 1024).toFixed(0)} KB`);
+    };
+    file('video.src', app.video?.src, '/video/', (k) => typeof k === 'string' && k.startsWith('iso('), 5 * 1024 * 1024);
+    file('video.poster', app.video?.poster, '/video/', (k) => k === 'jpeg', 300 * 1024);
   }
 }
 

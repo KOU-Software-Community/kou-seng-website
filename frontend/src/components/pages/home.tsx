@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { HomeData } from '@/lib/homeData';
 import AnnouncementsSection from '@/components/layout/AnnouncementsSection';
 import RssSection from '@/components/layout/RssSection';
+import AppSection from '@/components/layout/AppSection';
 import { RSS_ENABLED, cn } from '@/lib/utils';
 import { PixelMark } from "@/components/layout/Pixel";
 
@@ -124,6 +125,9 @@ export default function Home({ homeData }: HomeProps) {
           ))}
         </div>
       </section>
+
+      {/* Mobil uygulama ve tanıtım videosu */}
+      <AppSection app={homeData.app} />
 
       {/* 3. Duyurular */}
       <AnnouncementsSection

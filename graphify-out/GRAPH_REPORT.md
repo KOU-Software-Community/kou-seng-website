@@ -1,7 +1,7 @@
 # Graph Report - kou-seng-website  (2026-10-01)
 
 ## Corpus Check
-- 168 files · ~93,930 words
+- 168 files · ~94,054 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 8 file(s) not represented in the graph (top: (none) 4, .example 2, .ico 1)
 
@@ -11,7 +11,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `cb72dc02`
+- Built from commit: `110189e5`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 

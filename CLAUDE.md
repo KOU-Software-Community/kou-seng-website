@@ -76,6 +76,23 @@ Stil: Tailwind CSS v4 + CSS değişkenleri. Marka renkleri
 layout'ta `ThemeProvider`). Tailwind class çakışmaları için `src/lib/utils.ts`
 → `cn()` (`clsx` + `tailwind-merge`).
 
+Tasarım dili mobil uygulamayla (app_seng) ortak; kaynağı app_seng
+`src/theme.ts`. Marka rengi ya da tasarım kuralı değişirse iki repo birlikte
+güncellenir. Kurallar `globals.css` (`:root`, `@theme inline`) ve
+`layout.tsx`'te (next/font):
+
+- Yazı tipi Plus Jakarta Sans (`font-sans`, body'de). Press Start 2P
+  (`font-pixel`) yalnızca kısa etiketlerde: hero rozeti, logo yazısı, boş ve
+  yükleniyor durumu. Gövde metni, form ve düğmede kullanılmaz. İkisi de
+  `latin-ext` alt kümesiyle yükleniyor, yoksa ş/ğ/ı/İ yedek fonta düşer.
+- Özel sınıflar: `bg-hero` (ana sayfa logo paneli), `bg-cta` + `shadow-cta`
+  (birincil düğme), `shadow-featured`. Birincil düğme
+  `bg-cta text-white shadow-cta`: `text-white` şart, karanlık temada
+  `primary-foreground` koyu lacivert ve gradyan üstünde okunmuyor.
+- Yeni bir `--shadow-*` eklenirse `cn()` içindeki `extendTailwindMerge`
+  listesine de eklenmeli. Eklenmezse tailwind-merge onu gölge rengi sanar,
+  shadcn bileşeninin kendi `shadow-xs`'i kalır ve gölge sessizce görünmez.
+
 ### Backend (`backend/`)
 
 Express.js, routes → controllers → models; ayrıca `middlewares/`, `helpers/`,

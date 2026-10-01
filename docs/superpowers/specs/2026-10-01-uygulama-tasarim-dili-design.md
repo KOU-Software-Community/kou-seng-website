@@ -12,7 +12,7 @@ Site, KOU SENG mobil uygulamasının (app_seng) ve uygulamanın tanıtım videos
 Kaynaklar (app_seng):
 - `src/theme.ts`: renk, yazı tipi, köşe, gölge,
 - `src/components/Pixel.tsx`: piksel öğeleri,
-- `design-source/KOU Yazilim Kulubu App.dc.html`: Claude Design dışa aktarımı,
+- `design-source/KOU Yazilim Kulubu App.dc.html`: tasarım aracının dışa aktarımı,
 - tanıtım videosu.
 
 Videodan ve uygulamadan alınan öğeler:
@@ -177,7 +177,7 @@ Tur 1'in final incelemesinden:
 
 ## Doğrulama
 
-**Oturum içi Playwright stil kontrolü (`style-check.js`), önce kırmızı. Kontrol ettikleri:**
+**Yerel Playwright stil kontrolü (`style-check.js`, repoya girmez), önce kırmızı. Kontrol ettikleri:**
 - Hero `bg-night` ve arka planı radial-gradient. Hero'da kod editörü ve `bg-hero` yok; logonun hiçbir atasında arka plan, kenarlık ya da köşe kutusu yok.
 - İmleç `blink` animasyonlu; `prefers-reduced-motion: reduce` emülasyonunda imleç ve kareler animasyonsuz.
 - Home, `/apply` ve hakkında sayfasında, Türkçe büyük harf içeren her `.font-pixel` metninin computed `text-transform`'u `lowercase`.

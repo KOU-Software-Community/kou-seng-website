@@ -1,7 +1,5 @@
 # Uygulama Tasarım Dili — Uygulama Planı
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans (kullanıcı kuralı). Adımlar `- [ ]` ile işaretlenir.
-
 **Hedef:** Sitenin görünümünü app_seng'in tasarım diline geçirmek. Sayfa yapıları ve içerik aynı kalır.
 
 **Mimari:**
@@ -9,7 +7,7 @@
 - shadcn bileşenleri değişikliği bu kurallar üzerinden alır.
 - Uygulamaya özgü dokunuşlar dört dosyada sınıf olarak eklenir.
 
-**Teknoloji:** Next.js 16, Tailwind CSS v4, `next/font/google`, Playwright (oturum içi kontrol).
+**Teknoloji:** Next.js 16, Tailwind CSS v4, `next/font/google`, Playwright (yerel kontrol, repoya girmez).
 
 **Spec:** `docs/superpowers/specs/2026-10-01-uygulama-tasarim-dili-design.md`
 
@@ -40,13 +38,13 @@
 
 **Files:**
 - Modify: `frontend/src/app/layout.tsx`, `frontend/src/app/globals.css`
-- Test (oturum içi): `scratchpad/pw/style-check.js`, `scratchpad/pw/shots.js`
+- Test (yerel, repoya girmez): Playwright betikleri `style-check.js` ve `shots.js`
 
 **Interfaces:**
 - Produces: `font-pixel`, `shadow-featured`, `shadow-cta`, `bg-hero` ve `bg-cta` sınıfları. `shadow-sm` ve `--radius` yeni değerleriyle.
 
 - [ ] **Adım 1: Ortam ve önce görüntüleri.**
-  - dockerd ve Mongo'yu yeniden başlat, `e2e-env.sh` ile mevcut build'i aç.
+  - Yerel ortamda (boş Mongo veritabanı) mevcut build'i aç.
   - `node shots.js once` ile ekran görüntüleri al: `/`, `/apply`, `/apply/general` ve `/about`; masaüstü ve iPhone; açık ve karanlık tema. Karanlık tema için localStorage'a `theme=dark` yazılır.
 - [ ] **Adım 2: Stil kontrolünü yaz** (`style-check.js`, `/about`):
   - `getComputedStyle(body).fontFamily` "Plus Jakarta Sans" içermeli.
@@ -111,6 +109,6 @@
   - Beklenen: hepsi geçer.
 - [ ] **Adım 3: Commit, push, taslak PR.** `graphify update .` → `"CLAUDE.md: tasarım dili kuralları"`
 
-**Bitiş (executing-plans):**
-- Branch'in tamamı `fable-reviewer` ile incelenir; Critical bulgular düzeltilir.
+**Bitiş:**
+- Branch'in tamamı son bir kod incelemesinden geçer; kritik bulgular düzeltilir.
 - Önce/sonra görüntüleri kullanıcıya gösterilir. PR merge edilmez.

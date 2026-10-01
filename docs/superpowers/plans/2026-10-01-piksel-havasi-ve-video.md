@@ -1,7 +1,5 @@
 # Piksel Havası ve Tanıtım Videosu — Uygulama Planı
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans (kullanıcı kuralı). Adımlar `- [ ]` ile işaretlenir.
-
 **Hedef:** Siteye uygulamanın ve tanıtım videosunun piksel havasını taşımak: koyu bant hero, kutusuz logo, site geneli piksel parçaları ve ana sayfada sitenin kendisinden sunulan tanıtım videosu.
 
 **Mimari:**
@@ -10,7 +8,7 @@
 - Video bölümü tek bir istemci bileşeni: `src/components/layout/AppSection.tsx`.
 - Bölümün içeriği `public/data/home/data.json` → `app`'ten gelir; projenin mevcut deseni bu.
 
-**Teknoloji:** Next.js 16, Tailwind CSS v4, `next/image`, yerel `<video>` ve `IntersectionObserver`, oturum içi Playwright. Oturumdaki ffmpeg yalnızca dönüştürme aracı: `scratchpad/pyff/.../ffmpeg-linux-x86_64-v7.0.2`.
+**Teknoloji:** Next.js 16, Tailwind CSS v4, `next/image`, yerel `<video>` ve `IntersectionObserver`, yerel Playwright. ffmpeg yalnızca dönüştürme aracı; repoya girmez.
 
 **Spec:** `docs/superpowers/specs/2026-10-01-uygulama-tasarim-dili-design.md` (Tur 2 bölümleri)
 
@@ -32,7 +30,7 @@
   - `pixel-edge`,
   - `--border: #CBD9E1`,
   - video: 1280×720, 30 fps, H.264 High, CRF 24, AAC 128 kbps, `+faststart`.
-- **Build:** `cd frontend && NEXT_PUBLIC_API_URL=http://127.0.0.1:3001 npm run build`. Ortam `scratchpad/e2e-env.sh <db>` ile açılır: frontend :3000, backend :3001.
+- **Build:** `cd frontend && NEXT_PUBLIC_API_URL=http://127.0.0.1:3001 npm run build`. Yerel ortam: frontend :3000, backend :3001, boş bir Mongo veritabanı.
 - **Commit:** her kod commit'inden önce `graphify update .` çalışır ve `graphify-out/` commit'e eklenir.
 - **Push öncesi:** `cd frontend && npm run check:content && npm run lint && npm run build`.
 
@@ -69,7 +67,7 @@
   - `layout/Footer.tsx` "Yükleniyor..." → `label="yükleniyor"`
 - Modify: `RssSection.tsx` boş durum başlığı → "henüz yayın yok"
 - Modify: kart üzerine gelince gölge `hover:shadow-md` → `hover:shadow-featured`; dört yerde: `about.tsx`, `announcements.tsx`, `apply.tsx` ve `publications.tsx`'teki `Card`
-- Test (oturum içi): `scratchpad/pw/style-check.js` (Tur 1'den, genişletilir), `scratchpad/pw/shots.js` (sayfa listesine `team: '/technical-team/mobil-web'` eklenir)
+- Test (yerel, repoya girmez): Playwright betikleri `style-check.js` (Tur 1'den, genişletilir) ve `shots.js` (sayfa listesine `team: '/technical-team/mobil-web'` eklenir)
 
 **Interfaces:**
 - **`PixelMark({ className?: string })`**
@@ -85,7 +83,7 @@
   - design-source'taki CSS bunun tersini, yani üç yanık bir sönük kareyi veriyor.
 
 - [ ] **Adım 1: Ortam ve önce görüntüleri.**
-  - `bash e2e-env.sh tur2a` ile mevcut build'i (Tur 1) aç.
+  - Yerel ortamda mevcut build'i (Tur 1) aç.
   - `node shots.js tur1` ile görüntü al: `/`, `/apply`, `/apply/general`, `/about` ve takım sayfası; masaüstü ve iPhone; açık ve karanlık.
 - [ ] **Adım 2: style-check'e Task 1 kontrollerini ekle.**
   - `getComputedStyle(documentElement).getPropertyValue('--border').trim().toUpperCase() === '#CBD9E1'`.
@@ -239,7 +237,7 @@
   - **`video.poster`:** diskte var, `sniff === 'jpeg'`, en fazla 300 KB.
   - Betiğin başındaki "yakaladığı gerçek hatalar" listesine iki satır eklenir.
 - [ ] **Adım 2: Çalıştır.** `npm run check:content`. Beklenen: FAIL "home/app: app yok".
-- [ ] **Adım 3: Video dosyalarını üret.** `FF` = oturumdaki ffmpeg, `SRC` = yüklenen kaynak video.
+- [ ] **Adım 3: Video dosyalarını üret.** `FF` = ffmpeg, `SRC` = kaynak video.
 
   ```bash
   $FF -i $SRC -vf "scale=1280:-2,fps=30" -c:v libx264 -preset slow -crf 24 -profile:v high -pix_fmt yuv420p \
@@ -313,6 +311,6 @@
   - Push edilir.
   - PR #64'ün başlığı ve açıklaması Tur 2'yi de anlatacak şekilde güncellenir.
 
-**Bitiş (executing-plans):**
-- Tur 2 commit'leri (`aec2a58..HEAD`) `fable-reviewer` ile incelenir; Critical bulgular düzeltilir.
+**Bitiş:**
+- Tur 2 commit'leri son bir kod incelemesinden geçer; kritik bulgular düzeltilir.
 - Önce ve sonra görüntüleri kullanıcıya gösterilir. PR merge edilmez.

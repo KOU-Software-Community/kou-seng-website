@@ -163,6 +163,14 @@ gider. Henüz merge edilmemiş bir PR'ın üstüne iş gerekiyorsa yeni branch o
 branch'inden açılır, PR `main`'e açılır ve açıklamasına önce hangi PR'ın merge
 edilmesi gerektiği yazılır.
 
+### Commit, PR ve dokümanlarda yapay zekâ izi yok
+
+Commit mesajlarına, PR açıklamalarına, PR yorumlarına ve `docs/` altındaki
+plan/spec'lere yapay zekâ aracından iz yazılmaz: `Co-Authored-By` satırı,
+oturum linki, "Generated with …" notu, araç ya da ajan adı yok. Commit'lerin
+yazarı ekipten biridir (git `user.name`/`user.email`); araç kendi adıyla commit
+atmaz ve repoda katkıda bulunan olarak görünmez.
+
 ### Paket yöneticisi: npm
 
 Her pakette tek lockfile `package-lock.json`, CI `npm ci` kullanıyor.

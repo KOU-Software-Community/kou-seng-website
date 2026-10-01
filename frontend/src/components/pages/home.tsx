@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRight, faUsers, faFileLines } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { type IconProp } from '@fortawesome/fontawesome-svg-core';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -25,7 +25,7 @@ export default function Home({ homeData }: HomeProps) {
           <div className="grid items-center gap-12 lg:grid-cols-2">
             {/* Sol taraf - Metin içeriği */}
             <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
-              <div className="inline-flex items-center rounded-full border border-border/40 bg-background/80 px-4 py-1.5 text-sm font-medium backdrop-blur-sm mb-6">
+              <div className="inline-flex items-center rounded-full border border-border/40 bg-background/80 px-4 py-1.5 font-pixel text-[10px] sm:text-xs backdrop-blur-sm mb-6">
                 <span className="mr-1 flex h-2 w-2 rounded-full bg-primary"></span>
                 <span>{homeData.hero.badge}</span>
               </div>
@@ -43,7 +43,7 @@ export default function Home({ homeData }: HomeProps) {
               </p>
 
               <div className="flex flex-col gap-4 sm:flex-row sm:gap-6">
-                <Button asChild size="lg" className="bg-gradient-to-br from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70">
+                <Button asChild size="lg" className="bg-cta text-white shadow-cta hover:brightness-110">
                   <Link href={homeData.hero.primaryButton.href}>
                     {homeData.hero.primaryButton.text} <FontAwesomeIcon icon={faArrowRight} className="ml-2 h-4 w-4" />
                   </Link>
@@ -56,55 +56,18 @@ export default function Home({ homeData }: HomeProps) {
               </div>
             </div>
 
-            {/* Sağ taraf - Görseller */}
-            <div className="relative mx-auto lg:mx-0 w-full max-w-[280px] sm:max-w-[340px] md:max-w-md lg:max-w-lg mt-12 md:mt-0 aspect-[4/3] md:aspect-square lg:justify-self-center xl:justify-self-end">
-              {/* Ana görsel - kod ve teknoloji temalı illüstrasyon */}
-              <div className="absolute inset-0 rounded-lg border border-border/40 bg-background/80 p-2 backdrop-blur-sm shadow-xl">
-                <div className="h-full w-full rounded bg-gradient-to-br from-primary/10 to-accent/5 p-3 sm:p-4 md:p-6 flex items-center justify-center">
-                  {/* Büyük kod simgesi */}
-                  <div className="relative w-full">
-                    {/* Logo */}
-                    <div className="absolute -top-10 sm:-top-12 md:-top-16 left-1/2 -translate-x-1/2 h-20 w-20 sm:h-24 sm:w-24 md:h-32 md:w-32 rounded-xl overflow-hidden border border-border/40 bg-background/80 p-2 shadow-lg">
-                      <Image
-                        src="/kouseng-logo.svg"
-                        alt="KOU SENG Logo"
-                        width={100}
-                        height={100}
-                        className="object-contain h-full w-full"
-                      />
-                    </div>
-
-                    {/* Kod görseli */}
-                    <div className="w-full h-full bg-background/80 rounded-lg p-2 sm:p-3 md:p-4 border border-border/40 shadow-md overflow-hidden">
-                      <div className="flex items-center gap-1 sm:gap-2 mb-2 sm:mb-4">
-                        <div className="h-2 w-2 sm:h-3 sm:w-3 rounded-full bg-red-500"></div>
-                        <div className="h-2 w-2 sm:h-3 sm:w-3 rounded-full bg-yellow-500"></div>
-                        <div className="h-2 w-2 sm:h-3 sm:w-3 rounded-full bg-green-500"></div>
-                      </div>
-                      <div className="space-y-1 sm:space-y-2">
-                        <div className="h-3 sm:h-4 w-3/4 rounded bg-primary/20"></div>
-                        <div className="h-3 sm:h-4 w-full rounded bg-accent/20"></div>
-                        <div className="h-3 sm:h-4 w-5/6 rounded bg-primary/20"></div>
-                        <div className="h-3 sm:h-4 w-2/3 rounded bg-accent/20"></div>
-                        <div className="h-3 sm:h-4 w-4/5 rounded bg-primary/20"></div>
-                        <div className="h-3 sm:h-4 w-3/4 rounded bg-accent/20"></div>
-                        <div className="h-3 sm:h-4 w-1/2 rounded bg-primary/20"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Dekoratif öğeler - Mobilde daha küçük ve ekranda kalacak şekilde */}
-              <div className="absolute -bottom-2 sm:-bottom-4 md:-bottom-6 -right-2 sm:-right-4 md:-right-6 h-16 w-16 sm:h-20 sm:w-20 md:h-24 md:w-24 rounded-lg border border-border/40 bg-background/80 shadow-lg backdrop-blur-sm p-1 sm:p-1.5 md:p-2">
-                <div className="h-full w-full rounded bg-secondary/10 flex items-center justify-center">
-                  <FontAwesomeIcon icon={faFileLines} className="h-5 w-5 sm:h-6 sm:w-6 md:h-8 md:w-8 text-secondary" />
-                </div>
-              </div>
-              <div className="absolute -top-2 sm:-top-4 md:-top-6 -left-2 sm:-left-4 md:-left-6 h-14 w-14 sm:h-16 sm:w-16 md:h-20 md:w-20 rounded-lg border border-border/40 bg-background/80 shadow-lg backdrop-blur-sm p-1 sm:p-1.5 md:p-2">
-                <div className="h-full w-full rounded bg-primary/10 flex items-center justify-center">
-                  <FontAwesomeIcon icon={faUsers} className="h-5 w-5 sm:h-6 sm:w-6 md:h-8 md:w-8 text-primary" />
-                </div>
+            {/* Sağ taraf - Logo paneli (app_seng hero) */}
+            <div className="relative mx-auto lg:mx-0 w-full max-w-[280px] sm:max-w-[340px] md:max-w-md lg:max-w-lg aspect-square lg:justify-self-center xl:justify-self-end">
+              <div className="absolute inset-0 flex flex-col items-center justify-center gap-6 overflow-hidden rounded-2xl bg-hero shadow-featured">
+                <div aria-hidden="true" className="absolute h-2/3 w-2/3 rounded-full bg-(--turkuaz)/50 blur-3xl" />
+                <Image
+                  src="/kouseng-logo.svg"
+                  alt="KOU SENG Logo"
+                  width={240}
+                  height={240}
+                  className="relative h-auto w-1/2"
+                />
+                <span className="relative font-pixel text-sm tracking-widest text-white sm:text-base">KOU SENG</span>
               </div>
             </div>
           </div>

@@ -401,7 +401,7 @@ export default function ApplyDetail(props: { slug: string }) {
               </FormDescription>
               <Button 
                 type="submit" 
-                className="w-full cursor-pointer"
+                className="w-full cursor-pointer bg-cta text-white shadow-cta hover:brightness-110"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? (

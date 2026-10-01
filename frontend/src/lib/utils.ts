@@ -1,5 +1,9 @@
 import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { extendTailwindMerge } from "tailwind-merge"
+
+// globals.css'teki özel gölgeler. Tanıtılmazsa tailwind-merge shadow-cta'yı
+// gölge rengi sanar, bileşenin shadow-xs'i kalır ve gölge hiç görünmez.
+const twMerge = extendTailwindMerge({ extend: { theme: { shadow: ["featured", "cta"] } } })
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))

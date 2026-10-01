@@ -48,7 +48,7 @@ export default function RssSection({
       ) : articles.length === 0 ? (
         <div className="text-center p-12 border rounded-lg">
           <FontAwesomeIcon icon={faFileLines} className="h-12 w-12 text-muted-foreground mb-4" />
-          <h3 className="text-lg font-medium mb-2">Henüz Yayın Yok</h3>
+          <h3 className="font-pixel text-sm mb-3">Henüz Yayın Yok</h3>
           <p className="text-muted-foreground">Yakında kulüp üyelerimizin yazılım dünyasına dair makaleleri burada yer alacak.</p>
         </div>
       ) : (

@@ -127,7 +127,7 @@ export default function Apply() {
                 <div className="mx-auto max-w-6xl grid gap-6 sm:grid-cols-2 lg:grid-cols-2">
                     {isLoading || windowsLoading ? (
                         <div className="col-span-full text-center py-12">
-                            <p className="text-muted-foreground">Başvurular yükleniyor...</p>
+                            <p className="font-pixel text-xs text-muted-foreground">Başvurular yükleniyor...</p>
                         </div>
                     ) : filteredApplications.length > 0 ? (
                         filteredApplications.map((application) => (
@@ -159,6 +159,7 @@ export default function Apply() {
                                             <Button 
                                                 asChild
                                                 variant="default"
+                                                className="bg-cta text-white shadow-cta hover:brightness-110"
                                             >
                                                 <Link href={`/apply/${application.slug}`}>
                                                     Başvur

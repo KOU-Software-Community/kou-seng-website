@@ -304,7 +304,7 @@ planı büyük video sunumunu ücretli ürünlerine (Stream, R2) yönlendiriyor.
   ```
 
 - `app.stores`, `teams/mobil-web.json`'daki KOU SENG projesinin `stores`'unun
-  kopyası. Google Play linki gelince ikisi birlikte güncellenir;
+  kopyası. Mağaza linki değişirse ikisi birlikte güncellenir;
   `check:content` ayrışırsa FAIL verir.
 
 ### `check:content`
@@ -323,7 +323,7 @@ planı büyük video sunumunu ücretli ürünlerine (Stream, R2) yönlendiriyor.
 | `projects[].stores` dizi mi, `name` `App Store`/`Google Play` mı, `url` https ya da `null` mı | `stores.map` runtime tuzağı; yanlış `name` sessizce yanlış ikon verir. `url: null` → "Yakında" pasif buton |
 | Teknik formdaki her alan `question_<id>` olarak backend `allowedCustomFields`'te mi, `type: number` değil mi, `formatCustomFields`'te etiketi var mı (iki kopya aynı mı); genel formda kişisel olmayan alan var mı | Eksik anahtar her gönderimde 400 döner, build ve form sessiz geçer; etiketsiz alan panelde ham `question_<id>` görünür; genel form özel alanı sessizce atar |
 | `github` / `linkedin` / `kaggle` mutlak URL mi | Çıplak kullanıcı adı kırık link olur |
-| `home.app` videosu ve posteri diskte mi, gerçek formatı ve boyutu (video ≤ 5 MB, poster ≤ 300 KB); `app.stores` KOU SENG projesiyle aynı mı | Next `public/` yollarını doğrulamıyor → video 404; büyük video repoyu şişirir; Google Play linki iki yerde duruyor |
+| `home.app` videosu ve posteri diskte mi, gerçek formatı ve boyutu (video ≤ 5 MB, poster ≤ 300 KB); `app.stores` KOU SENG projesiyle aynı mı | Next `public/` yollarını doğrulamıyor → video 404; büyük video repoyu şişirir; mağaza linkleri iki yerde duruyor |
 
 Betik hiçbir zaman sessizce atlamaz: ölçemediği her durum FAIL, çıkış kodu 1.
 Kontrol yeşilken bile içerik değiştirdikten sonra ilgili sayfayı `npm run dev`

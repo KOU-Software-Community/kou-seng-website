@@ -276,6 +276,10 @@ planı büyük video sunumunu ücretli ürünlerine (Stream, R2) yönlendiriyor.
   başlayan hareketli içerik durdurulabilmeli (WCAG 2.2.2); bunu videonun sol
   üstündeki durdur/oynat düğmesi sağlar. Kullanıcı durdurduysa video ekrana
   geri dönünce kendiliğinden başlamaz.
+- Sayfa arka plana geçince (kilit ekranı, uygulama ya da sekme değiştirme) video
+  durur. Video her durduğunda ses de kapanır: sesli ve duraklatılmış video
+  iPhone'un kilit ekranında "KOU SENG - Web Sitesi" oynatıcısı olarak kalıyordu.
+  Safari sessiz videoyu oynatıcıya koymuyor.
 - **Coolify'da frontend uygulamasının gzip'i kapalı olmalı** (Configuration →
   Advanced → Enable Gzip Compression). Açıkken Coolify proxy'si (Traefik)
   videoyu ve görselleri de gzip'liyor. Cloudflare sıkıştırılmış yanıtı açmak

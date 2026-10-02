@@ -15,7 +15,10 @@ const chip = "flex items-center gap-2 border border-(--acik-mavi)/35 bg-[#00102F
 // Tarayıcının kendi kontrolleri yok: iPhone'da sesi açınca birkaç saniye videonun
 // üstünü örtüyorlardı. Kendiliğinden başlayan hareketli içerik durdurulabilmeli;
 // bunu durdur/oynat düğmesi sağlıyor, kullanıcı durdurduysa video geri dönünce
-// kendiliğinden başlamıyor.
+// kendiliğinden başlamıyor. Sayfa arka plana geçince (kilit ekranı, uygulama ya da
+// sekme değiştirme) video durur. Durunca ses de kapanır: sesli ve duraklatılmış
+// video iPhone'un kilit ekranında oynatıcı olarak kalıyordu; Safari sessiz videoyu
+// oynatıcıya koymuyor.
 export default function AppSection({ app }: { app: AppData }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const userPaused = useRef(false);
@@ -24,16 +27,26 @@ export default function AppSection({ app }: { app: AppData }) {
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!video) return;
+    const autoplay = !matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let inView = false;
+    const sync = () => {
+      if (!inView || document.hidden) video.pause();
+      else if (autoplay && !userPaused.current) video.play().catch(() => {});
+    };
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (!entry.isIntersecting) video.pause();
-        else if (!userPaused.current) video.play().catch(() => {});
+        inView = entry.isIntersecting;
+        sync();
       },
       { threshold: 0.5 },
     );
     observer.observe(video);
-    return () => observer.disconnect();
+    document.addEventListener('visibilitychange', sync);
+    return () => {
+      observer.disconnect();
+      document.removeEventListener('visibilitychange', sync);
+    };
   }, []);
 
   // Sesli izlemek isteyen videonun başını kaçırmasın: baştan başlar.
@@ -99,7 +112,10 @@ export default function AppSection({ app }: { app: AppData }) {
             preload="none"
             aria-label={app.title}
             onPlay={() => setPaused(false)}
-            onPause={() => setPaused(true)}
+            onPause={(e) => {
+              e.currentTarget.muted = true;
+              setPaused(true);
+            }}
             onVolumeChange={(e) => setMuted(e.currentTarget.muted)}
             className="h-full w-full object-cover"
           />

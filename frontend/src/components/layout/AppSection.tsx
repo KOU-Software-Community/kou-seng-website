@@ -7,22 +7,28 @@ import { Button } from "@/components/ui/button";
 import { PixelMark } from "@/components/layout/Pixel";
 import type { AppData } from "@/lib/homeData";
 
+const chip = "flex items-center gap-2 border border-(--acik-mavi)/35 bg-[#00102F]/75 text-white shadow-[3px_3px_0_var(--koyu-lacivert)]";
+
 // Ana sayfadaki mobil uygulama bölümü. Tanıtım videosu sitenin kendisinden sunulur
 // (public/video/): bölümün yarısı görününce sessiz oynar, ekrandan çıkınca durur;
 // video yalnızca görününce iner. Hareket azaltma açıksa kendiliğinden oynamaz.
-// Durdurma, ses ve tam ekran tarayıcının kendi kontrollerinde: kendiliğinden
-// başlayan hareketli içerik durdurulabilmeli.
+// Tarayıcının kendi kontrolleri yok: iPhone'da sesi açınca birkaç saniye videonun
+// üstünü örtüyorlardı. Kendiliğinden başlayan hareketli içerik durdurulabilmeli;
+// bunu durdur/oynat düğmesi sağlıyor, kullanıcı durdurduysa video geri dönünce
+// kendiliğinden başlamıyor.
 export default function AppSection({ app }: { app: AppData }) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const userPaused = useRef(false);
   const [muted, setMuted] = useState(true);
+  const [paused, setPaused] = useState(true);
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) video.play().catch(() => {});
-        else video.pause();
+        if (!entry.isIntersecting) video.pause();
+        else if (!userPaused.current) video.play().catch(() => {});
       },
       { threshold: 0.5 },
     );
@@ -30,11 +36,22 @@ export default function AppSection({ app }: { app: AppData }) {
     return () => observer.disconnect();
   }, []);
 
+  // Sesli izlemek isteyen videonun başını kaçırmasın: baştan başlar.
   const unmute = () => {
     const video = videoRef.current;
     if (!video) return;
     video.muted = false;
+    video.currentTime = 0;
+    userPaused.current = false;
+    video.play().catch(() => {});
+  };
+
+  const togglePlay = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    userPaused.current = !video.paused;
     if (video.paused) video.play().catch(() => {});
+    else video.pause();
   };
 
   return (
@@ -79,24 +96,28 @@ export default function AppSection({ app }: { app: AppData }) {
             muted
             loop
             playsInline
-            controls
             preload="none"
             aria-label={app.title}
+            onPlay={() => setPaused(false)}
+            onPause={() => setPaused(true)}
             onVolumeChange={(e) => setMuted(e.currentTarget.muted)}
             className="h-full w-full object-cover"
           />
-          {muted && (
-            <button
-              type="button"
-              onClick={unmute}
-              className="absolute left-3 top-3 flex items-center gap-2 border border-(--acik-mavi)/35 bg-[#00102F]/75 px-2.5 py-2 font-pixel text-[9px] text-white shadow-[3px_3px_0_var(--koyu-lacivert)]"
-            >
+          <div className="absolute left-3 top-3 flex gap-2">
+            <button type="button" onClick={togglePlay} aria-label={paused ? 'videoyu oynat' : 'videoyu durdur'} className={`${chip} p-2`}>
               <svg aria-hidden="true" width="16" height="16" viewBox="0 0 8 8">
-                <path fill="currentColor" d="M0 3h2v2h-2z M2 2h1v4h-1z M3 1h1v6h-1z M5 2h1v1h-1z M7 2h1v1h-1z M6 3h1v2h-1z M5 5h1v1h-1z M7 5h1v1h-1z" />
+                <path fill="currentColor" d={paused ? 'M3 1h1v6h-1z M4 2h1v4h-1z M5 3h1v2h-1z' : 'M2 1h2v6h-2z M5 1h2v6h-2z'} />
               </svg>
-              sesi aç
             </button>
-          )}
+            {muted && (
+              <button type="button" onClick={unmute} className={`${chip} px-2.5 py-2 font-pixel text-[9px]`}>
+                <svg aria-hidden="true" width="16" height="16" viewBox="0 0 8 8">
+                  <path fill="currentColor" d="M0 3h2v2h-2z M2 2h1v4h-1z M3 1h1v6h-1z M5 2h1v1h-1z M7 2h1v1h-1z M6 3h1v2h-1z M5 5h1v1h-1z M7 5h1v1h-1z" />
+                </svg>
+                sesi aç
+              </button>
+            )}
+          </div>
         </div>
       </div>
       <div aria-hidden="true" className="pixel-edge bottom-0" />

@@ -1579,7 +1579,7 @@
       "file_type": "code",
       "norm_label": "appsection()",
       "source_file": "frontend/src/components/layout/AppSection.tsx",
-      "source_location": "L15"
+      "source_location": "L19"
     },
     {
       "id": "frontend_src_components_layout_pixel_pixelmark",
@@ -7447,7 +7447,7 @@
       "node_kind": "heading",
       "norm_label": "backend esm \u2014 `node --check` yalan soyluyor",
       "source_file": "CLAUDE.md",
-      "source_location": "L370"
+      "source_location": "L390"
     },
     {
       "id": "claude_ba\u015fvuru_d\u00f6nemleri",
@@ -7459,7 +7459,7 @@
       "node_kind": "heading",
       "norm_label": "basvuru donemleri",
       "source_file": "CLAUDE.md",
-      "source_location": "L413"
+      "source_location": "L433"
     },
     {
       "id": "claude_ba\u015fvurular\u0131_silme_saklama_s\u00fcresi",
@@ -7471,7 +7471,7 @@
       "node_kind": "heading",
       "norm_label": "basvurular\u0131 silme (saklama suresi)",
       "source_file": "CLAUDE.md",
-      "source_location": "L471"
+      "source_location": "L491"
     },
     {
       "id": "claude_branch_ler",
@@ -7495,7 +7495,7 @@
       "node_kind": "heading",
       "norm_label": "`check:content`",
       "source_file": "CLAUDE.md",
-      "source_location": "L290"
+      "source_location": "L310"
     },
     {
       "id": "claude_claude_md",
@@ -7531,7 +7531,7 @@
       "node_kind": "heading",
       "norm_label": "duyuru html'i ve csp",
       "source_file": "CLAUDE.md",
-      "source_location": "L480"
+      "source_location": "L500"
     },
     {
       "id": "claude_frontend_frontend",
@@ -7627,7 +7627,7 @@
       "node_kind": "heading",
       "norm_label": "lint",
       "source_file": "CLAUDE.md",
-      "source_location": "L524"
+      "source_location": "L544"
     },
     {
       "id": "claude_mongoose_sanitizefilter_a\u00e7\u0131k_operat\u00f6rl\u00fc_sorgu_trusted_ister",
@@ -7639,7 +7639,7 @@
       "node_kind": "heading",
       "norm_label": "mongoose `sanitizefilter` ac\u0131k \u2014 operatorlu sorgu `trusted()` ister",
       "source_file": "CLAUDE.md",
-      "source_location": "L399"
+      "source_location": "L419"
     },
     {
       "id": "claude_ortam_de\u011fi\u015fkenleri",
@@ -7699,7 +7699,7 @@
       "node_kind": "heading",
       "norm_label": "rate limit ve cloudflare",
       "source_file": "CLAUDE.md",
-      "source_location": "L495"
+      "source_location": "L515"
     },
     {
       "id": "claude_sosyal_medya_linkleri",
@@ -8410,7 +8410,7 @@
       "node_kind": "heading",
       "norm_label": "ilk admin olusturma (deploy edilmis sunucuda)",
       "source_file": "CLAUDE.md",
-      "source_location": "L341"
+      "source_location": "L361"
     },
     {
       "id": "docs_superpowers_plans_2026_09_28_basvuru_donemleri",
@@ -9379,7 +9379,7 @@
       "node_kind": "heading",
       "norm_label": "basvuru formuna alan ekleme",
       "source_file": "CLAUDE.md",
-      "source_location": "L439"
+      "source_location": "L459"
     },
     {
       "id": "docs_superpowers_plans_2026_09_28_basvuru_donemleri_task_2_model_get_patch_endpoint_leri_ve_smoke_beti\u011finin_yetki_do\u011frulama_k\u0131sm\u0131",
@@ -11656,7 +11656,7 @@
       "node_kind": "heading",
       "norm_label": "tak\u0131m slug'\u0131 uc kimligi birden tas\u0131yor",
       "source_file": "CLAUDE.md",
-      "source_location": "L312"
+      "source_location": "L332"
     },
     {
       "id": "frontend_src_components_ui_form_form",
@@ -29663,7 +29663,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L290",
+      "source_location": "L310",
       "weight": 1.0
     },
     {
@@ -29674,7 +29674,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L312",
+      "source_location": "L332",
       "weight": 1.0
     },
     {
@@ -29685,7 +29685,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L341",
+      "source_location": "L361",
       "weight": 1.0
     },
     {
@@ -29696,7 +29696,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L370",
+      "source_location": "L390",
       "weight": 1.0
     },
     {
@@ -29707,7 +29707,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L399",
+      "source_location": "L419",
       "weight": 1.0
     },
     {
@@ -29718,7 +29718,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L413",
+      "source_location": "L433",
       "weight": 1.0
     },
     {
@@ -29729,7 +29729,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L439",
+      "source_location": "L459",
       "weight": 1.0
     },
     {
@@ -29740,7 +29740,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L471",
+      "source_location": "L491",
       "weight": 1.0
     },
     {
@@ -29751,7 +29751,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L480",
+      "source_location": "L500",
       "weight": 1.0
     },
     {
@@ -29762,7 +29762,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L495",
+      "source_location": "L515",
       "weight": 1.0
     },
     {
@@ -29773,7 +29773,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L524",
+      "source_location": "L544",
       "weight": 1.0
     },
     {
@@ -32006,7 +32006,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/src/components/layout/AppSection.tsx",
-      "source_location": "L15",
+      "source_location": "L19",
       "weight": 1.0
     },
     {
@@ -36419,7 +36419,7 @@
       "confidence_score": 0.95,
       "context": "AdminSidebar",
       "source_file": "CLAUDE.md",
-      "source_location": "L330",
+      "source_location": "L350",
       "weight": 1.0
     },
     {
@@ -36455,7 +36455,7 @@
       "confidence_score": 0.95,
       "context": "ApplicationWindow",
       "source_file": "CLAUDE.md",
-      "source_location": "L416",
+      "source_location": "L436",
       "weight": 1.0
     },
     {
@@ -36467,7 +36467,7 @@
       "confidence_score": 0.95,
       "context": "ApplicationWindow",
       "source_file": "CLAUDE.md",
-      "source_location": "L327",
+      "source_location": "L347",
       "weight": 1.0
     },
     {
@@ -36839,7 +36839,7 @@
       "confidence_score": 0.95,
       "context": "createGeneralSubmission",
       "source_file": "CLAUDE.md",
-      "source_location": "L460",
+      "source_location": "L480",
       "weight": 1.0
     },
     {
@@ -36899,7 +36899,7 @@
       "confidence_score": 0.95,
       "context": "createUser",
       "source_file": "CLAUDE.md",
-      "source_location": "L360",
+      "source_location": "L380",
       "weight": 1.0
     },
     {
@@ -36911,7 +36911,7 @@
       "confidence_score": 0.95,
       "context": "firstUserCreation()",
       "source_file": "CLAUDE.md",
-      "source_location": "L344",
+      "source_location": "L364",
       "weight": 1.0
     },
     {
@@ -36959,7 +36959,7 @@
       "confidence_score": 0.95,
       "context": "getTeamDetail",
       "source_file": "CLAUDE.md",
-      "source_location": "L320",
+      "source_location": "L340",
       "weight": 1.0
     },
     {
@@ -37019,7 +37019,7 @@
       "confidence_score": 0.95,
       "context": "matchesSystemKey",
       "source_file": "CLAUDE.md",
-      "source_location": "L345",
+      "source_location": "L365",
       "weight": 1.0
     },
     {
@@ -37067,7 +37067,7 @@
       "confidence_score": 0.95,
       "context": "protect",
       "source_file": "CLAUDE.md",
-      "source_location": "L344",
+      "source_location": "L364",
       "weight": 1.0
     },
     {
@@ -37127,7 +37127,7 @@
       "confidence_score": 0.95,
       "context": "roleOnlyForCategory",
       "source_file": "CLAUDE.md",
-      "source_location": "L315",
+      "source_location": "L335",
       "weight": 1.0
     },
     {
@@ -37259,7 +37259,7 @@
       "confidence_score": 0.95,
       "context": "useApplyDetail",
       "source_file": "CLAUDE.md",
-      "source_location": "L321",
+      "source_location": "L341",
       "weight": 1.0
     },
     {
@@ -37276,5 +37276,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "7c9c1db7aaffbf968f14839cf53b41c5c7596356"
+  "built_at_commit": "a1c0357cffb4e4f31333d928541bedbe14612c76"
 }

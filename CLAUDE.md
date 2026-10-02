@@ -270,8 +270,12 @@ planı büyük video sunumunu ücretli ürünlerine (Stream, R2) yönlendiriyor.
 
 - Bölümün yarısı görününce sessiz ve döngüde oynar, çıkınca durur; video ancak
   görününce iner (`preload="none"`). Hareket azaltma açıksa kendiliğinden
-  başlamaz. Tarayıcının kendi kontrolleri açık kalmalı: kendiliğinden başlayan
-  hareketli içerik durdurulabilmeli.
+  başlamaz. "sesi aç" videoyu baştan sesli başlatır.
+- Tarayıcının kendi kontrolleri (`controls`) kullanılmaz: iPhone'da sesi açınca
+  birkaç saniye videonun üstünü örtüp başını izletmiyordu. Kendiliğinden
+  başlayan hareketli içerik durdurulabilmeli (WCAG 2.2.2); bunu videonun sol
+  üstündeki durdur/oynat düğmesi sağlar. Kullanıcı durdurduysa video ekrana
+  geri dönünce kendiliğinden başlamaz.
 - **Coolify'da frontend uygulamasının gzip'i kapalı olmalı** (Configuration →
   Advanced → Enable Gzip Compression). Açıkken Coolify proxy'si (Traefik)
   videoyu ve görselleri de gzip'liyor. Cloudflare sıkıştırılmış yanıtı açmak

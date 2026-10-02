@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useState } from 'react';
 import { getFooterData, iconMap, type FooterData } from '@/lib/footerData';
 import { RSS_ENABLED } from '@/lib/utils';
+import { PixelLoader } from "@/components/layout/Pixel";
 
 export default function Footer() {
   const [footerData, setFooterData] = useState<FooterData | null>(null);
@@ -22,7 +23,7 @@ export default function Footer() {
       <footer className="border-t border-border/50 bg-background py-8">
         <div className="container mx-auto max-w-6xl px-4">
           <div className="flex justify-center items-center h-32">
-            <div className="animate-pulse text-muted-foreground">Yükleniyor...</div>
+            <PixelLoader label="yükleniyor" />
           </div>
         </div>
       </footer>

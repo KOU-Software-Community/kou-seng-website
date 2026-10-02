@@ -1,6 +1,7 @@
 import { promises as fs } from 'fs';
 import path from 'path';
 import { faUsers, faAward, faFileLines } from '@fortawesome/free-solid-svg-icons';
+import type { StoreLink } from './teamData';
 
 // Hero section types
 export type HeroStat = {
@@ -60,10 +61,20 @@ export type StatisticsData = {
   stats: HeroStat[];
 };
 
+// Mobil uygulama bölümü ve tanıtım videosu (public/video/)
+export type AppData = {
+  kicker: string;
+  title: string;
+  description: string;
+  stores: StoreLink[];
+  video: { src: string; poster: string };
+};
+
 // Main home data type
 export type HomeData = {
   hero: HeroData;
   clubIntroduction: ClubIntroductionData;
+  app: AppData;
   announcements: AnnouncementsData;
   publications: PublicationsData;
   statistics: StatisticsData;

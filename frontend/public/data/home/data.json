@@ -34,6 +34,16 @@
       }
     ]
   },
+  "app": {
+    "kicker": "mobil uygulama",
+    "title": "Kulüpten hiçbir şey kaçmasın.",
+    "description": "Etkinliklere tek dokunuşla kaydol, yoklamanı QR ile ver, sertifikan hesabına düşsün; teknoloji gündemi her sabah üç maddede. KOU SENG, kulübümüzün resmi uygulaması.",
+    "stores": [
+      { "name": "App Store", "url": "https://apps.apple.com/tr/app/kou-seng/id6800271760" },
+      { "name": "Google Play", "url": "https://play.google.com/store/apps/details?id=com.akadirr1.sengkou" }
+    ],
+    "video": { "src": "/video/kou-seng-tanitim.mp4", "poster": "/video/kou-seng-tanitim.jpg" }
+  },
   "announcements": {
     "title": "Duyurular",
     "description": "Kulübümüzün önemli duyuruları hakkında bilgi alın.",

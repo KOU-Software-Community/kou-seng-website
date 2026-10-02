@@ -2,6 +2,9 @@ import { promises as fs } from 'fs';
 import path from 'path';
 
 // Team member type
+// url null: mağaza düğmesi "Yakında" yazan pasif düğme olur.
+export type StoreLink = { name: 'App Store' | 'Google Play'; url: string | null };
+
 export type TeamMember = {
   name: string;
   role: string;
@@ -46,7 +49,7 @@ export type Project = {
   github: string;
   demo: string | null;
   // url null ise buton "Yakında" yazısıyla pasif gösterilir
-  stores?: { name: 'App Store' | 'Google Play'; url: string | null }[];
+  stores?: StoreLink[];
 };
 
 // Team detail type

@@ -167,7 +167,7 @@ bakmadan **403** döner: `{ success: false, message: "Bu başvuru şu anda kapal
   - genel formu kapatıp açma.
 
   Genel formu açık bırakarak biter. CI'da `loadtest`'ten önce koşar; sonrasında form limiti tükenmiş oluyor.
-- **Oturum içi kabul testi (Playwright, repoya girmez):**
+- **Yerel kabul testi (Playwright, repoya girmez):**
   - admin panelinden tarih girme: 18:00 yerel saat girilince API'de 15:00Z olmalı, sitede 18:00 gösterilmeli,
   - başvuru sayfalarının üç durumu,
   - backend'e ulaşılamaması,

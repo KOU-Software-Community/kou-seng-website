@@ -8,6 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Button } from '@/components/ui/button';
 import { TeamDetail as TeamDetailType } from '@/lib/teamData';
+import { PixelMark } from "@/components/layout/Pixel";
 
 interface TeamDetailProps {
   team: TeamDetailType | null;
@@ -101,6 +102,7 @@ export default function TeamDetail({ team, error }: TeamDetailProps) {
       {/* Team Members */}
       <section className="container pb-16">
         <div className="mb-12 mx-auto text-center max-w-3xl">
+          <PixelMark />
           <h2 className="mb-2 text-3xl font-bold tracking-tight">Takım Sorumluları</h2>
           <p className="mx-auto max-w-2xl text-muted-foreground">
             Takımımızın yönetiminden ve kordinasyonundan sorumlu üyelerimiz.
@@ -184,6 +186,7 @@ export default function TeamDetail({ team, error }: TeamDetailProps) {
       {team.achievements && team.achievements.length > 0 && (
         <section className="container pb-16">
           <div className="mb-12 mx-auto text-center max-w-3xl">
+            <PixelMark />
             <h2 className="mb-2 text-3xl font-bold tracking-tight">Başarılarımız</h2>
             <p className="mx-auto max-w-2xl text-muted-foreground">
               Takımımızın kazandığı ödüller ve başarılar.
@@ -218,6 +221,7 @@ export default function TeamDetail({ team, error }: TeamDetailProps) {
       {team.competitions && team.competitions.length > 0 && (
         <section className="container pb-16">
           <div className="mb-12 mx-auto text-center max-w-3xl">
+            <PixelMark />
             <h2 className="mb-2 text-3xl font-bold tracking-tight">Katıldığımız Yarışmalar</h2>
             <p className="mx-auto max-w-2xl text-muted-foreground">
               Takımımızın katıldığı yarışmalar ve elde ettiği dereceler.
@@ -256,6 +260,7 @@ export default function TeamDetail({ team, error }: TeamDetailProps) {
       {team.projects && team.projects.length > 0 && (
         <section className="container pb-16">
           <div className="mb-12 mx-auto text-center max-w-3xl">
+            <PixelMark />
             <h2 className="mb-2 text-3xl font-bold tracking-tight">Projelerimiz</h2>
             <p className="mx-auto max-w-2xl text-muted-foreground">
               Takımımızın geliştirdiği projeler ve çalışmaları.

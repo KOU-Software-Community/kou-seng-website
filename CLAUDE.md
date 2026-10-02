@@ -76,6 +76,39 @@ Stil: Tailwind CSS v4 + CSS değişkenleri. Marka renkleri
 layout'ta `ThemeProvider`). Tailwind class çakışmaları için `src/lib/utils.ts`
 → `cn()` (`clsx` + `tailwind-merge`).
 
+Tasarım dili mobil uygulamayla (app_seng) ve uygulamanın tanıtım videosuyla
+ortak; kaynağı app_seng `src/theme.ts` ve `src/components/Pixel.tsx`. Marka
+rengi ya da tasarım kuralı değişirse iki repo birlikte güncellenir. Kurallar
+`globals.css` (`:root`, `@theme`, `@utility`) ve `layout.tsx`'te (next/font):
+
+- Yazı tipi Plus Jakarta Sans (`font-sans`, body'de). Press Start 2P
+  (`font-pixel`) yalnızca kısa etiketlerde: header'daki KOU SENG, hero rozeti,
+  bölüm üst etiketi, "sesi aç", yükleniyor ve boş durum. Gövde metni, başlık,
+  form ve diğer düğmelerde kullanılmaz. İkisi de `latin-ext` alt kümesiyle
+  yükleniyor, yoksa ş/ğ/ı/İ yedek fonta düşer.
+- **Piksel fontta Türkçe büyük harf yok.** Press Start 2P İ, Ç, Ş, Ğ, Ü, Ö'yü
+  küçük harf gibi çiziyor ("Kocaeli Üniversitesi" → "Kocaeli üniversitesi").
+  Piksel metin küçük harfle yazılır; JSON'dan gelen metin `lowercase` sınıfı
+  alır (`<html lang="tr">` sayesinde I→ı, İ→i doğru dönüşür). Tek istisna ASCII
+  "KOU SENG".
+- Özel sınıflar:
+  - `bg-night`: koyu bant (ana sayfa hero'su, mobil uygulama bölümü). Zemin
+    gradyanı ve `::before` ile nokta ızgarası; iki temada aynı.
+  - `pixel-edge`: koyu bandın kenarındaki piksel piksel geçiş; `bottom-0` ya da
+    `top-0 rotate-180` ile.
+  - `bg-cta` + `shadow-cta` (birincil düğme), `shadow-featured`. Birincil düğme
+    `bg-cta text-white shadow-cta`: `text-white` şart, karanlık temada
+    `primary-foreground` koyu lacivert ve gradyan üstünde okunmuyor.
+  - `animate-pxspin`, `animate-blink`: yalnızca `motion-safe:` ile; hareket
+    azaltma açıkken durur.
+- `src/components/layout/Pixel.tsx`: `PixelMark` (bölüm başlığının üstündeki
+  ■■□) ve `PixelLoader` (dört kareli yükleniyor animasyonu).
+- `--border` #CBD9E1, form kenarlığıyla aynı. Uygulamadaki #E4EEF3 açık zeminde
+  kayboluyordu (çerçeveli düğme, ayırıcı, çizgi); bilinçli sapma.
+- Yeni bir `--shadow-*` eklenirse `cn()` içindeki `extendTailwindMerge`
+  listesine de eklenmeli. Eklenmezse tailwind-merge onu gölge rengi sanar,
+  shadcn bileşeninin kendi `shadow-xs`'i kalır ve gölge sessizce görünmez.
+
 ### Backend (`backend/`)
 
 Express.js, routes → controllers → models; ayrıca `middlewares/`, `helpers/`,
@@ -145,6 +178,14 @@ Bir branch tek bir iş taşır; araya giren ilgisiz değişiklik kendi branch'in
 gider. Henüz merge edilmemiş bir PR'ın üstüne iş gerekiyorsa yeni branch o PR'ın
 branch'inden açılır, PR `main`'e açılır ve açıklamasına önce hangi PR'ın merge
 edilmesi gerektiği yazılır.
+
+### Commit, PR ve dokümanlarda yapay zekâ izi yok
+
+Commit mesajlarına, PR açıklamalarına, PR yorumlarına ve `docs/` altındaki
+plan/spec'lere yapay zekâ aracından iz yazılmaz: `Co-Authored-By` satırı,
+oturum linki, "Generated with …" notu, araç ya da ajan adı yok. Commit'lerin
+yazarı ekipten biridir (git `user.name`/`user.email`); araç kendi adıyla commit
+atmaz ve repoda katkıda bulunan olarak görünmez.
 
 ### Paket yöneticisi: npm
 
@@ -217,6 +258,59 @@ fotoğrafında yayımlanmamalı). HEIC okumak için macOS'ta `sips`, Python'da
 Uzantıya güvenme: bu depoya bir kez `.jpeg` uzantılı ama içeriği HEIC olan dosya
 geldi. `check:content` bu yüzden magic byte'a bakıyor.
 
+### Tanıtım videosu
+
+Ana sayfadaki mobil uygulama bölümü (`layout/AppSection.tsx`) tanıtım videosunu
+sitenin kendisinden sunar: `public/video/kou-seng-tanitim.mp4` ve poster
+`kou-seng-tanitim.jpg`; yollar ve metinler `home/data.json` → `app`. YouTube
+değil: 15 sn'lik video 1,8 MB'a iniyor, oynatıcının logosu ve önerileri
+tasarımı bozmuyor, üçüncü taraf çerezi (KVKK) ve CSP değişikliği gerekmiyor.
+Video sayısı ya da boyutu büyürse yeniden düşünülmeli: Cloudflare ücretsiz
+planı büyük video sunumunu ücretli ürünlerine (Stream, R2) yönlendiriyor.
+
+- Bölümün yarısı görününce sessiz ve döngüde oynar, çıkınca durur; video ancak
+  görününce iner (`preload="none"`). Hareket azaltma açıksa kendiliğinden
+  başlamaz. "sesi aç" videoyu baştan sesli başlatır.
+- Tarayıcının kendi kontrolleri (`controls`) kullanılmaz: iPhone'da sesi açınca
+  birkaç saniye videonun üstünü örtüp başını izletmiyordu. Kendiliğinden
+  başlayan hareketli içerik durdurulabilmeli (WCAG 2.2.2); bunu videonun sol
+  üstündeki durdur/oynat düğmesi sağlar. Kullanıcı durdurduysa video ekrana
+  geri dönünce kendiliğinden başlamaz.
+- Sayfa arka plana geçince (kilit ekranı, uygulama ya da sekme değiştirme) video
+  durur. Video her durduğunda ses de kapanır: sesli ve duraklatılmış video
+  iPhone'un kilit ekranında "KOU SENG - Web Sitesi" oynatıcısı olarak kalıyordu.
+  Safari sessiz videoyu oynatıcıya koymuyor.
+- **Coolify'da frontend uygulamasının gzip'i kapalı olmalı** (Configuration →
+  Advanced → Enable Gzip Compression). Açıkken Coolify proxy'si (Traefik)
+  videoyu ve görselleri de gzip'liyor. Cloudflare sıkıştırılmış yanıtı açmak
+  zorunda kalınca byte-range isteğini yok sayıp dosyanın tamamını 200 ile
+  dönüyor; iPhone Safari 206 almadan videoyu oynatmıyor, üstünde üstü çizili
+  oynat simgesi çıkıyor. Masaüstü tarayıcılar 200'ü kabul ettiği için sorun
+  yalnızca iOS'ta görünür. HTML, JS, CSS ve SVG'yi Next zaten kendisi
+  sıkıştırıyor; ayar kapalıyken kaybedilen bir şey yok. Ayarı değiştirince
+  uygulamayı yeniden deploy et. Kontrol (`206` ve `content-range` beklenir;
+  200 dönerse Cloudflare'de bu adresi Purge et):
+
+  ```bash
+  curl -s -o /dev/null -D - -r 0-1 -H 'Accept-Encoding: identity' \
+    https://kouseng.com/video/kou-seng-tanitim.mp4
+  ```
+
+- Video değişirse kaynaktan 720p'ye dönüştür, metadata'yı at, `moov` başa
+  gelsin (Safari ve hızlı başlangıç için). Poster videonun son karesi:
+
+  ```bash
+  ffmpeg -i kaynak.mp4 -vf "scale=1280:-2,fps=30" -c:v libx264 -preset slow -crf 24 \
+    -profile:v high -pix_fmt yuv420p -movflags +faststart -map_metadata -1 \
+    -c:a aac -b:a 128k frontend/public/video/kou-seng-tanitim.mp4
+  ffmpeg -sseof -0.8 -i kaynak.mp4 -frames:v 1 -vf scale=1280:-2 -q:v 3 \
+    -map_metadata -1 frontend/public/video/kou-seng-tanitim.jpg
+  ```
+
+- `app.stores`, `teams/mobil-web.json`'daki KOU SENG projesinin `stores`'unun
+  kopyası. Mağaza linki değişirse ikisi birlikte güncellenir;
+  `check:content` ayrışırsa FAIL verir.
+
 ### `check:content`
 
 `npm run build` `public/data/` JSON'larını doğrulamaz; bunu
@@ -233,6 +327,7 @@ geldi. `check:content` bu yüzden magic byte'a bakıyor.
 | `projects[].stores` dizi mi, `name` `App Store`/`Google Play` mı, `url` https ya da `null` mı | `stores.map` runtime tuzağı; yanlış `name` sessizce yanlış ikon verir. `url: null` → "Yakında" pasif buton |
 | Teknik formdaki her alan `question_<id>` olarak backend `allowedCustomFields`'te mi, `type: number` değil mi, `formatCustomFields`'te etiketi var mı (iki kopya aynı mı); genel formda kişisel olmayan alan var mı | Eksik anahtar her gönderimde 400 döner, build ve form sessiz geçer; etiketsiz alan panelde ham `question_<id>` görünür; genel form özel alanı sessizce atar |
 | `github` / `linkedin` / `kaggle` mutlak URL mi | Çıplak kullanıcı adı kırık link olur |
+| `home.app` videosu ve posteri diskte mi, gerçek formatı ve boyutu (video ≤ 5 MB, poster ≤ 300 KB); `app.stores` KOU SENG projesiyle aynı mı | Next `public/` yollarını doğrulamıyor → video 404; büyük video repoyu şişirir; mağaza linkleri iki yerde duruyor |
 
 Betik hiçbir zaman sessizce atlamaz: ölçemediği her durum FAIL, çıkış kodu 1.
 Kontrol yeşilken bile içerik değiştirdikten sonra ilgili sayfayı `npm run dev`

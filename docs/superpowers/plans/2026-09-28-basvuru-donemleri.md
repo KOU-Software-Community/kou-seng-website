@@ -1,7 +1,5 @@
 # Başvuru Dönemleri — Uygulama Planı
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans (kullanıcı kuralı; subagent-driven-development kullanılmaz). Adımlar `- [ ]` ile işaretlenir.
-
 **Hedef:** Başvuru formlarının açık/kapalı durumu backend'de tutulsun ve uygulansın. Admin tarihleri panelden ayarlasın, sayfalar durumu backend'den okusun.
 
 **Mimari:**
@@ -222,7 +220,7 @@ test('toPublicWindow ISO döndürür', () => assert.deepEqual(
 **Interfaces:**
 - Consumes: `useApplicationWindows`, `windowSummary`, `ApplicationWindow` (Task 4).
 
-- [ ] **Adım 1: Kabul senaryosunu yaz** (oturum içi Playwright; repoya girmez). Geçici Mongo, backend ve `npm run build && npm run start` (`NEXT_PUBLIC_API_URL=http://127.0.0.1:3001`) ile:
+- [ ] **Adım 1: Kabul senaryosunu yaz** (yerel Playwright; repoya girmez). Geçici Mongo, backend ve `npm run build && npm run start` (`NEXT_PUBLIC_API_URL=http://127.0.0.1:3001`) ile:
   - (a) Varsayılan durum:
     - `/apply`'da genel kartta "Başvur" ve "Son başvuru tarihi belirtilmedi" görünür.
     - Teknik kartlarda "Başvuru Kapalı" ve "Başvurular kapalı" görünür.
@@ -259,7 +257,7 @@ test('toPublicWindow ISO döndürür', () => assert.deepEqual(
 **Interfaces:**
 - Consumes: `useApplicationWindows`, `APPLICATION_LABELS`, `toLocalInput`, `fromLocalInput`, `formatWindowDate` (Task 4).
 
-- [ ] **Adım 1: Kabul senaryosunu yaz** (oturum içi Playwright, `timezoneId: 'Europe/Istanbul'`):
+- [ ] **Adım 1: Kabul senaryosunu yaz** (yerel Playwright, `timezoneId: 'Europe/Istanbul'`):
   - Admin olarak giriş yapılır → kenar menüsünde "Başvuru Dönemleri" var → sayfada dört kart ve durum rozetleri görünür.
   - Yapay Zeka kartına Açılış olarak bugün 18:00, Kapanış olarak yarın 18:00 girilir → "Kaydet" → "Kaydedildi" mesajı çıkar.
   - API'de `opensAt` değeri `...T15:00:00.000Z` olmalı. `/apply/ai`'de "Son başvuru: <yarın> 18:00" görünmeli.
@@ -280,7 +278,7 @@ test('toPublicWindow ISO döndürür', () => assert.deepEqual(
 
 ---
 
-**Bitiş (executing-plans):**
-- Branch'in tamamı `fable-reviewer` ile incelenir; kritik bulgular düzeltilir.
+**Bitiş:**
+- Branch'in tamamı son bir kod incelemesinden geçer; kritik bulgular düzeltilir.
 - PR #62 açıklaması güncellenir; merge edilmez.
 - Deploy notu kullanıcıya iletilir: önce #61, sonra #62; önce backend, sonra frontend.

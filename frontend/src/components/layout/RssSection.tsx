@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { useRssFeed } from '@/hooks/useRssFeed';
+import { PixelMark } from "@/components/layout/Pixel";
 
 type RssSectionProps = {
   title: string;
@@ -29,6 +30,7 @@ export default function RssSection({
   return (
     <section className="container pb-16">
       <div className="mb-12 mx-auto text-center max-w-3xl">
+        <PixelMark />
         <h2 className="mb-2 text-3xl font-bold tracking-tight">{title}</h2>
         <p className="mx-auto max-w-2xl text-muted-foreground">
           {description}
@@ -48,7 +50,7 @@ export default function RssSection({
       ) : articles.length === 0 ? (
         <div className="text-center p-12 border rounded-lg">
           <FontAwesomeIcon icon={faFileLines} className="h-12 w-12 text-muted-foreground mb-4" />
-          <h3 className="text-lg font-medium mb-2">Henüz Yayın Yok</h3>
+          <h3 className="font-pixel text-sm mb-3">henüz yayın yok</h3>
           <p className="text-muted-foreground">Yakında kulüp üyelerimizin yazılım dünyasına dair makaleleri burada yer alacak.</p>
         </div>
       ) : (

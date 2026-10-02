@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -59,6 +60,16 @@ export default function Header() {
           </Button>
         </div>
         
+        {/* Marka - mobilde ortada, masaüstünde solda */}
+        <Link
+          href="/"
+          aria-label="KOU SENG ana sayfa"
+          className="absolute left-1/2 flex -translate-x-1/2 items-center gap-2 md:left-4 md:translate-x-0"
+        >
+          <Image src="/kouseng-logo.svg" alt="" width={32} height={32} className="size-8" />
+          <span className="font-pixel text-[11px] md:hidden lg:inline">KOU SENG</span>
+        </Link>
+
         {/* Masaüstü navigasyon - Orta (tam ortada) */}
         <div className="flex justify-center w-full">
           <nav className="hidden md:flex md:items-center md:gap-8">

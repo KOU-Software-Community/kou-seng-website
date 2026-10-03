@@ -19,12 +19,13 @@ const matchesSystemKey = (token) => {
 };
 
 // JWT `iat` saniye hassasiyetinde (aşağı yuvarlanmış), passwordChangedAt
-// milisaniye. Token, değişikliğin olduğu saniyeden önce verildiyse geçersiz:
-// iat < floor(passwordChangedAt / 1000). Değişiklikten sonra dönen yeni token
-// aynı saniyede verilse de geçer; bedeli, değişiklikten hemen önce aynı saniye
-// içinde verilmiş eski bir token'ın da geçmesi (en fazla 1 sn'lik pencere).
+// milisaniye. iat * 1000 < passwordChangedAt: değişiklikten önce verilmiş her
+// token, aynı saniyede verilmiş olsa da geçersiz (şifreyi bilen saldırgan
+// değişiklik anına denk gelen bir token'la içeride kalamasın). Bedeli: aynı
+// saniyede yapılan yeni bir giriş de reddedilir; panel şifre değişince zaten
+// çıkış yaptırıyor, tekrar giriş bir saniyeden uzun sürer.
 const issuedBeforePasswordChange = (iat, passwordChangedAt) =>
-    Boolean(passwordChangedAt) && iat < Math.floor(passwordChangedAt.getTime() / 1000);
+    Boolean(passwordChangedAt) && iat * 1000 < passwordChangedAt.getTime();
 
 // @desc    Yönetici erişim kontrolü
 const adminOnly = (req, res, next) => {

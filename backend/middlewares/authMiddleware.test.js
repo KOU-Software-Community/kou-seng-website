@@ -11,7 +11,7 @@ test('passwordChangedAt yoksa token geçerli', () => {
 });
 test('değişiklikten önceki saniyede verilen token reddedilir', () =>
   assert.equal(issuedBeforePasswordChange(sec - 1, changed), true));
-test('aynı saniyede verilen yeni token geçer', () =>
-  assert.equal(issuedBeforePasswordChange(sec, changed), false));
+test('değişiklikle aynı saniyede verilen token reddedilir', () =>
+  assert.equal(issuedBeforePasswordChange(sec, changed), true));
 test('sonra verilen token geçer', () =>
   assert.equal(issuedBeforePasswordChange(sec + 5, changed), false));

@@ -69,12 +69,12 @@ const changePassword = async (req, res) => {
             return res.status(400).json({ message: 'Mevcut şifre yanlış' });
         }
         user.password = await bcrypt.hash(newPassword, await bcrypt.genSalt(10));
-        // Eski token'lar geçersizleşir; oturum açık kalsın diye yeni token dönülür.
+        // Bu andan önce verilmiş token'lar geçersiz; panel çıkış yaptırıp yeniden giriş ister.
         user.passwordChangedAt = new Date();
         // Yalnızca şifre doğrulanır; eski kayıtlardaki başka bir alan (ör.
         // migration'ı yapılmamış `web` rolü) şifre değişikliğini engellemesin.
         await user.save({ validateModifiedOnly: true });
-        res.status(200).json({ message: 'Şifre değiştirildi', token: generateToken(user._id) });
+        res.status(200).json({ message: 'Şifre değiştirildi' });
     } catch {
         res.status(500).json({ message: 'Şifre değiştirilemedi' });
     }

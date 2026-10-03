@@ -18,7 +18,7 @@ Yönetim paneline erişim için kullanılır.
   - **Açıklama:** Oturumdaki kullanıcının şifresini değiştirir. Yeni şifre en az 10 karakter. Hatalı denemeler login ile aynı limite (15 dakikada 10) sayılır.
   - **Gerekli Header:** `Authorization: Bearer <token>`
   - **Request Body:** `{ "currentPassword": "string", "newPassword": "string" }`
-  - **Response:** `{ "message": "Şifre değiştirildi", "token": "<yeni JWT>" }`. Değişiklikten önce verilmiş token'lar artık 401 alır; istemci yeni token'ı saklamalı.
+  - Değişiklikten önce verilmiş token'lar (bu oturumunki dahil) artık 401 alır; panel çıkış yaptırıp yeniden giriş ister.
 
 - **GET** `/auth/status`
   - **Açıklama:** Başvuru ve iletişim mesajı sayıları (dashboard özeti). Yalnızca admin.

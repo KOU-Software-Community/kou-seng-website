@@ -108,6 +108,18 @@ const loginLimiter = rateLimit({
 app.post('/auth/login', loginLimiter);
 app.patch('/auth/password', loginLimiter);
 
+// Mail gönderimi de token'lı istekleri muaf tutan genel limite takılmıyor;
+// ele geçirilmiş bir sponsor hesabı sınırsız gönderim/görev açamasın.
+const mailLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 30,
+  standardHeaders: true,
+  legacyHeaders: false,
+  keyGenerator,
+  message: { success: false, message: 'Çok fazla mail isteği yapıldı. Lütfen 15 dakika sonra tekrar deneyin.' },
+});
+app.post(['/mail/send', '/mail/queue'], mailLimiter);
+
 app.use((req, res, next) => {
   logger.debug(`${req.method} ${req.path} [${clientIp(req)}] (req.ip: ${req.ip})`);
   next();

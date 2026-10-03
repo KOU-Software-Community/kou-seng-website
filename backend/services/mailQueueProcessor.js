@@ -16,11 +16,14 @@ function randomDelayMs() {
     return (Math.floor(Math.random() * 16) + 15) * 1_000; // 15–30 sn
 }
 
-// Yalnızca job seçme döngüsünü korur; job'ların çalışma süresini değil.
-// Bu sayede yeni job eklenmesi (wakeProcessor) anında pick-up edilebilir.
-let isPickingJobs = false;
+// Görevler sırayla, tek tek işlenir: gönderimler zaten 15–30 sn aralıkla
+// yapılıyor; paralel görevler bu aralığı delip her biri eklerini (≤10 MB)
+// bellekte tutuyordu. Çalışırken gelen wakeProcessor bir şey yapmaz; yeni görev
+// mevcut görev bitince aynı döngüde alınır.
+let isProcessing = false;
 let processorTimer = null;
 
+/** @returns {Promise<boolean>} false: görev pending'e geri alındı, döngü 5 sn beklesin */
 async function processJob(job) {
     logger.info(`Kuyruk işlemcisi görevi başlattı: ${job._id} (${job.recipients.length} alıcı)`);
 
@@ -33,7 +36,7 @@ async function processJob(job) {
     } catch (err) {
         logger.error(`Mail kimlik bilgileri eksik; görev pending'e alındı. (${job._id})`);
         await MailJob.updateOne({ _id: job._id }, { $set: { status: 'pending' } });
-        return;
+        return false;
     }
 
     const htmlContent = buildMailHtml(job.blocks);
@@ -56,7 +59,7 @@ async function processJob(job) {
             const fresh = await MailJob.findById(job._id).select('status').lean();
             if (!fresh || fresh.status === 'cancelled') {
                 logger.info(`Kuyruk görevi iptal edildi: ${job._id}`);
-                return;
+                return true;
             }
 
             const email = job.recipients[i];
@@ -73,18 +76,26 @@ async function processJob(job) {
                 result = { email, status: 'sent' };
                 logger.info(`Kuyruk maili gönderildi → ${email} (görev: ${job._id})`);
             } catch (err) {
-                result = { email, status: 'failed', error: err.message };
+                result = { email, status: 'failed', error: String(err.message).slice(0, 500) };
                 logger.error(`Kuyruk maili gönderilemedi → ${email} (görev: ${job._id}): ${err.message}`);
             }
 
-            // İlerlemeyi kaydet
-            await MailJob.updateOne(
-                { _id: job._id },
-                {
-                    $set: { currentIndex: i + 1 },
-                    $push: { results: result },
-                },
-            );
+            // İlerlemeyi kaydet. Mail gitmiş ama kayıt yazılamamışsa görev pending'e
+            // alınmaz: alınsaydı aynı alıcıya 5 sn'de bir, sonsuza dek yeniden
+            // gönderilirdi. Görev 'running' kalır (iptal edilebilir); sunucu yeniden
+            // başlayınca currentIndex'ten sürer: her yeniden başlatmada en fazla bir tekrar.
+            try {
+                await MailJob.updateOne(
+                    { _id: job._id },
+                    {
+                        $set: { currentIndex: i + 1 },
+                        $push: { results: result },
+                    },
+                );
+            } catch (err) {
+                logger.error(`Görev ilerlemesi kaydedilemedi, görev durduruldu: ${job._id}: ${err.message}`);
+                return true;
+            }
 
             // Son alıcı değilse gecikme uygula
             if (i < job.recipients.length - 1) {
@@ -105,17 +116,19 @@ async function processJob(job) {
         if (updated) {
             logger.info(`Kuyruk görevi tamamlandı: ${job._id}`);
         }
+        return true;
     } catch (err) {
+        // Buraya yalnızca gönderimden önce ya da ilerleme kaydedildikten sonra
+        // düşülür; currentIndex'ten sürmek tekrar gönderim yapmaz.
         logger.error(`Görev işlenirken hata: ${job._id}: ${err.message}`);
         await MailJob.updateOne({ _id: job._id, status: 'running' }, { $set: { status: 'pending' } }).catch(() => {});
+        return false;
     }
 }
 
 async function processJobs() {
-    // Sadece job seçme döngüsünü koru. Job'ların çalışması beklenmez;
-    // bu sayede yeni bir job eklendiğinde wakeProcessor anında devreye girer.
-    if (isPickingJobs) return;
-    isPickingJobs = true;
+    if (isProcessing) return;
+    isProcessing = true;
 
     try {
         while (true) {
@@ -126,16 +139,15 @@ async function processJobs() {
             );
             if (!job) break;
 
-            // Fire-and-forget: job arka planda çalışır, seçme döngüsünü bloklamaz.
-            processJob(job).catch((err) =>
-                logger.error(`İşlenmemiş görev hatası ${job._id}: ${err.message}`)
-            );
+            // Pending'e geri alınan görevi hemen yeniden almamak için 5 sn bekle.
+            if (!(await processJob(job))) break;
         }
     } catch (err) {
+        // 'running' görevler toplu pending'e alınmaz: ilerlemesi yazılamadığı için
+        // bilerek durdurulan görev de geri dönerdi. Yeniden başlatma onları sürdürür.
         logger.error(`Kuyruk işlemci hatası: ${err.message}`);
-        await MailJob.updateMany({ status: 'running' }, { $set: { status: 'pending' } }).catch(() => {});
     } finally {
-        isPickingJobs = false;
+        isProcessing = false;
         processorTimer = setTimeout(processJobs, 5_000);
     }
 }

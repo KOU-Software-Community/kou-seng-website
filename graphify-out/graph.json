@@ -1762,18 +1762,6 @@
       "source_location": "L30"
     },
     {
-      "id": "frontend_src_components_pages_admin_application_windows_windowcard",
-      "label": "WindowCard()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "Button",
-      "file_type": "code",
-      "norm_label": "windowcard()",
-      "source_file": "frontend/src/components/pages/admin/application-windows.tsx",
-      "source_location": "L27"
-    },
-    {
       "id": "frontend_src_components_pages_admin_contact_admincontact",
       "label": "AdminContact()",
       "_callable": true,
@@ -1939,7 +1927,7 @@
       "file_type": "code",
       "norm_label": "blockeditor()",
       "source_file": "frontend/src/components/pages/admin/sponsor-mail.tsx",
-      "source_location": "L680"
+      "source_location": "L681"
     },
     {
       "id": "frontend_src_components_pages_admin_sponsor_mail_createblock",
@@ -1963,7 +1951,7 @@
       "file_type": "code",
       "norm_label": "formatabletextarea()",
       "source_file": "frontend/src/components/pages/admin/sponsor-mail.tsx",
-      "source_location": "L620"
+      "source_location": "L621"
     },
     {
       "id": "frontend_src_components_pages_admin_sponsor_mail_formatdate",
@@ -1999,7 +1987,7 @@
       "file_type": "code",
       "norm_label": "queuejobcard()",
       "source_file": "frontend/src/components/pages/admin/sponsor-mail.tsx",
-      "source_location": "L498"
+      "source_location": "L499"
     },
     {
       "id": "frontend_src_components_pages_admin_technical_team_admintechnicalteam",
@@ -2530,18 +2518,6 @@
       "source_location": "L5"
     },
     {
-      "id": "frontend_src_hooks_use_mobile_useismobile",
-      "label": "useIsMobile()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "Button",
-      "file_type": "code",
-      "norm_label": "useismobile()",
-      "source_file": "frontend/src/hooks/use-mobile.ts",
-      "source_location": "L5"
-    },
-    {
       "id": "frontend_src_hooks_useannouncements_useannouncements",
       "label": "useAnnouncements()",
       "_callable": true,
@@ -2575,7 +2551,7 @@
       "file_type": "code",
       "norm_label": "useauth()",
       "source_file": "frontend/src/hooks/useAuth.ts",
-      "source_location": "L68"
+      "source_location": "L66"
     },
     {
       "id": "frontend_src_hooks_usecontact_usecontact",
@@ -2683,7 +2659,7 @@
       "file_type": "code",
       "norm_label": "cancelmailjob()",
       "source_file": "backend/controllers/mailQueueController.js",
-      "source_location": "L157"
+      "source_location": "L159"
     },
     {
       "id": "backend_controllers_mailqueuecontroller_createmailjob",
@@ -2707,7 +2683,7 @@
       "file_type": "code",
       "norm_label": "deletemailjob()",
       "source_file": "backend/controllers/mailQueueController.js",
-      "source_location": "L194"
+      "source_location": "L196"
     },
     {
       "id": "backend_controllers_mailqueuecontroller_getmailjobs",
@@ -2719,7 +2695,7 @@
       "file_type": "code",
       "norm_label": "getmailjobs()",
       "source_file": "backend/controllers/mailQueueController.js",
-      "source_location": "L134"
+      "source_location": "L136"
     },
     {
       "id": "backend_controllers_mailqueuecontroller_sanitizejob",
@@ -2792,18 +2768,6 @@
       "norm_label": "uploadmiddleware()",
       "source_file": "backend/routes/mailQueueRoutes.js",
       "source_location": "L32"
-    },
-    {
-      "id": "backend_services_mailqueueprocessor_wakeprocessor",
-      "label": "wakeProcessor()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "mailQueueController.js",
-      "file_type": "code",
-      "norm_label": "wakeprocessor()",
-      "source_file": "backend/services/mailQueueProcessor.js",
-      "source_location": "L164"
     },
     {
       "id": "frontend_src_contexts_mailqueuecontext_authheaders",
@@ -2890,88 +2854,40 @@
       "source_location": "L27"
     },
     {
-      "id": "backend_routes_mailroutes_uploadmiddleware",
-      "label": "uploadMiddleware()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 12,
-      "community_name": "backend/package.json",
-      "file_type": "code",
-      "norm_label": "uploadmiddleware()",
-      "source_file": "backend/routes/mailRoutes.js",
-      "source_location": "L28"
-    },
-    {
-      "id": "backend_config_dbconnection_connectdb",
-      "label": "ConnectDB()",
+      "id": "backend_helpers_clientip_clientip",
+      "label": "clientIp()",
       "_callable": true,
       "_origin": "ast",
       "community": 13,
       "community_name": "index.js",
       "file_type": "code",
-      "norm_label": "connectdb()",
-      "source_file": "backend/config/dbConnection.js",
-      "source_location": "L4"
+      "norm_label": "clientip()",
+      "source_file": "backend/helpers/clientIp.js",
+      "source_location": "L37"
     },
     {
-      "id": "backend_controllers_healthcontroller_gethealthstatus",
-      "label": "getHealthStatus()",
+      "id": "backend_helpers_clientip_fromtrustedhop",
+      "label": "fromTrustedHop()",
       "_callable": true,
       "_origin": "ast",
       "community": 13,
       "community_name": "index.js",
       "file_type": "code",
-      "norm_label": "gethealthstatus()",
-      "source_file": "backend/controllers/healthController.js",
-      "source_location": "L7"
+      "norm_label": "fromtrustedhop()",
+      "source_file": "backend/helpers/clientIp.js",
+      "source_location": "L30"
     },
     {
-      "id": "backend_helpers_logger_formatlogmessage",
-      "label": "formatLogMessage()",
+      "id": "backend_index_keygenerator",
+      "label": "keyGenerator()",
       "_callable": true,
       "_origin": "ast",
       "community": 13,
       "community_name": "index.js",
       "file_type": "code",
-      "norm_label": "formatlogmessage()",
-      "source_file": "backend/helpers/logger.js",
-      "source_location": "L5"
-    },
-    {
-      "id": "backend_helpers_rateskip_rateskip",
-      "label": "rateSkip()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "index.js",
-      "file_type": "code",
-      "norm_label": "rateskip()",
-      "source_file": "backend/helpers/rateSkip.js",
-      "source_location": "L6"
-    },
-    {
-      "id": "backend_helpers_rateskip_rateskipauth",
-      "label": "rateSkipAuth()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "index.js",
-      "file_type": "code",
-      "norm_label": "rateskipauth()",
-      "source_file": "backend/helpers/rateSkip.js",
-      "source_location": "L60"
-    },
-    {
-      "id": "backend_helpers_rateskip_rateskipip",
-      "label": "rateSkipIP()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "index.js",
-      "file_type": "code",
-      "norm_label": "rateskipip()",
-      "source_file": "backend/helpers/rateSkip.js",
-      "source_location": "L18"
+      "norm_label": "keygenerator()",
+      "source_file": "backend/index.js",
+      "source_location": "L66"
     },
     {
       "id": "backend_index_skipgenerallimit",
@@ -2983,7 +2899,7 @@
       "file_type": "code",
       "norm_label": "skipgenerallimit()",
       "source_file": "backend/index.js",
-      "source_location": "L78"
+      "source_location": "L88"
     },
     {
       "id": "backend_controllers_authcontroller_changepassword",
@@ -3020,18 +2936,6 @@
       "norm_label": "loginuser()",
       "source_file": "backend/controllers/authController.js",
       "source_location": "L13"
-    },
-    {
-      "id": "backend_controllers_statuscontroller_getsystemstatus",
-      "label": "getSystemStatus()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 16,
-      "community_name": "authController.js",
-      "file_type": "code",
-      "norm_label": "getsystemstatus()",
-      "source_file": "backend/controllers/statusController.js",
-      "source_location": "L8"
     },
     {
       "id": "backend_helpers_generatetoken_generatetoken",
@@ -3080,6 +2984,18 @@
       "norm_label": "adminapplicationwindows()",
       "source_file": "frontend/src/components/pages/admin/application-windows.tsx",
       "source_location": "L89"
+    },
+    {
+      "id": "frontend_src_components_pages_admin_application_windows_windowcard",
+      "label": "WindowCard()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 17,
+      "community_name": "application-windows.tsx",
+      "file_type": "code",
+      "norm_label": "windowcard()",
+      "source_file": "frontend/src/components/pages/admin/application-windows.tsx",
+      "source_location": "L27"
     },
     {
       "id": "frontend_src_components_pages_apply_apply",
@@ -3274,30 +3190,6 @@
       "source_location": "L135"
     },
     {
-      "id": "backend_controllers_submissionscontroller_getallsubmissions",
-      "label": "getAllSubmissions()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 19,
-      "community_name": "announcementsController.js",
-      "file_type": "code",
-      "norm_label": "getallsubmissions()",
-      "source_file": "backend/controllers/submissionsController.js",
-      "source_location": "L206"
-    },
-    {
-      "id": "backend_helpers_searchpattern_tosearchpattern",
-      "label": "toSearchPattern()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 19,
-      "community_name": "announcementsController.js",
-      "file_type": "code",
-      "norm_label": "tosearchpattern()",
-      "source_file": "backend/helpers/searchPattern.js",
-      "source_location": "L5"
-    },
-    {
       "id": "frontend_src_app_routes_admin_layout_admin_page_adminindexpage",
       "label": "AdminIndexPage()",
       "_callable": true,
@@ -3379,7 +3271,7 @@
       "file_type": "code",
       "norm_label": "adminonly()",
       "source_file": "backend/middlewares/authMiddleware.js",
-      "source_location": "L30"
+      "source_location": "L31"
     },
     {
       "id": "backend_middlewares_authmiddleware_firstusercreation",
@@ -3391,19 +3283,7 @@
       "file_type": "code",
       "norm_label": "firstusercreation()",
       "source_file": "backend/middlewares/authMiddleware.js",
-      "source_location": "L129"
-    },
-    {
-      "id": "backend_middlewares_authmiddleware_issuedbeforepasswordchange",
-      "label": "issuedBeforePasswordChange()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 23,
-      "community_name": "authMiddleware.js",
-      "file_type": "code",
-      "norm_label": "issuedbeforepasswordchange()",
-      "source_file": "backend/middlewares/authMiddleware.js",
-      "source_location": "L26"
+      "source_location": "L130"
     },
     {
       "id": "backend_middlewares_authmiddleware_matchessystemkey",
@@ -3427,7 +3307,7 @@
       "file_type": "code",
       "norm_label": "protect()",
       "source_file": "backend/middlewares/authMiddleware.js",
-      "source_location": "L87"
+      "source_location": "L88"
     },
     {
       "id": "backend_middlewares_authmiddleware_roleonlyforcategory",
@@ -3439,7 +3319,7 @@
       "file_type": "code",
       "norm_label": "roleonlyforcategory()",
       "source_file": "backend/middlewares/authMiddleware.js",
-      "source_location": "L45"
+      "source_location": "L46"
     },
     {
       "id": "backend_middlewares_authmiddleware_roleonlyforsubmission",
@@ -3451,7 +3331,7 @@
       "file_type": "code",
       "norm_label": "roleonlyforsubmission()",
       "source_file": "backend/middlewares/authMiddleware.js",
-      "source_location": "L65"
+      "source_location": "L66"
     },
     {
       "id": "backend_middlewares_authmiddleware_sponsororadmin",
@@ -3463,7 +3343,67 @@
       "file_type": "code",
       "norm_label": "sponsororadmin()",
       "source_file": "backend/middlewares/authMiddleware.js",
-      "source_location": "L146"
+      "source_location": "L147"
+    },
+    {
+      "id": "backend_routes_mailroutes_uploadmiddleware",
+      "label": "uploadMiddleware()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "authMiddleware.js",
+      "file_type": "code",
+      "norm_label": "uploadmiddleware()",
+      "source_file": "backend/routes/mailRoutes.js",
+      "source_location": "L28"
+    },
+    {
+      "id": "backend_helpers_rateskip_rateskip",
+      "label": "rateSkip()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 24,
+      "community_name": "rateSkip.js",
+      "file_type": "code",
+      "norm_label": "rateskip()",
+      "source_file": "backend/helpers/rateSkip.js",
+      "source_location": "L7"
+    },
+    {
+      "id": "backend_helpers_rateskip_rateskipauth",
+      "label": "rateSkipAuth()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 24,
+      "community_name": "rateSkip.js",
+      "file_type": "code",
+      "norm_label": "rateskipauth()",
+      "source_file": "backend/helpers/rateSkip.js",
+      "source_location": "L61"
+    },
+    {
+      "id": "backend_helpers_rateskip_rateskipip",
+      "label": "rateSkipIP()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 24,
+      "community_name": "rateSkip.js",
+      "file_type": "code",
+      "norm_label": "rateskipip()",
+      "source_file": "backend/helpers/rateSkip.js",
+      "source_location": "L19"
+    },
+    {
+      "id": "backend_middlewares_authmiddleware_issuedbeforepasswordchange",
+      "label": "issuedBeforePasswordChange()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 24,
+      "community_name": "rateSkip.js",
+      "file_type": "code",
+      "norm_label": "issuedbeforepasswordchange()",
+      "source_file": "backend/middlewares/authMiddleware.js",
+      "source_location": "L27"
     },
     {
       "id": "frontend_src_hooks_useauth_getstoredtoken",
@@ -3475,7 +3415,7 @@
       "file_type": "code",
       "norm_label": "getstoredtoken()",
       "source_file": "frontend/src/hooks/useAuth.ts",
-      "source_location": "L46"
+      "source_location": "L44"
     },
     {
       "id": "frontend_src_hooks_useauth_setstoredtoken",
@@ -3487,7 +3427,7 @@
       "file_type": "code",
       "norm_label": "setstoredtoken()",
       "source_file": "frontend/src/hooks/useAuth.ts",
-      "source_location": "L55"
+      "source_location": "L53"
     },
     {
       "id": "backend_controllers_publicationscontroller_extractcoverimage",
@@ -4246,6 +4186,18 @@
       "source_location": "L31"
     },
     {
+      "id": "frontend_src_hooks_use_mobile_useismobile",
+      "label": "useIsMobile()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 27,
+      "community_name": "cn",
+      "file_type": "code",
+      "norm_label": "useismobile()",
+      "source_file": "frontend/src/hooks/use-mobile.ts",
+      "source_location": "L5"
+    },
+    {
       "id": "frontend_src_lib_utils_cn",
       "label": "cn()",
       "_callable": true,
@@ -4654,6 +4606,18 @@
       "source_location": "L309"
     },
     {
+      "id": "backend_controllers_submissionscontroller_getallsubmissions",
+      "label": "getAllSubmissions()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 31,
+      "community_name": "submissionsController.js",
+      "file_type": "code",
+      "norm_label": "getallsubmissions()",
+      "source_file": "backend/controllers/submissionsController.js",
+      "source_location": "L206"
+    },
+    {
       "id": "backend_controllers_submissionscontroller_getsubmissionbyid",
       "label": "getSubmissionById()",
       "_callable": true,
@@ -4748,6 +4712,18 @@
       "norm_label": "windowstate()",
       "source_file": "backend/helpers/applicationWindow.js",
       "source_location": "L19"
+    },
+    {
+      "id": "backend_helpers_searchpattern_tosearchpattern",
+      "label": "toSearchPattern()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 31,
+      "community_name": "submissionsController.js",
+      "file_type": "code",
+      "norm_label": "tosearchpattern()",
+      "source_file": "backend/helpers/searchPattern.js",
+      "source_location": "L5"
     },
     {
       "id": "backend_scripts_windows_smoke_api",
@@ -4882,40 +4858,52 @@
       "source_location": "L39"
     },
     {
-      "id": "backend_helpers_clientip_clientip",
-      "label": "clientIp()",
+      "id": "backend_controllers_contactcontroller_createcontactmessage",
+      "label": "createContactMessage()",
       "_callable": true,
       "_origin": "ast",
       "community": 35,
-      "community_name": "clientIp.js",
+      "community_name": "contactRoutes.js",
       "file_type": "code",
-      "norm_label": "clientip()",
-      "source_file": "backend/helpers/clientIp.js",
-      "source_location": "L37"
+      "norm_label": "createcontactmessage()",
+      "source_file": "backend/controllers/contactController.js",
+      "source_location": "L7"
     },
     {
-      "id": "backend_helpers_clientip_fromtrustedhop",
-      "label": "fromTrustedHop()",
+      "id": "backend_controllers_contactcontroller_deletecontactmessage",
+      "label": "deleteContactMessage()",
       "_callable": true,
       "_origin": "ast",
       "community": 35,
-      "community_name": "clientIp.js",
+      "community_name": "contactRoutes.js",
       "file_type": "code",
-      "norm_label": "fromtrustedhop()",
-      "source_file": "backend/helpers/clientIp.js",
-      "source_location": "L30"
+      "norm_label": "deletecontactmessage()",
+      "source_file": "backend/controllers/contactController.js",
+      "source_location": "L101"
     },
     {
-      "id": "backend_index_keygenerator",
-      "label": "keyGenerator()",
+      "id": "backend_controllers_contactcontroller_getcontactmessages",
+      "label": "getContactMessages()",
       "_callable": true,
       "_origin": "ast",
       "community": 35,
-      "community_name": "clientIp.js",
+      "community_name": "contactRoutes.js",
       "file_type": "code",
-      "norm_label": "keygenerator()",
-      "source_file": "backend/index.js",
-      "source_location": "L56"
+      "norm_label": "getcontactmessages()",
+      "source_file": "backend/controllers/contactController.js",
+      "source_location": "L47"
+    },
+    {
+      "id": "backend_controllers_contactcontroller_updatecontactisread",
+      "label": "updateContactIsRead()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "contactRoutes.js",
+      "file_type": "code",
+      "norm_label": "updatecontactisread()",
+      "source_file": "backend/controllers/contactController.js",
+      "source_location": "L68"
     },
     {
       "id": "frontend_src_lib_api_fetchannouncements",
@@ -5038,52 +5026,52 @@
       "source_location": "L17"
     },
     {
-      "id": "backend_controllers_contactcontroller_createcontactmessage",
-      "label": "createContactMessage()",
+      "id": "backend_config_dbconnection_connectdb",
+      "label": "ConnectDB()",
       "_callable": true,
       "_origin": "ast",
       "community": 5,
-      "community_name": "mongoose",
+      "community_name": "logger.js",
       "file_type": "code",
-      "norm_label": "createcontactmessage()",
-      "source_file": "backend/controllers/contactController.js",
+      "norm_label": "connectdb()",
+      "source_file": "backend/config/dbConnection.js",
+      "source_location": "L4"
+    },
+    {
+      "id": "backend_controllers_healthcontroller_gethealthstatus",
+      "label": "getHealthStatus()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "logger.js",
+      "file_type": "code",
+      "norm_label": "gethealthstatus()",
+      "source_file": "backend/controllers/healthController.js",
       "source_location": "L7"
     },
     {
-      "id": "backend_controllers_contactcontroller_deletecontactmessage",
-      "label": "deleteContactMessage()",
+      "id": "backend_controllers_statuscontroller_getsystemstatus",
+      "label": "getSystemStatus()",
       "_callable": true,
       "_origin": "ast",
       "community": 5,
-      "community_name": "mongoose",
+      "community_name": "logger.js",
       "file_type": "code",
-      "norm_label": "deletecontactmessage()",
-      "source_file": "backend/controllers/contactController.js",
-      "source_location": "L101"
+      "norm_label": "getsystemstatus()",
+      "source_file": "backend/controllers/statusController.js",
+      "source_location": "L8"
     },
     {
-      "id": "backend_controllers_contactcontroller_getcontactmessages",
-      "label": "getContactMessages()",
+      "id": "backend_helpers_logger_formatlogmessage",
+      "label": "formatLogMessage()",
       "_callable": true,
       "_origin": "ast",
       "community": 5,
-      "community_name": "mongoose",
+      "community_name": "logger.js",
       "file_type": "code",
-      "norm_label": "getcontactmessages()",
-      "source_file": "backend/controllers/contactController.js",
-      "source_location": "L47"
-    },
-    {
-      "id": "backend_controllers_contactcontroller_updatecontactisread",
-      "label": "updateContactIsRead()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "mongoose",
-      "file_type": "code",
-      "norm_label": "updatecontactisread()",
-      "source_file": "backend/controllers/contactController.js",
-      "source_location": "L68"
+      "norm_label": "formatlogmessage()",
+      "source_file": "backend/helpers/logger.js",
+      "source_location": "L5"
     },
     {
       "id": "backend_helpers_mailtemplatebuilder_blocktohtml",
@@ -5216,6 +5204,18 @@
       "norm_label": "startmailqueueprocessor()",
       "source_file": "backend/services/mailQueueProcessor.js",
       "source_location": "L155"
+    },
+    {
+      "id": "backend_services_mailqueueprocessor_wakeprocessor",
+      "label": "wakeProcessor()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "mailQueueProcessor.js",
+      "file_type": "code",
+      "norm_label": "wakeprocessor()",
+      "source_file": "backend/services/mailQueueProcessor.js",
+      "source_location": "L164"
     },
     {
       "id": "frontend_src_app_routes_main_layout_about_page_aboutroute",
@@ -5870,17 +5870,6 @@
       "file_type": "code",
       "norm_label": "textarea.tsx",
       "source_file": "frontend/src/components/ui/textarea.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "frontend_src_hooks_use_mobile",
-      "label": "use-mobile.ts",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "Button",
-      "file_type": "code",
-      "norm_label": "use-mobile.ts",
-      "source_file": "frontend/src/hooks/use-mobile.ts",
       "source_location": "L1"
     },
     {
@@ -6656,39 +6645,6 @@
       "source_location": "L3"
     },
     {
-      "id": "backend_routes_mailroutes",
-      "label": "mailRoutes.js",
-      "_origin": "ast",
-      "community": 12,
-      "community_name": "backend/package.json",
-      "file_type": "code",
-      "norm_label": "mailroutes.js",
-      "source_file": "backend/routes/mailRoutes.js",
-      "source_location": "L1"
-    },
-    {
-      "id": "backend_routes_mailroutes_router",
-      "label": "router",
-      "_origin": "ast",
-      "community": 12,
-      "community_name": "backend/package.json",
-      "file_type": "code",
-      "norm_label": "router",
-      "source_file": "backend/routes/mailRoutes.js",
-      "source_location": "L6"
-    },
-    {
-      "id": "backend_routes_mailroutes_upload",
-      "label": "upload",
-      "_origin": "ast",
-      "community": 12,
-      "community_name": "backend/package.json",
-      "file_type": "code",
-      "norm_label": "upload",
-      "source_file": "backend/routes/mailRoutes.js",
-      "source_location": "L8"
-    },
-    {
       "id": "ref_cors",
       "label": "cors",
       "_origin": "ast",
@@ -6722,17 +6678,6 @@
       "source_location": "L23"
     },
     {
-      "id": "ref_multer",
-      "label": "multer",
-      "_origin": "ast",
-      "community": 12,
-      "community_name": "backend/package.json",
-      "file_type": "concept",
-      "norm_label": "multer",
-      "source_file": "backend/package.json",
-      "source_location": "L26"
-    },
-    {
       "id": "ref_nodemon",
       "label": "nodemon",
       "_origin": "ast",
@@ -6755,59 +6700,48 @@
       "source_location": "L29"
     },
     {
-      "id": "backend_config_dbconnection",
-      "label": "dbConnection.js",
+      "id": "backend_helpers_clientip",
+      "label": "clientIp.js",
       "_origin": "ast",
       "community": 13,
       "community_name": "index.js",
       "file_type": "code",
-      "norm_label": "dbconnection.js",
-      "source_file": "backend/config/dbConnection.js",
+      "norm_label": "clientip.js",
+      "source_file": "backend/helpers/clientIp.js",
       "source_location": "L1"
     },
     {
-      "id": "backend_controllers_healthcontroller",
-      "label": "healthController.js",
+      "id": "backend_helpers_clientip_cloudflare_ranges",
+      "label": "CLOUDFLARE_RANGES",
       "_origin": "ast",
       "community": 13,
       "community_name": "index.js",
       "file_type": "code",
-      "norm_label": "healthcontroller.js",
-      "source_file": "backend/controllers/healthController.js",
-      "source_location": "L1"
+      "norm_label": "cloudflare_ranges",
+      "source_file": "backend/helpers/clientIp.js",
+      "source_location": "L12"
     },
     {
-      "id": "backend_helpers_logger",
-      "label": "logger.js",
+      "id": "backend_helpers_clientip_local_ranges",
+      "label": "LOCAL_RANGES",
       "_origin": "ast",
       "community": 13,
       "community_name": "index.js",
       "file_type": "code",
-      "norm_label": "logger.js",
-      "source_file": "backend/helpers/logger.js",
-      "source_location": "L1"
+      "norm_label": "local_ranges",
+      "source_file": "backend/helpers/clientIp.js",
+      "source_location": "L22"
     },
     {
-      "id": "backend_helpers_logger_logger",
-      "label": "logger",
+      "id": "backend_helpers_clientip_trustedhops",
+      "label": "trustedHops",
       "_origin": "ast",
       "community": 13,
       "community_name": "index.js",
       "file_type": "code",
-      "norm_label": "logger",
-      "source_file": "backend/helpers/logger.js",
-      "source_location": "L16"
-    },
-    {
-      "id": "backend_helpers_rateskip",
-      "label": "rateSkip.js",
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "index.js",
-      "file_type": "code",
-      "norm_label": "rateskip.js",
-      "source_file": "backend/helpers/rateSkip.js",
-      "source_location": "L1"
+      "norm_label": "trustedhops",
+      "source_file": "backend/helpers/clientIp.js",
+      "source_location": "L24"
     },
     {
       "id": "backend_index",
@@ -6851,18 +6785,7 @@
       "file_type": "code",
       "norm_label": "formlimiter",
       "source_file": "backend/index.js",
-      "source_location": "L70"
-    },
-    {
-      "id": "backend_index_limiter",
-      "label": "limiter",
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "index.js",
-      "file_type": "code",
-      "norm_label": "limiter",
-      "source_file": "backend/index.js",
-      "source_location": "L85"
+      "source_location": "L80"
     },
     {
       "id": "backend_index_loginlimiter",
@@ -6873,7 +6796,7 @@
       "file_type": "code",
       "norm_label": "loginlimiter",
       "source_file": "backend/index.js",
-      "source_location": "L99"
+      "source_location": "L109"
     },
     {
       "id": "backend_index_maillimiter",
@@ -6884,7 +6807,7 @@
       "file_type": "code",
       "norm_label": "maillimiter",
       "source_file": "backend/index.js",
-      "source_location": "L113"
+      "source_location": "L123"
     },
     {
       "id": "backend_index_windowslimiter",
@@ -6895,29 +6818,7 @@
       "file_type": "code",
       "norm_label": "windowslimiter",
       "source_file": "backend/index.js",
-      "source_location": "L63"
-    },
-    {
-      "id": "backend_routes_healthroutes",
-      "label": "healthRoutes.js",
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "index.js",
-      "file_type": "code",
-      "norm_label": "healthroutes.js",
-      "source_file": "backend/routes/healthRoutes.js",
-      "source_location": "L1"
-    },
-    {
-      "id": "backend_routes_healthroutes_router",
-      "label": "router",
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "index.js",
-      "file_type": "code",
-      "norm_label": "router",
-      "source_file": "backend/routes/healthRoutes.js",
-      "source_location": "L4"
+      "source_location": "L73"
     },
     {
       "id": "backend_routes_publicationroutes",
@@ -6951,28 +6852,6 @@
       "norm_label": "express",
       "source_file": "backend/package.json",
       "source_location": "L21"
-    },
-    {
-      "id": "ref_jsonwebtoken",
-      "label": "jsonwebtoken",
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "index.js",
-      "file_type": "concept",
-      "norm_label": "jsonwebtoken",
-      "source_file": "backend/package.json",
-      "source_location": "L24"
-    },
-    {
-      "id": "backend_helpers_logger_rationale_28",
-      "label": "TODO: Telegram ile loglama yap\u0131lacak",
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "index.js",
-      "file_type": "rationale",
-      "norm_label": "todo: telegram ile loglama yap\u0131lacak",
-      "source_file": "backend/helpers/logger.js",
-      "source_location": "L28"
     },
     {
       "id": "frontend_components",
@@ -7415,17 +7294,6 @@
       "source_location": "L8"
     },
     {
-      "id": "backend_controllers_statuscontroller",
-      "label": "statusController.js",
-      "_origin": "ast",
-      "community": 16,
-      "community_name": "authController.js",
-      "file_type": "code",
-      "norm_label": "statuscontroller.js",
-      "source_file": "backend/controllers/statusController.js",
-      "source_location": "L1"
-    },
-    {
       "id": "backend_helpers_generatetoken",
       "label": "generateToken.js",
       "_origin": "ast",
@@ -7457,6 +7325,28 @@
       "norm_label": "router",
       "source_file": "backend/routes/authRoutes.js",
       "source_location": "L5"
+    },
+    {
+      "id": "ref_bcryptjs",
+      "label": "bcryptjs",
+      "_origin": "ast",
+      "community": 16,
+      "community_name": "authController.js",
+      "file_type": "concept",
+      "norm_label": "bcryptjs",
+      "source_file": "backend/package.json",
+      "source_location": "L18"
+    },
+    {
+      "id": "ref_jsonwebtoken",
+      "label": "jsonwebtoken",
+      "_origin": "ast",
+      "community": 16,
+      "community_name": "authController.js",
+      "file_type": "concept",
+      "norm_label": "jsonwebtoken",
+      "source_file": "backend/package.json",
+      "source_location": "L24"
     },
     {
       "id": "frontend_src_app_routes_admin_layout_admin_dashboard_application_windows_page",
@@ -7556,6 +7446,17 @@
       "norm_label": "dateformat",
       "source_file": "frontend/src/lib/applicationWindow.ts",
       "source_location": "L23"
+    },
+    {
+      "id": "ref_fortawesome_fontawesome_svg_core",
+      "label": "@fortawesome/fontawesome-svg-core",
+      "_origin": "ast",
+      "community": 17,
+      "community_name": "application-windows.tsx",
+      "file_type": "concept",
+      "norm_label": "@fortawesome/fontawesome-svg-core",
+      "source_file": "frontend/package.json",
+      "source_location": "L16"
     },
     {
       "id": "docs_superpowers_plans_2026_09_28_basvuru_donemleri",
@@ -8040,17 +7941,6 @@
       "file_type": "code",
       "norm_label": "announcementscontroller.js",
       "source_file": "backend/controllers/announcementsController.js",
-      "source_location": "L1"
-    },
-    {
-      "id": "backend_helpers_searchpattern",
-      "label": "searchPattern.js",
-      "_origin": "ast",
-      "community": 19,
-      "community_name": "announcementsController.js",
-      "file_type": "code",
-      "norm_label": "searchpattern.js",
-      "source_file": "backend/helpers/searchPattern.js",
       "source_location": "L1"
     },
     {
@@ -8651,39 +8541,6 @@
       "source_location": "L1"
     },
     {
-      "id": "backend_middlewares_authmiddleware_test",
-      "label": "authMiddleware.test.js",
-      "_origin": "ast",
-      "community": 23,
-      "community_name": "authMiddleware.js",
-      "file_type": "code",
-      "norm_label": "authmiddleware.test.js",
-      "source_file": "backend/middlewares/authMiddleware.test.js",
-      "source_location": "L1"
-    },
-    {
-      "id": "backend_middlewares_authmiddleware_test_changed",
-      "label": "changed",
-      "_origin": "ast",
-      "community": 23,
-      "community_name": "authMiddleware.js",
-      "file_type": "code",
-      "norm_label": "changed",
-      "source_file": "backend/middlewares/authMiddleware.test.js",
-      "source_location": "L5"
-    },
-    {
-      "id": "backend_middlewares_authmiddleware_test_sec",
-      "label": "sec",
-      "_origin": "ast",
-      "community": 23,
-      "community_name": "authMiddleware.js",
-      "file_type": "code",
-      "norm_label": "sec",
-      "source_file": "backend/middlewares/authMiddleware.test.js",
-      "source_location": "L6"
-    },
-    {
       "id": "backend_models_user",
       "label": "User.js",
       "_origin": "ast",
@@ -8717,6 +8574,39 @@
       "source_location": "L8"
     },
     {
+      "id": "backend_routes_mailroutes",
+      "label": "mailRoutes.js",
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "authMiddleware.js",
+      "file_type": "code",
+      "norm_label": "mailroutes.js",
+      "source_file": "backend/routes/mailRoutes.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "backend_routes_mailroutes_router",
+      "label": "router",
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "authMiddleware.js",
+      "file_type": "code",
+      "norm_label": "router",
+      "source_file": "backend/routes/mailRoutes.js",
+      "source_location": "L6"
+    },
+    {
+      "id": "backend_routes_mailroutes_upload",
+      "label": "upload",
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "authMiddleware.js",
+      "file_type": "code",
+      "norm_label": "upload",
+      "source_file": "backend/routes/mailRoutes.js",
+      "source_location": "L8"
+    },
+    {
       "id": "backend_routes_userroutes",
       "label": "userRoutes.js",
       "_origin": "ast",
@@ -8739,15 +8629,15 @@
       "source_location": "L5"
     },
     {
-      "id": "ref_bcryptjs",
-      "label": "bcryptjs",
+      "id": "ref_multer",
+      "label": "multer",
       "_origin": "ast",
       "community": 23,
       "community_name": "authMiddleware.js",
       "file_type": "concept",
-      "norm_label": "bcryptjs",
+      "norm_label": "multer",
       "source_file": "backend/package.json",
-      "source_location": "L18"
+      "source_location": "L26"
     },
     {
       "id": "claude_backend_backend",
@@ -8786,95 +8676,11 @@
       "source_location": "L336"
     },
     {
-      "id": "docs_superpowers_specs_2026_09_28_basvuru_donemleri_design_backend",
-      "label": "Backend",
-      "_origin": "ast",
-      "community": 23,
-      "community_name": "authMiddleware.js",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "backend",
-      "source_file": "docs/superpowers/specs/2026-09-28-basvuru-donemleri-design.md",
-      "source_location": "L42"
-    },
-    {
-      "id": "docs_superpowers_specs_2026_09_28_basvuru_donemleri_design_endpoint_ler",
-      "label": "Endpoint'ler",
-      "_origin": "ast",
-      "community": 23,
-      "community_name": "authMiddleware.js",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "endpoint'ler",
-      "source_file": "docs/superpowers/specs/2026-09-28-basvuru-donemleri-design.md",
-      "source_location": "L70"
-    },
-    {
-      "id": "docs_superpowers_specs_2026_09_28_basvuru_donemleri_design",
-      "label": "2026-09-28-basvuru-donemleri-design.md",
-      "_origin": "ast",
-      "community": 24,
-      "community_name": "Ba\u015fvuru D\u00f6nemleri \u2014 Tasar\u0131m",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "2026-09-28-basvuru-donemleri-design.md",
-      "source_file": "docs/superpowers/specs/2026-09-28-basvuru-donemleri-design.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_superpowers_specs_2026_09_28_basvuru_donemleri_design_ama\u00e7",
-      "label": "Ama\u00e7",
-      "_origin": "ast",
-      "community": 24,
-      "community_name": "Ba\u015fvuru D\u00f6nemleri \u2014 Tasar\u0131m",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "amac",
-      "source_file": "docs/superpowers/specs/2026-09-28-basvuru-donemleri-design.md",
-      "source_location": "L5"
-    },
-    {
-      "id": "docs_superpowers_specs_2026_09_28_basvuru_donemleri_design_ba\u015fvuru_d\u00f6nemleri_tasar\u0131m",
-      "label": "Ba\u015fvuru D\u00f6nemleri \u2014 Tasar\u0131m",
-      "_origin": "ast",
-      "community": 24,
-      "community_name": "Ba\u015fvuru D\u00f6nemleri \u2014 Tasar\u0131m",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "basvuru donemleri \u2014 tasar\u0131m",
-      "source_file": "docs/superpowers/specs/2026-09-28-basvuru-donemleri-design.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_superpowers_specs_2026_09_28_basvuru_donemleri_design_deploy",
-      "label": "Deploy",
-      "_origin": "ast",
-      "community": 24,
-      "community_name": "Ba\u015fvuru D\u00f6nemleri \u2014 Tasar\u0131m",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "deploy",
-      "source_file": "docs/superpowers/specs/2026-09-28-basvuru-donemleri-design.md",
-      "source_location": "L152"
-    },
-    {
-      "id": "docs_superpowers_specs_2026_09_28_basvuru_donemleri_design_dok\u00fcmantasyon",
-      "label": "Dok\u00fcmantasyon",
-      "_origin": "ast",
-      "community": 24,
-      "community_name": "Ba\u015fvuru D\u00f6nemleri \u2014 Tasar\u0131m",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "dokumantasyon",
-      "source_file": "docs/superpowers/specs/2026-09-28-basvuru-donemleri-design.md",
-      "source_location": "L178"
-    },
-    {
       "id": "docs_superpowers_specs_2026_09_28_basvuru_donemleri_design_g\u00fcvenlik",
       "label": "G\u00fcvenlik",
       "_origin": "ast",
-      "community": 24,
-      "community_name": "Ba\u015fvuru D\u00f6nemleri \u2014 Tasar\u0131m",
+      "community": 23,
+      "community_name": "authMiddleware.js",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "guvenlik",
@@ -8882,40 +8688,59 @@
       "source_location": "L145"
     },
     {
-      "id": "docs_superpowers_specs_2026_09_28_basvuru_donemleri_design_kapsam_d\u0131\u015f\u0131",
-      "label": "Kapsam d\u0131\u015f\u0131",
+      "id": "backend_helpers_rateskip",
+      "label": "rateSkip.js",
       "_origin": "ast",
       "community": 24,
-      "community_name": "Ba\u015fvuru D\u00f6nemleri \u2014 Tasar\u0131m",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "kapsam d\u0131s\u0131",
-      "source_file": "docs/superpowers/specs/2026-09-28-basvuru-donemleri-design.md",
-      "source_location": "L15"
+      "community_name": "rateSkip.js",
+      "file_type": "code",
+      "norm_label": "rateskip.js",
+      "source_file": "backend/helpers/rateSkip.js",
+      "source_location": "L1"
     },
     {
-      "id": "docs_superpowers_specs_2026_09_28_basvuru_donemleri_design_kurallar",
-      "label": "Kurallar",
+      "id": "backend_index_limiter",
+      "label": "limiter",
       "_origin": "ast",
       "community": 24,
-      "community_name": "Ba\u015fvuru D\u00f6nemleri \u2014 Tasar\u0131m",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "kurallar",
-      "source_file": "docs/superpowers/specs/2026-09-28-basvuru-donemleri-design.md",
-      "source_location": "L21"
+      "community_name": "rateSkip.js",
+      "file_type": "code",
+      "norm_label": "limiter",
+      "source_file": "backend/index.js",
+      "source_location": "L95"
     },
     {
-      "id": "docs_superpowers_specs_2026_09_28_basvuru_donemleri_design_test",
-      "label": "Test",
+      "id": "backend_middlewares_authmiddleware_test",
+      "label": "authMiddleware.test.js",
       "_origin": "ast",
       "community": 24,
-      "community_name": "Ba\u015fvuru D\u00f6nemleri \u2014 Tasar\u0131m",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "test",
-      "source_file": "docs/superpowers/specs/2026-09-28-basvuru-donemleri-design.md",
-      "source_location": "L158"
+      "community_name": "rateSkip.js",
+      "file_type": "code",
+      "norm_label": "authmiddleware.test.js",
+      "source_file": "backend/middlewares/authMiddleware.test.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "backend_middlewares_authmiddleware_test_changed",
+      "label": "changed",
+      "_origin": "ast",
+      "community": 24,
+      "community_name": "rateSkip.js",
+      "file_type": "code",
+      "norm_label": "changed",
+      "source_file": "backend/middlewares/authMiddleware.test.js",
+      "source_location": "L5"
+    },
+    {
+      "id": "backend_middlewares_authmiddleware_test_sec",
+      "label": "sec",
+      "_origin": "ast",
+      "community": 24,
+      "community_name": "rateSkip.js",
+      "file_type": "code",
+      "norm_label": "sec",
+      "source_file": "backend/middlewares/authMiddleware.test.js",
+      "source_location": "L6"
     },
     {
       "id": "frontend_src_hooks_useannouncements",
@@ -8948,7 +8773,7 @@
       "file_type": "code",
       "norm_label": "min_password_length",
       "source_file": "frontend/src/hooks/useAuth.ts",
-      "source_location": "L44"
+      "source_location": "L42"
     },
     {
       "id": "frontend_src_hooks_usecontact",
@@ -9150,6 +8975,17 @@
       "source_location": "L1"
     },
     {
+      "id": "frontend_src_hooks_use_mobile",
+      "label": "use-mobile.ts",
+      "_origin": "ast",
+      "community": 27,
+      "community_name": "cn",
+      "file_type": "code",
+      "norm_label": "use-mobile.ts",
+      "source_file": "frontend/src/hooks/use-mobile.ts",
+      "source_location": "L1"
+    },
+    {
       "id": "frontend_src_lib_utils",
       "label": "utils.ts",
       "_origin": "ast",
@@ -9172,6 +9008,17 @@
       "source_location": "L6"
     },
     {
+      "id": "ref_clsx",
+      "label": "clsx",
+      "_origin": "ast",
+      "community": 27,
+      "community_name": "cn",
+      "file_type": "concept",
+      "norm_label": "clsx",
+      "source_file": "frontend/package.json",
+      "source_location": "L30"
+    },
+    {
       "id": "ref_lucide_react",
       "label": "lucide-react",
       "_origin": "ast",
@@ -9192,6 +9039,17 @@
       "norm_label": "@radix-ui/react-dropdown-menu",
       "source_file": "frontend/package.json",
       "source_location": "L24"
+    },
+    {
+      "id": "ref_tailwind_merge",
+      "label": "tailwind-merge",
+      "_origin": "ast",
+      "community": 27,
+      "community_name": "cn",
+      "file_type": "concept",
+      "norm_label": "tailwind-merge",
+      "source_file": "frontend/package.json",
+      "source_location": "L38"
     },
     {
       "id": "frontend_src_app_page",
@@ -9807,6 +9665,17 @@
       "source_location": "L5"
     },
     {
+      "id": "backend_helpers_searchpattern",
+      "label": "searchPattern.js",
+      "_origin": "ast",
+      "community": 31,
+      "community_name": "submissionsController.js",
+      "file_type": "code",
+      "norm_label": "searchpattern.js",
+      "source_file": "backend/helpers/searchPattern.js",
+      "source_location": "L1"
+    },
+    {
       "id": "backend_models_applicationwindow",
       "label": "ApplicationWindow.js",
       "_origin": "ast",
@@ -9875,6 +9744,18 @@
       "source_location": "L129"
     },
     {
+      "id": "docs_superpowers_specs_2026_09_28_basvuru_donemleri_design",
+      "label": "2026-09-28-basvuru-donemleri-design.md",
+      "_origin": "ast",
+      "community": 31,
+      "community_name": "submissionsController.js",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "2026-09-28-basvuru-donemleri-design.md",
+      "source_file": "docs/superpowers/specs/2026-09-28-basvuru-donemleri-design.md",
+      "source_location": "L1"
+    },
+    {
       "id": "docs_superpowers_specs_2026_09_28_basvuru_donemleri_design_admin_paneli",
       "label": "Admin paneli",
       "_origin": "ast",
@@ -9885,6 +9766,42 @@
       "norm_label": "admin paneli",
       "source_file": "docs/superpowers/specs/2026-09-28-basvuru-donemleri-design.md",
       "source_location": "L132"
+    },
+    {
+      "id": "docs_superpowers_specs_2026_09_28_basvuru_donemleri_design_ama\u00e7",
+      "label": "Ama\u00e7",
+      "_origin": "ast",
+      "community": 31,
+      "community_name": "submissionsController.js",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "amac",
+      "source_file": "docs/superpowers/specs/2026-09-28-basvuru-donemleri-design.md",
+      "source_location": "L5"
+    },
+    {
+      "id": "docs_superpowers_specs_2026_09_28_basvuru_donemleri_design_backend",
+      "label": "Backend",
+      "_origin": "ast",
+      "community": 31,
+      "community_name": "submissionsController.js",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "backend",
+      "source_file": "docs/superpowers/specs/2026-09-28-basvuru-donemleri-design.md",
+      "source_location": "L42"
+    },
+    {
+      "id": "docs_superpowers_specs_2026_09_28_basvuru_donemleri_design_ba\u015fvuru_d\u00f6nemleri_tasar\u0131m",
+      "label": "Ba\u015fvuru D\u00f6nemleri \u2014 Tasar\u0131m",
+      "_origin": "ast",
+      "community": 31,
+      "community_name": "submissionsController.js",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "basvuru donemleri \u2014 tasar\u0131m",
+      "source_file": "docs/superpowers/specs/2026-09-28-basvuru-donemleri-design.md",
+      "source_location": "L1"
     },
     {
       "id": "docs_superpowers_specs_2026_09_28_basvuru_donemleri_design_ba\u015fvuru_sayfalar\u0131",
@@ -9911,6 +9828,42 @@
       "source_location": "L91"
     },
     {
+      "id": "docs_superpowers_specs_2026_09_28_basvuru_donemleri_design_deploy",
+      "label": "Deploy",
+      "_origin": "ast",
+      "community": 31,
+      "community_name": "submissionsController.js",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "deploy",
+      "source_file": "docs/superpowers/specs/2026-09-28-basvuru-donemleri-design.md",
+      "source_location": "L152"
+    },
+    {
+      "id": "docs_superpowers_specs_2026_09_28_basvuru_donemleri_design_dok\u00fcmantasyon",
+      "label": "Dok\u00fcmantasyon",
+      "_origin": "ast",
+      "community": 31,
+      "community_name": "submissionsController.js",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "dokumantasyon",
+      "source_file": "docs/superpowers/specs/2026-09-28-basvuru-donemleri-design.md",
+      "source_location": "L178"
+    },
+    {
+      "id": "docs_superpowers_specs_2026_09_28_basvuru_donemleri_design_endpoint_ler",
+      "label": "Endpoint'ler",
+      "_origin": "ast",
+      "community": 31,
+      "community_name": "submissionsController.js",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "endpoint'ler",
+      "source_file": "docs/superpowers/specs/2026-09-28-basvuru-donemleri-design.md",
+      "source_location": "L70"
+    },
+    {
       "id": "docs_superpowers_specs_2026_09_28_basvuru_donemleri_design_frontend",
       "label": "Frontend",
       "_origin": "ast",
@@ -9923,6 +9876,30 @@
       "source_location": "L99"
     },
     {
+      "id": "docs_superpowers_specs_2026_09_28_basvuru_donemleri_design_kapsam_d\u0131\u015f\u0131",
+      "label": "Kapsam d\u0131\u015f\u0131",
+      "_origin": "ast",
+      "community": 31,
+      "community_name": "submissionsController.js",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "kapsam d\u0131s\u0131",
+      "source_file": "docs/superpowers/specs/2026-09-28-basvuru-donemleri-design.md",
+      "source_location": "L15"
+    },
+    {
+      "id": "docs_superpowers_specs_2026_09_28_basvuru_donemleri_design_kurallar",
+      "label": "Kurallar",
+      "_origin": "ast",
+      "community": 31,
+      "community_name": "submissionsController.js",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "kurallar",
+      "source_file": "docs/superpowers/specs/2026-09-28-basvuru-donemleri-design.md",
+      "source_location": "L21"
+    },
+    {
       "id": "docs_superpowers_specs_2026_09_28_basvuru_donemleri_design_mant\u0131k",
       "label": "Mant\u0131k",
       "_origin": "ast",
@@ -9933,6 +9910,18 @@
       "norm_label": "mant\u0131k",
       "source_file": "docs/superpowers/specs/2026-09-28-basvuru-donemleri-design.md",
       "source_location": "L58"
+    },
+    {
+      "id": "docs_superpowers_specs_2026_09_28_basvuru_donemleri_design_test",
+      "label": "Test",
+      "_origin": "ast",
+      "community": 31,
+      "community_name": "submissionsController.js",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "test",
+      "source_file": "docs/superpowers/specs/2026-09-28-basvuru-donemleri-design.md",
+      "source_location": "L158"
     },
     {
       "id": "docs_superpowers_specs_2026_09_28_basvuru_donemleri_design_veri_katman\u0131",
@@ -10109,48 +10098,37 @@
       "source_location": "L32"
     },
     {
-      "id": "backend_helpers_clientip",
-      "label": "clientIp.js",
+      "id": "backend_controllers_contactcontroller",
+      "label": "contactController.js",
       "_origin": "ast",
       "community": 35,
-      "community_name": "clientIp.js",
+      "community_name": "contactRoutes.js",
       "file_type": "code",
-      "norm_label": "clientip.js",
-      "source_file": "backend/helpers/clientIp.js",
+      "norm_label": "contactcontroller.js",
+      "source_file": "backend/controllers/contactController.js",
       "source_location": "L1"
     },
     {
-      "id": "backend_helpers_clientip_cloudflare_ranges",
-      "label": "CLOUDFLARE_RANGES",
+      "id": "backend_routes_contactroutes",
+      "label": "contactRoutes.js",
       "_origin": "ast",
       "community": 35,
-      "community_name": "clientIp.js",
+      "community_name": "contactRoutes.js",
       "file_type": "code",
-      "norm_label": "cloudflare_ranges",
-      "source_file": "backend/helpers/clientIp.js",
-      "source_location": "L12"
+      "norm_label": "contactroutes.js",
+      "source_file": "backend/routes/contactRoutes.js",
+      "source_location": "L1"
     },
     {
-      "id": "backend_helpers_clientip_local_ranges",
-      "label": "LOCAL_RANGES",
+      "id": "backend_routes_contactroutes_router",
+      "label": "router",
       "_origin": "ast",
       "community": 35,
-      "community_name": "clientIp.js",
+      "community_name": "contactRoutes.js",
       "file_type": "code",
-      "norm_label": "local_ranges",
-      "source_file": "backend/helpers/clientIp.js",
-      "source_location": "L22"
-    },
-    {
-      "id": "backend_helpers_clientip_trustedhops",
-      "label": "trustedHops",
-      "_origin": "ast",
-      "community": 35,
-      "community_name": "clientIp.js",
-      "file_type": "code",
-      "norm_label": "trustedhops",
-      "source_file": "backend/helpers/clientIp.js",
-      "source_location": "L24"
+      "norm_label": "router",
+      "source_file": "backend/routes/contactRoutes.js",
+      "source_location": "L5"
     },
     {
       "id": "frontend_package_scripts",
@@ -10327,28 +10305,6 @@
       "norm_label": "teamdata.ts",
       "source_file": "frontend/src/lib/teamData.ts",
       "source_location": "L1"
-    },
-    {
-      "id": "frontend_package_overrides",
-      "label": "overrides",
-      "_origin": "ast",
-      "community": 40,
-      "community_name": "overrides",
-      "file_type": "code",
-      "norm_label": "overrides",
-      "source_file": "frontend/package.json",
-      "source_location": "L52"
-    },
-    {
-      "id": "frontend_package_overrides_postcss",
-      "label": "postcss",
-      "_origin": "ast",
-      "community": 40,
-      "community_name": "overrides",
-      "file_type": "code",
-      "norm_label": "postcss",
-      "source_file": "frontend/package.json",
-      "source_location": "L53"
     },
     {
       "id": "docs_superpowers_plans_2026_10_01_piksel_havasi_ve_video",
@@ -10668,44 +10624,66 @@
       "source_location": "L84"
     },
     {
-      "id": "frontend_tailwind_config",
-      "label": "tailwind.config.ts",
-      "_origin": "ast",
-      "community": 48,
-      "community_name": "tailwindcss",
-      "file_type": "code",
-      "norm_label": "tailwind.config.ts",
-      "source_file": "frontend/tailwind.config.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "ref_tailwindcss",
-      "label": "tailwindcss",
-      "_origin": "ast",
-      "community": 48,
-      "community_name": "tailwindcss",
-      "file_type": "concept",
-      "norm_label": "tailwindcss",
-      "source_file": "frontend/package.json",
-      "source_location": "L48"
-    },
-    {
-      "id": "backend_controllers_contactcontroller",
-      "label": "contactController.js",
+      "id": "backend_config_dbconnection",
+      "label": "dbConnection.js",
       "_origin": "ast",
       "community": 5,
-      "community_name": "mongoose",
+      "community_name": "logger.js",
       "file_type": "code",
-      "norm_label": "contactcontroller.js",
-      "source_file": "backend/controllers/contactController.js",
+      "norm_label": "dbconnection.js",
+      "source_file": "backend/config/dbConnection.js",
       "source_location": "L1"
+    },
+    {
+      "id": "backend_controllers_healthcontroller",
+      "label": "healthController.js",
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "logger.js",
+      "file_type": "code",
+      "norm_label": "healthcontroller.js",
+      "source_file": "backend/controllers/healthController.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "backend_controllers_statuscontroller",
+      "label": "statusController.js",
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "logger.js",
+      "file_type": "code",
+      "norm_label": "statuscontroller.js",
+      "source_file": "backend/controllers/statusController.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "backend_helpers_logger",
+      "label": "logger.js",
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "logger.js",
+      "file_type": "code",
+      "norm_label": "logger.js",
+      "source_file": "backend/helpers/logger.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "backend_helpers_logger_logger",
+      "label": "logger",
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "logger.js",
+      "file_type": "code",
+      "norm_label": "logger",
+      "source_file": "backend/helpers/logger.js",
+      "source_location": "L16"
     },
     {
       "id": "backend_models_announcement",
       "label": "Announcement.js",
       "_origin": "ast",
       "community": 5,
-      "community_name": "mongoose",
+      "community_name": "logger.js",
       "file_type": "code",
       "norm_label": "announcement.js",
       "source_file": "backend/models/Announcement.js",
@@ -10716,7 +10694,7 @@
       "label": "announcementSchema",
       "_origin": "ast",
       "community": 5,
-      "community_name": "mongoose",
+      "community_name": "logger.js",
       "file_type": "code",
       "norm_label": "announcementschema",
       "source_file": "backend/models/Announcement.js",
@@ -10727,7 +10705,7 @@
       "label": "Contact.js",
       "_origin": "ast",
       "community": 5,
-      "community_name": "mongoose",
+      "community_name": "logger.js",
       "file_type": "code",
       "norm_label": "contact.js",
       "source_file": "backend/models/Contact.js",
@@ -10738,7 +10716,7 @@
       "label": "contactSchema",
       "_origin": "ast",
       "community": 5,
-      "community_name": "mongoose",
+      "community_name": "logger.js",
       "file_type": "code",
       "norm_label": "contactschema",
       "source_file": "backend/models/Contact.js",
@@ -10749,7 +10727,7 @@
       "label": "Submission.js",
       "_origin": "ast",
       "community": 5,
-      "community_name": "mongoose",
+      "community_name": "logger.js",
       "file_type": "code",
       "norm_label": "submission.js",
       "source_file": "backend/models/Submission.js",
@@ -10760,44 +10738,55 @@
       "label": "submissionSchema",
       "_origin": "ast",
       "community": 5,
-      "community_name": "mongoose",
+      "community_name": "logger.js",
       "file_type": "code",
       "norm_label": "submissionschema",
       "source_file": "backend/models/Submission.js",
       "source_location": "L4"
     },
     {
-      "id": "backend_routes_contactroutes",
-      "label": "contactRoutes.js",
+      "id": "backend_routes_healthroutes",
+      "label": "healthRoutes.js",
       "_origin": "ast",
       "community": 5,
-      "community_name": "mongoose",
+      "community_name": "logger.js",
       "file_type": "code",
-      "norm_label": "contactroutes.js",
-      "source_file": "backend/routes/contactRoutes.js",
+      "norm_label": "healthroutes.js",
+      "source_file": "backend/routes/healthRoutes.js",
       "source_location": "L1"
     },
     {
-      "id": "backend_routes_contactroutes_router",
+      "id": "backend_routes_healthroutes_router",
       "label": "router",
       "_origin": "ast",
       "community": 5,
-      "community_name": "mongoose",
+      "community_name": "logger.js",
       "file_type": "code",
       "norm_label": "router",
-      "source_file": "backend/routes/contactRoutes.js",
-      "source_location": "L5"
+      "source_file": "backend/routes/healthRoutes.js",
+      "source_location": "L4"
     },
     {
       "id": "ref_mongoose",
       "label": "mongoose",
       "_origin": "ast",
       "community": 5,
-      "community_name": "mongoose",
+      "community_name": "logger.js",
       "file_type": "concept",
       "norm_label": "mongoose",
       "source_file": "backend/package.json",
       "source_location": "L25"
+    },
+    {
+      "id": "backend_helpers_logger_rationale_28",
+      "label": "TODO: Telegram ile loglama yap\u0131lacak",
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "logger.js",
+      "file_type": "rationale",
+      "norm_label": "todo: telegram ile loglama yap\u0131lacak",
+      "source_file": "backend/helpers/logger.js",
+      "source_location": "L28"
     },
     {
       "id": "frontend_package",
@@ -10822,6 +10811,28 @@
       "source_location": "L2"
     },
     {
+      "id": "frontend_package_overrides",
+      "label": "overrides",
+      "_origin": "ast",
+      "community": 50,
+      "community_name": "frontend/package.json",
+      "file_type": "code",
+      "norm_label": "overrides",
+      "source_file": "frontend/package.json",
+      "source_location": "L52"
+    },
+    {
+      "id": "frontend_package_overrides_postcss",
+      "label": "postcss",
+      "_origin": "ast",
+      "community": 50,
+      "community_name": "frontend/package.json",
+      "file_type": "code",
+      "norm_label": "postcss",
+      "source_file": "frontend/package.json",
+      "source_location": "L53"
+    },
+    {
       "id": "frontend_package_private",
       "label": "private",
       "_origin": "ast",
@@ -10844,6 +10855,17 @@
       "source_location": "L3"
     },
     {
+      "id": "frontend_tailwind_config",
+      "label": "tailwind.config.ts",
+      "_origin": "ast",
+      "community": 50,
+      "community_name": "frontend/package.json",
+      "file_type": "code",
+      "norm_label": "tailwind.config.ts",
+      "source_file": "frontend/tailwind.config.ts",
+      "source_location": "L1"
+    },
+    {
       "id": "ref_class_variance_authority",
       "label": "class-variance-authority",
       "_origin": "ast",
@@ -10853,17 +10875,6 @@
       "norm_label": "class-variance-authority",
       "source_file": "frontend/package.json",
       "source_location": "L29"
-    },
-    {
-      "id": "ref_clsx",
-      "label": "clsx",
-      "_origin": "ast",
-      "community": 50,
-      "community_name": "frontend/package.json",
-      "file_type": "concept",
-      "norm_label": "clsx",
-      "source_file": "frontend/package.json",
-      "source_location": "L30"
     },
     {
       "id": "ref_date_fns",
@@ -10886,17 +10897,6 @@
       "norm_label": "eslint",
       "source_file": "frontend/package.json",
       "source_location": "L46"
-    },
-    {
-      "id": "ref_fortawesome_fontawesome_svg_core",
-      "label": "@fortawesome/fontawesome-svg-core",
-      "_origin": "ast",
-      "community": 50,
-      "community_name": "frontend/package.json",
-      "file_type": "concept",
-      "norm_label": "@fortawesome/fontawesome-svg-core",
-      "source_file": "frontend/package.json",
-      "source_location": "L16"
     },
     {
       "id": "ref_fortawesome_free_regular_svg_icons",
@@ -10965,15 +10965,15 @@
       "source_location": "L36"
     },
     {
-      "id": "ref_tailwind_merge",
-      "label": "tailwind-merge",
+      "id": "ref_tailwindcss",
+      "label": "tailwindcss",
       "_origin": "ast",
       "community": 50,
       "community_name": "frontend/package.json",
       "file_type": "concept",
-      "norm_label": "tailwind-merge",
+      "norm_label": "tailwindcss",
       "source_file": "frontend/package.json",
-      "source_location": "L38"
+      "source_location": "L48"
     },
     {
       "id": "ref_tailwindcss_postcss",
@@ -11874,14 +11874,14 @@
       "type": "external"
     },
     {
-      "id": "ref_node_assert",
-      "label": "ref_node_assert",
+      "id": "ref_node_net",
+      "label": "ref_node_net",
       "_origin": "semantic",
-      "community": 1,
-      "community_name": "mailQueueController.js",
+      "community": 13,
+      "community_name": "index.js",
       "external": true,
       "file_type": "concept",
-      "norm_label": "ref_node_assert",
+      "norm_label": "ref_node_net",
       "source_file": "",
       "type": "external"
     },
@@ -11910,11 +11910,23 @@
       "type": "external"
     },
     {
+      "id": "ref_node_assert",
+      "label": "ref_node_assert",
+      "_origin": "semantic",
+      "community": 24,
+      "community_name": "rateSkip.js",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "ref_node_assert",
+      "source_file": "",
+      "type": "external"
+    },
+    {
       "id": "ref_node_test",
       "label": "ref_node_test",
       "_origin": "semantic",
-      "community": 23,
-      "community_name": "authMiddleware.js",
+      "community": 24,
+      "community_name": "rateSkip.js",
       "external": true,
       "file_type": "concept",
       "norm_label": "ref_node_test",
@@ -11954,18 +11966,6 @@
       "external": true,
       "file_type": "concept",
       "norm_label": "ref_node_url",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "ref_node_net",
-      "label": "ref_node_net",
-      "_origin": "semantic",
-      "community": 35,
-      "community_name": "clientIp.js",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "ref_node_net",
       "source_file": "",
       "type": "external"
     },
@@ -12080,18 +12080,6 @@
       "weight": 1.0
     },
     {
-      "source": "backend_controllers_authcontroller_changepassword",
-      "target": "backend_helpers_generatetoken_generatetoken",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "backend/controllers/authController.js",
-      "source_location": "L77",
-      "weight": 1.0
-    },
-    {
       "source": "backend_controllers_authcontroller_loginuser",
       "target": "backend_helpers_generatetoken_generatetoken",
       "relation": "calls",
@@ -12172,7 +12160,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "backend/controllers/mailQueueController.js",
-      "source_location": "L118",
+      "source_location": "L120",
       "weight": 1.0
     },
     {
@@ -12184,7 +12172,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "backend/controllers/mailQueueController.js",
-      "source_location": "L123",
+      "source_location": "L125",
       "weight": 1.0
     },
     {
@@ -12496,7 +12484,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "backend/helpers/rateSkip.js",
-      "source_location": "L10",
+      "source_location": "L11",
       "weight": 1.0
     },
     {
@@ -12508,7 +12496,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "backend/helpers/rateSkip.js",
-      "source_location": "L8",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_helpers_rateskip_rateskipauth",
+      "target": "backend_middlewares_authmiddleware_issuedbeforepasswordchange",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "backend/helpers/rateSkip.js",
+      "source_location": "L79",
       "weight": 1.0
     },
     {
@@ -12520,7 +12520,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "backend/index.js",
-      "source_location": "L56",
+      "source_location": "L66",
       "weight": 1.0
     },
     {
@@ -12532,7 +12532,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "backend/index.js",
-      "source_location": "L91",
+      "source_location": "L101",
       "weight": 1.0
     },
     {
@@ -12544,7 +12544,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "backend/middlewares/authMiddleware.js",
-      "source_location": "L111",
+      "source_location": "L112",
       "weight": 1.0
     },
     {
@@ -12556,7 +12556,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "backend/middlewares/authMiddleware.js",
-      "source_location": "L95",
+      "source_location": "L96",
       "weight": 1.0
     },
     {
@@ -15664,7 +15664,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "frontend/src/components/pages/admin/sponsor-mail.tsx",
-      "source_location": "L165",
+      "source_location": "L166",
       "weight": 1.0
     },
     {
@@ -15676,7 +15676,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "frontend/src/components/pages/admin/sponsor-mail.tsx",
-      "source_location": "L232",
+      "source_location": "L233",
       "weight": 1.0
     },
     {
@@ -15688,7 +15688,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "frontend/src/components/pages/admin/sponsor-mail.tsx",
-      "source_location": "L249",
+      "source_location": "L250",
       "weight": 1.0
     },
     {
@@ -15700,7 +15700,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "frontend/src/components/pages/admin/sponsor-mail.tsx",
-      "source_location": "L263",
+      "source_location": "L264",
       "weight": 1.0
     },
     {
@@ -15712,7 +15712,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "frontend/src/components/pages/admin/sponsor-mail.tsx",
-      "source_location": "L264",
+      "source_location": "L265",
       "weight": 1.0
     },
     {
@@ -15724,7 +15724,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "frontend/src/components/pages/admin/sponsor-mail.tsx",
-      "source_location": "L266",
+      "source_location": "L267",
       "weight": 1.0
     },
     {
@@ -15736,7 +15736,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "frontend/src/components/pages/admin/sponsor-mail.tsx",
-      "source_location": "L303",
+      "source_location": "L304",
       "weight": 1.0
     },
     {
@@ -15748,7 +15748,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "frontend/src/components/pages/admin/sponsor-mail.tsx",
-      "source_location": "L304",
+      "source_location": "L305",
       "weight": 1.0
     },
     {
@@ -15760,7 +15760,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "frontend/src/components/pages/admin/sponsor-mail.tsx",
-      "source_location": "L440",
+      "source_location": "L441",
       "weight": 1.0
     },
     {
@@ -15772,7 +15772,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "frontend/src/components/pages/admin/sponsor-mail.tsx",
-      "source_location": "L481",
+      "source_location": "L482",
       "weight": 1.0
     },
     {
@@ -15832,7 +15832,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "frontend/src/components/pages/admin/sponsor-mail.tsx",
-      "source_location": "L689",
+      "source_location": "L690",
       "weight": 1.0
     },
     {
@@ -15844,7 +15844,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "frontend/src/components/pages/admin/sponsor-mail.tsx",
-      "source_location": "L700",
+      "source_location": "L701",
       "weight": 1.0
     },
     {
@@ -15856,7 +15856,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "frontend/src/components/pages/admin/sponsor-mail.tsx",
-      "source_location": "L732",
+      "source_location": "L733",
       "weight": 1.0
     },
     {
@@ -15868,7 +15868,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "frontend/src/components/pages/admin/sponsor-mail.tsx",
-      "source_location": "L669",
+      "source_location": "L670",
       "weight": 1.0
     },
     {
@@ -15880,7 +15880,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "frontend/src/components/pages/admin/sponsor-mail.tsx",
-      "source_location": "L547",
+      "source_location": "L548",
       "weight": 1.0
     },
     {
@@ -15892,7 +15892,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "frontend/src/components/pages/admin/sponsor-mail.tsx",
-      "source_location": "L548",
+      "source_location": "L549",
       "weight": 1.0
     },
     {
@@ -15904,7 +15904,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "frontend/src/components/pages/admin/sponsor-mail.tsx",
-      "source_location": "L586",
+      "source_location": "L587",
       "weight": 1.0
     },
     {
@@ -15916,7 +15916,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "frontend/src/components/pages/admin/sponsor-mail.tsx",
-      "source_location": "L591",
+      "source_location": "L592",
       "weight": 1.0
     },
     {
@@ -18412,7 +18412,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "frontend/src/hooks/useAuth.ts",
-      "source_location": "L112",
+      "source_location": "L107",
       "weight": 1.0
     },
     {
@@ -18424,7 +18424,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "frontend/src/hooks/useAuth.ts",
-      "source_location": "L74",
+      "source_location": "L72",
       "weight": 1.0
     },
     {
@@ -19229,6 +19229,18 @@
       "context": "import",
       "source_file": "backend/helpers/rateSkip.js",
       "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_helpers_rateskip",
+      "target": "backend_middlewares_authmiddleware_issuedbeforepasswordchange",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "backend/helpers/rateSkip.js",
+      "source_location": "L4",
       "weight": 1.0
     },
     {
@@ -25652,6 +25664,18 @@
       "weight": 1.0
     },
     {
+      "source": "backend_helpers_rateskip",
+      "target": "backend_middlewares_authmiddleware",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "backend/helpers/rateSkip.js",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
       "source": "backend_index",
       "target": "ref_express",
       "relation": "imports_from",
@@ -31732,7 +31756,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/controllers/mailQueueController.js",
-      "source_location": "L134",
+      "source_location": "L136",
       "weight": 1.0
     },
     {
@@ -31754,7 +31778,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/controllers/mailQueueController.js",
-      "source_location": "L157",
+      "source_location": "L159",
       "weight": 1.0
     },
     {
@@ -31765,7 +31789,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/controllers/mailQueueController.js",
-      "source_location": "L194",
+      "source_location": "L196",
       "weight": 1.0
     },
     {
@@ -32458,18 +32482,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/helpers/rateSkip.js",
-      "source_location": "L18",
-      "weight": 1.0
-    },
-    {
-      "source": "backend_helpers_rateskip",
-      "target": "backend_helpers_rateskip_rateskip",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "backend/helpers/rateSkip.js",
-      "source_location": "L6",
+      "source_location": "L19",
       "weight": 1.0
     },
     {
@@ -32480,7 +32493,18 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/helpers/rateSkip.js",
-      "source_location": "L60",
+      "source_location": "L61",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_helpers_rateskip",
+      "target": "backend_helpers_rateskip_rateskip",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/helpers/rateSkip.js",
+      "source_location": "L7",
       "weight": 1.0
     },
     {
@@ -32496,13 +32520,24 @@
     },
     {
       "source": "backend_index",
+      "target": "backend_index_loginlimiter",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/index.js",
+      "source_location": "L109",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_index",
       "target": "backend_index_maillimiter",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/index.js",
-      "source_location": "L113",
+      "source_location": "L123",
       "weight": 1.0
     },
     {
@@ -32535,7 +32570,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/index.js",
-      "source_location": "L63",
+      "source_location": "L73",
       "weight": 1.0
     },
     {
@@ -32546,7 +32581,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/index.js",
-      "source_location": "L70",
+      "source_location": "L80",
       "weight": 1.0
     },
     {
@@ -32557,18 +32592,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/index.js",
-      "source_location": "L85",
-      "weight": 1.0
-    },
-    {
-      "source": "backend_index",
-      "target": "backend_index_loginlimiter",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "backend/index.js",
-      "source_location": "L99",
+      "source_location": "L95",
       "weight": 1.0
     },
     {
@@ -32590,7 +32614,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/middlewares/authMiddleware.js",
-      "source_location": "L129",
+      "source_location": "L130",
       "weight": 1.0
     },
     {
@@ -32601,7 +32625,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/middlewares/authMiddleware.js",
-      "source_location": "L146",
+      "source_location": "L147",
       "weight": 1.0
     },
     {
@@ -32612,7 +32636,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/middlewares/authMiddleware.js",
-      "source_location": "L26",
+      "source_location": "L27",
       "weight": 1.0
     },
     {
@@ -32623,7 +32647,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/middlewares/authMiddleware.js",
-      "source_location": "L30",
+      "source_location": "L31",
       "weight": 1.0
     },
     {
@@ -32634,7 +32658,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/middlewares/authMiddleware.js",
-      "source_location": "L45",
+      "source_location": "L46",
       "weight": 1.0
     },
     {
@@ -32645,7 +32669,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/middlewares/authMiddleware.js",
-      "source_location": "L65",
+      "source_location": "L66",
       "weight": 1.0
     },
     {
@@ -32656,7 +32680,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/middlewares/authMiddleware.js",
-      "source_location": "L87",
+      "source_location": "L88",
       "weight": 1.0
     },
     {
@@ -37111,7 +37135,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/src/components/pages/admin/sponsor-mail.tsx",
-      "source_location": "L498",
+      "source_location": "L499",
       "weight": 1.0
     },
     {
@@ -37122,7 +37146,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/src/components/pages/admin/sponsor-mail.tsx",
-      "source_location": "L620",
+      "source_location": "L621",
       "weight": 1.0
     },
     {
@@ -37133,7 +37157,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/src/components/pages/admin/sponsor-mail.tsx",
-      "source_location": "L680",
+      "source_location": "L681",
       "weight": 1.0
     },
     {
@@ -38662,7 +38686,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/src/hooks/useAuth.ts",
-      "source_location": "L44",
+      "source_location": "L42",
       "weight": 1.0
     },
     {
@@ -38673,7 +38697,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/src/hooks/useAuth.ts",
-      "source_location": "L46",
+      "source_location": "L44",
       "weight": 1.0
     },
     {
@@ -38695,7 +38719,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/src/hooks/useAuth.ts",
-      "source_location": "L55",
+      "source_location": "L53",
       "weight": 1.0
     },
     {
@@ -38706,7 +38730,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/src/hooks/useAuth.ts",
-      "source_location": "L68",
+      "source_location": "L66",
       "weight": 1.0
     },
     {
@@ -40303,7 +40327,7 @@
       "confidence_score": 0.85,
       "context": "argument",
       "source_file": "backend/controllers/mailQueueController.js",
-      "source_location": "L146",
+      "source_location": "L148",
       "weight": 1.0
     },
     {
@@ -40327,7 +40351,7 @@
       "confidence_score": 0.85,
       "context": "argument",
       "source_file": "backend/index.js",
-      "source_location": "L82",
+      "source_location": "L92",
       "weight": 1.0
     },
     {
@@ -40975,7 +40999,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "backend/index.js",
-      "source_location": "L68",
+      "source_location": "L78",
       "weight": 1.0
     },
     {
@@ -41844,5 +41868,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "ccb8ccd1ea7511682fb7ce120e7d79db7887a9c4"
+  "built_at_commit": "913b5634e7b2c6b2b2f92c37f0345159bd76a6b8"
 }

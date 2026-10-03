@@ -1,17 +1,17 @@
 # Graph Report - kou-seng-website  (2026-10-03)
 
 ## Corpus Check
-- 174 files · ~102,278 words
+- 174 files · ~102,374 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 8 file(s) not represented in the graph (top: (none) 4, .example 2, .ico 1)
 
 ## Summary
-- 1026 nodes · 2552 edges · 47 communities (43 shown, 4 thin omitted)
+- 1026 nodes · 2554 edges · 45 communities (43 shown, 2 thin omitted)
 - Extraction: 95% EXTRACTED · 5% INFERRED · 0% AMBIGUOUS · INFERRED: 130 edges (avg confidence: 0.91)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `ccb8ccd1`
+- Built from commit: `913b5634`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -21,7 +21,7 @@
 - devDependencies
 - purge-submissions.js
 - teamData.ts
-- mongoose
+- logger.js
 - mailQueueProcessor.js
 - Frontend - KOU SENG Website
 - dependencies
@@ -40,7 +40,7 @@
 - next
 - dependencies
 - authMiddleware.js
-- Başvuru Dönemleri — Tasarım
+- rateSkip.js
 - useAuth.ts
 - publicationsController.js
 - cn
@@ -51,17 +51,15 @@
 - Backend API Endpoints
 - windows-smoke.js
 - Footer.tsx
-- clientIp.js
+- contactRoutes.js
 - scripts
 - api.ts
 - ApplyLayout.tsx
 - (admin-layout)/layout.tsx
-- overrides
 - Uygulama Tasarım Dili — Tasarım
 - postcss.config.mjs
 - eslint.config.mjs
 - homeData.ts
-- tailwindcss
 - frontend/package.json
 
 ## God Nodes (most connected - your core abstractions)
@@ -79,27 +77,27 @@
 ## Surprising Connections (you probably didn't know these)
 - `Başvuru formuna alan ekleme` --references--> `createGeneralSubmission()`  [INFERRED]
   CLAUDE.md → backend/controllers/submissionsController.js
-- `Güvenlik` --references--> `adminOnly()`  [INFERRED]
-  docs/superpowers/specs/2026-09-28-basvuru-donemleri-design.md → backend/middlewares/authMiddleware.js
 - `Global Constraints` --references--> `PixelMark()`  [INFERRED]
   docs/superpowers/plans/2026-10-01-piksel-havasi-ve-video.md → frontend/src/components/layout/Pixel.tsx
 - `Doğrulama` --references--> `PixelMark()`  [INFERRED]
   docs/superpowers/specs/2026-10-01-uygulama-tasarim-dili-design.md → frontend/src/components/layout/Pixel.tsx
 - `Erişilebilirlik` --references--> `PixelMark()`  [INFERRED]
   docs/superpowers/specs/2026-10-01-uygulama-tasarim-dili-design.md → frontend/src/components/layout/Pixel.tsx
+- `Mobil uygulama bölümü ve tanıtım videosu` --references--> `PixelMark()`  [INFERRED]
+  docs/superpowers/specs/2026-10-01-uygulama-tasarim-dili-design.md → frontend/src/components/layout/Pixel.tsx
 
 ## Import Cycles
 - None detected.
 
-## Communities (47 total, 4 thin omitted)
+## Communities (45 total, 2 thin omitted)
 
 ### Community 0 - "Button"
 Cohesion: 0.05
-Nodes (137): AdminManagementRoute(), AdminAnnouncementsRoute(), AdminContactRoute(), AdminDataRoute(), AdminGeneralMembershipRoute(), AdminDashboardRoute(), AdminSponsorMailRoute(), AdminTechnicalTeamRoute() (+129 more)
+Nodes (135): AdminManagementRoute(), AdminAnnouncementsRoute(), AdminContactRoute(), AdminDataRoute(), AdminGeneralMembershipRoute(), AdminDashboardRoute(), AdminSponsorMailRoute(), AdminTechnicalTeamRoute() (+127 more)
 
 ### Community 1 - "mailQueueController.js"
-Cohesion: 0.14
-Nodes (20): assetsDir, __dirname, sendSponsorMail(), cancelMailJob(), createMailJob(), deleteMailJob(), getMailJobs(), sanitizeJob() (+12 more)
+Cohesion: 0.16
+Nodes (19): assetsDir, __dirname, sendSponsorMail(), cancelMailJob(), createMailJob(), deleteMailJob(), getMailJobs(), sanitizeJob() (+11 more)
 
 ### Community 2 - "devDependencies"
 Cohesion: 0.20
@@ -113,13 +111,13 @@ Nodes (35): args, __dirname, dryRun, rollback, all, args, BACKEND_ROOT, category
 Cohesion: 0.21
 Nodes (10): TeamDetailRoute(), TeamDetailProps, Achievement, Competition, getTeamDetail(), getTeamSlugs(), LeaderMessage, Project (+2 more)
 
-### Community 5 - "mongoose"
-Cohesion: 0.19
-Nodes (9): createContactMessage(), deleteContactMessage(), getContactMessages(), updateContactIsRead(), announcementSchema, contactSchema, submissionSchema, router (+1 more)
+### Community 5 - "logger.js"
+Cohesion: 0.15
+Nodes (9): ConnectDB(), getHealthStatus(), getSystemStatus(), logger, announcementSchema, contactSchema, submissionSchema, router (+1 more)
 
 ### Community 6 - "mailQueueProcessor.js"
 Cohesion: 0.13
-Nodes (18): blockToHtml(), buildMailHtml(), escapeHtml(), parseInline(), getTransporter(), initTransporter(), attachmentSchema, MailJob (+10 more)
+Nodes (19): blockToHtml(), buildMailHtml(), escapeHtml(), parseInline(), getTransporter(), initTransporter(), attachmentSchema, MailJob (+11 more)
 
 ### Community 7 - "Frontend - KOU SENG Website"
 Cohesion: 0.07
@@ -142,12 +140,12 @@ Cohesion: 0.11
 Nodes (19): authHeaders(), EnqueueInput, MailQueueContext, MailQueueContextValue, MailQueueProvider(), QueueJob, QueueJobResult, QueueJobStatus (+11 more)
 
 ### Community 12 - "backend/package.json"
-Cohesion: 0.10
-Nodes (18): author, description, devDependencies, nodemon, keywords, license, main, name (+10 more)
+Cohesion: 0.12
+Nodes (15): author, description, devDependencies, nodemon, keywords, license, main, name (+7 more)
 
 ### Community 13 - "index.js"
-Cohesion: 0.12
-Nodes (17): ConnectDB(), getHealthStatus(), logger, rateSkip(), rateSkipAuth(), rateSkipIP(), app, corsOptions (+9 more)
+Cohesion: 0.13
+Nodes (14): clientIp(), CLOUDFLARE_RANGES, fromTrustedHop(), LOCAL_RANGES, trustedHops, app, corsOptions, formLimiter (+6 more)
 
 ### Community 14 - "components.json"
 Cohesion: 0.11
@@ -158,20 +156,20 @@ Cohesion: 0.11
 Nodes (18): compilerOptions, allowJs, esModuleInterop, incremental, isolatedModules, jsx, lib, module (+10 more)
 
 ### Community 16 - "authController.js"
-Cohesion: 0.31
-Nodes (7): changePassword(), DUMMY_HASH, getMe(), loginUser(), getSystemStatus(), generateToken(), router
+Cohesion: 0.27
+Nodes (8): changePassword(), DUMMY_HASH, getMe(), loginUser(), generateToken(), router, bcryptjs, jsonwebtoken
 
 ### Community 17 - "application-windows.tsx"
-Cohesion: 0.12
-Nodes (26): Başvuru Dönemleri — Uygulama Planı, Global Constraints, Review Focus, Task 1: Pencere kuralı (saf fonksiyonlar) ve birim testleri, Task 4: Frontend veri katmanı, Task 5: Başvuru sayfaları durumu backend'den okur, JSON temizliği, Task 6: Admin paneli "Başvuru Dönemleri" sayfası, AdminApplicationWindowsRoute() (+18 more)
+Cohesion: 0.11
+Nodes (28): Başvuru Dönemleri — Uygulama Planı, Global Constraints, Review Focus, Task 1: Pencere kuralı (saf fonksiyonlar) ve birim testleri, Task 4: Frontend veri katmanı, Task 5: Başvuru sayfaları durumu backend'den okur, JSON temizliği, Task 6: Admin paneli "Başvuru Dönemleri" sayfası, AdminApplicationWindowsRoute() (+20 more)
 
 ### Community 18 - "Projeye özel kurallar"
 Cohesion: 0.06
 Nodes (31): Backend ESM — `node --check` yalan söylüyor, Başvuru dönemleri, Başvuru formuna alan ekleme, Başvuruları silme (saklama süresi), Branch'ler, `check:content`, Commit, PR ve dokümanlarda yapay zekâ izi yok, Duyuru HTML'i ve CSP (+23 more)
 
 ### Community 19 - "announcementsController.js"
-Cohesion: 0.30
-Nodes (9): cleanContent(), createAnnouncement(), deleteAnnouncement(), getAnnouncement(), getAnnouncements(), updateAnnouncement(), getAllSubmissions(), toSearchPattern() (+1 more)
+Cohesion: 0.42
+Nodes (7): cleanContent(), createAnnouncement(), deleteAnnouncement(), getAnnouncement(), getAnnouncements(), updateAnnouncement(), router
 
 ### Community 20 - "KOU SENG Website"
 Cohesion: 0.14
@@ -186,12 +184,12 @@ Cohesion: 0.10
 Nodes (19): dependencies, bcryptjs, cors, dotenv, express, express-rate-limit, json2csv, jsonwebtoken (+11 more)
 
 ### Community 23 - "authMiddleware.js"
-Cohesion: 0.11
-Nodes (23): createUser(), deleteUser(), getAllUsers(), updateUser(), adminOnly(), firstUserCreation(), issuedBeforePasswordChange(), matchesSystemKey() (+15 more)
+Cohesion: 0.12
+Nodes (21): createUser(), deleteUser(), getAllUsers(), updateUser(), adminOnly(), firstUserCreation(), matchesSystemKey(), protect() (+13 more)
 
-### Community 24 - "Başvuru Dönemleri — Tasarım"
-Cohesion: 0.22
-Nodes (8): Amaç, Başvuru Dönemleri — Tasarım, Deploy, Dokümantasyon, Güvenlik, Kapsam dışı, Kurallar, Test
+### Community 24 - "rateSkip.js"
+Cohesion: 0.24
+Nodes (7): rateSkip(), rateSkipAuth(), rateSkipIP(), limiter, issuedBeforePasswordChange(), changed, sec
 
 ### Community 25 - "useAuth.ts"
 Cohesion: 0.05
@@ -202,8 +200,8 @@ Cohesion: 0.36
 Nodes (8): customFields, extractCoverImage(), extractExcerpt(), extractSourceName(), fetchAllRssFeeds(), formatDate(), getRssFeed(), rss-parser
 
 ### Community 27 - "cn"
-Cohesion: 0.07
-Nodes (61): AdminDashboardLayout(), DashboardLayoutProps, AdminSidebar(), NavItem, navItems, ThemeToggle(), DropdownMenu(), DropdownMenuCheckboxItem() (+53 more)
+Cohesion: 0.06
+Nodes (64): AdminDashboardLayout(), DashboardLayoutProps, AdminSidebar(), NavItem, navItems, ThemeToggle(), DropdownMenu(), DropdownMenuCheckboxItem() (+56 more)
 
 ### Community 28 - "MainLayout.tsx"
 Cohesion: 0.39
@@ -218,8 +216,8 @@ Cohesion: 0.12
 Nodes (13): BASE, body(), C, N, one(), RUN, SUBMIT, Global Constraints (+5 more)
 
 ### Community 31 - "submissionsController.js"
-Cohesion: 0.12
-Nodes (31): getWindow(), getWindows(), toDate(), updateWindow(), createGeneralSubmission(), createTechnicalSubmission(), csvString(), exportSubmissionsToCSV() (+23 more)
+Cohesion: 0.08
+Nodes (42): getWindow(), getWindows(), toDate(), updateWindow(), createGeneralSubmission(), createTechnicalSubmission(), csvString(), exportSubmissionsToCSV() (+34 more)
 
 ### Community 32 - "Backend API Endpoints"
 Cohesion: 0.25
@@ -233,9 +231,9 @@ Nodes (8): api(), applicant(), BASE, expectClosed(), expectStatus(), RUN, setWin
 Cohesion: 0.60
 Nodes (4): Footer(), FooterData, getFooterData(), iconMap
 
-### Community 35 - "clientIp.js"
-Cohesion: 0.29
-Nodes (6): clientIp(), CLOUDFLARE_RANGES, fromTrustedHop(), LOCAL_RANGES, trustedHops, keyGenerator()
+### Community 35 - "contactRoutes.js"
+Cohesion: 0.48
+Nodes (5): createContactMessage(), deleteContactMessage(), getContactMessages(), updateContactIsRead(), router
 
 ### Community 36 - "scripts"
 Cohesion: 0.22
@@ -263,12 +261,12 @@ Nodes (11): AnnouncementsData, AppData, ClubFeature, ClubIntroductionData, HeroB
 
 ### Community 50 - "frontend/package.json"
 Cohesion: 0.09
-Nodes (21): name, private, version, class-variance-authority, clsx, date-fns, eslint, @fortawesome/fontawesome-svg-core (+13 more)
+Nodes (21): name, overrides, postcss, private, version, class-variance-authority, date-fns, eslint (+13 more)
 
 ## Knowledge Gaps
 - **380 isolated node(s):** `DUMMY_HASH`, `__dirname`, `assetsDir`, `customFields`, `PURGE_SCOPES` (+375 more)
   These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 419 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **4 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **2 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
@@ -276,14 +274,14 @@ _Questions this graph is uniquely positioned to answer:_
 - **Why does `react` connect `Button` to `Footer.tsx`, `MailQueueContext.tsx`, `application-windows.tsx`, `frontend/package.json`, `next`, `useAuth.ts`, `cn`?**
   _High betweenness centrality (0.096) - this node is a cross-community bridge._
 - **Why does `next` connect `next` to `Button`, `Footer.tsx`, `purge-submissions.js`, `teamData.ts`, `ApplyLayout.tsx`, `aboutData.ts`, `MailQueueContext.tsx`, `application-windows.tsx`, `Projeye özel kurallar`, `frontend/package.json`, `cn`, `sitemap.ts`?**
-  _High betweenness centrality (0.077) - this node is a cross-community bridge._
-- **Why does `ApplicationWindow` connect `application-windows.tsx` to `Başvuru Dönemleri — Tasarım`, `Projeye özel kurallar`, `submissionsController.js`, `authMiddleware.js`?**
-  _High betweenness centrality (0.063) - this node is a cross-community bridge._
+  _High betweenness centrality (0.074) - this node is a cross-community bridge._
+- **Why does `ApplicationWindow` connect `application-windows.tsx` to `Projeye özel kurallar`, `submissionsController.js`, `authMiddleware.js`?**
+  _High betweenness centrality (0.066) - this node is a cross-community bridge._
 - **What connects `DUMMY_HASH`, `__dirname`, `assetsDir` to the rest of the system?**
   _380 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Button` be split into smaller, more focused modules?**
-  _Cohesion score 0.050313380484158475 - nodes in this community are weakly interconnected._
-- **Should `mailQueueController.js` be split into smaller, more focused modules?**
-  _Cohesion score 0.14285714285714285 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.0510216203373723 - nodes in this community are weakly interconnected._
 - **Should `purge-submissions.js` be split into smaller, more focused modules?**
   _Cohesion score 0.05757575757575758 - nodes in this community are weakly interconnected._
+- **Should `logger.js` be split into smaller, more focused modules?**
+  _Cohesion score 0.14619883040935672 - nodes in this community are weakly interconnected._

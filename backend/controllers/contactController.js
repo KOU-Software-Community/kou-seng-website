@@ -15,16 +15,25 @@ const createContactMessage = async (req, res) => {
       });
     }
 
-    await Contact.create({ name, email, subject, message });
+    // Şemadaki maxlength ile aynı; aşan değer ValidationError mesajıyla loga düşmesin
+    const limits = { name: 100, email: 254, subject: 100, message: 1000 };
+    if (!Object.entries({ name, email, subject, message }).every(([key, value]) => typeof value === 'string' && value.length <= limits[key])) {
+      return res.status(400).json({
+        success: false,
+        message: 'Gönderilen alanlardan biri geçersiz veya çok uzun.'
+      });
+    }
 
-    logger.debug(`Yeni bir iletişim mesajı alındı: ${name} (${email})`);
+    const contact = await Contact.create({ name, email, subject, message });
+
+    logger.debug(`Yeni bir iletişim mesajı alındı: ${contact._id}`);
     
     return res.status(201).json({
       success: true,
       message: 'İletişim mesajınız başarıyla gönderildi'
     });
   } catch (error) {
-    logger.error(`İletişim mesajı oluşturulamadı: ${error.message}`);
+    logger.error(`İletişim mesajı oluşturulamadı: ${error.name}`);
     return res.status(500).json({
       success: false,
       message: 'Sunucu hatası, lütfen daha sonra tekrar deneyiniz'

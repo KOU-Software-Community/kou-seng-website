@@ -77,7 +77,7 @@ export const createGeneralSubmission = async (req, res) => {
       grade
     });
 
-    logger.debug(`Yeni genel başvuru alındı: ${name} (${email})`);
+    logger.debug(`Yeni genel başvuru alındı: ${submission._id}`);
 
     return res.status(201).json({
       success: true,
@@ -85,7 +85,8 @@ export const createGeneralSubmission = async (req, res) => {
       data: { _id: submission._id }
     });
   } catch (error) {
-    logger.error(`Genel başvuru oluşturulamadı: ${error.message}`);
+    // ValidationError mesajı alan değerini alıntılıyor; kişisel veri loga düşmesin
+    logger.error(`Genel başvuru oluşturulamadı: ${error.name}`);
     return res.status(500).json({
       success: false,
       message: "Sunucu hatası, lütfen daha sonra tekrar deneyiniz."
@@ -183,7 +184,7 @@ export const createTechnicalSubmission = async (req, res) => {
       customFields
     });
 
-    logger.debug(`Yeni teknik başvuru alındı: ${name} (${email}) - Kategori: ${slug}`);
+    logger.debug(`Yeni teknik başvuru alındı: ${submission._id} - Kategori: ${slug}`);
 
     return res.status(201).json({
       success: true,
@@ -191,7 +192,7 @@ export const createTechnicalSubmission = async (req, res) => {
       data: { _id: submission._id }
     });
   } catch (error) {
-    logger.error(`Teknik başvuru oluşturulamadı: ${error.message}`);
+    logger.error(`Teknik başvuru oluşturulamadı: ${error.name}`);
     return res.status(500).json({
       success: false,
       message: "Sunucu hatası, lütfen daha sonra tekrar deneyiniz."

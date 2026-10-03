@@ -35,7 +35,7 @@ async function processJob(job) {
         transporter = getTransporter();
     } catch (err) {
         logger.error(`Mail kimlik bilgileri eksik; görev pending'e alındı. (${job._id})`);
-        await MailJob.updateOne({ _id: job._id }, { $set: { status: 'pending' } });
+        await MailJob.updateOne({ _id: job._id }, { $set: { status: 'pending' } }).catch(() => {});
         return false;
     }
 

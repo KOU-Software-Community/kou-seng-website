@@ -49,11 +49,11 @@ export const createMailJob = async (req, res) => {
         }
         const { blocks } = parsed;
 
-        // Virgülle ayrılmış alıcı listesi
-        const recipientsRaw = (typeof recipients === 'string' ? recipients : '')
+        // Virgülle ayrılmış alıcı listesi; tekrarlar atılır (tek kişiye yüzlerce mail gitmesin)
+        const recipientsRaw = [...new Set((typeof recipients === 'string' ? recipients : '')
             .split(',')
-            .map((e) => e.trim())
-            .filter(Boolean);
+            .map((e) => e.trim().toLowerCase())
+            .filter(Boolean))];
 
         if (!recipientsRaw.length) {
             return res.status(400).json({ success: false, message: 'En az bir alıcı zorunludur.' });
@@ -75,6 +75,8 @@ export const createMailJob = async (req, res) => {
         }
 
         // sanitizeFilter açık: $in operatörü trusted() ister.
+        // ponytail: sayım ile create arası kilitsiz; eşzamanlı isteklerle 5 aşılabilir,
+        // üst sınırı mailLimiter (15 dk'da 30). Gerekirse create'ten sonra yeniden say.
         const activeJobs = await MailJob.countDocuments({
             createdBy: req.user._id,
             status: mongoose.trusted({ $in: ['pending', 'running'] }),

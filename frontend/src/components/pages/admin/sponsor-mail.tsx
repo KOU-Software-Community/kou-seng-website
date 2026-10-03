@@ -101,6 +101,7 @@ export default function AdminSponsorMail() {
     e.preventDefault();
     if (validEmails.length === 0 || blocks.length === 0) return;
     setEnqueueError('');
+    setEnqueuedMsg(false);
     try {
       await enqueueJob({ subject, recipients: validEmails, blocks, attachments });
     } catch (err) {

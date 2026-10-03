@@ -94,8 +94,7 @@ const sendSponsorMail = async (req, res) => {
         logger.error(`Mail gönderilemedi: ${error.message}`);
         return res.status(500).json({
             success: false,
-            message: 'Mail gönderilirken bir hata oluştu.',
-            error: error.message
+            message: 'Mail gönderilirken bir hata oluştu.'
         });
     }
 };

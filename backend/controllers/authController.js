@@ -3,6 +3,10 @@ import User, { MIN_PASSWORD_LENGTH } from "../models/User.js";
 import bcrypt from "bcryptjs";
 import logger from "../helpers/logger.js";
 
+// Kullanıcı yokken de bcrypt.compare çalışsın: yanıt süresi e-postanın kayıtlı
+// olup olmadığını sızdırmasın. Maliyet genSalt(10) ile aynı.
+const DUMMY_HASH = bcrypt.hashSync('kullanici-yok', 10);
+
 // @desc    Admin girişi
 // @route   GET /auth/login
 // @access  Public
@@ -13,11 +17,8 @@ const loginUser = async (req, res) => {
     }
     try {
         const user = await User.findOne({ email });
-        if (!user) {
-            return res.status(400).json({ message: 'E-posta adresi veya şifre yanlış' });
-        }
-        const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) {
+        const isMatch = await bcrypt.compare(password, user ? user.password : DUMMY_HASH);
+        if (!user || !isMatch) {
             return res.status(400).json({ message: 'E-posta adresi veya şifre yanlış' });
         }
         res.status(200).json({
@@ -68,10 +69,12 @@ const changePassword = async (req, res) => {
             return res.status(400).json({ message: 'Mevcut şifre yanlış' });
         }
         user.password = await bcrypt.hash(newPassword, await bcrypt.genSalt(10));
+        // Eski token'lar geçersizleşir; oturum açık kalsın diye yeni token dönülür.
+        user.passwordChangedAt = new Date();
         // Yalnızca şifre doğrulanır; eski kayıtlardaki başka bir alan (ör.
         // migration'ı yapılmamış `web` rolü) şifre değişikliğini engellemesin.
         await user.save({ validateModifiedOnly: true });
-        res.status(200).json({ message: 'Şifre değiştirildi' });
+        res.status(200).json({ message: 'Şifre değiştirildi', token: generateToken(user._id) });
     } catch {
         res.status(500).json({ message: 'Şifre değiştirilemedi' });
     }

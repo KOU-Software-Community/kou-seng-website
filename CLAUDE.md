@@ -120,18 +120,23 @@ Route prefix'leri: `/health`, `/auth`, `/users`, `/announcements`, `/contact`,
 Kimlik doğrulama: `POST /auth/login` JWT döndürür, frontend token'ı
 localStorage'da saklar, korunan istekler `Authorization: Bearer <token>`
 gönderir. `middlewares/authMiddleware.js`: `protect`, `adminOnly`,
-`roleOnlyForCategory`, `roleOnlyForSubmission`, `sponsorOrAdmin`.
+`roleOnlyForCategory`, `roleOnlyForSubmission`, `sponsorOrAdmin`. Şifre
+değişince `User.passwordChangedAt` yazılır; ondan önce verilmiş token'lar
+`protect`'te 401 alır (panel çıkış yaptırıp yeniden giriş ister).
 
 Roller (`User.role`): `admin`, `mobil-web`, `ai`, `game`, `sponsor`, `user`.
 Takım rolleri yalnızca kendi kategorilerinin başvurularını yönetir; `sponsor`
-yalnızca sponsor mailine (`/mail`, `/mail/queue`) erişir.
+yalnızca sponsor mailine (`/mail`, `/mail/queue`) erişir. Sponsor maili
+kuralları `helpers/mailInput.js`'te: tek adres, görev başına ≤500 tekil alıcı,
+kullanıcı başına ≤5 aktif görev, ≤100 blok (ham JSON ≤100 KB). Kuyruk ortak ve
+sıralı işlenir (alıcılar arası 15–30 sn).
 
 Logging: `helpers/logger.js` — `logger.debug()`, `logger.info()`,
 `logger.error()`; `LOG_LEVEL=debug` olmadıkça debug logları gösterilmez.
 
 Modeller (`models/`, Mongoose):
 
-- **User:** `name`, `email`, `password` (bcrypt), `role`
+- **User:** `name`, `email`, `password` (bcrypt), `role`, `passwordChangedAt`
 - **Announcement:** `title`, `content`, `summary`, `category`, `author`
 - **Contact:** `name`, `email`, `subject`, `message`, `isRead`
 - **Submission:** `submissionType` (general/technical), öğrenci alanları,
@@ -521,7 +526,8 @@ bu yüzden var. Kaldırılırsa analitik toplanmaz ve her sayfada konsol hatası
 `backend/index.js`: genel limit IP başına 15 dk'da 100 istek (geçerli token'lı
 istekler sayılmaz, mail kuyruğu sık yokluyor). Ek olarak, muafiyetsiz:
 `POST /auth/login` ve `PATCH /auth/password` birlikte 15 dk'da 10 **hatalı**
-deneme. Başvuru akışının kendi limitleri var ve genel limite **sayılmaz**:
+deneme. `POST /mail/send` ve `POST /mail/queue` birlikte 15 dk'da 30 (token'lı
+istekler de sayılır). Başvuru akışının kendi limitleri var ve genel limite **sayılmaz**:
 `GET /submissions/windows` 15 dk'da 600, başvuru ve iletişim formları birlikte
 15 dk'da 100. Sebep kampüs Wi-Fi'ı: yüzlerce öğrenci aynı dış IP'yi paylaşıyor;
 başvuru akışı genel limite sayılsaydı ~30 başvurandan sonra o ağdaki herkes

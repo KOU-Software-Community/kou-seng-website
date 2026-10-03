@@ -18,6 +18,15 @@ const matchesSystemKey = (token) => {
     return timingSafeEqual(digest(token), digest(key));
 };
 
+// JWT `iat` saniye hassasiyetinde (aşağı yuvarlanmış), passwordChangedAt
+// milisaniye. iat * 1000 < passwordChangedAt: değişiklikten önce verilmiş her
+// token, aynı saniyede verilmiş olsa da geçersiz (şifreyi bilen saldırgan
+// değişiklik anına denk gelen bir token'la içeride kalamasın). Bedeli: aynı
+// saniyede yapılan yeni bir giriş de reddedilir; panel şifre değişince zaten
+// çıkış yaptırıyor, tekrar giriş bir saniyeden uzun sürer.
+const issuedBeforePasswordChange = (iat, passwordChangedAt) =>
+    Boolean(passwordChangedAt) && iat * 1000 < passwordChangedAt.getTime();
+
 // @desc    Yönetici erişim kontrolü
 const adminOnly = (req, res, next) => {
     try {
@@ -99,6 +108,10 @@ const protect = async (req, res, next) => {
             if (!req.user) {
                 return res.status(401).json({ message: 'Not authorized, user not found' });
             }
+            // Şifre değiştikten önce verilmiş token: oturum kapatılır.
+            if (issuedBeforePasswordChange(decoded.iat, req.user.passwordChangedAt)) {
+                return res.status(401).json({ message: 'Token expired, please login again' });
+            }
             next();
         }
         else {
@@ -144,4 +157,4 @@ const sponsorOrAdmin = (req, res, next) => {
     }
 }
 
-export { adminOnly, roleOnlyForCategory, roleOnlyForSubmission, protect, firstUserCreation, sponsorOrAdmin };
+export { issuedBeforePasswordChange, adminOnly, roleOnlyForCategory, roleOnlyForSubmission, protect, firstUserCreation, sponsorOrAdmin };

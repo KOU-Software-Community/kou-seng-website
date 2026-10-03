@@ -58,7 +58,7 @@ const createUser = async (req, res) => {
         });
 
         if (user) {
-            logger.debug(`Kullanıcı oluşturuldu: ${user.name} - ${user.email} - ${user.role}`);
+            logger.debug(`Kullanıcı oluşturuldu: ${user._id} - ${user.role}`);
             res.status(201).json({
                 _id: user._id,
                 name: user.name,
@@ -96,7 +96,7 @@ const updateUser = async (req, res) => {
 
         const updatedUser = await user.save();
 
-        logger.debug(`Kullanıcı güncellendi: ${updatedUser.name} - ${updatedUser.email} - ${updatedUser.role}`);
+        logger.debug(`Kullanıcı güncellendi: ${updatedUser._id} - ${updatedUser.role}`);
 
         res.status(200).json({
             _id: updatedUser._id,
@@ -126,7 +126,7 @@ const deleteUser = async (req, res) => {
         }
 
         await User.deleteOne({ _id: user._id });
-        logger.debug(`Kullanıcı silindi: ${user.name} - ${user.email} - ${user.role}`);
+        logger.debug(`Kullanıcı silindi: ${user._id} - ${user.role}`);
         res.status(200).json({ message: 'Kullanıcı silindi' });
     } catch (error) {
         logger.error(`Kullanıcı silinemedi: ${error.message}`);

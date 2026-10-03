@@ -52,18 +52,17 @@ export default function AdminDashboardLayout({ children }: DashboardLayoutProps)
         }
         // Rol kontrolü
         const role = (detail as AuthUser).role;
-        const onDashboardPage = pathname === '/admin/dashboard';
-        
         // Admin rolü her sayfaya erişebilir
         if (role === 'admin') {
           if (isMounted) setIsChecking(false);
           return;
         }
         
-        // Web, AI, Game rolleri sadece dashboard ve kendi teknik sayfasına erişebilir
+        // Web, AI, Game rolleri yalnızca kendi teknik sayfasına erişebilir; dashboard'daki
+        // özet sayılar (GET /auth/status) yalnızca admin içindir
         if (['mobil-web', 'ai', 'game'].includes(role)) {
           const isOwnTechnicalPage = pathname?.startsWith(`/admin/dashboard/technical-team/${role}`);
-          if (!onDashboardPage && !isOwnTechnicalPage) {
+          if (!isOwnTechnicalPage) {
             router.replace(`/admin/dashboard/technical-team/${role}`);
             return;
           }
@@ -71,10 +70,10 @@ export default function AdminDashboardLayout({ children }: DashboardLayoutProps)
           return;
         }
 
-        // Sponsor rolü sadece dashboard ve sponsor-mail sayfasına erişebilir
+        // Sponsor rolü yalnızca sponsor-mail sayfasına erişebilir
         if (role === 'sponsor') {
           const isSponsorMailPage = pathname === '/admin/dashboard/sponsor-mail';
-          if (!onDashboardPage && !isSponsorMailPage) {
+          if (!isSponsorMailPage) {
             router.replace('/admin/dashboard/sponsor-mail');
             return;
           }

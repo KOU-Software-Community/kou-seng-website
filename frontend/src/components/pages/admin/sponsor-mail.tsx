@@ -38,8 +38,8 @@ const formatDate = (ts: string | number) =>
     hour: '2-digit', minute: '2-digit',
   });
 
-/** Basic email regex — rejects obvious typos. */
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+/** Tek adres; backend helpers/mailInput.js ile aynı kural (; < > " yok). */
+const EMAIL_RE = /^[^\s@,;<>"]+@[^\s@,;<>"]+\.[^\s@,;<>"]+$/;
 
 function parseEmails(raw: string): string[] {
   return raw.split(',').map((e) => e.trim()).filter(Boolean);
@@ -60,6 +60,7 @@ export default function AdminSponsorMail() {
 
   // Durum mesajları
   const [enqueuedMsg, setEnqueuedMsg] = useState(false);
+  const [enqueueError, setEnqueueError] = useState('');
 
   // Taslak kaydetme
   const [isDraftNameOpen, setIsDraftNameOpen] = useState(false);
@@ -99,7 +100,15 @@ export default function AdminSponsorMail() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (validEmails.length === 0 || blocks.length === 0) return;
-    await enqueueJob({ subject, recipients: validEmails, blocks, attachments });
+    setEnqueueError('');
+    setEnqueuedMsg(false);
+    try {
+      await enqueueJob({ subject, recipients: validEmails, blocks, attachments });
+    } catch (err) {
+      // Sunucu sınırları (alıcı sayısı, aktif görev, istek limiti) burada görünür.
+      setEnqueueError((err as Error).message || 'Görev oluşturulamadı.');
+      return;
+    }
     setEnqueuedMsg(true);
     setTimeout(() => setEnqueuedMsg(false), 4000);
   };
@@ -374,6 +383,9 @@ export default function AdminSponsorMail() {
               <div className="flex-1 min-w-0 text-sm">
                 {draftSavedMsg && (
                   <span className="text-green-700" role="status">Taslak kaydedildi.</span>
+                )}
+                {!draftSavedMsg && enqueueError && (
+                  <span className="text-destructive" role="alert">{enqueueError}</span>
                 )}
                 {!draftSavedMsg && enqueuedMsg && (
                   <span className="text-green-700" role="status">

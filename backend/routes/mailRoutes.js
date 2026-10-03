@@ -7,7 +7,7 @@ const router = express.Router();
 
 const upload = multer({
     storage: multer.memoryStorage(),
-    limits: { fileSize: 10 * 1024 * 1024 }, // 10 MB
+    limits: { fileSize: 10 * 1024 * 1024, fields: 10, fieldSize: 200_000 }, // dosya başına 10 MB; metin alanı ≤200 KB (500 alıcı, ≤100 KB blok)
     fileFilter: (_req, file, cb) => {
         const allowed = [
             'application/pdf',

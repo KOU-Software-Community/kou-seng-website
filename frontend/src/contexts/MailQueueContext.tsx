@@ -132,7 +132,7 @@ export function MailQueueProvider({ children }: { children: React.ReactNode }) {
         body: formData,
       });
 
-      const data = (await res.json()) as { success: boolean; message?: string };
+      const data = (await res.json().catch(() => ({}))) as { success?: boolean; message?: string };
       if (!res.ok || !data.success) {
         throw new Error(data.message ?? 'Görev oluşturulamadı.');
       }

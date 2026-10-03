@@ -1,11 +1,14 @@
+import mongoose from 'mongoose';
 import MailJob from '../models/MailJob.js';
 import logger from '../helpers/logger.js';
 import { wakeProcessor } from '../services/mailQueueProcessor.js';
+import {
+    isSingleEmail, isValidSubject, parseBlocks,
+    MAX_RECIPIENTS, MAX_ACTIVE_JOBS, MAX_SUBJECT_LENGTH,
+} from '../helpers/mailInput.js';
 
 // Toplam ek boyutu sınırı (MongoDB BSON 16 MB limitini aşmamak için)
 const MAX_TOTAL_ATTACHMENT_BYTES = 10 * 1024 * 1024; // 10 MB
-
-const emailRegex = /^\S+@\S+\.\S+$/;
 
 /** Hassas/büyük alanları çıkarır; API yanıtı için güvenli obje döner */
 function sanitizeJob(job) {
@@ -31,33 +34,55 @@ function sanitizeJob(job) {
 // @access  Private/SponsorOrAdmin
 export const createMailJob = async (req, res) => {
     try {
-        let blocks;
-        try {
-            blocks = JSON.parse(req.body.blocks || '[]');
-        } catch {
-            return res.status(400).json({ success: false, message: 'Geçersiz blok verisi.' });
+        const { subject, recipients } = req.body;
+
+        if (!isValidSubject(subject)) {
+            return res.status(400).json({
+                success: false,
+                message: `Konu zorunludur ve en fazla ${MAX_SUBJECT_LENGTH} karakter olabilir.`,
+            });
         }
 
-        const { subject } = req.body;
+        const parsed = parseBlocks(req.body.blocks);
+        if (parsed.error) {
+            return res.status(400).json({ success: false, message: parsed.error });
+        }
+        const { blocks } = parsed;
 
         // Virgülle ayrılmış alıcı listesi
-        const recipientsRaw = (req.body.recipients || '')
+        const recipientsRaw = (typeof recipients === 'string' ? recipients : '')
             .split(',')
             .map((e) => e.trim())
             .filter(Boolean);
 
-        if (!subject || !recipientsRaw.length || !Array.isArray(blocks) || blocks.length === 0) {
+        if (!recipientsRaw.length) {
+            return res.status(400).json({ success: false, message: 'En az bir alıcı zorunludur.' });
+        }
+
+        if (recipientsRaw.length > MAX_RECIPIENTS) {
             return res.status(400).json({
                 success: false,
-                message: 'Konu, en az bir alıcı ve içerik bloğu zorunludur.',
+                message: `Bir görevde en fazla ${MAX_RECIPIENTS} alıcı olabilir (şu an: ${recipientsRaw.length}).`,
             });
         }
 
-        const validRecipients = recipientsRaw.filter((e) => emailRegex.test(e));
+        const validRecipients = recipientsRaw.filter(isSingleEmail);
         if (!validRecipients.length) {
             return res.status(400).json({
                 success: false,
                 message: 'Geçerli e-posta adresi bulunamadı.',
+            });
+        }
+
+        // sanitizeFilter açık: $in operatörü trusted() ister.
+        const activeJobs = await MailJob.countDocuments({
+            createdBy: req.user._id,
+            status: mongoose.trusted({ $in: ['pending', 'running'] }),
+        });
+        if (activeJobs >= MAX_ACTIVE_JOBS) {
+            return res.status(400).json({
+                success: false,
+                message: `Aynı anda en fazla ${MAX_ACTIVE_JOBS} aktif görev olabilir. Önceki görevlerin bitmesini bekleyin ya da iptal edin.`,
             });
         }
 

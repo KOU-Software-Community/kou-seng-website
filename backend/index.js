@@ -50,6 +50,16 @@ app.use((req, res, next) => {
 });
 app.use(cors(corsOptions));
 
+// Limiter'lar yola göre bağlı (app.post('/mail/queue', …)); router ise
+// '/mail/queue//'yi de '/' sayıp eşliyordu, yani çift slash limiti atlatıyordu.
+// Yoldaki ardışık slash'lar en başta teke indirilir.
+app.use((req, res, next) => {
+  const q = req.url.indexOf('?');
+  const path = q === -1 ? req.url : req.url.slice(0, q);
+  if (path.includes('//')) req.url = path.replace(/\/{2,}/g, '/') + (q === -1 ? '' : req.url.slice(q));
+  next();
+});
+
 // Rate limiting middleware
 // Limitler Cloudflare arkasındaki gerçek ziyaretçi adresine göre sayılır
 // (helpers/clientIp.js); IPv6 adresleri kütüphanenin varsayılanı gibi /56 ağına göre.
@@ -142,7 +152,7 @@ app.use('/mail/queue', mailQueueRoutes);
 app.use((err, req, res, next) => {
   if (res.headersSent) return next(err);
   const status = err.status >= 400 && err.status < 500 ? err.status : 500;
-  if (status === 500) logger.error(`${req.method} ${req.originalUrl} işlenemedi: ${err.message}`);
+  if (status === 500) logger.error(`${req.method} ${req.path} işlenemedi: ${err.message}`);
   res.status(status).json({ message: status === 500 ? 'Sunucu hatası' : err.message });
 });
 

@@ -37,8 +37,6 @@ export type UseAuthReturn = {
 };
 
 const AUTH_TOKEN_KEY = 'auth_token';
-// Her useAuth() kendi token state'ini tutuyor; token değişince diğerleri bununla güncellenir.
-const AUTH_TOKEN_EVENT = 'auth-token-changed';
 
 /** Yeni şifreler için alt sınır; backend'deki MIN_PASSWORD_LENGTH ile aynı olmalı. */
 export const MIN_PASSWORD_LENGTH = 10;
@@ -73,9 +71,6 @@ export const useAuth = (): UseAuthReturn => {
   useEffect(() => {
     const existingToken = getStoredToken();
     if (existingToken) setToken(existingToken);
-    const sync = () => setToken(getStoredToken());
-    window.addEventListener(AUTH_TOKEN_EVENT, sync);
-    return () => window.removeEventListener(AUTH_TOKEN_EVENT, sync);
   }, []);
 
   const login = useCallback(async (email: string, password: string): Promise<boolean> => {
@@ -167,16 +162,8 @@ export const useAuth = (): UseAuthReturn => {
         headers: { 'Content-Type': 'application/json', ...getAuthHeader() },
         body: JSON.stringify({ currentPassword, newPassword }),
       });
+      if (response.ok) return null;
       const data = await response.json().catch(() => null);
-      if (response.ok) {
-        // Şifre değişince eski token'lar geçersiz; sunucunun döndüğü yeni token'la oturum sürer.
-        if (typeof data?.token === 'string') {
-          setStoredToken(data.token);
-          setToken(data.token);
-          window.dispatchEvent(new Event(AUTH_TOKEN_EVENT));
-        }
-        return null;
-      }
       return typeof data?.message === 'string' ? data.message : 'Şifre değiştirilemedi.';
     } catch {
       return 'Şifre değiştirilemedi. Bağlantınızı kontrol edin.';

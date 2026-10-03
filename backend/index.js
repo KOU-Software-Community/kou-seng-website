@@ -109,7 +109,7 @@ app.post('/auth/login', loginLimiter);
 app.patch('/auth/password', loginLimiter);
 
 app.use((req, res, next) => {
-  logger.debug(`${req.method} ${req.url} [${clientIp(req)}] (req.ip: ${req.ip})`);
+  logger.debug(`${req.method} ${req.path} [${clientIp(req)}] (req.ip: ${req.ip})`);
   next();
 });
 

@@ -521,7 +521,8 @@ bu yüzden var. Kaldırılırsa analitik toplanmaz ve her sayfada konsol hatası
 `backend/index.js`: genel limit IP başına 15 dk'da 100 istek (geçerli token'lı
 istekler sayılmaz, mail kuyruğu sık yokluyor). Ek olarak, muafiyetsiz:
 `POST /auth/login` ve `PATCH /auth/password` birlikte 15 dk'da 10 **hatalı**
-deneme. Başvuru akışının kendi limitleri var ve genel limite **sayılmaz**:
+deneme. `POST /mail/send` ve `POST /mail/queue` birlikte 15 dk'da 30 (token'lı
+istekler de sayılır). Başvuru akışının kendi limitleri var ve genel limite **sayılmaz**:
 `GET /submissions/windows` 15 dk'da 600, başvuru ve iletişim formları birlikte
 15 dk'da 100. Sebep kampüs Wi-Fi'ı: yüzlerce öğrenci aynı dış IP'yi paylaşıyor;
 başvuru akışı genel limite sayılsaydı ~30 başvurandan sonra o ağdaki herkes

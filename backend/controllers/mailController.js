@@ -91,7 +91,8 @@ const sendSponsorMail = async (req, res) => {
             message: 'Mail başarıyla gönderildi.'
         });
     } catch (error) {
-        logger.error(`Mail gönderilemedi: ${error.message}`);
+        // SMTP mesajı alıcı adresini alıntılıyor; loga yalnızca kod yazılır.
+        logger.error(`Mail gönderilemedi: ${error.responseCode ?? error.code ?? error.name}`);
         return res.status(500).json({
             success: false,
             message: 'Mail gönderilirken bir hata oluştu.'

@@ -74,16 +74,18 @@ async function processJob(job) {
                     attachments: mailAttachments,
                 });
                 result = { email, status: 'sent' };
-                logger.info(`Kuyruk maili gönderildi → ${email} (görev: ${job._id})`);
+                // Alıcı adresi ve SMTP mesajı (adresi alıntılıyor) loga yazılmaz; ayrıntı görevin results'ında.
+                logger.info(`Kuyruk maili gönderildi: alıcı ${i + 1}/${job.recipients.length} (görev: ${job._id})`);
             } catch (err) {
                 result = { email, status: 'failed', error: String(err.message).slice(0, 500) };
-                logger.error(`Kuyruk maili gönderilemedi → ${email} (görev: ${job._id}): ${err.message}`);
+                logger.error(`Kuyruk maili gönderilemedi: alıcı ${i + 1}/${job.recipients.length} (görev: ${job._id}): ${err.responseCode ?? err.code ?? err.name}`);
             }
 
             // İlerlemeyi kaydet. Mail gitmiş ama kayıt yazılamamışsa görev pending'e
             // alınmaz: alınsaydı aynı alıcıya 5 sn'de bir, sonsuza dek yeniden
-            // gönderilirdi. Görev 'running' kalır (iptal edilebilir); sunucu yeniden
-            // başlayınca currentIndex'ten sürer: her yeniden başlatmada en fazla bir tekrar.
+            // gönderilirdi. Görev 'running' kalır; sunucu yeniden başlayınca currentIndex'ten
+            // sürer (her yeniden başlatmada en fazla bir tekrar). O zamana kadar aktif görev
+            // kotasını tutar; panelden iptal edilerek bırakılır.
             try {
                 await MailJob.updateOne(
                     { _id: job._id },

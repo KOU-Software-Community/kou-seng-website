@@ -120,6 +120,7 @@ Anasayfa ve duyurular sayfasında gösterilecek duyuruları yönetmek için kull
 - **POST** `/contact`
   - **Açıklama:** İletişim formundan gelen mesajı kaydeder.
   - **Request Body:** `{ "name": "string", "email": "string", "subject": "string", "message": "string" }`
+  - Alanlar string ve en fazla 100 / 254 / 100 / 1000 karakter; aşan istek 400.
 
 - **GET** `/contact`
   - **Açıklama:** Tüm iletişim mesajlarını listeler.

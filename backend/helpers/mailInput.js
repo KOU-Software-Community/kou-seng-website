@@ -4,7 +4,9 @@
 // kalsın (ekler ≤10 MB + aşağıdaki sınırlar).
 
 export const MAX_RECIPIENTS = 500; // Gmail kişisel hesap günlük gönderim sınırı
-export const MAX_ACTIVE_JOBS = 5; // kullanıcı başına bekleyen + çalışan görev
+// Kullanıcı başına bekleyen + çalışan görev. Kuyruk tüm kullanıcılar için ortak ve
+// sıralı (15-30 sn aralık): 500 alıcılı bir görev ~3 saat, sonrakiler bekler.
+export const MAX_ACTIVE_JOBS = 5;
 export const MAX_SUBJECT_LENGTH = 300;
 export const MAX_BLOCKS = 100;
 export const MAX_BLOCKS_JSON_LENGTH = 100_000; // ham JSON, ~100 KB

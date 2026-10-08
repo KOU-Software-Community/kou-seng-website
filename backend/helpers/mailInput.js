@@ -12,6 +12,23 @@ export const MAX_TOTAL_ATTACHMENT_BYTES = 10 * 1024 * 1024; // ekler toplamı
 // Gövde sınırı: ekler + metin alanları ve multipart payı. Daha büyüğü belleğe
 // alınmadan 413 alır (multer tek tek dosyaya bakıyor; 10 × 10 MB yüklenebiliyordu).
 export const MAX_REQUEST_BYTES = MAX_TOTAL_ATTACHMENT_BYTES + 1024 * 1024;
+
+/**
+ * multer'dan önce: Content-Length sınırı aşıyorsa 413. Başlık yoksa (chunked)
+ * gövde akarken sayılır, sınır aşılınca bağlantı kesilir. Başlığı zorunlu
+ * tutmak tünelin chunked ilettiği meşru gönderimi de keserdi.
+ */
+export function limitUploadBody(req, res, next) {
+    if (Number(req.headers['content-length']) > MAX_REQUEST_BYTES) {
+        return res.status(413).json({ success: false, message: 'Ekler toplamda 10 MB\'ı aşıyor.' });
+    }
+    let seen = 0;
+    req.on('data', (chunk) => {
+        seen += chunk.length;
+        if (seen > MAX_REQUEST_BYTES) req.destroy();
+    });
+    next();
+}
 export const MAX_BLOCKS = 100;
 export const MAX_BLOCKS_JSON_LENGTH = 100_000; // ham JSON, ~100 KB
 const MAX_LIST_ITEMS = 50;

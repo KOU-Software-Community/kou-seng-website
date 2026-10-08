@@ -29,3 +29,25 @@ test('büyük, boş ya da dizi olarak gelen blok verisi reddedilir', () => {
   assert.ok(parseBlocks(['[', ']']).error);
   assert.ok(parseBlocks(undefined).error);
 });
+
+test('limitUploadBody: büyük Content-Length 413, chunked gövde sınırı aşınca kesilir', async () => {
+    const { PassThrough } = await import('node:stream');
+    const { limitUploadBody, MAX_REQUEST_BYTES } = await import('./mailInput.js');
+    let status;
+    const res = { status: (s) => { status = s; return { json: () => {} }; } };
+
+    const big = Object.assign(new PassThrough(), { headers: { 'content-length': String(MAX_REQUEST_BYTES + 1) } });
+    limitUploadBody(big, res, () => assert.fail('next çağrılmamalı'));
+    assert.equal(status, 413);
+
+    const chunked = Object.assign(new PassThrough(), { headers: {} });
+    let nexted = false;
+    limitUploadBody(chunked, res, () => { nexted = true; });
+    assert.ok(nexted);
+    chunked.write(Buffer.alloc(MAX_REQUEST_BYTES));
+    await new Promise((r) => setImmediate(r));
+    assert.equal(chunked.destroyed, false);
+    chunked.write(Buffer.alloc(1));
+    await new Promise((r) => setImmediate(r));
+    assert.equal(chunked.destroyed, true);
+});

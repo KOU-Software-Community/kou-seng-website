@@ -32,7 +32,9 @@ export default function AdminLogin() {
   const requestedRedirect = searchParams.get('redirect') ?? '';
   const redirectTo = /^\/admin(\/[\w-]+)*\/?$/.test(requestedRedirect) ? requestedRedirect : '/admin/dashboard';
   const { login, isAuthenticating, errorMessage, token, getAuthDetail, logout } = useAuth();
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(
+    searchParams.get('yetkisiz') === '1' ? 'Bu hesabın yönetim paneline erişimi yok.' : null,
+  );
   const [isCheckingAuth, setIsCheckingAuth] = useState(false);
 
   const form = useForm<LoginFormValues>({

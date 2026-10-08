@@ -17,6 +17,8 @@ export const MAX_REQUEST_BYTES = MAX_TOTAL_ATTACHMENT_BYTES + 1024 * 1024;
  * multer'dan önce: Content-Length sınırı aşıyorsa 413. Başlık yoksa (chunked)
  * gövde akarken sayılır, sınır aşılınca bağlantı kesilir. Başlığı zorunlu
  * tutmak tünelin chunked ilettiği meşru gönderimi de keserdi.
+ * multer'dan hemen önce durmalı: arada async bir middleware olursa gövde multer
+ * bağlanmadan akmaya başlar ve multer parça kaçırır.
  */
 export function limitUploadBody(req, res, next) {
     if (Number(req.headers['content-length']) > MAX_REQUEST_BYTES) {

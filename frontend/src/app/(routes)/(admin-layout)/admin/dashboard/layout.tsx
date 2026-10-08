@@ -83,6 +83,7 @@ export default function AdminDashboardLayout({ children }: DashboardLayoutProps)
 
         // Panelde sayfası olmayan rol (ör. user): oturum kapatılır. Yalnızca
         // yönlendirmek giriş sayfasıyla döngü yapardı (geçerli token'ı dashboard'a atıyor).
+        if (!isMounted) return;
         logout();
         router.replace('/admin/login?yetkisiz=1');
         return;

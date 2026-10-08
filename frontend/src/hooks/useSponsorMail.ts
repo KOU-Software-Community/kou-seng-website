@@ -53,7 +53,7 @@ export const useSponsorMail = (): UseSponsorMailReturn => {
         body: formData,
       });
 
-      const result = await response.json() as { success: boolean; message?: string };
+      const result = (await response.json().catch(() => ({}))) as { success?: boolean; message?: string };
 
       if (!response.ok || !result.success) {
         throw new Error(result.message || 'Mail gönderilirken bir hata oluştu.');

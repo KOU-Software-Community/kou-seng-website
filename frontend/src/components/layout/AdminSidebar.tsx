@@ -201,10 +201,10 @@ export default function AdminSidebar() {
     if (userRole === 'admin') return navItems;
     const limitedRoles = ['mobil-web', 'ai', 'game'];
     if (limitedRoles.includes(userRole)) {
-      return navItems.filter((n) => n.label === 'Dashboard' || n.label === 'Teknik Takım');
+      return navItems.filter((n) => n.label === 'Teknik Takım');
     }
     if (userRole === 'sponsor') {
-      return navItems.filter((n) => n.label === 'Dashboard' || n.label === 'Sponsor Mail');
+      return navItems.filter((n) => n.label === 'Sponsor Mail');
     }
     return [];
   }, [userRole]);

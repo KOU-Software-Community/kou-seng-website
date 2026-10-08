@@ -13,10 +13,10 @@ import Link from "next/link";
 
 // Form doğrulama şeması
 const formSchema = z.object({
-  name: z.string().min(2, { message: "İsim en az 2 karakter olmalıdır" }),
-  email: z.email({ message: "Geçerli bir e-posta adresi giriniz" }),
-  subject: z.string().min(5, { message: "Konu en az 5 karakter olmalıdır" }),
-  message: z.string().min(10, { message: "Mesaj en az 10 karakter olmalıdır" })
+  name: z.string().min(2, { message: "İsim en az 2 karakter olmalıdır" }).max(100, { message: "İsim en fazla 100 karakter olabilir" }),
+  email: z.email({ message: "Geçerli bir e-posta adresi giriniz" }).max(254, { message: "E-posta en fazla 254 karakter olabilir" }),
+  subject: z.string().min(5, { message: "Konu en az 5 karakter olmalıdır" }).max(100, { message: "Konu en fazla 100 karakter olabilir" }),
+  message: z.string().min(10, { message: "Mesaj en az 10 karakter olmalıdır" }).max(1000, { message: "Mesaj en fazla 1000 karakter olabilir" })
 });
 
 type FormValues = z.infer<typeof formSchema>;

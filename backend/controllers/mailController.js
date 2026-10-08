@@ -3,11 +3,12 @@ import { fileURLToPath } from 'url';
 import { getTransporter } from '../helpers/mailTransporter.js';
 import { buildMailHtml } from '../helpers/mailTemplateBuilder.js';
 import logger from '../helpers/logger.js';
+import {
+    isSingleEmail, isValidSubject, parseBlocks, MAX_SUBJECT_LENGTH, MAX_TOTAL_ATTACHMENT_BYTES,
+} from '../helpers/mailInput.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const assetsDir = path.join(__dirname, '..', 'assets');
-
-const emailRegex = /^\S+@\S+\.\S+$/;
 
 // @desc    Sponsorluk mailini gönderir
 // @route   POST /mail/send
@@ -16,30 +17,38 @@ const sendSponsorMail = async (req, res) => {
     try {
         const { to, subject } = req.body;
 
+        if (!isSingleEmail(to)) {
+            return res.status(400).json({
+                success: false,
+                message: 'Tek bir geçerli alıcı e-posta adresi giriniz.'
+            });
+        }
+
+        if (!isValidSubject(subject)) {
+            return res.status(400).json({
+                success: false,
+                message: `Konu zorunludur ve en fazla ${MAX_SUBJECT_LENGTH} karakter olabilir.`
+            });
+        }
+
         // blocks FormData'dan JSON string olarak gelir
-        let blocks;
-        try {
-            blocks = JSON.parse(req.body.blocks || '[]');
-        } catch {
-            return res.status(400).json({ success: false, message: 'Geçersiz blok verisi.' });
+        const parsed = parseBlocks(req.body.blocks);
+        if (parsed.error) {
+            return res.status(400).json({ success: false, message: parsed.error });
         }
-
-        if (!to || !subject || !Array.isArray(blocks) || blocks.length === 0) {
-            return res.status(400).json({
-                success: false,
-                message: 'Alıcı, konu ve en az bir içerik bloğu zorunludur.'
-            });
-        }
-
-        if (!emailRegex.test(to)) {
-            return res.status(400).json({
-                success: false,
-                message: 'Geçerli bir alıcı e-posta adresi giriniz.'
-            });
-        }
+        const { blocks } = parsed;
 
         const mailUser = process.env.MAIL_USER;
         const mailSenderName = process.env.MAIL_SENDER_NAME || 'KOU SENG';
+
+        // Kuyrukla aynı toplam ek sınırı
+        const totalSize = (req.files ?? []).reduce((sum, f) => sum + f.size, 0);
+        if (totalSize > MAX_TOTAL_ATTACHMENT_BYTES) {
+            return res.status(400).json({
+                success: false,
+                message: `Toplam ek boyutu 10 MB'ı aşıyor (şu an: ${(totalSize / 1024 / 1024).toFixed(1)} MB). Daha küçük dosyalar kullanın.`,
+            });
+        }
 
         let transporter;
         try {
@@ -86,18 +95,18 @@ const sendSponsorMail = async (req, res) => {
         const attachmentInfo = req.files?.length
             ? ` | ekler: ${req.files.map(f => f.originalname).join(', ')}`
             : '';
-        logger.info(`Sponsorluk maili gönderildi: ${to} (gönderen: ${req.user?.email}${attachmentInfo})`);
+        logger.info(`Sponsorluk maili gönderildi (gönderen: ${req.user?.email}${attachmentInfo})`);
 
         return res.status(200).json({
             success: true,
             message: 'Mail başarıyla gönderildi.'
         });
     } catch (error) {
-        logger.error(`Mail gönderilemedi: ${error.message}`);
+        // SMTP mesajı alıcı adresini alıntılıyor; loga yalnızca kod yazılır.
+        logger.error(`Mail gönderilemedi: ${error.responseCode ?? error.code ?? error.name}`);
         return res.status(500).json({
             success: false,
-            message: 'Mail gönderilirken bir hata oluştu.',
-            error: error.message
+            message: 'Mail gönderilirken bir hata oluştu.'
         });
     }
 };

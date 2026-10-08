@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 import User from "../models/User.js";
 import logger from "./logger.js";
+import { issuedBeforePasswordChange } from "../middlewares/authMiddleware.js";
 
 
 const rateSkip = async (req) => {
@@ -74,7 +75,8 @@ const rateSkipAuth = async (authHeader) => {
 
         const user = await User.findOne({ _id: decoded.id }).select('-password');
 
-        if (!user) {
+        // Şifre değişikliğiyle geçersizleşen token muafiyet de almaz (bkz. protect).
+        if (!user || issuedBeforePasswordChange(decoded.iat, user.passwordChangedAt)) {
             return false;
         }
 

@@ -1,6 +1,7 @@
 import express from 'express';
 import multer from 'multer';
 import { protect, sponsorOrAdmin } from '../middlewares/authMiddleware.js';
+import { limitUploadBody } from '../helpers/mailInput.js';
 import {
     createMailJob,
     getMailJobs,
@@ -12,7 +13,7 @@ const router = express.Router();
 
 const upload = multer({
     storage: multer.memoryStorage(),
-    limits: { fileSize: 10 * 1024 * 1024 }, // 10 MB per file
+    limits: { fileSize: 10 * 1024 * 1024, fields: 10, fieldSize: 200_000 }, // dosya başına 10 MB; metin alanı ≤200 KB (500 alıcı, ≤100 KB blok)
     fileFilter: (_req, file, cb) => {
         const allowed = [
             'application/pdf',
@@ -51,7 +52,7 @@ const uploadMiddleware = (req, res, next) => {
 // @route   GET  /mail/queue      — görevleri listele
 // @route   PATCH /mail/queue/:id/cancel — iptal et
 // @route   DELETE /mail/queue/:id       — sil
-router.post('/', protect, sponsorOrAdmin, uploadMiddleware, createMailJob);
+router.post('/', protect, sponsorOrAdmin, limitUploadBody, uploadMiddleware, createMailJob);
 router.get('/', protect, sponsorOrAdmin, getMailJobs);
 router.patch('/:id/cancel', protect, sponsorOrAdmin, cancelMailJob);
 router.delete('/:id', protect, sponsorOrAdmin, deleteMailJob);

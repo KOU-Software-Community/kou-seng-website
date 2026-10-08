@@ -18,6 +18,11 @@ Yönetim paneline erişim için kullanılır.
   - **Açıklama:** Oturumdaki kullanıcının şifresini değiştirir. Yeni şifre en az 10 karakter. Hatalı denemeler login ile aynı limite (15 dakikada 10) sayılır.
   - **Gerekli Header:** `Authorization: Bearer <token>`
   - **Request Body:** `{ "currentPassword": "string", "newPassword": "string" }`
+  - Değişiklikten önce verilmiş token'lar (bu oturumunki dahil) artık 401 alır; panel çıkış yaptırıp yeniden giriş ister.
+
+- **GET** `/auth/status`
+  - **Açıklama:** Başvuru ve iletişim mesajı sayıları (dashboard özeti). Yalnızca admin.
+  - **Gerekli Header:** `Authorization: Bearer <token>`
 
 ## Kullanıcı Yönetimi (Admin) - YAPILDI
 
@@ -115,6 +120,7 @@ Anasayfa ve duyurular sayfasında gösterilecek duyuruları yönetmek için kull
 - **POST** `/contact`
   - **Açıklama:** İletişim formundan gelen mesajı kaydeder.
   - **Request Body:** `{ "name": "string", "email": "string", "subject": "string", "message": "string" }`
+  - Alanlar string ve en fazla 100 / 254 / 100 / 1000 karakter; aşan istek 400.
 
 - **GET** `/contact`
   - **Açıklama:** Tüm iletişim mesajlarını listeler.

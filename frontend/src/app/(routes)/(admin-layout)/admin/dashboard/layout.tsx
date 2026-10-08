@@ -13,7 +13,7 @@ type DashboardLayoutProps = {
 
 export default function AdminDashboardLayout({ children }: DashboardLayoutProps) {
   const router = useRouter();
-  const { isAuthenticated, getAuthDetail } = useAuth();
+  const { isAuthenticated, getAuthDetail, logout } = useAuth();
   const pathname = usePathname();
 
   const [isChecking, setIsChecking] = React.useState(true);
@@ -52,18 +52,17 @@ export default function AdminDashboardLayout({ children }: DashboardLayoutProps)
         }
         // Rol kontrolü
         const role = (detail as AuthUser).role;
-        const onDashboardPage = pathname === '/admin/dashboard';
-        
         // Admin rolü her sayfaya erişebilir
         if (role === 'admin') {
           if (isMounted) setIsChecking(false);
           return;
         }
         
-        // Web, AI, Game rolleri sadece dashboard ve kendi teknik sayfasına erişebilir
+        // Web, AI, Game rolleri yalnızca kendi teknik sayfasına erişebilir; dashboard'daki
+        // özet sayılar (GET /auth/status) yalnızca admin içindir
         if (['mobil-web', 'ai', 'game'].includes(role)) {
           const isOwnTechnicalPage = pathname?.startsWith(`/admin/dashboard/technical-team/${role}`);
-          if (!onDashboardPage && !isOwnTechnicalPage) {
+          if (!isOwnTechnicalPage) {
             router.replace(`/admin/dashboard/technical-team/${role}`);
             return;
           }
@@ -71,10 +70,10 @@ export default function AdminDashboardLayout({ children }: DashboardLayoutProps)
           return;
         }
 
-        // Sponsor rolü sadece dashboard ve sponsor-mail sayfasına erişebilir
+        // Sponsor rolü yalnızca sponsor-mail sayfasına erişebilir
         if (role === 'sponsor') {
           const isSponsorMailPage = pathname === '/admin/dashboard/sponsor-mail';
-          if (!onDashboardPage && !isSponsorMailPage) {
+          if (!isSponsorMailPage) {
             router.replace('/admin/dashboard/sponsor-mail');
             return;
           }
@@ -82,7 +81,11 @@ export default function AdminDashboardLayout({ children }: DashboardLayoutProps)
           return;
         }
 
-        if (isMounted) setIsChecking(false);
+        // Panelde sayfası olmayan rol (ör. user): oturum kapatılır. Yalnızca
+        // yönlendirmek giriş sayfasıyla döngü yapardı (geçerli token'ı dashboard'a atıyor).
+        if (!isMounted) return;
+        logout();
+        router.replace('/admin/login?yetkisiz=1');
         return;
       }
 
@@ -94,7 +97,7 @@ export default function AdminDashboardLayout({ children }: DashboardLayoutProps)
     return () => {
       isMounted = false;
     };
-  }, [getAuthDetail, hasStoredToken, isAuthenticated, router, pathname]);
+  }, [getAuthDetail, hasStoredToken, isAuthenticated, logout, router, pathname]);
 
   if (isChecking) return null;
 

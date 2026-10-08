@@ -1,6 +1,7 @@
 import express from 'express';
 import multer from 'multer';
 import { protect, sponsorOrAdmin } from '../middlewares/authMiddleware.js';
+import { MAX_REQUEST_BYTES } from '../helpers/mailInput.js';
 import {
     createMailJob,
     getMailJobs,
@@ -30,6 +31,10 @@ const upload = multer({
 });
 
 const uploadMiddleware = (req, res, next) => {
+    // Gövde, multer belleğe almadan önce reddedilir (bkz. MAX_REQUEST_BYTES).
+    if (Number(req.headers['content-length']) > MAX_REQUEST_BYTES) {
+        return res.status(413).json({ success: false, message: 'Ekler toplamda 10 MB\'ı aşıyor.' });
+    }
     upload.array('attachments', 10)(req, res, (err) => {
         if (err instanceof multer.MulterError) {
             const msg =

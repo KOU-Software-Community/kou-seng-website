@@ -4,11 +4,14 @@ import logger from '../helpers/logger.js';
 import { wakeProcessor } from '../services/mailQueueProcessor.js';
 import {
     isSingleEmail, isValidSubject, parseBlocks,
-    MAX_RECIPIENTS, MAX_ACTIVE_JOBS, MAX_SUBJECT_LENGTH,
+    MAX_RECIPIENTS, MAX_ACTIVE_JOBS, MAX_SUBJECT_LENGTH, MAX_TOTAL_ATTACHMENT_BYTES,
 } from '../helpers/mailInput.js';
 
-// Toplam ek boyutu sınırı (MongoDB BSON 16 MB limitini aşmamak için)
-const MAX_TOTAL_ATTACHMENT_BYTES = 10 * 1024 * 1024; // 10 MB
+// Aktif görev sayımı ile create arasında aynı kullanıcının ikinci isteği
+// beklemez, reddedilir; yoksa eşzamanlı istekler 5 sınırını birlikte geçerdi.
+// ponytail: süreç içi kilit, tek backend süreci varsayıyor (kuyruk işlemcisi de
+// öyle). Birden fazla instance'a geçilirse sayım create'ten sonra yapılmalı.
+const creatingFor = new Set();
 
 /** Hassas/büyük alanları çıkarır; API yanıtı için güvenli obje döner */
 function sanitizeJob(job) {
@@ -74,21 +77,7 @@ export const createMailJob = async (req, res) => {
             });
         }
 
-        // sanitizeFilter açık: $in operatörü trusted() ister.
-        // ponytail: sayım ile create arası kilitsiz; eşzamanlı isteklerle 5 aşılabilir,
-        // üst sınırı mailLimiter (15 dk'da 30). Gerekirse create'ten sonra yeniden say.
-        const activeJobs = await MailJob.countDocuments({
-            createdBy: req.user._id,
-            status: mongoose.trusted({ $in: ['pending', 'running'] }),
-        });
-        if (activeJobs >= MAX_ACTIVE_JOBS) {
-            return res.status(400).json({
-                success: false,
-                message: `Aynı anda en fazla ${MAX_ACTIVE_JOBS} aktif görev olabilir. Önceki görevlerin bitmesini bekleyin ya da iptal edin.`,
-            });
-        }
-
-        // Toplam ek boyutu kontrolü
+        // Toplam ek boyutu kontrolü (MongoDB BSON 16 MB limitini aşmamak için)
         const totalSize = (req.files ?? []).reduce((sum, f) => sum + f.size, 0);
         if (totalSize > MAX_TOTAL_ATTACHMENT_BYTES) {
             return res.status(400).json({
@@ -97,23 +86,43 @@ export const createMailJob = async (req, res) => {
             });
         }
 
-        const attachments = (req.files ?? []).map((f) => ({
-            filename: f.originalname,
-            contentType: f.mimetype,
-            data: f.buffer,
-        }));
+        const userId = String(req.user._id);
+        if (creatingFor.has(userId)) {
+            return res.status(429).json({ success: false, message: 'Önceki görev isteğiniz hâlâ işleniyor.' });
+        }
+        creatingFor.add(userId);
+        let job;
+        try {
+            // sanitizeFilter açık: $in operatörü trusted() ister.
+            const activeJobs = await MailJob.countDocuments({
+                createdBy: req.user._id,
+                status: mongoose.trusted({ $in: ['pending', 'running'] }),
+            });
+            if (activeJobs >= MAX_ACTIVE_JOBS) {
+                return res.status(400).json({
+                    success: false,
+                    message: `Aynı anda en fazla ${MAX_ACTIVE_JOBS} aktif görev olabilir. Önceki görevlerin bitmesini bekleyin ya da iptal edin.`,
+                });
+            }
 
-        const job = await MailJob.create({
-            createdBy: req.user._id,
-            subject,
-            recipients: validRecipients,
-            blocks,
-            attachments,
-        });
+            job = await MailJob.create({
+                createdBy: req.user._id,
+                subject,
+                recipients: validRecipients,
+                blocks,
+                attachments: (req.files ?? []).map((f) => ({
+                    filename: f.originalname,
+                    contentType: f.mimetype,
+                    data: f.buffer,
+                })),
+            });
+        } finally {
+            creatingFor.delete(userId);
+        }
 
         logger.info(
             `Mail kuyruğuna görev eklendi: ${validRecipients.length} alıcı` +
-            (attachments.length ? ` · ${attachments.length} ek` : '') +
+            (job.attachments.length ? ` · ${job.attachments.length} ek` : '') +
             ` (gönderen: ${req.user.email})`,
         );
 

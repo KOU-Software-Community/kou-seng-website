@@ -8,6 +8,10 @@ export const MAX_RECIPIENTS = 500; // Gmail kişisel hesap günlük gönderim s�
 // sıralı (15-30 sn aralık): 500 alıcılı bir görev ~3 saat, sonrakiler bekler.
 export const MAX_ACTIVE_JOBS = 5;
 export const MAX_SUBJECT_LENGTH = 300;
+export const MAX_TOTAL_ATTACHMENT_BYTES = 10 * 1024 * 1024; // ekler toplamı
+// Gövde sınırı: ekler + metin alanları ve multipart payı. Daha büyüğü belleğe
+// alınmadan 413 alır (multer tek tek dosyaya bakıyor; 10 × 10 MB yüklenebiliyordu).
+export const MAX_REQUEST_BYTES = MAX_TOTAL_ATTACHMENT_BYTES + 1024 * 1024;
 export const MAX_BLOCKS = 100;
 export const MAX_BLOCKS_JSON_LENGTH = 100_000; // ham JSON, ~100 KB
 const MAX_LIST_ITEMS = 50;

@@ -3,7 +3,9 @@ import { fileURLToPath } from 'url';
 import { getTransporter } from '../helpers/mailTransporter.js';
 import { buildMailHtml } from '../helpers/mailTemplateBuilder.js';
 import logger from '../helpers/logger.js';
-import { isSingleEmail, isValidSubject, parseBlocks, MAX_SUBJECT_LENGTH } from '../helpers/mailInput.js';
+import {
+    isSingleEmail, isValidSubject, parseBlocks, MAX_SUBJECT_LENGTH, MAX_TOTAL_ATTACHMENT_BYTES,
+} from '../helpers/mailInput.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const assetsDir = path.join(__dirname, '..', 'assets');
@@ -38,6 +40,15 @@ const sendSponsorMail = async (req, res) => {
 
         const mailUser = process.env.MAIL_USER;
         const mailSenderName = process.env.MAIL_SENDER_NAME || 'KOU SENG';
+
+        // Kuyrukla aynı toplam ek sınırı
+        const totalSize = (req.files ?? []).reduce((sum, f) => sum + f.size, 0);
+        if (totalSize > MAX_TOTAL_ATTACHMENT_BYTES) {
+            return res.status(400).json({
+                success: false,
+                message: `Toplam ek boyutu 10 MB'ı aşıyor (şu an: ${(totalSize / 1024 / 1024).toFixed(1)} MB). Daha küçük dosyalar kullanın.`,
+            });
+        }
 
         let transporter;
         try {
@@ -84,7 +95,7 @@ const sendSponsorMail = async (req, res) => {
         const attachmentInfo = req.files?.length
             ? ` | ekler: ${req.files.map(f => f.originalname).join(', ')}`
             : '';
-        logger.info(`Sponsorluk maili gönderildi: ${to} (gönderen: ${req.user?.email}${attachmentInfo})`);
+        logger.info(`Sponsorluk maili gönderildi (gönderen: ${req.user?.email}${attachmentInfo})`);
 
         return res.status(200).json({
             success: true,

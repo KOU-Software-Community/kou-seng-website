@@ -4219,7 +4219,7 @@
       "file_type": "code",
       "norm_label": "purgesubmissions()",
       "source_file": "backend/controllers/submissionsController.js",
-      "source_location": "L476"
+      "source_location": "L477"
     },
     {
       "id": "backend_controllers_submissionscontroller_updatesubmission",
@@ -4231,7 +4231,7 @@
       "file_type": "code",
       "norm_label": "updatesubmission()",
       "source_file": "backend/controllers/submissionsController.js",
-      "source_location": "L389"
+      "source_location": "L390"
     },
     {
       "id": "backend_helpers_applicationwindow_iswindowopen",
@@ -9253,7 +9253,7 @@
       "file_type": "code",
       "norm_label": "purge_scopes",
       "source_file": "backend/controllers/submissionsController.js",
-      "source_location": "L465"
+      "source_location": "L466"
     },
     {
       "id": "backend_controllers_submissionscontroller_quotecsvstring",
@@ -32140,7 +32140,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/controllers/submissionsController.js",
-      "source_location": "L389",
+      "source_location": "L390",
       "weight": 1.0
     },
     {
@@ -32151,7 +32151,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/controllers/submissionsController.js",
-      "source_location": "L465",
+      "source_location": "L466",
       "weight": 1.0
     },
     {
@@ -32162,7 +32162,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/controllers/submissionsController.js",
-      "source_location": "L476",
+      "source_location": "L477",
       "weight": 1.0
     },
     {
@@ -41186,7 +41186,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "backend/controllers/submissionsController.js",
-      "source_location": "L367",
+      "source_location": "L368",
       "weight": 1.0
     },
     {
@@ -42067,5 +42067,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "345710e2a1f16fd8a20f9d76ec856851c5628382"
+  "built_at_commit": "50043dfc69857fe637f6f9c9a46d6af5f640150b"
 }

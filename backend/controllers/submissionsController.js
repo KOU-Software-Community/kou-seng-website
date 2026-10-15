@@ -364,7 +364,8 @@ export const exportSubmissionsToCSV = async (req, res) => {
     const fields = [...baseFields, ...customFieldDefs];
 
     // JSON'dan CSV'ye dönüştür
-    const json2csvParser = new Parser({ fields, formatters: { string: csvString } });
+    // Türkçe Excel: ayırıcı ';', BOM olmadan UTF-8'i ANSI sanıp Türkçe karakterleri bozuyor
+    const json2csvParser = new Parser({ fields, delimiter: ';', withBOM: true, formatters: { string: csvString } });
     const csv = json2csvParser.parse(submissions);
 
     // CSV dosyasını indirilecek şekilde gönder

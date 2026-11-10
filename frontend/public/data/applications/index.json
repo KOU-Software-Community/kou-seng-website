@@ -30,5 +30,13 @@
     "description": "Oyun projelerinde çalışmak için teknik başvuru formu.",
     "type": "technical",
     "icon": "faGamepad"
+  },
+  {
+    "id": 5,
+    "slug": "gamejam",
+    "title": "Game Jam Başvurusu",
+    "description": "2–4 kişilik takımlarla game jam etkinliğimize katılmak için takım başvuru formu. Kulüp üyesi olmak gerekmez.",
+    "type": "event",
+    "icon": "faGamepad"
   }
 ]

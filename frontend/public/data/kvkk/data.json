@@ -1,9 +1,9 @@
 {
   "title": "Kişisel Verilerin Korunması Hakkında Aydınlatma Metni",
-  "lastUpdated": "28 Eylül 2026",
+  "lastUpdated": "10 Kasım 2026",
   "intro": [
     "KOÜ Yazılım Kulübü (KOU SENG) olarak, internet sitemiz (kouseng.com) üzerinden ilettiğiniz kişisel verileri 6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK) ve ilgili mevzuata uygun olarak işliyoruz.",
-    "Bu metin, KVKK'nın 10. maddesi ve Aydınlatma Yükümlülüğünün Yerine Getirilmesinde Uyulacak Usul ve Esaslar Hakkında Tebliğ uyarınca; sitedeki genel üyelik ve teknik takım başvuru formlarını, iletişim formunu kullanan ve siteyi ziyaret eden kişileri bilgilendirmek amacıyla hazırlanmıştır."
+    "Bu metin, KVKK'nın 10. maddesi ve Aydınlatma Yükümlülüğünün Yerine Getirilmesinde Uyulacak Usul ve Esaslar Hakkında Tebliğ uyarınca; sitedeki genel üyelik, teknik takım ve game jam başvuru formlarını, iletişim formunu kullanan ve siteyi ziyaret eden kişileri bilgilendirmek amacıyla hazırlanmıştır."
   ],
   "sections": [
     {
@@ -26,6 +26,8 @@
         "İletişim bilgileri: e-posta adresi, telefon numarası.",
         "Eğitim bilgileri: öğrenci numarası, fakülte, bölüm, sınıf.",
         "Teknik takım başvurularına özgü bilgiler: GitHub, LinkedIn, Kaggle, Itch.io ve portfolyo bağlantıları; ilgi alanları, deneyim (yapay zeka destekli geliştirme araçları, API ve cloud deneyimi dahil) ve motivasyon sorularına verdiğiniz yanıtlar.",
+        "Game jam başvurularına özgü bilgiler: takım adı; takım lideri ve ekip üyelerinin adı soyadı, doğum tarihi, üniversitesi, bölümü, CV ve oyun projesi bağlantıları, uzmanlık alanları ve fotoğraf/video iznine ilişkin tercihleri; takım liderinin e-posta adresi, telefon numarası ve senaryo sorularına verdiği yanıtlar. Ekip üyelerinin bilgilerini takım lideri girer.",
+        "Görsel ve işitsel veriler: game jam etkinliği sırasında çekilen fotoğraf ve videolar (yalnızca izin verenler için paylaşılır).",
         "Başvuru değerlendirme bilgileri: başvurunuzun tarihi, durumu (beklemede, incelendi, kabul edildi, reddedildi) ve kulüp yöneticilerinin değerlendirme notları.",
         "İletişim formu bilgileri: ad, e-posta adresi, mesajınızın konusu ve içeriği.",
         "İşlem güvenliği bilgisi: IP adresi."
@@ -38,6 +40,8 @@
       "title": "3. Kişisel Verilerin İşlenme Amaçları",
       "items": [
         "Genel üyelik ve teknik takım başvurularının alınması, değerlendirilmesi ve sonuçlandırılması,",
+        "Game jam başvurularının alınması ve değerlendirilmesi, etkinliğin düzenlenmesi, katılımcıların yaşının ve etkinlik kurallarının kabulünün kontrolü, etkinlik sırasında acil durumlarda takım lideriyle iletişim kurulması,",
+        "İzin verilmesi hâlinde, game jam etkinliğinde çekilen fotoğraf ve videoların kulübün internet sitesinde ve sosyal medya hesaplarında paylaşılması,",
         "Başvurunuz veya mesajınızla ilgili sizinle iletişime geçilmesi,",
         "İletişim formu üzerinden ilettiğiniz soru, öneri ve taleplerin yanıtlanması,",
         "Başvurusu kabul edilen üyelerle kulüp etkinliklerinin ve takım çalışmalarının yürütülmesi,",
@@ -54,12 +58,14 @@
         "Verileriniz, KVKK'nın 5. maddesinin 2. fıkrasında yer alan aşağıdaki hukuki sebeplere dayanılarak işlenir:"
       ],
       "items": [
-        "(c) Bir sözleşmenin kurulması veya ifasıyla doğrudan ilgili olması: kulüp üyeliği ve takım başvurularının alınması, değerlendirilmesi ve sonuçlandırılması.",
+        "(c) Bir sözleşmenin kurulması veya ifasıyla doğrudan ilgili olması: kulüp üyeliği, takım ve game jam başvurularının alınması, değerlendirilmesi ve sonuçlandırılması.",
         "(f) Temel hak ve özgürlüklerinize zarar vermemek kaydıyla, kulübün meşru menfaatleri için zorunlu olması: iletişim formu mesajlarının yanıtlanması, site ve bilgi güvenliğinin sağlanması.",
         "(ç) Kulübün hukuki yükümlülüğünü yerine getirebilmesi için zorunlu olması: mevzuattan doğan bir yükümlülük bulunması hâlinde."
       ],
       "after": [
-        "Bu hukuki sebepler açık rızanızı gerektirmediğinden formlarda ayrıca onay istenmez. Formları doldurmak zorunlu değildir; ancak zorunlu alanlar doldurulmadan başvurunuz alınamaz ve değerlendirilemez."
+        "Game jam etkinliğinde çekilen fotoğraf ve videoların paylaşılması ise KVKK'nın 5. maddesinin 1. fıkrası uyarınca açık rızanıza dayanır. Bu izin isteğe bağlıdır; vermemeniz başvurunuzu etkilemez ve izninizi info@kouseng.com adresine yazarak istediğiniz zaman geri alabilirsiniz.",
+        "Diğer işlemler yukarıdaki hukuki sebeplere dayandığından açık rızanızı gerektirmez. Formları doldurmak zorunlu değildir; ancak zorunlu alanlar doldurulmadan başvurunuz alınamaz ve değerlendirilemez.",
+        "Game jam başvurusunda ekip üyelerinin bilgilerini takım lideri girer; lider, formu göndermeden önce ekip üyelerini bu metin hakkında bilgilendirdiğini ve bilgilerini paylaşmak için onaylarını aldığını beyan eder."
       ]
     },
     {

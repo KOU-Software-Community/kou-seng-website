@@ -17,6 +17,7 @@ export const APPLICATION_LABELS: Record<string, string> = {
   'mobil-web': 'Mobil ve Web Geliştirme Takımı',
   ai: 'Yapay Zeka Takımı',
   game: 'Oyun Geliştirme Takımı',
+  gamejam: 'Game Jam',
 };
 
 // Sitede tarih her zaman Türkiye saatiyle: "5 Ekim 2026 23:59"

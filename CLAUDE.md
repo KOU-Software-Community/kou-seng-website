@@ -441,11 +441,11 @@ string alanında boş sonuç.
 
 ### Başvuru dönemleri
 
-Formların (`general`, `mobil-web`, `ai`, `game`) açık/kapalı durumu backend'de,
+Formların (`general`, `mobil-web`, `ai`, `game`, `gamejam`) açık/kapalı durumu backend'de,
 form başına bir `ApplicationWindow` kaydında durur. Kural
 `helpers/applicationWindow.js`'te (birim testi yanında): form
 `[opensAt, closesAt)` aralığında açık; `opensAt` yoksa kapalı, `closesAt` yoksa
-süresiz açık. Kayıt yoksa genel üyelik açık, teknik formlar kapalı. Karar
+süresiz açık. Kayıt yoksa genel üyelik açık, teknik formlar ve game jam kapalı. Karar
 sunucu saatiyle verilir; kapalı forma gelen başvuru, gövdeye bakılmadan 403
 alır ("Bu başvuru şu anda kapalı."). Tarihleri `PATCH /submissions/windows/:slug`
 değiştirir, yalnızca admin.
@@ -462,7 +462,7 @@ kapalı görünür.
 `scripts/windows-smoke.js` bunları çalışan backend'e karşı sınar. İlk admini
 `KEY` ile oluşturduğu için kullanıcısı olmayan boş bir veritabanı ister ve
 yalnızca `localhost`/`127.0.0.1`'e koşar (başka adreste exit 2). Tarih değiştirip
-başvuru yazar, 5 form isteği harcar ve genel formu açık bırakır; CI'da bu yüzden
+başvuru yazar (game jam dahil), 11 form isteği harcar ve genel formu açık bırakır; CI'da bu yüzden
 `loadtest`'ten önce koşar, sonrasında form limiti dolmuş olurdu.
 
 ### Başvuru formuna alan ekleme
@@ -497,6 +497,25 @@ Tuzaklar:
 - Mongo'da migration gerekmez (`customFields` `Mixed`); CSV dışa aktarımı yeni
   anahtarı kendiliğinden sütun yapar.
 
+### Game jam başvurusu
+
+`/apply/gamejam` ayrı bir sayfa (`components/pages/gamejam.tsx`), JSON form
+motorunu kullanmaz: takım (lider + 1–3 üye) tekrar eden alanlar ve çoklu seçim
+içeriyor, `customFields` yalnızca düz metin kabul ediyor. Veri ayrı koleksiyonda
+(`JamApplication`), uçlar `/gamejam` (`backend/ENDPOINTS.md`). Doğrulama
+`helpers/jamInput.js`'te, birim testi yanında. Açılış/kapanış **Başvuru
+Dönemleri**'nde (`gamejam` slug'ı); panelde **Game Jam** sayfası (yalnızca
+admin) listeler, CSV indirir ve CSV'den sonra hepsini siler. Genel üyelik ve
+**Veri Yönetimi** bu kayıtları kapsamaz.
+
+- Disiplin ve soru anahtarları iki yerde: `frontend/src/lib/gameJam.ts` ve
+  `backend/helpers/jamInput.js`. Ayrışırsa her gönderim 400 döner;
+  `check:content` karşılaştırır. Soru/seçenek metni yalnızca frontend'de,
+  backend A–D harfini saklar; seçenek sırası değişirse eski kayıtların anlamı
+  da değişir.
+- Fotoğraf/video izni kişi başına ve isteğe bağlı (KVKK açık rıza); zorunlu
+  yapılmamalı. Forma alan eklenirse `kvkk/data.json` da güncellenmeli.
+
 ### Başvuruları silme (saklama süresi)
 
 Başvurular kişisel veri içeriyor; değerlendirme dönemi bitince silinmeli. Yol
@@ -528,10 +547,10 @@ istekler sayılmaz, mail kuyruğu sık yokluyor). Ek olarak, muafiyetsiz:
 `POST /auth/login` ve `PATCH /auth/password` birlikte 15 dk'da 10 **hatalı**
 deneme. `POST /mail/send` ve `POST /mail/queue` birlikte 15 dk'da 30 (token'lı
 istekler de sayılır). Başvuru akışının kendi limitleri var ve genel limite **sayılmaz**:
-`GET /submissions/windows` 15 dk'da 600, başvuru ve iletişim formları birlikte
-15 dk'da 100. Sebep kampüs Wi-Fi'ı: yüzlerce öğrenci aynı dış IP'yi paylaşıyor;
+`GET /submissions/windows` 15 dk'da 600, başvuru (game jam dahil) ve iletişim
+formları birlikte 15 dk'da 100. Sebep kampüs Wi-Fi'ı: yüzlerce öğrenci aynı dış IP'yi paylaşıyor;
 başvuru akışı genel limite sayılsaydı ~30 başvurandan sonra o ağdaki herkes
-formları kapalı görürdü. CI'da `windows-smoke` önce 7 form isteği harcıyor,
+formları kapalı görürdü. CI'da `windows-smoke` önce 11 form isteği harcıyor,
 `--submit --n 40`'ın hepsi 201 alır; loadtest 429'u hata saymaz.
 
 Site ve API Cloudflare arkasında. Production'da istek Express'e

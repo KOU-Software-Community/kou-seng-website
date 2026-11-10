@@ -35,6 +35,7 @@ const navItems: NavItem[] = [
   { label: 'Duyurular', href: '/admin/dashboard/announcements' },
   { label: 'Genel Üyelik', href: '/admin/dashboard/general-membership' },
   { label: 'Teknik Takım', href: '/admin/dashboard/technical-team' },
+  { label: 'Game Jam', href: '/admin/dashboard/gamejam' },
   { label: 'Başvuru Dönemleri', href: '/admin/dashboard/application-windows' },
   { label: 'Sponsor Mail', href: '/admin/dashboard/sponsor-mail' },
   { label: 'İletişim', href: '/admin/dashboard/contact' },

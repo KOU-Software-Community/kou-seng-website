@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faLock, faClock, faUsers, faCode, faLaptopCode, faRobot } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faLock, faClock, faUsers, faCode, faLaptopCode, faRobot, faGamepad } from '@fortawesome/free-solid-svg-icons';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { useApplicationWindows } from '@/hooks/useApplicationWindows';
 import { windowSummary } from '@/lib/applicationWindow';
@@ -22,6 +22,8 @@ const getIconByName = (iconName: string) => {
             return faRobot;
         case 'faCode':
             return faCode;
+        case 'faGamepad':
+            return faGamepad;
         default:
             return faCode;
     }

@@ -25,6 +25,7 @@ const navItems: NavItem[] = [
     ],
   },
   ...(RSS_ENABLED ? [{ title: "Yayınlar", href: "/publications" }] : []),
+  { title: "Game Jam", href: "/gamejam" },
   { title: "Başvuru", href: "/apply" },
   { title: "İletişim", href: "/contact" },
 ];
@@ -72,7 +73,7 @@ export default function Header() {
 
         {/* Masaüstü navigasyon - Orta (tam ortada) */}
         <div className="flex justify-center w-full">
-          <nav className="hidden md:flex md:items-center md:gap-8">
+          <nav className="hidden md:flex md:items-center md:gap-1 lg:gap-8">
             {navItems.map((item) => {
               const isLink = (it: NavItem): it is NavLinkItem => (it as NavLinkItem).href !== undefined;
               if (isLink(item)) {
@@ -80,7 +81,7 @@ export default function Header() {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`relative px-3 py-2 text-sm font-medium transition-colors ${
+                    className={`relative whitespace-nowrap px-2 py-2 lg:px-3 text-sm font-medium transition-colors ${
                       activeItem === item.href
                         ? "text-primary after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:bg-primary after:content-['']"
                         : "text-foreground hover:text-primary"
@@ -95,7 +96,7 @@ export default function Header() {
               return (
                 <div key={item.title} className="relative group">
                   <span
-                    className={`relative px-3 py-2 text-sm font-medium cursor-default select-none ${
+                    className={`relative whitespace-nowrap px-2 py-2 lg:px-3 text-sm font-medium cursor-default select-none ${
                       isAnyChildActive
                         ? "text-primary after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:bg-primary after:content-['']"
                         : "text-foreground"

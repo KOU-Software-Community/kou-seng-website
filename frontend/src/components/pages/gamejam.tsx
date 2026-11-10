@@ -6,7 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { get, useFieldArray, useForm, type FieldPath } from 'react-hook-form';
 import * as z from 'zod';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faPlus, faSpinner, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faArrowDown, faCheck, faGamepad, faPlus, faSpinner, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -59,6 +59,23 @@ const emptyPerson = {
 };
 
 const checkboxClass = 'mt-1 h-4 w-4 shrink-0 accent-[var(--turkuaz)] cursor-pointer';
+
+// Ana sayfa hero'sundaki gibi kumandanın çevresinde piksel kareler: [sol %, üst %, boyut px, opaklık, gecikme sn]
+const HERO_PIXELS: [number, number, number, number, number?][] = [
+    [6, 20, 12, 0.7], [18, 34, 8, 0.4, -0.4], [4, 60, 10, 0.55], [16, 78, 6, 0.8],
+    [86, 12, 14, 0.5], [92, 34, 8, 0.85, -1.2], [76, 6, 10, 0.3], [88, 66, 12, 0.6, -2],
+];
+
+// Form bölümleri oyun seviyeleri gibi: piksel üst etiket + normal başlık
+const levelTitle = (level: number, title: string) => (
+    <div>
+        <p className="mb-1 font-pixel text-[10px] lowercase text-(--turkuaz)">level {level}</p>
+        <h3 className="text-lg font-semibold">{title}</h3>
+    </div>
+);
+const playerTag = (n: number) => (
+    <span className="mr-2 inline-grid h-6 min-w-8 place-items-center rounded-sm bg-(--turkuaz)/15 px-1 font-pixel text-[9px] text-(--turkuaz)">p{n}</span>
+);
 
 export default function GameJam() {
     const { submit } = useGameJam();
@@ -147,6 +164,7 @@ export default function GameJam() {
         );
     };
 
+    const content = () => {
     if (isLoading) {
         return (
             <div className="flex flex-col items-center justify-center min-h-[60vh] p-6">
@@ -166,7 +184,7 @@ export default function GameJam() {
 
     if (!appWindow?.isOpen) {
         return (
-            <Card className="w-full max-w-3xl mx-auto my-8">
+            <Card className="w-full max-w-3xl mx-auto">
                 {header}
                 <CardContent>
                     <div className="p-4 bg-muted rounded-md text-center">
@@ -182,7 +200,7 @@ export default function GameJam() {
 
     if (referenceId !== null) {
         return (
-            <Card className="w-full max-w-3xl mx-auto my-8">
+            <Card className="w-full max-w-3xl mx-auto">
                 <CardHeader className="text-center">
                     <div className="mx-auto bg-primary/10 p-3 rounded-full w-16 h-16 flex items-center justify-center mb-4">
                         <FontAwesomeIcon icon={faCheck} className="h-8 w-8 text-primary" />
@@ -199,18 +217,18 @@ export default function GameJam() {
     }
 
     return (
-        <Card className="w-full max-w-3xl mx-auto my-8">
+        <Card className="w-full max-w-3xl mx-auto">
             {header}
             <CardContent>
                 <p className="mb-6 text-sm text-muted-foreground">{windowSummary(appWindow)}</p>
                 <form onSubmit={handleSubmit(onSubmit)} className="grid gap-8" noValidate>
                     <section className="grid gap-4">
-                        <h3 className="text-lg font-semibold">Takım</h3>
+                        {levelTitle(1, 'Takım')}
                         {textField({ name: 'teamName', label: 'Ekip / takım adı', placeholder: 'Takımınızın adı' })}
                     </section>
 
                     <section className="grid gap-4 border-t pt-6">
-                        <h3 className="text-lg font-semibold">Takım Lideri</h3>
+                        <div className="flex items-end gap-1">{playerTag(1)}{levelTitle(2, 'Takım Lideri')}</div>
                         {textField({ name: 'leader.name', label: 'Ad soyad' })}
                         <div className="grid gap-4 sm:grid-cols-2">
                             {textField({ name: 'leader.email', label: 'E-posta (iletişim için)', type: 'email' })}
@@ -221,13 +239,13 @@ export default function GameJam() {
 
                     <section className="grid gap-4 border-t pt-6">
                         <div className="flex items-center justify-between gap-2">
-                            <h3 className="text-lg font-semibold">Ekip Üyeleri</h3>
+                            {levelTitle(3, 'Ekip Üyeleri')}
                             <span className="text-sm text-muted-foreground">{members.fields.length}/{MAX_MEMBERS}</span>
                         </div>
                         {members.fields.map((field, i) => (
                             <div key={field.id} className="grid gap-4 rounded-md border p-4">
                                 <div className="flex items-center justify-between gap-2">
-                                    <h4 className="font-medium">{i + 2}. kişi</h4>
+                                    <h4 className="flex items-center font-medium">{playerTag(i + 2)}Ekip üyesi</h4>
                                     {members.fields.length > 1 && (
                                         <Button type="button" variant="ghost" size="sm" onClick={() => members.remove(i)} className="cursor-pointer">
                                             <FontAwesomeIcon icon={faTrash} className="mr-2 h-3 w-3" />
@@ -250,7 +268,7 @@ export default function GameJam() {
 
                     <section className="grid gap-6 border-t pt-6">
                         <div>
-                            <h3 className="text-lg font-semibold">Senaryo Soruları</h3>
+                            {levelTitle(4, 'Senaryo Soruları')}
                             <p className="text-sm text-muted-foreground">Takım lideri olarak size en yakın seçeneği işaretleyin.</p>
                         </div>
                         {QUESTIONS.map((q, qi) => (
@@ -271,7 +289,7 @@ export default function GameJam() {
                     </section>
 
                     <section className="grid gap-3 border-t pt-6">
-                        <h3 className="text-lg font-semibold">Onaylar</h3>
+                        {levelTitle(5, 'Onaylar')}
                         <label className="flex items-start gap-2 text-sm cursor-pointer">
                             <input type="checkbox" className={checkboxClass} {...register('rulesConsent')} />
                             <span>
@@ -306,11 +324,71 @@ export default function GameJam() {
                                 Gönderiliyor
                             </>
                         ) : (
-                            'Başvuruyu Gönder'
+                            'Takımı Kaydet'
                         )}
                     </Button>
                 </form>
             </CardContent>
         </Card>
+    );
+};
+
+    return (
+        <main className="flex flex-col gap-12 pb-16">
+            <section className="bg-night overflow-hidden py-16 text-white md:py-24">
+                <div className="container grid items-center gap-10 lg:grid-cols-[1.2fr_1fr]">
+                    <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
+                        {/* Piksel font Türkçe büyük harfleri bozuk çiziyor: rozet küçük harf */}
+                        <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-(--acik-mavi)/30 bg-white/5 px-4 py-1.5 font-pixel text-[10px] lowercase text-(--acik-mavi) sm:text-xs">
+                            <span className="size-2 bg-(--turkuaz)" />
+                            <span>kou seng game jam</span>
+                        </div>
+                        <h1 className="mb-6 text-4xl font-extrabold tracking-tight md:text-5xl">
+                            Takımını kur,{' '}
+                            <span className="bg-gradient-to-br from-(--acik-mavi) to-[#3FB0DC] bg-clip-text text-transparent">oyununu yap</span>
+                            <span aria-hidden="true" className="ml-1 inline-block h-[0.8em] w-[0.42em] translate-y-[0.06em] bg-(--turkuaz) motion-safe:animate-blink" />
+                        </h1>
+                        <p className="mb-6 max-w-xl text-lg text-[#C4D9E6]">
+                            Tema açıklanır, süre başlar. 2–4 kişilik takımınla sıfırdan bir oyun geliştir: programcı, sanatçı,
+                            oyun tasarımcısı, ses tasarımcısı ve hikâye yazarı, herkesin yeri var. Kulüp üyesi olmak gerekmez.
+                        </p>
+                        <ul className="mb-8 flex flex-wrap justify-center gap-2 text-sm lg:justify-start">
+                            {['2–4 kişilik takımlar', 'Formu takım lideri doldurur', appWindow ? windowSummary(appWindow) : 'Başvuru durumu yükleniyor'].map((chip) => (
+                                <li key={chip} className="rounded-md border border-(--acik-mavi)/25 bg-white/5 px-3 py-1.5 text-[#C4D9E6]">{chip}</li>
+                            ))}
+                        </ul>
+                        {appWindow?.isOpen && referenceId === null && (
+                            <Button asChild size="lg" className="bg-cta text-white shadow-cta hover:brightness-110">
+                                <a href="#basvuru">
+                                    Takımını kaydet <FontAwesomeIcon icon={faArrowDown} className="ml-2 h-4 w-4" />
+                                </a>
+                            </Button>
+                        )}
+                    </div>
+
+                    {/* Süs: parıltı, piksel kareler, kumanda ve yanıp sönen "press start" */}
+                    <div aria-hidden="true" className="relative mx-auto grid aspect-square w-full max-w-[220px] place-items-center sm:max-w-[320px] lg:max-w-sm">
+                        <div className="absolute inset-0 m-auto size-[60%] rounded-full bg-(--turkuaz)/55 blur-[60px]" />
+                        {HERO_PIXELS.map(([left, top, size, opacity, delay], i) => (
+                            <span
+                                key={i}
+                                className={delay !== undefined ? 'absolute bg-(--acik-mavi) motion-safe:animate-pxspin' : 'absolute bg-(--acik-mavi)'}
+                                // Süre inline: animate-pxspin'in animation kısaltması bir sınıfla verilen süreyi eziyor.
+                                style={{ left: `${left}%`, top: `${top}%`, width: size, height: size, opacity, ...(delay !== undefined && { animationDuration: '2.4s', animationDelay: `${delay}s` }) }}
+                            />
+                        ))}
+                        <div className="relative flex flex-col items-center gap-6">
+                            <FontAwesomeIcon icon={faGamepad} className="text-[6rem] text-white drop-shadow-[0_8px_24px_rgb(3_137_188_/_0.6)] sm:text-[8rem]" />
+                            <span className="font-pixel text-xs text-(--acik-mavi) motion-safe:animate-blink">press start</span>
+                        </div>
+                    </div>
+                </div>
+                <div aria-hidden="true" className="pixel-edge bottom-0" />
+            </section>
+
+            <section id="basvuru" className="container scroll-mt-24">
+                {content()}
+            </section>
+        </main>
     );
 }

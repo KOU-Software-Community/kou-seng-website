@@ -86,7 +86,7 @@ jobs:
     # sonrasında form limiti dolmuş olur.
     - run: node scripts/windows-smoke.js
     # Formların kendi limiti var (15 dk'da 100, genel limite sayılmaz):
-    # --submit 40 → 40×201 (smoke önce 7 form isteği harcıyor). Genel limit
+    # --submit 40 → 40×201 (smoke önce 11 form isteği harcıyor). Genel limit
     # (15 dk'da 100) /health'e.
     - run: node scripts/loadtest.js --submit --n 40
     - run: node scripts/loadtest.js --n 100

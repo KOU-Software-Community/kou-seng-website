@@ -22,7 +22,7 @@ const CLOSED_MESSAGE = "Bu başvuru şu anda kapalı.";
 // Yalnızca rakam, boşluk, parantez ve +/- içeren değerler (telefon gibi)
 // formül taşıyamaz; görünür bir ' çıkmasın diye olduğu gibi bırakılır.
 const quoteCsvString = formatters.string();
-const csvString = (value) =>
+export const csvString = (value) =>
   quoteCsvString(/^[=+\-@\t\r]/.test(value) && !/^\+?[\d\s()-]+$/.test(value) ? `'${value}` : value);
 
 // @desc    Genel başvuru oluştur

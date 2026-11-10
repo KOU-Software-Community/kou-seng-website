@@ -32,7 +32,7 @@ test('kapanış yoksa süresiz açık', () =>
 test('varsayılanlar: genel açık, teknikler kapalı', () => {
   assert.deepEqual(Object.keys(DEFAULT_WINDOWS), APPLICATION_SLUGS);
   assert.equal(isWindowOpen(DEFAULT_WINDOWS.general, T), true);
-  for (const s of ['mobil-web', 'ai', 'game']) assert.equal(isWindowOpen(DEFAULT_WINDOWS[s], T), false);
+  for (const s of ['mobil-web', 'ai', 'game', 'gamejam']) assert.equal(isWindowOpen(DEFAULT_WINDOWS[s], T), false);
 });
 
 test('toPublicWindow ISO döndürür', () => assert.deepEqual(

@@ -240,6 +240,24 @@ console.log('\napplications/*.json — basvuru formlari ↔ backend');
   }
 }
 
+console.log('\ngamejam — form secenekleri ↔ backend');
+{
+  // Formdaki disiplin/soru anahtarlari backend'in kabul ettikleriyle ayni olmali;
+  // ayrisirsa her gonderim 400 doner, build ve form ekranda normal gorunur.
+  const read = (p) => (existsSync(p) ? readFileSync(p, 'utf8') : '');
+  const fe = read(join(ROOT, 'src', 'lib', 'gameJam.ts'));
+  const be = read(join(ROOT, '..', 'backend', 'helpers', 'jamInput.js'));
+  const block = (src, name, end) => src.match(new RegExp(`export const ${name} = [\\[{]([\\s\\S]*?)\\n[\\]}]${end}`))?.[1];
+  const feIds = (name) => [...(block(fe, name, ' as const;') ?? '').matchAll(/^ {4}id: '([\w-]+)'/gm)].map((m) => m[1]);
+  const feDisc = [...(block(fe, 'DISCIPLINES', ' as const;') ?? '').matchAll(/id: '([\w-]+)'/g)].map((m) => m[1]);
+  const beKeys = (name) => [...(block(be, name, ';') ?? '').matchAll(/^ {2}(\w+):/gm)].map((m) => m[1]);
+  for (const [label, a, b] of [['DISCIPLINES', feDisc, beKeys('DISCIPLINES')], ['QUESTIONS', feIds('QUESTIONS'), beKeys('QUESTIONS')]]) {
+    if (!a.length || !b.length) bad('gamejam', `${label} okunamadi (olculemedi)`);
+    else if (a.join() !== b.join()) bad('gamejam', `${label}: form [${a}] ≠ backend [${b}] — her gonderim 400 doner`);
+    else ok('gamejam', `${label}: ${a.length} anahtar ayni`);
+  }
+}
+
 console.log('\nsahipsiz gorseller (bilgi — hata degil)');
 {
   const referenced = new Set();

@@ -63,8 +63,8 @@ listesine bak.
   - **Yanıtlar:** 201 kaydedildi; 400 eksik veya geçersiz alan; 403 form şu anda kapalı (`"Bu başvuru şu anda kapalı."`); 409 aynı kategoride aynı öğrenci no, e-posta ya da telefonla önceki başvuru; 429 istek sınırı.
 
 - **GET** `/submissions/windows`
-  - **Açıklama:** Başvuru formlarının açık/kapalı durumu, herkese açık. Form `[opensAt, closesAt)` aralığında açık: `opensAt` yoksa kapalı, `closesAt` yoksa süresiz açık. Veritabanında kayıt yoksa genel üyelik açık, teknik formlar kapalı. Karar sunucu saatiyle verilir; yanıt önbelleğe alınmaz.
-  - **Yanıt:** `{ "success": true, "data": [{ "slug": "general" | "mobil-web" | "ai" | "game", "opensAt": "ISO 8601" | null, "closesAt": "ISO 8601" | null, "state": "open" | "scheduled" | "closed", "isOpen": boolean }] }`
+  - **Açıklama:** Başvuru formlarının açık/kapalı durumu, herkese açık. Form `[opensAt, closesAt)` aralığında açık: `opensAt` yoksa kapalı, `closesAt` yoksa süresiz açık. Veritabanında kayıt yoksa genel üyelik açık, teknik formlar ve game jam kapalı. Karar sunucu saatiyle verilir; yanıt önbelleğe alınmaz.
+  - **Yanıt:** `{ "success": true, "data": [{ "slug": "general" | "mobil-web" | "ai" | "game" | "gamejam", "opensAt": "ISO 8601" | null, "closesAt": "ISO 8601" | null, "state": "open" | "scheduled" | "closed", "isOpen": boolean }] }`
 
 - **PATCH** `/submissions/windows/:slug`
   - **Açıklama:** Formun açılış ve kapanış tarihini ayarlar (yalnızca admin). İkisi de `null` ise form kapalıdır. Tarih, saat dilimi belirtilmiş ISO 8601 metni olmalı (`2026-10-05T15:00:00.000Z` ya da `2026-10-05T18:00:00+03:00`).
@@ -88,6 +88,21 @@ listesine bak.
   - **Açıklama:** Seçilen kapsamdaki başvuruları kalıcı olarak siler (yalnızca admin). `scope`: `all`, `general`, `mobil-web`, `ai` veya `game`. `expectedCount` kapsamdaki güncel kayıt sayısıyla tutmazsa hiçbir şey silinmez, 409 döner. Paneldeki "Veri Yönetimi" sayfası silmeden önce `/submissions/export` ile yedek indirtir.
   - **Gerekli Header:** `Authorization: Bearer <token>`
   - **Request Body:** `{ "scope": "string", "expectedCount": number }`
+
+## Game Jam Başvuruları
+
+Takım başvurusu (lider + 1–3 üye). Doğrulama `helpers/jamInput.js`'te (testi yanında);
+form `frontend/src/components/pages/gamejam.tsx`. Açık/kapalı durumu `gamejam` slug'ıyla
+`/submissions/windows`'tan gelir.
+
+- **POST** `/gamejam`
+  - **Açıklama:** Başvuruyu kaydeder. Başvuru ve iletişim formlarıyla aynı limit (15 dk'da 100), genel limite sayılmaz.
+  - **Request Body:** `{ "teamName": "string", "leader": Kişi & { "email": "string", "phone": "string" }, "members": Kişi[] (1–3), "answers": { "teamwork" | "scope" | "conflict" | "motivation" | "feedback": "A" | "B" | "C" | "D" }, "rulesConsent": true, "kvkkConsent": true }`; Kişi: `{ "name", "birthDate": "YYYY-MM-DD", "university", "department", "cvUrl": "http(s)://…", "projectUrl"?: "http(s)://…", "disciplines": ("developer" | "artist" | "designer" | "sound" | "narrative" | "other")[], "otherDiscipline"?: "string", "mediaConsent": boolean }`. Bilinmeyen alanlar atılır.
+  - **Yanıtlar:** 201 kaydedildi; 400 eksik/geçersiz alan; 403 form kapalı; 409 aynı takım adı (büyük/küçük harf duyarsız) ya da aynı lider e-postası/telefonu; 429 istek sınırı.
+
+- **GET** `/gamejam` — tüm başvurular, en yeni önce (yalnızca admin).
+- **GET** `/gamejam/export` — CSV, kişi başına bir satır; senaryo cevapları lider satırında (yalnızca admin).
+- **POST** `/gamejam/purge` — `{ "expectedCount": number }`; tüm game jam başvurularını siler, sayı tutmazsa 409 (yalnızca admin).
 
 ## Duyurular (Announcements) - YAPILDI
 

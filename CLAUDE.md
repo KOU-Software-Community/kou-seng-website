@@ -513,8 +513,9 @@ admin) listeler, CSV indirir ve CSV'den sonra hepsini siler. Genel üyelik ve
   `check:content` karşılaştırır. Soru/seçenek metni yalnızca frontend'de,
   backend A–D harfini saklar; seçenek sırası değişirse eski kayıtların anlamı
   da değişir.
-- Fotoğraf/video izni kişi başına ve isteğe bağlı (KVKK açık rıza); zorunlu
-  yapılmamalı. Forma alan eklenirse `kvkk/data.json` da güncellenmeli.
+- Fotoğraf/video izni isteğe bağlı açık rıza (KVKK m.5/1): formda yalnızca
+  lider kendi adına işaretler, üyelere etkinlikte sorulur; backend üyelerinkini
+  hep `false` saklar. Zorunlu yapılmamalı, lider üyeler adına işaretlememeli. Forma alan eklenirse `kvkk/data.json` da güncellenmeli.
 
 ### Başvuruları silme (saklama süresi)
 

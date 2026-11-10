@@ -24,6 +24,14 @@ test('geçerli başvuru: e-posta küçük harfe iner, bilinmeyen alan atılır',
   assert.equal(out.members[0].email, undefined);
   assert.equal(out.status, undefined);
   assert.equal(out.members.length, 1);
+  assert.equal(out.leader.phone, '+905551234567');
+});
+
+test('fotoğraf izni yalnızca liderin kendi beyanı; üyelerinki saklanmaz', () => {
+  const out = parseJamApplication(valid({ members: [person({ mediaConsent: true })] }), NOW);
+  assert.equal(out.leader.mediaConsent, true);
+  assert.equal(out.members[0].mediaConsent, false);
+  assert.ok(parseJamApplication(valid({ members: [person({ mediaConsent: undefined })] }), NOW));
 });
 
 test('ekip 2–4 kişi: 0 ya da 4 üye reddedilir', () => {
@@ -46,6 +54,8 @@ test('disiplin: en az bir, bilinen anahtar, tekrarsız', () => {
   assert.equal(parseJamApplication(valid({ members: [person({ disciplines: [] })] }), NOW), null);
   assert.equal(parseJamApplication(valid({ members: [person({ disciplines: ['hacker'] })] }), NOW), null);
   assert.equal(parseJamApplication(valid({ members: [person({ disciplines: ['sound', 'sound'] })] }), NOW), null);
+  // ['developer'] dizisi Object.hasOwn'da 'developer'a dönüşüyordu, Mongoose 500 veriyordu
+  assert.equal(parseJamApplication(valid({ members: [person({ disciplines: [['developer']] })] }), NOW), null);
   // "Diğer" seçilmediyse açıklaması saklanmaz
   assert.equal(parseJamApplication(valid({ members: [person({ otherDiscipline: 'VFX' })] }), NOW).members[0].otherDiscipline, '');
   assert.equal(parseJamApplication(valid({ members: [person({ disciplines: ['other'], otherDiscipline: 'VFX' })] }), NOW).members[0].otherDiscipline, 'VFX');
@@ -62,6 +72,8 @@ test('bağlantılar http(s), lider telefonu ve e-postası zorunlu', () => {
   assert.equal(parseJamApplication(valid({ members: [person({ projectUrl: 'itch.io/oyun' })] }), NOW), null);
   assert.equal(parseJamApplication(valid({ leader: person({ email: 'ada@example.com' }) }), NOW), null);
   assert.equal(parseJamApplication(valid({ leader: person({ email: 'a@b.co, c@d.co', phone: '05551234567' }) }), NOW), null);
+  assert.equal(parseJamApplication(valid({ leader: person({ email: 'a@b.co', phone: '----------' }) }), NOW), null);
+  assert.equal(parseJamApplication(valid({ leader: person({ email: 'a@b.co', phone: '0555 123 45 67' }) }), NOW).leader.phone, '05551234567');
 });
 
 test('nesne olmayan gövde ve alanlar', () => {

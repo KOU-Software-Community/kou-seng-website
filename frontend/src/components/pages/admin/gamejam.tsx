@@ -32,9 +32,9 @@ function PersonRow({ person, role, email, phone }: { person: JamPerson; role: st
                 <p className="font-medium">
                     {person.name} <span className="text-muted-foreground font-normal">· {role} · {ageOf(person.birthDate)} yaş</span>
                 </p>
-                <span className="text-xs text-muted-foreground">
-                    Fotoğraf/video izni: {person.mediaConsent ? 'Var' : 'Yok'}
-                </span>
+                {email && (
+                    <span className="text-xs text-muted-foreground">Fotoğraf/video izni: {person.mediaConsent ? 'Var' : 'Yok'}</span>
+                )}
             </div>
             {email && <p>{email} · {phone}</p>}
             <p className="text-muted-foreground">{person.university} · {person.department}</p>

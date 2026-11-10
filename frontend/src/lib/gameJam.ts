@@ -84,7 +84,7 @@ export type JamPerson = {
   projectUrl: string;
   disciplines: string[];
   otherDiscipline: string;
-  mediaConsent: boolean;
+  mediaConsent: boolean; // yalnızca lider için anlamlı, üyelerde hep false
 };
 
 export type JamLeader = JamPerson & { email: string; phone: string };

@@ -25,6 +25,8 @@ export const MAX_MEMBERS = 3;
 const ANSWERS = ['A', 'B', 'C', 'D'];
 const URL_RE = /^https?:\/\/[^\s]+$/i;
 const PHONE_RE = /^\+?[\d\s()-]{10,20}$/;
+// Tekrar kontrolü biçimden bağımsız olsun: yalnızca rakam ve baştaki + saklanır
+const normalizePhone = (v) => v.trim().replace(/(?!^\+)\D/g, '');
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
 
 const text = (v, max = 100) => typeof v === 'string' && v.trim().length > 0 && v.length <= max;
@@ -44,9 +46,11 @@ const parsePerson = (p, isLeader, now) => {
   if (!text(name) || !text(university) || !text(department) || !birthDate(p.birthDate, now) || !url(cvUrl)) return null;
   if (projectUrl !== undefined && projectUrl !== '' && !url(projectUrl)) return null;
   if (!Array.isArray(disciplines) || disciplines.length === 0 ||
-      !disciplines.every((d) => Object.hasOwn(DISCIPLINES, d)) || new Set(disciplines).size !== disciplines.length) return null;
+      !disciplines.every((d) => typeof d === 'string' && Object.hasOwn(DISCIPLINES, d)) || new Set(disciplines).size !== disciplines.length) return null;
   if (otherDiscipline !== undefined && otherDiscipline !== '' && !text(otherDiscipline)) return null;
-  if (typeof mediaConsent !== 'boolean') return null;
+  // Açık rıza kişinin kendisinden alınır: lider yalnızca kendi adına işaretler,
+  // üyelerin izni etkinlikte kendilerinden sorulur (KVKK m.5/1).
+  if (isLeader && typeof mediaConsent !== 'boolean') return null;
   const person = {
     name: name.trim(),
     birthDate: p.birthDate,
@@ -56,11 +60,13 @@ const parsePerson = (p, isLeader, now) => {
     projectUrl: projectUrl || '',
     disciplines,
     otherDiscipline: disciplines.includes('other') ? (otherDiscipline ?? '').trim() : '',
-    mediaConsent,
+    mediaConsent: isLeader && mediaConsent,
   };
   if (isLeader) {
     if (!isSingleEmail(email) || typeof phone !== 'string' || !PHONE_RE.test(phone)) return null;
-    Object.assign(person, { email: email.toLowerCase(), phone: phone.trim() });
+    const digits = normalizePhone(phone);
+    if (digits.replace('+', '').length < 10) return null;
+    Object.assign(person, { email: email.toLowerCase(), phone: digits });
   }
   return person;
 };

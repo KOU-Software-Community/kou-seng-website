@@ -68,7 +68,8 @@ const toRows = (applications) =>
       role: i === 0 ? "Lider" : "Üye",
       ...p,
       disciplines: p.disciplines.map((d) => DISCIPLINES[d] ?? d).join(", "),
-      mediaConsent: p.mediaConsent ? "Evet" : "Hayır",
+      // Üyelerin izni formda alınmıyor, etkinlikte kendilerine sorulur
+      mediaConsent: i === 0 ? (p.mediaConsent ? "Evet" : "Hayır") : "",
       answers: i === 0 ? a.answers ?? {} : {},
       createdAt: new Date(a.createdAt).toLocaleString("tr-TR", { timeZone: "Europe/Istanbul" }),
     }))

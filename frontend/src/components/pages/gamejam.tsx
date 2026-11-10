@@ -15,7 +15,7 @@ import { PixelLoader } from '@/components/layout/Pixel';
 import { useApplicationWindows } from '@/hooks/useApplicationWindows';
 import { useGameJam } from '@/hooks/useGameJam';
 import { windowSummary } from '@/lib/applicationWindow';
-import { ANSWER_KEYS, DISCIPLINES, MAX_MEMBERS, QUESTIONS, type JamApplicationBody } from '@/lib/gameJam';
+import { ANSWER_KEYS, DISCIPLINES, MAX_MEMBERS, QUESTIONS, ageOf, type JamApplicationBody } from '@/lib/gameJam';
 
 // Kurallar backend/helpers/jamInput.js'teki doğrulamayla aynı; sunucu yine de kendisi denetler.
 const URL_RE = /^https?:\/\/\S+$/i;
@@ -26,7 +26,9 @@ const answer = z.enum(ANSWER_KEYS, { message: 'Bir seçenek işaretleyiniz.' });
 
 const personSchema = z.object({
     name: required('Ad soyad'),
-    birthDate: z.string().min(1, 'Doğum tarihi zorunludur.'),
+    // Backend 10–100 yaş dışını reddediyor; hatalı yıl genel 400 yerine alanın altında görünsün
+    birthDate: z.string().min(1, 'Doğum tarihi zorunludur.')
+        .refine((v) => { const age = ageOf(v); return age >= 10 && age <= 100; }, 'Doğum tarihini kontrol ediniz.'),
     university: required('Üniversite'),
     department: required('Bölüm'),
     cvUrl: link,
@@ -130,14 +132,17 @@ export default function GameJam() {
                     {disciplines.includes('other') &&
                         textField({ name: `${prefix}.otherDiscipline`, label: 'Diğer alan', placeholder: 'Örn. VFX, QA, prodüksiyon', optional: true })}
                 </fieldset>
-                <label className="flex items-start gap-2 text-sm cursor-pointer">
-                    <input type="checkbox" className={checkboxClass} {...register(`${prefix}.mediaConsent`)} />
-                    <span>
-                        {prefix === 'leader' ? 'Etkinlik' : 'Bu üye, etkinlik'} sırasında çekilecek fotoğraf ve videolarda yer almayı ve
-                        bunların kulübün sitesinde ve sosyal medya hesaplarında paylaşılmasını kabul {prefix === 'leader' ? 'ediyorum' : 'ediyor'}.{' '}
-                        <span className="text-muted-foreground">(İsteğe bağlı)</span>
-                    </span>
-                </label>
+                {/* Açık rıza kişinin kendisinden: üyelere etkinlikte sorulur */}
+                {prefix === 'leader' && (
+                    <label className="flex items-start gap-2 text-sm cursor-pointer">
+                        <input type="checkbox" className={checkboxClass} {...register('leader.mediaConsent')} />
+                        <span>
+                            Etkinlik sırasında çekilecek fotoğraf ve videolarda yer almayı ve bunların kulübün sitesinde ve sosyal
+                            medya hesaplarında paylaşılmasını kabul ediyorum.{' '}
+                            <span className="text-muted-foreground">(İsteğe bağlı; ekip üyelerine etkinlikte ayrıca sorulur)</span>
+                        </span>
+                    </label>
+                )}
             </>
         );
     };

@@ -26,7 +26,7 @@
         "İletişim bilgileri: e-posta adresi, telefon numarası.",
         "Eğitim bilgileri: öğrenci numarası, fakülte, bölüm, sınıf.",
         "Teknik takım başvurularına özgü bilgiler: GitHub, LinkedIn, Kaggle, Itch.io ve portfolyo bağlantıları; ilgi alanları, deneyim (yapay zeka destekli geliştirme araçları, API ve cloud deneyimi dahil) ve motivasyon sorularına verdiğiniz yanıtlar.",
-        "Game jam başvurularına özgü bilgiler: takım adı; takım lideri ve ekip üyelerinin adı soyadı, doğum tarihi, üniversitesi, bölümü, CV ve oyun projesi bağlantıları, uzmanlık alanları ve fotoğraf/video iznine ilişkin tercihleri; takım liderinin e-posta adresi, telefon numarası ve senaryo sorularına verdiği yanıtlar. Ekip üyelerinin bilgilerini takım lideri girer.",
+        "Game jam başvurularına özgü bilgiler: takım adı; takım lideri ve ekip üyelerinin adı soyadı, doğum tarihi, üniversitesi, bölümü, CV ve oyun projesi bağlantıları, uzmanlık alanları; takım liderinin e-posta adresi, fotoğraf/video iznine ilişkin tercihi, telefon numarası ve senaryo sorularına verdiği yanıtlar. Ekip üyelerinin bilgilerini takım lideri girer.",
         "Görsel ve işitsel veriler: game jam etkinliği sırasında çekilen fotoğraf ve videolar (yalnızca izin verenler için paylaşılır).",
         "Başvuru değerlendirme bilgileri: başvurunuzun tarihi, durumu (beklemede, incelendi, kabul edildi, reddedildi) ve kulüp yöneticilerinin değerlendirme notları.",
         "İletişim formu bilgileri: ad, e-posta adresi, mesajınızın konusu ve içeriği.",
@@ -63,7 +63,7 @@
         "(ç) Kulübün hukuki yükümlülüğünü yerine getirebilmesi için zorunlu olması: mevzuattan doğan bir yükümlülük bulunması hâlinde."
       ],
       "after": [
-        "Game jam etkinliğinde çekilen fotoğraf ve videoların paylaşılması ise KVKK'nın 5. maddesinin 1. fıkrası uyarınca açık rızanıza dayanır. Bu izin isteğe bağlıdır; vermemeniz başvurunuzu etkilemez ve izninizi info@kouseng.com adresine yazarak istediğiniz zaman geri alabilirsiniz.",
+        "Game jam etkinliğinde çekilen fotoğraf ve videoların paylaşılması ise KVKK'nın 5. maddesinin 1. fıkrası uyarınca açık rızanıza dayanır. Bu izin isteğe bağlıdır ve herkesten kendisi için alınır: takım lideri formda kendi adına işaretler, ekip üyelerine etkinlikte ayrıca sorulur; vermemeniz başvurunuzu etkilemez ve izninizi info@kouseng.com adresine yazarak istediğiniz zaman geri alabilirsiniz.",
         "Diğer işlemler yukarıdaki hukuki sebeplere dayandığından açık rızanızı gerektirmez. Formları doldurmak zorunlu değildir; ancak zorunlu alanlar doldurulmadan başvurunuz alınamaz ve değerlendirilemez.",
         "Game jam başvurusunda ekip üyelerinin bilgilerini takım lideri girer; lider, formu göndermeden önce ekip üyelerini bu metin hakkında bilgilendirdiğini ve bilgilerini paylaşmak için onaylarını aldığını beyan eder."
       ]

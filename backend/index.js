@@ -8,6 +8,7 @@ import announcementRoutes from './routes/announcementRoutes.js';
 import contactRoutes from './routes/contactRoutes.js';
 import publicationRoutes from './routes/publicationRoutes.js';
 import submissionsRoutes from './routes/submissionsRoutes.js';
+import jamRoutes from './routes/jamRoutes.js';
 import healthRoutes from './routes/healthRoutes.js';
 import mailRoutes from './routes/mailRoutes.js';
 import mailQueueRoutes from './routes/mailQueueRoutes.js';
@@ -90,7 +91,7 @@ const skipGeneralLimit = (req, res, next) => {
   next();
 };
 app.get('/submissions/windows', windowsLimiter, skipGeneralLimit);
-app.post(['/submissions/general', '/submissions/technical/:slug', '/contact'], formLimiter, skipGeneralLimit);
+app.post(['/submissions/general', '/submissions/technical/:slug', '/gamejam', '/contact'], formLimiter, skipGeneralLimit);
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
@@ -143,6 +144,7 @@ app.use('/announcements', announcementRoutes);
 app.use('/contact', contactRoutes);
 app.use('/rss', publicationRoutes);
 app.use('/submissions', submissionsRoutes);
+app.use('/gamejam', jamRoutes);
 app.use('/mail', mailRoutes);
 app.use('/mail/queue', mailQueueRoutes);
 

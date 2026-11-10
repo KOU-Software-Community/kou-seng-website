@@ -7,7 +7,7 @@
 // Yalnızca yerelde ve kullanıcısı olmayan boş bir veritabanında çalışır: ilk
 // admini KEY ile oluşturur (kullanıcı varsa 3. adım 401 alır), pencere
 // tarihlerini değiştirir, başvuru kaydı yazar. CI'da loadtest'ten önce koşar:
-// 7 form isteği harcar (form limiti 15 dk'da 100) ve genel formu açık bırakır.
+// 11 form isteği harcar (form limiti 15 dk'da 100) ve genel formu açık bırakır.
 // Kampüs adımı ayrı bir istemci IP'siyle (CF-Connecting-IP) genel limiti doldurur;
 // CI'daki loadtest'in kovalarına dokunmaz.
 //
@@ -71,10 +71,10 @@ const setWindow = async (slug, opensAt, closesAt) =>
 await step('GET /submissions/windows: varsayılanlar (genel açık, teknikler kapalı)', async () => {
   const res = await api('GET', '/submissions/windows');
   expectStatus(res, 200);
-  assert.deepEqual(res.body.data.map((w) => w.slug), ['general', 'mobil-web', 'ai', 'game']);
+  assert.deepEqual(res.body.data.map((w) => w.slug), ['general', 'mobil-web', 'ai', 'game', 'gamejam']);
   const w = bySlug(res.body.data);
   assert.equal(w.general.isOpen, true);
-  for (const s of ['mobil-web', 'ai', 'game']) assert.equal(w[s].state, 'closed');
+  for (const s of ['mobil-web', 'ai', 'game', 'gamejam']) assert.equal(w[s].state, 'closed');
 });
 
 await step('PATCH token olmadan → 401', async () => {
@@ -155,6 +155,43 @@ await step('geçersiz sınıf ve JSON olmayan gövde → 400 (500 değil)', asyn
   expectStatus(await api('POST', '/submissions/general', { body: { ...applicant(), grade: 99 } }), 400);
   const res = await fetch(`${BASE}/submissions/general`, { method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: 'merhaba' });
   assert.equal(res.status, 400, `text/plain gövde: ${res.status}`);
+});
+
+const jamPerson = (extra) => ({
+  name: 'Smoke Jam', birthDate: '2004-05-17', university: 'KOÜ', department: 'Yazılım',
+  cvUrl: 'https://example.com/cv', disciplines: ['developer', 'other'], otherDiscipline: 'VFX', mediaConsent: false, ...extra,
+});
+const jamBody = {
+  teamName: `Smoke ${RUN}`,
+  leader: jamPerson({ email: `jam-${RUN}@example.com`, phone: '+90 555 000 00 00', mediaConsent: true }),
+  members: [jamPerson()],
+  answers: { teamwork: 'B', scope: 'B', conflict: 'D', motivation: 'B', feedback: 'A' },
+  rulesConsent: true,
+  kvkkConsent: true,
+};
+
+await step('game jam: kapalıyken 403, açılınca 201, tekrar 409, eksik form 400', async () => {
+  expectClosed(await api('POST', '/gamejam', { body: jamBody }));
+  await setWindow('gamejam', iso(-60e3), iso(H));
+  expectStatus(await api('POST', '/gamejam', { body: jamBody }), 201);
+  // Takım adı büyük/küçük harf duyarsız tekil
+  expectStatus(await api('POST', '/gamejam', { body: { ...jamBody, teamName: jamBody.teamName.toUpperCase() } }), 409);
+  expectStatus(await api('POST', '/gamejam', { body: { ...jamBody, members: [] } }), 400);
+});
+
+await step('game jam: liste ve CSV yalnızca admin, silme sayıyla', async () => {
+  expectStatus(await api('GET', '/gamejam'), 401);
+  const list = await api('GET', '/gamejam', { token: adminToken });
+  expectStatus(list, 200);
+  assert.equal(list.body.count, 1);
+  assert.equal(list.body.data[0].leader.email, jamBody.leader.email);
+  const csv = await fetch(`${BASE}/gamejam/export`, { headers: { Authorization: `Bearer ${adminToken}` } });
+  assert.equal(csv.status, 200);
+  const text = await csv.text();
+  assert.ok(text.includes(jamBody.teamName) && text.includes('Oyun Programlama (Developer), Diğer'), 'CSV içeriği');
+  expectStatus(await api('POST', '/gamejam/purge', { token: adminToken, body: { expectedCount: 2 } }), 409);
+  expectStatus(await api('POST', '/gamejam/purge', { token: adminToken, body: { expectedCount: 1 } }), 200);
+  await setWindow('gamejam', null, null);
 });
 
 // Kampüs Wi-Fi'ı gibi paylaşılan IP: genel limit dolsa da başvuru akışı çalışmalı.

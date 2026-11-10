@@ -1,15 +1,16 @@
 // Başvuru formlarının açık/kapalı kuralı. Veritabanına dokunmaz; testi yanında
 // (applicationWindow.test.js, `node --test`).
 
-export const APPLICATION_SLUGS = ['general', 'mobil-web', 'ai', 'game'];
+export const APPLICATION_SLUGS = ['general', 'mobil-web', 'ai', 'game', 'gamejam'];
 
 // Veritabanında kayıt yoksa geçerli olan: genel üyelik süresiz açık, teknik
-// formlar kapalı (bu özellikten önceki davranış).
+// formlar ve game jam kapalı (bu özellikten önceki davranış).
 export const DEFAULT_WINDOWS = {
   general: { opensAt: new Date(0), closesAt: null },
   'mobil-web': { opensAt: null, closesAt: null },
   ai: { opensAt: null, closesAt: null },
   game: { opensAt: null, closesAt: null },
+  gamejam: { opensAt: null, closesAt: null },
 };
 
 // [opensAt, closesAt): açılış anında açık, kapanış anında kapalı; kapanış yoksa süresiz.

@@ -10,6 +10,7 @@ import {
 } from 'react';
 import { useRouter } from 'next/navigation';
 import type { MailBlock } from '@/hooks/useSponsorMail';
+import { apiFetch, hasSession, setSession } from '@/hooks/useAuth';
 
 // ─── Tipler ──────────────────────────────────────────────────────────────────
 
@@ -53,13 +54,6 @@ const MailQueueContext = createContext<MailQueueContextValue | null>(null);
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL;
 
-/** localStorage'dan token'ı okur — auth state'e değil, her zaman güncel değere bakar */
-function authHeaders(): Record<string, string> {
-  if (typeof window === 'undefined') return {};
-  const token = localStorage.getItem('auth_token');
-  return token ? { Authorization: `Bearer ${token}` } : {};
-}
-
 // ─── Provider ────────────────────────────────────────────────────────────────
 
 export function MailQueueProvider({ children }: { children: React.ReactNode }) {
@@ -75,15 +69,15 @@ export function MailQueueProvider({ children }: { children: React.ReactNode }) {
   // ─── Görevleri Getir ─────────────────────────────────────────────────────
 
   const fetchJobs = useCallback(async () => {
-    const headers = authHeaders();
-    if (!headers.Authorization) return; // Oturum açılmamış
+    // Auth state'e değil, her zaman güncel işarete bakar
+    if (!hasSession()) return; // Oturum açılmamış
     try {
-      const res = await fetch(`${API_BASE}/mail/queue`, { headers });
+      const res = await apiFetch(`${API_BASE}/mail/queue`);
       // Oturum düştü (süre doldu, hesap silindi). Geçersiz token'lı istekler rate
       // limit muafiyetinden yararlanmaz; açık kalan sekme yoklamaya devam ederse
       // IP'nin kotasını bitirip girişi de kilitler.
       if (res.status === 401) {
-        localStorage.removeItem('auth_token');
+        setSession(false);
         router.replace(`/admin/login?redirect=${encodeURIComponent(window.location.pathname)}`);
         return;
       }
@@ -126,9 +120,8 @@ export function MailQueueProvider({ children }: { children: React.ReactNode }) {
         formData.append('attachments', file);
       }
 
-      const res = await fetch(`${API_BASE}/mail/queue`, {
+      const res = await apiFetch(`${API_BASE}/mail/queue`, {
         method: 'POST',
-        headers: authHeaders(),
         body: formData,
       });
 
@@ -144,10 +137,7 @@ export function MailQueueProvider({ children }: { children: React.ReactNode }) {
 
   const cancelJob = useCallback(
     async (id: string) => {
-      await fetch(`${API_BASE}/mail/queue/${id}/cancel`, {
-        method: 'PATCH',
-        headers: authHeaders(),
-      });
+      await apiFetch(`${API_BASE}/mail/queue/${id}/cancel`, { method: 'PATCH' });
       await fetchJobs();
     },
     [fetchJobs],
@@ -155,10 +145,7 @@ export function MailQueueProvider({ children }: { children: React.ReactNode }) {
 
   const dismissJob = useCallback(
     async (id: string) => {
-      await fetch(`${API_BASE}/mail/queue/${id}`, {
-        method: 'DELETE',
-        headers: authHeaders(),
-      });
+      await apiFetch(`${API_BASE}/mail/queue/${id}`, { method: 'DELETE' });
       await fetchJobs();
     },
     [fetchJobs],

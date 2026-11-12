@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 type LoginRequestBody = {
   email: string;
@@ -8,7 +8,7 @@ type LoginRequestBody = {
 };
 
 type LoginResponse = {
-  token: string;
+  success: boolean;
 };
 
 export type AuthUser = {
@@ -24,39 +24,47 @@ export type AuthError = {
 };
 
 export type UseAuthReturn = {
-  token: string | null;
   isAuthenticating: boolean;
   errorMessage: string | null;
   isAuthenticated: boolean;
   login: (email: string, password: string) => Promise<boolean>;
   logout: () => void;
-  getAuthHeader: () => Record<string, string>;
   getAuthDetail: () => Promise<AuthUser | AuthError>;
   /** Başarılıysa null, değilse gösterilecek hata mesajı döner. */
   changePassword: (currentPassword: string, newPassword: string) => Promise<string | null>;
 };
 
-const AUTH_TOKEN_KEY = 'auth_token';
+// Oturum token'ı backend'in koyduğu httpOnly çerezde; JS onu okuyamaz. Burada
+// yalnızca "giriş yapıldı" işareti tutulur (gizli değil), sayfalar oturum varken
+// istek atsın diye. Asıl kontrol her istekte backend'de.
+const SESSION_FLAG_KEY = 'auth_session';
+const LEGACY_TOKEN_KEY = 'auth_token';
 
 /** Yeni şifreler için alt sınır; backend'deki MIN_PASSWORD_LENGTH ile aynı olmalı. */
 export const MIN_PASSWORD_LENGTH = 10;
 
-const getStoredToken = (): string | null => {
-  if (typeof window === 'undefined') return null;
+/** API isteği; oturum çerezi gönderilir. */
+export const apiFetch = (input: string, init: RequestInit = {}) =>
+  fetch(input, { ...init, credentials: 'include' });
+
+export const hasSession = (): boolean => {
+  if (typeof window === 'undefined') return false;
   try {
-    return window.localStorage.getItem(AUTH_TOKEN_KEY);
+    return window.localStorage.getItem(SESSION_FLAG_KEY) === '1';
   } catch {
-    return null;
+    return false;
   }
 };
 
-const setStoredToken = (token: string | null) => {
+export const setSession = (active: boolean) => {
   if (typeof window === 'undefined') return;
   try {
-    if (token) {
-      window.localStorage.setItem(AUTH_TOKEN_KEY, token);
+    // Eski sürümün localStorage'da bıraktığı token silinir
+    window.localStorage.removeItem(LEGACY_TOKEN_KEY);
+    if (active) {
+      window.localStorage.setItem(SESSION_FLAG_KEY, '1');
     } else {
-      window.localStorage.removeItem(AUTH_TOKEN_KEY);
+      window.localStorage.removeItem(SESSION_FLAG_KEY);
     }
   } catch {
     // storage erişimi başarısız olabilir; sessizce geç
@@ -64,13 +72,13 @@ const setStoredToken = (token: string | null) => {
 };
 
 export const useAuth = (): UseAuthReturn => {
-  const [token, setToken] = useState<string | null>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isAuthenticating, setIsAuthenticating] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
-    const existingToken = getStoredToken();
-    if (existingToken) setToken(existingToken);
+    if (hasSession()) setIsAuthenticated(true);
+    else setSession(false);
   }, []);
 
   const login = useCallback(async (email: string, password: string): Promise<boolean> => {
@@ -81,7 +89,7 @@ export const useAuth = (): UseAuthReturn => {
       const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/auth/login`;
       const body: LoginRequestBody = { email, password };
 
-      const response = await fetch(apiUrl, {
+      const response = await apiFetch(apiUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
@@ -100,12 +108,12 @@ export const useAuth = (): UseAuthReturn => {
       }
 
       const data: LoginResponse = await response.json();
-      if (!data?.token) {
+      if (!data?.success) {
         throw new Error('Geçersiz yanıt alındı. Lütfen daha sonra tekrar deneyin.');
       }
 
-      setStoredToken(data.token);
-      setToken(data.token);
+      setSession(true);
+      setIsAuthenticated(true);
       return true;
     } catch (error) {
       const message = (error as Error).message || 'Giriş sırasında beklenmeyen bir hata oluştu.';
@@ -117,28 +125,20 @@ export const useAuth = (): UseAuthReturn => {
   }, []);
 
   const logout = useCallback(() => {
-    setStoredToken(null);
-    setToken(null);
+    // Çerez httpOnly; yalnızca backend silebilir
+    void apiFetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/logout`, { method: 'POST' }).catch(() => {});
+    setSession(false);
+    setIsAuthenticated(false);
   }, []);
 
-  const getAuthHeader = useCallback((): Record<string, string> => {
-    if (!token) return {};
-    return { Authorization: `Bearer ${token}` };
-  }, [token]);
-
   const getAuthDetail = useCallback(async (): Promise<AuthUser | AuthError> => {
-    if (!token) {
+    if (!isAuthenticated) {
       return { message: 'Not authorized, token missing', error: 'missing token' };
     }
 
     try {
       const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/auth/me`;
-      const response = await fetch(apiUrl, {
-        method: 'GET',
-        headers: {
-          ...getAuthHeader(),
-        },
-      });
+      const response = await apiFetch(apiUrl, { method: 'GET' });
 
       const data = await response.json();
 
@@ -153,13 +153,13 @@ export const useAuth = (): UseAuthReturn => {
     } catch {
       return { message: 'Not authorized, token failed', error: 'invalid signature' };
     }
-  }, [getAuthHeader, token]);
+  }, [isAuthenticated]);
 
   const changePassword = useCallback(async (currentPassword: string, newPassword: string): Promise<string | null> => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/password`, {
+      const response = await apiFetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/password`, {
         method: 'PATCH',
-        headers: { 'Content-Type': 'application/json', ...getAuthHeader() },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ currentPassword, newPassword }),
       });
       if (response.ok) return null;
@@ -168,18 +168,14 @@ export const useAuth = (): UseAuthReturn => {
     } catch {
       return 'Şifre değiştirilemedi. Bağlantınızı kontrol edin.';
     }
-  }, [getAuthHeader]);
-
-  const isAuthenticated = useMemo(() => Boolean(token), [token]);
+  }, []);
 
   return {
-    token,
     isAuthenticating,
     errorMessage,
     isAuthenticated,
     login,
     logout,
-    getAuthHeader,
     getAuthDetail,
     changePassword,
   };

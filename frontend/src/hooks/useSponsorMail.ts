@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useAuth } from './useAuth';
+import { apiFetch } from './useAuth';
 
 export type MailBlock =
   | { type: 'paragraph'; text: string }
@@ -28,7 +28,6 @@ export const useSponsorMail = (): UseSponsorMailReturn => {
   const [isSending, setIsSending] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-  const { getAuthHeader } = useAuth();
 
   const sendMail = async (payload: SendMailPayload): Promise<boolean> => {
     if (isSending) return false;
@@ -47,9 +46,8 @@ export const useSponsorMail = (): UseSponsorMailReturn => {
         formData.append('attachments', file);
       }
 
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/mail/send`, {
+      const response = await apiFetch(`${process.env.NEXT_PUBLIC_API_URL}/mail/send`, {
         method: 'POST',
-        headers: { ...getAuthHeader() },
         body: formData,
       });
 

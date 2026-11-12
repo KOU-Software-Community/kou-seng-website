@@ -117,9 +117,14 @@ Express.js, routes → controllers → models; ayrıca `middlewares/`, `helpers/
 Route prefix'leri: `/health`, `/auth`, `/users`, `/announcements`, `/contact`,
 `/rss`, `/submissions`, `/mail`, `/mail/queue`.
 
-Kimlik doğrulama: `POST /auth/login` JWT döndürür, frontend token'ı
-localStorage'da saklar, korunan istekler `Authorization: Bearer <token>`
-gönderir. `middlewares/authMiddleware.js`: `protect`, `adminOnly`,
+Kimlik doğrulama: `POST /auth/login` JWT'yi `__Host-kouseng_session` adlı
+`HttpOnly; Secure; SameSite=Strict` çereze yazar, ömrü sabit 1 saat
+(`JWT_EXPIRES_IN` artık yok). Frontend token'ı göremez; localStorage'da yalnızca
+gizli olmayan `auth_session=1` işareti var ve API istekleri `apiFetch`
+(`hooks/useAuth.ts`, `credentials: 'include'`) ile gider. CSRF: çerezle gelen
+yazma isteğinin `Origin`'i `CORS_ALLOWED_ORIGINS`'te olmalı (`isCrossSiteWrite`).
+Betikler ve ilk admin `KEY`'i `Authorization: Bearer <token>` ile gelir.
+`middlewares/authMiddleware.js`: `protect`, `adminOnly`,
 `roleOnlyForCategory`, `roleOnlyForSubmission`, `sponsorOrAdmin`. Şifre
 değişince `User.passwordChangedAt` yazılır; ondan önce verilmiş token'lar
 `protect`'te 401 alır (panel çıkış yaptırıp yeniden giriş ister).
@@ -415,15 +420,14 @@ cd backend && MONGODB_URI="" node scripts/<betik>.js --dry-run   # exit 2 beklen
 Betikler `scripts/` altından çalıştığından `dotenv.config()` çıplak
 çağrılmamalı — `.env` backend kökünde, yol açıkça verilmeli.
 
-**Production Node 22.11 ve `require(esm)`.** Coolify (Nixpacks) backend'i Node
-22.11.0 ile çalıştırıyor. Bu sürümde bir CommonJS paketinin yalnızca ESM olan
-bir paketi `require()` etmesi bayraksız kapalı (Node 22.12'de varsayılan
-açıldı). `sanitize-html` 2.17.6+ `htmlparser2` 12'yi böyle yüklüyor; bu yüzden
-`npm start` `node --experimental-require-module index.js` çalıştırıyor. Sunucuyu
-`node index.js` ile doğrudan başlatırsan Node < 22.12'de açılışta
-`ERR_REQUIRE_ESM` ile çöker. CI, production'daki Node sürümü (`ci.yml`
-`NODE_VERSION`) ve `npm start` ile koşuyor. Production 22.12+'ya geçerse bayrak
-kaldırılabilir; `NODE_VERSION` da güncellenmeli.
+**Production Node sürümü.** Coolify (Railpack) iki uygulamayı da
+`RAILPACK_NODE_VERSION` ile seçilen Node'la çalıştırıyor: 22.23.5 (22 LTS'in
+güvenlik sürümü). CI aynı sürümle (`ci.yml` `NODE_VERSION`) ve `npm start` ile
+koşuyor; Node güvenlik sürümü çıkınca ikisi birlikte yükseltilir. `npm start`
+`node --experimental-require-module index.js` çalıştırıyor: `sanitize-html`
+2.17.6+ yalnızca ESM olan `htmlparser2` 12'yi `require()` ediyor ve bu Node
+< 22.12'de bayraksız `ERR_REQUIRE_ESM` ile çöker. 22.12+'da bayrak etkisiz;
+`RAILPACK_NODE_VERSION` silinip eski bir sürüme düşülürse diye duruyor.
 
 ### Mongoose `sanitizeFilter` açık — operatörlü sorgu `trusted()` ister
 

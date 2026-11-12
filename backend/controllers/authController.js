@@ -2,6 +2,7 @@ import generateToken from "../helpers/generateToken.js";
 import User, { MIN_PASSWORD_LENGTH } from "../models/User.js";
 import bcrypt from "bcryptjs";
 import logger from "../helpers/logger.js";
+import { SESSION_COOKIE, SESSION_MS, sessionCookieOptions } from "../middlewares/authMiddleware.js";
 
 // Kullanıcı yokken de bcrypt.compare çalışsın: yanıt süresi e-postanın kayıtlı
 // olup olmadığını sızdırmasın. Maliyet genSalt(10) ile aynı.
@@ -21,9 +22,9 @@ const loginUser = async (req, res) => {
         if (!user || !isMatch) {
             return res.status(400).json({ message: 'E-posta adresi veya şifre yanlış' });
         }
-        res.status(200).json({
-            token: generateToken(user._id)
-        });
+        // Token yanıt gövdesinde değil, JS'in okuyamadığı çerezde
+        res.cookie(SESSION_COOKIE, generateToken(user._id), { ...sessionCookieOptions, maxAge: SESSION_MS });
+        res.status(200).json({ success: true });
     } catch (error) {
         logger.error(`Giriş sırasında hata: ${error.message}`);
         res.status(500).json({ message: 'Error logging in' });
@@ -74,10 +75,19 @@ const changePassword = async (req, res) => {
         // Yalnızca şifre doğrulanır; eski kayıtlardaki başka bir alan (ör.
         // migration'ı yapılmamış `web` rolü) şifre değişikliğini engellemesin.
         await user.save({ validateModifiedOnly: true });
+        res.clearCookie(SESSION_COOKIE, sessionCookieOptions);
         res.status(200).json({ message: 'Şifre değiştirildi' });
     } catch {
         res.status(500).json({ message: 'Şifre değiştirilemedi' });
     }
 }
 
-export { loginUser, getMe, changePassword };
+// @desc    Oturumu kapat (çerezi sil)
+// @route   POST /auth/logout
+// @access  Public
+const logoutUser = (req, res) => {
+    res.clearCookie(SESSION_COOKIE, sessionCookieOptions);
+    res.status(200).json({ success: true });
+}
+
+export { loginUser, logoutUser, getMe, changePassword };

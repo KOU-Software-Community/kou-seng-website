@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useAuth } from "./useAuth";
+import { useAuth, apiFetch } from './useAuth';
 
 export type ContactFormValues = {
   name: string;
@@ -58,7 +58,7 @@ export const useContact = (): UseContactReturn => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
-  const { getAuthHeader } = useAuth();
+  const { isAuthenticated } = useAuth();
 
   // Admin state
   const [contacts, setContacts] = useState<ContactMessage[]>([]);
@@ -80,7 +80,7 @@ export const useContact = (): UseContactReturn => {
     setErrorMessage("");
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/contact`, {
+      const response = await apiFetch(`${process.env.NEXT_PUBLIC_API_URL}/contact`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -114,18 +114,16 @@ export const useContact = (): UseContactReturn => {
 
     try {
       const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/contact`;
-      const auth = getAuthHeader();
-      if (!auth?.Authorization) {
+      if (!isAuthenticated) {
         // Sayfa tarafında auth bekleniyorsa sessizce çık
         setContacts([]);
         setTotalCount(0);
         return;
       }
-      const response = await fetch(apiUrl, {
+      const response = await apiFetch(apiUrl, {
         method: "GET",
         headers: {
           Accept: "application/json",
-          ...auth,
         },
       });
 
@@ -166,11 +164,10 @@ export const useContact = (): UseContactReturn => {
 
     try {
       const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/contact/${id}/read`;
-      const response = await fetch(apiUrl, {
+      const response = await apiFetch(apiUrl, {
         method: "PATCH",
         headers: {
           Accept: "application/json",
-          ...getAuthHeader(),
         },
       });
 
@@ -213,11 +210,10 @@ export const useContact = (): UseContactReturn => {
 
     try {
       const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/contact/${id}`;
-      const response = await fetch(apiUrl, {
+      const response = await apiFetch(apiUrl, {
         method: "DELETE",
         headers: {
           Accept: "application/json",
-          ...getAuthHeader(),
         },
       });
 

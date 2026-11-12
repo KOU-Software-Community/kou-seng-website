@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback } from 'react';
-import { useAuth } from './useAuth';
+import { useAuth, apiFetch } from './useAuth';
 
 export type StatusData = {
   generalSubmissions: {
@@ -41,7 +41,7 @@ export const useStatus = (): UseStatusReturn => {
   const [statusData, setStatusData] = useState<StatusData | null>(null);
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const { getAuthHeader } = useAuth();
+  const { isAuthenticated } = useAuth();
 
   /**
    * Sistem durumu verilerini API'den getirir
@@ -53,16 +53,14 @@ export const useStatus = (): UseStatusReturn => {
     setErrorMessage(null);
 
     try {
-      const auth = getAuthHeader();
-      if (!auth?.Authorization) {
+      if (!isAuthenticated) {
         throw new Error('Yetkilendirme bulunamadı');
       }
 
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/status`, {
+      const response = await apiFetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/status`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          ...auth,
         },
       });
 
@@ -93,7 +91,7 @@ export const useStatus = (): UseStatusReturn => {
     } finally {
       setIsFetching(false);
     }
-  }, [getAuthHeader, isFetching]);
+  }, [isAuthenticated, isFetching]);
 
   return {
     statusData,

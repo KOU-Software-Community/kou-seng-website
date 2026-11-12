@@ -59,7 +59,6 @@ export default function AdminGameJam() {
     const load = useCallback(async () => {
         const result = await list();
         setApplications(result.data);
-        // Token yüklenmeden giden ilk istek 401 alır; token gelince liste yeniden çekilir, eski hata kalmasın
         setNotice(result.success ? null : { kind: 'error', text: result.message });
     }, [list]);
 

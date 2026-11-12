@@ -43,6 +43,7 @@ const corsOptions = {
     }
     return callback(null, true);
   },
+  credentials: true, // panelin oturum çerezi (bkz. authMiddleware)
 };
 // API JSON ve CSV döndürüyor; tarayıcı içerik türünü tahmin etmeye kalkmasın.
 app.use((req, res, next) => {

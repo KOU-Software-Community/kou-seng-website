@@ -6,9 +6,19 @@ Bu doküman, Kocaeli Üniversitesi Yazılım Kulübü web sitesinin backend API'
 
 Yönetim paneline erişim için kullanılır.
 
+Oturum: girişte JWT, `__Host-kouseng_session` adlı `HttpOnly; Secure; SameSite=Strict`
+çereze yazılır, ömrü 1 saat (uzatılamaz). Tarayıcı çerezi kendisi gönderir
+(`credentials: 'include'`). Çerezle gelen yazma isteklerinde (GET/HEAD/OPTIONS
+dışı) `Origin` `CORS_ALLOWED_ORIGINS`'te olmalı, yoksa 403 (CSRF). Aşağıdaki
+"Gerekli Header: `Authorization: Bearer <token>`" satırları betikler ve ilk admin
+`KEY`'i için geçerli; Bearer başlığı çerezin yerine geçer.
+
 - **POST** `/auth/login`
-  - **Açıklama:** Yönetici girişi için kullanılır. Başarılı girişte JWT (JSON Web Token) döndürür.
+  - **Açıklama:** Yönetici girişi için kullanılır. Başarılı girişte oturum çerezini koyar, gövde `{ "success": true }` (token gövdede dönmez).
   - **Request Body:** `{ "email": "string", "password": "string" }`
+
+- **POST** `/auth/logout`
+  - **Açıklama:** Oturum çerezini siler.
 
 - **GET** `/auth/me`
   - **Açıklama:** Mevcut token'a sahip yöneticinin bilgilerini döndürür. Oturum kontrolü için kullanılır.

@@ -56,6 +56,10 @@ jobs:
     services:
       mongo:
         image: mongo:8
+        # Runner çekirdeği 6.19+: MongoDB 8'in TCMalloc'u rseq yüzünden açılmayı reddediyor
+        # (SERVER-121912). rseq'i glibc'ye bırakmak açılmasını sağlıyor; MongoDB düzeltince kaldır.
+        env:
+          GLIBC_TUNABLES: glibc.pthread.rseq=1
         ports:
           - 27017:27017
 

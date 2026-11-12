@@ -19,7 +19,7 @@ export const QUESTIONS = {
   motivation: 'Motivasyon',
   feedback: 'Geri bildirim',
 };
-export const MIN_MEMBERS = 1; // lider hariç: ekip 2–4 kişi
+export const MIN_MEMBERS = 2; // lider hariç: ekip 3–4 kişi
 export const MAX_MEMBERS = 3;
 
 const ANSWERS = ['A', 'B', 'C', 'D'];

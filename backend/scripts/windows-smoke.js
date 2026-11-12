@@ -164,7 +164,7 @@ const jamPerson = (extra) => ({
 const jamBody = {
   teamName: `Smoke ${RUN}`,
   leader: jamPerson({ email: `jam-${RUN}@example.com`, phone: '+90 555 000 00 00', mediaConsent: true }),
-  members: [jamPerson()],
+  members: [jamPerson(), jamPerson()],
   answers: { teamwork: 'B', scope: 'B', conflict: 'D', motivation: 'B', feedback: 'A' },
   rulesConsent: true,
   kvkkConsent: true,

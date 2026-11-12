@@ -73,7 +73,8 @@ export const QUESTIONS = [
 
 export type QuestionId = (typeof QUESTIONS)[number]['id'];
 
-export const MAX_MEMBERS = 3; // lider hariç: ekip 2–4 kişi
+export const MIN_MEMBERS = 2; // lider hariç: ekip 3–4 kişi
+export const MAX_MEMBERS = 3;
 
 export type JamPerson = {
   name: string;

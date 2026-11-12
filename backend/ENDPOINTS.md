@@ -91,13 +91,13 @@ listesine bak.
 
 ## Game Jam Başvuruları
 
-Takım başvurusu (lider + 1–3 üye). Doğrulama `helpers/jamInput.js`'te (testi yanında);
+Takım başvurusu (lider + 2–3 üye, ekip 3–4 kişi). Doğrulama `helpers/jamInput.js`'te (testi yanında);
 form `frontend/src/components/pages/gamejam.tsx`. Açık/kapalı durumu `gamejam` slug'ıyla
 `/submissions/windows`'tan gelir.
 
 - **POST** `/gamejam`
   - **Açıklama:** Başvuruyu kaydeder. Başvuru ve iletişim formlarıyla aynı limit (15 dk'da 100), genel limite sayılmaz.
-  - **Request Body:** `{ "teamName": "string", "leader": Kişi & { "email": "string", "phone": "string" }, "members": Kişi[] (1–3), "answers": { "teamwork" | "scope" | "conflict" | "motivation" | "feedback": "A" | "B" | "C" | "D" }, "rulesConsent": true, "kvkkConsent": true }`; Kişi: `{ "name", "birthDate": "YYYY-MM-DD", "university", "department", "cvUrl": "http(s)://…", "projectUrl"?: "http(s)://…", "disciplines": ("developer" | "artist" | "designer" | "sound" | "narrative" | "other")[], "otherDiscipline"?: "string", "mediaConsent": boolean }`. Bilinmeyen alanlar atılır.
+  - **Request Body:** `{ "teamName": "string", "leader": Kişi & { "email": "string", "phone": "string" }, "members": Kişi[] (2–3), "answers": { "teamwork" | "scope" | "conflict" | "motivation" | "feedback": "A" | "B" | "C" | "D" }, "rulesConsent": true, "kvkkConsent": true }`; Kişi: `{ "name", "birthDate": "YYYY-MM-DD", "university", "department", "cvUrl": "http(s)://…", "projectUrl"?: "http(s)://…", "disciplines": ("developer" | "artist" | "designer" | "sound" | "narrative" | "other")[], "otherDiscipline"?: "string", "mediaConsent": boolean }`. Bilinmeyen alanlar atılır.
   - **Yanıtlar:** 201 kaydedildi; 400 eksik/geçersiz alan; 403 form kapalı; 409 aynı takım adı (büyük/küçük harf duyarsız) ya da aynı lider e-postası/telefonu; 429 istek sınırı.
 
 - **GET** `/gamejam` — tüm başvurular, en yeni önce (yalnızca admin).

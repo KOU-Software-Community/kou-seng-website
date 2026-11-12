@@ -501,7 +501,7 @@ Tuzaklar:
 
 `/gamejam` header'dan açılan ayrı bir sayfa (`components/pages/gamejam.tsx`,
 koyu hero + form); Başvurular (`/apply`) listesinde yok ve JSON form motorunu
-kullanmaz: takım (lider + 1–3 üye) tekrar eden alanlar ve çoklu seçim
+kullanmaz: takım (lider + 2–3 üye) tekrar eden alanlar ve çoklu seçim
 içeriyor, `customFields` yalnızca düz metin kabul ediyor. Veri ayrı koleksiyonda
 (`JamApplication`), uçlar `/gamejam` (`backend/ENDPOINTS.md`). Doğrulama
 `helpers/jamInput.js`'te, birim testi yanında. Açılış/kapanış **Başvuru

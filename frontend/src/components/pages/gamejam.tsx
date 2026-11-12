@@ -15,7 +15,7 @@ import { PixelLoader } from '@/components/layout/Pixel';
 import { useApplicationWindows } from '@/hooks/useApplicationWindows';
 import { useGameJam } from '@/hooks/useGameJam';
 import { windowSummary } from '@/lib/applicationWindow';
-import { ANSWER_KEYS, DISCIPLINES, MAX_MEMBERS, QUESTIONS, ageOf, type JamApplicationBody } from '@/lib/gameJam';
+import { ANSWER_KEYS, DISCIPLINES, MAX_MEMBERS, MIN_MEMBERS, QUESTIONS, ageOf, type JamApplicationBody } from '@/lib/gameJam';
 
 // Kurallar backend/helpers/jamInput.js'teki doğrulamayla aynı; sunucu yine de kendisi denetler.
 const URL_RE = /^https?:\/\/\S+$/i;
@@ -44,7 +44,7 @@ const schema = z.object({
         email: z.email({ message: 'Geçerli bir e-posta adresi giriniz.' }).max(254),
         phone: z.string().trim().regex(/^\+?[\d\s()-]{10,20}$/, 'Geçerli bir telefon numarası giriniz.'),
     }),
-    members: z.array(personSchema).min(1, 'En az bir ekip üyesi ekleyiniz.').max(MAX_MEMBERS),
+    members: z.array(personSchema).min(MIN_MEMBERS, `En az ${MIN_MEMBERS} ekip üyesi ekleyiniz.`).max(MAX_MEMBERS),
     answers: z.object({ teamwork: answer, scope: answer, conflict: answer, motivation: answer, feedback: answer }),
     rulesConsent: z.literal(true, { message: 'Etkinlik kurallarını onaylamanız gerekiyor.' }),
     kvkkConsent: z.literal(true, { message: 'Aydınlatma metnini onaylamanız gerekiyor.' }),
@@ -89,7 +89,7 @@ export default function GameJam() {
         defaultValues: {
             teamName: '',
             leader: { ...emptyPerson, email: '', phone: '' },
-            members: [{ ...emptyPerson }],
+            members: Array.from({ length: MIN_MEMBERS }, () => ({ ...emptyPerson })),
         },
     });
     const { register, handleSubmit, watch, formState: { errors, isSubmitting } } = form;
@@ -177,7 +177,7 @@ export default function GameJam() {
         <CardHeader>
             <CardTitle>Game Jam Başvurusu</CardTitle>
             <CardDescription>
-                2–4 kişilik takımlar halinde başvurulur. Formu takım lideri doldurur; ekip üyelerinin bilgilerini de lider girer.
+                3–4 kişilik takımlar halinde başvurulur. Formu takım lideri doldurur; ekip üyelerinin bilgilerini de lider girer.
             </CardDescription>
         </CardHeader>
     );
@@ -246,7 +246,7 @@ export default function GameJam() {
                             <div key={field.id} className="grid gap-4 rounded-md border p-4">
                                 <div className="flex items-center justify-between gap-2">
                                     <h4 className="flex items-center font-medium">{playerTag(i + 2)}Ekip üyesi</h4>
-                                    {members.fields.length > 1 && (
+                                    {members.fields.length > MIN_MEMBERS && (
                                         <Button type="button" variant="ghost" size="sm" onClick={() => members.remove(i)} className="cursor-pointer">
                                             <FontAwesomeIcon icon={faTrash} className="mr-2 h-3 w-3" />
                                             Kaldır
@@ -349,11 +349,11 @@ export default function GameJam() {
                             <span aria-hidden="true" className="ml-1 inline-block h-[0.8em] w-[0.42em] translate-y-[0.06em] bg-(--turkuaz) motion-safe:animate-blink" />
                         </h1>
                         <p className="mb-6 max-w-xl text-lg text-[#C4D9E6]">
-                            Tema açıklanır, süre başlar. 2–4 kişilik takımınla sıfırdan bir oyun geliştir: programcı, sanatçı,
+                            Tema açıklanır, süre başlar. 3–4 kişilik takımınla sıfırdan bir oyun geliştir: programcı, sanatçı,
                             oyun tasarımcısı, ses tasarımcısı ve hikâye yazarı, herkesin yeri var. Kulüp üyesi olmak gerekmez.
                         </p>
                         <ul className="mb-8 flex flex-wrap justify-center gap-2 text-sm lg:justify-start">
-                            {['2–4 kişilik takımlar', 'Formu takım lideri doldurur', appWindow ? windowSummary(appWindow) : 'Başvuru durumu yükleniyor'].map((chip) => (
+                            {['3–4 kişilik takımlar', 'Formu takım lideri doldurur', appWindow ? windowSummary(appWindow) : 'Başvuru durumu yükleniyor'].map((chip) => (
                                 <li key={chip} className="rounded-md border border-(--acik-mavi)/25 bg-white/5 px-3 py-1.5 text-[#C4D9E6]">{chip}</li>
                             ))}
                         </ul>

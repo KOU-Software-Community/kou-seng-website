@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useState } from 'react';
-import { useAuth } from './useAuth';
+import { apiFetch } from './useAuth';
 import type { ApplicationWindow } from '@/lib/applicationWindow';
 
 type UseApplicationWindowsReturn = {
@@ -25,7 +25,6 @@ export const useApplicationWindows = (): UseApplicationWindowsReturn => {
   const [windows, setWindows] = useState<Record<string, ApplicationWindow> | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const { getAuthHeader } = useAuth();
 
   // Durum isteğinin backend'de kendi limiti var ve genel limite sayılmaz (kampüs gibi
   // paylaşılan IP'de de açılır); token gerekmez.
@@ -35,7 +34,7 @@ export const useApplicationWindows = (): UseApplicationWindowsReturn => {
         // Backend askıda kalırsa sayfa "yükleniyor"da beklemesin: 10 sn'de yanıt yoksa hata sayılır
         const deadline = new Promise<never>((_, reject) => setTimeout(() => reject(new Error('zaman aşımı')), 10_000));
         const response = await Promise.race([
-          fetch(`${process.env.NEXT_PUBLIC_API_URL}/submissions/windows`, {
+          apiFetch(`${process.env.NEXT_PUBLIC_API_URL}/submissions/windows`, {
             cache: 'no-store',
             signal,
           }),
@@ -65,9 +64,9 @@ export const useApplicationWindows = (): UseApplicationWindowsReturn => {
 
   const updateWindow = async (slug: string, opensAt: string | null, closesAt: string | null) => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/submissions/windows/${slug}`, {
+      const response = await apiFetch(`${process.env.NEXT_PUBLIC_API_URL}/submissions/windows/${slug}`, {
         method: 'PATCH',
-        headers: { 'Content-Type': 'application/json', ...getAuthHeader() },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ opensAt, closesAt }),
       });
       const data = await response.json().catch(() => null);

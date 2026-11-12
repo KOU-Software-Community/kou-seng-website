@@ -28,8 +28,10 @@ const api = async (method, path, { token, body, headers } = {}) => {
     headers: { 'Content-Type': 'application/json', ...(token && { Authorization: `Bearer ${token}` }), ...headers },
     body: body === undefined ? undefined : JSON.stringify(body),
   });
-  return { status: res.status, body: await res.json().catch(() => null) };
+  return { status: res.status, body: await res.json().catch(() => null), cookies: res.headers.getSetCookie() };
 };
+// Login token'ı gövdede değil, httpOnly oturum çerezinde döner
+const sessionToken = (res) => res.cookies.join(';').match(/__Host-kouseng_session=([^;]+)/)?.[1];
 
 const step = async (name, fn) => {
   try {
@@ -86,7 +88,22 @@ await step('ilk admin KEY ile oluşturulur ve giriş yapar', async () => {
   expectStatus(await api('POST', '/users', { token: KEY, body }), 201);
   const login = await api('POST', '/auth/login', { body: { email: body.email, password: PASSWORD } });
   expectStatus(login, 200);
-  adminToken = login.body.token;
+  assert.equal(login.body.token, undefined, 'token gövdede dönmemeli');
+  const cookie = login.cookies.find((c) => c.startsWith('__Host-kouseng_session='));
+  assert.match(cookie ?? '', /HttpOnly/i);
+  assert.match(cookie, /SameSite=Strict/i);
+  assert.match(cookie, /Max-Age=3600/);
+  adminToken = sessionToken(login);
+});
+
+await step('çerezle yazma: izinli Origin 200, yabancı ya da eksik Origin 403 (CSRF)', async () => {
+  const patch = (headers) => api('PATCH', '/submissions/windows/game', {
+    body: { opensAt: null, closesAt: null }, headers: { Cookie: `__Host-kouseng_session=${adminToken}`, ...headers },
+  });
+  expectStatus(await patch({ Origin: 'http://localhost:3000' }), 200);
+  expectStatus(await patch({ Origin: 'https://evil.example' }), 403);
+  expectStatus(await patch({}), 403);
+  expectStatus(await api('GET', '/auth/me', { headers: { Cookie: `__Host-kouseng_session=${adminToken}` } }), 200);
 });
 
 await step('admin olmayan rol (ai) PATCH → 403', async () => {
@@ -94,7 +111,7 @@ await step('admin olmayan rol (ai) PATCH → 403', async () => {
   expectStatus(await api('POST', '/users', { token: adminToken, body }), 201);
   const login = await api('POST', '/auth/login', { body: { email: body.email, password: PASSWORD } });
   expectStatus(login, 200);
-  const res = await api('PATCH', '/submissions/windows/ai', { token: login.body.token, body: { opensAt: null, closesAt: null } });
+  const res = await api('PATCH', '/submissions/windows/ai', { token: sessionToken(login), body: { opensAt: null, closesAt: null } });
   expectStatus(res, 403);
 });
 

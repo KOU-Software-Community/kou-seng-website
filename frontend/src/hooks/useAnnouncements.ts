@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { useAuth } from './useAuth';
+import { apiFetch } from './useAuth';
 
 // API'den dönecek olan duyuru tipini tanımlayalım
 export interface Announcement {
@@ -47,7 +47,6 @@ interface ApiResponse {
 }
 
 export default function useAnnouncements(limit: number = 10) {
-  const { getAuthHeader } = useAuth();
   const [announcements, setAnnouncements] = useState<Announcement[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
@@ -70,7 +69,7 @@ export default function useAnnouncements(limit: number = 10) {
     try {
       const searchParam = searchTerm ? `&search=${encodeURIComponent(searchTerm)}` : '';
       const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/announcements?page=${page}&limit=${limit}${searchParam}`;
-      const response = await fetch(apiUrl);
+      const response = await apiFetch(apiUrl);
       
       if (!response.ok) {
         throw new Error('Duyurular yüklenirken bir hata oluştu.');
@@ -143,12 +142,9 @@ export default function useAnnouncements(limit: number = 10) {
     
     try {
       const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/announcements`;
-      const response = await fetch(apiUrl, {
+      const response = await apiFetch(apiUrl, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          ...getAuthHeader()
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
       });
       
@@ -176,12 +172,9 @@ export default function useAnnouncements(limit: number = 10) {
     
     try {
       const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/announcements/${id}`;
-      const response = await fetch(apiUrl, {
+      const response = await apiFetch(apiUrl, {
         method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          ...getAuthHeader()
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
       });
       
@@ -209,11 +202,8 @@ export default function useAnnouncements(limit: number = 10) {
     
     try {
       const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/announcements/${id}`;
-      const response = await fetch(apiUrl, {
+      const response = await apiFetch(apiUrl, {
         method: 'DELETE',
-        headers: {
-          ...getAuthHeader()
-        }
       });
       
       if (!response.ok) {

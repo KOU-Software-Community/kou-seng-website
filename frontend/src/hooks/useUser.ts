@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback } from 'react';
-import { useAuth } from './useAuth';
+import { useAuth, apiFetch } from './useAuth';
 
 export type User = {
   _id: string;
@@ -47,7 +47,7 @@ interface UseUserReturn {
  * @returns Kullanıcı CRUD işlemleri ve durum bilgileri
  */
 export const useUser = (): UseUserReturn => {
-  const { getAuthHeader } = useAuth();
+  const { isAuthenticated } = useAuth();
   const [users, setUsers] = useState<User[]>([]);
   const [isFetchingUsers, setIsFetchingUsers] = useState<boolean>(false);
   const [isCreating, setIsCreating] = useState<boolean>(false);
@@ -65,17 +65,15 @@ export const useUser = (): UseUserReturn => {
     setErrorMessage(null);
 
     try {
-      const auth = getAuthHeader();
-      if (!auth?.Authorization) {
+      if (!isAuthenticated) {
         setUsers([]);
         return;
       }
 
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users`, {
+      const response = await apiFetch(`${process.env.NEXT_PUBLIC_API_URL}/users`, {
         method: 'GET',
         headers: {
           Accept: 'application/json',
-          ...auth,
         },
       });
 
@@ -93,7 +91,7 @@ export const useUser = (): UseUserReturn => {
     } finally {
       setIsFetchingUsers(false);
     }
-  }, [getAuthHeader, isFetchingUsers]);
+  }, [isAuthenticated, isFetchingUsers]);
 
   /**
    * Yeni kullanıcı oluştur
@@ -105,16 +103,14 @@ export const useUser = (): UseUserReturn => {
     setErrorMessage(null);
 
     try {
-      const auth = getAuthHeader();
-      if (!auth?.Authorization) {
+      if (!isAuthenticated) {
         throw new Error('Yetkilendirme bulunamadı');
       }
 
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users`, {
+      const response = await apiFetch(`${process.env.NEXT_PUBLIC_API_URL}/users`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          ...auth,
         },
         body: JSON.stringify(data),
       });
@@ -146,16 +142,14 @@ export const useUser = (): UseUserReturn => {
     setErrorMessage(null);
 
     try {
-      const auth = getAuthHeader();
-      if (!auth?.Authorization) {
+      if (!isAuthenticated) {
         throw new Error('Yetkilendirme bulunamadı');
       }
 
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/${id}`, {
+      const response = await apiFetch(`${process.env.NEXT_PUBLIC_API_URL}/users/${id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
-          ...auth,
         },
         body: JSON.stringify(data),
       });
@@ -187,16 +181,14 @@ export const useUser = (): UseUserReturn => {
     setErrorMessage(null);
 
     try {
-      const auth = getAuthHeader();
-      if (!auth?.Authorization) {
+      if (!isAuthenticated) {
         throw new Error('Yetkilendirme bulunamadı');
       }
 
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/${id}`, {
+      const response = await apiFetch(`${process.env.NEXT_PUBLIC_API_URL}/users/${id}`, {
         method: 'DELETE',
         headers: {
           Accept: 'application/json',
-          ...auth,
         },
       });
 

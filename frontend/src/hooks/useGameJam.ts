@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback } from 'react';
-import { useAuth } from './useAuth';
+import { apiFetch } from './useAuth';
 import type { JamApplication, JamApplicationBody } from '@/lib/gameJam';
 
 type Result = { success: boolean; message: string };
@@ -10,11 +10,10 @@ const API = () => `${process.env.NEXT_PUBLIC_API_URL}/gamejam`;
 
 /** Game jam başvurusu (herkese açık) ve admin işlemleri: liste, CSV, silme. */
 export const useGameJam = () => {
-  const { getAuthHeader } = useAuth();
 
   const submit = async (body: JamApplicationBody): Promise<Result & { id?: string }> => {
     try {
-      const response = await fetch(API(), {
+      const response = await apiFetch(API(), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
@@ -33,7 +32,7 @@ export const useGameJam = () => {
   // Admin sayfası bunu effect içinde çağırıyor; kimliği sabit kalmalı
   const list = useCallback(async (): Promise<Result & { data: JamApplication[] }> => {
     try {
-      const response = await fetch(API(), { headers: getAuthHeader(), cache: 'no-store' });
+      const response = await apiFetch(API(), { cache: 'no-store' });
       const data = await response.json().catch(() => null);
       if (!response.ok || !Array.isArray(data?.data)) {
         return { success: false, message: data?.message || 'Başvurular alınamadı.', data: [] };
@@ -42,12 +41,12 @@ export const useGameJam = () => {
     } catch {
       return { success: false, message: 'Başvurular alınamadı. Bağlantınızı kontrol edin.', data: [] };
     }
-  }, [getAuthHeader]);
+  }, []);
 
   /** Başarılıysa null, değilse hata mesajı. */
   const downloadCsv = async (filename: string): Promise<string | null> => {
     try {
-      const response = await fetch(`${API()}/export`, { headers: getAuthHeader() });
+      const response = await apiFetch(`${API()}/export`);
       if (!response.ok) {
         const data = await response.json().catch(() => null);
         return data?.message || 'CSV indirilemedi.';
@@ -69,9 +68,9 @@ export const useGameJam = () => {
   /** Sunucu, kayıt sayısı expectedCount'la tutmazsa hiçbir şey silmeden 409 döner. */
   const purge = async (expectedCount: number): Promise<Result> => {
     try {
-      const response = await fetch(`${API()}/purge`, {
+      const response = await apiFetch(`${API()}/purge`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', ...getAuthHeader() },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ expectedCount }),
       });
       const data = await response.json().catch(() => null);

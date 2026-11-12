@@ -117,9 +117,14 @@ Express.js, routes → controllers → models; ayrıca `middlewares/`, `helpers/
 Route prefix'leri: `/health`, `/auth`, `/users`, `/announcements`, `/contact`,
 `/rss`, `/submissions`, `/mail`, `/mail/queue`.
 
-Kimlik doğrulama: `POST /auth/login` JWT döndürür, frontend token'ı
-localStorage'da saklar, korunan istekler `Authorization: Bearer <token>`
-gönderir. `middlewares/authMiddleware.js`: `protect`, `adminOnly`,
+Kimlik doğrulama: `POST /auth/login` JWT'yi `__Host-kouseng_session` adlı
+`HttpOnly; Secure; SameSite=Strict` çereze yazar, ömrü sabit 1 saat
+(`JWT_EXPIRES_IN` artık yok). Frontend token'ı göremez; localStorage'da yalnızca
+gizli olmayan `auth_session=1` işareti var ve API istekleri `apiFetch`
+(`hooks/useAuth.ts`, `credentials: 'include'`) ile gider. CSRF: çerezle gelen
+yazma isteğinin `Origin`'i `CORS_ALLOWED_ORIGINS`'te olmalı (`isCrossSiteWrite`).
+Betikler ve ilk admin `KEY`'i `Authorization: Bearer <token>` ile gelir.
+`middlewares/authMiddleware.js`: `protect`, `adminOnly`,
 `roleOnlyForCategory`, `roleOnlyForSubmission`, `sponsorOrAdmin`. Şifre
 değişince `User.passwordChangedAt` yazılır; ondan önce verilmiş token'lar
 `protect`'te 401 alır (panel çıkış yaptırıp yeniden giriş ister).

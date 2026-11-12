@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useAuth } from './useAuth';
+import { useAuth, apiFetch } from './useAuth';
 
 export type SubmissionResponse = {
   success: boolean;
@@ -108,7 +108,7 @@ export const useSubmissions = (): UseSubmissionsReturn => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const { getAuthHeader } = useAuth();
+  const { isAuthenticated } = useAuth();
 
   // Listing state
   const [isFetchingSubmissions, setIsFetchingSubmissions] = useState<boolean>(false);
@@ -146,7 +146,7 @@ export const useSubmissions = (): UseSubmissionsReturn => {
         ? `${process.env.NEXT_PUBLIC_API_URL}/submissions/general`
         : `${process.env.NEXT_PUBLIC_API_URL}/submissions/technical/${slug}`;
 
-      const response = await fetch(apiUrl, {
+      const response = await apiFetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -202,8 +202,7 @@ export const useSubmissions = (): UseSubmissionsReturn => {
     setSubmissionsError(null);
 
     try {
-      const auth = getAuthHeader();
-      if (!auth?.Authorization) {
+      if (!isAuthenticated) {
         setSubmissions([]);
         setPagination({ count: 0, page: 1, limit: params.limit ?? 20, totalPages: 0 });
         return {
@@ -225,11 +224,10 @@ export const useSubmissions = (): UseSubmissionsReturn => {
       if (typeof params.page === 'number') url.searchParams.set('page', String(params.page));
       if (typeof params.limit === 'number') url.searchParams.set('limit', String(params.limit));
 
-      const response = await fetch(url.toString(), {
+      const response = await apiFetch(url.toString(), {
         method: 'GET',
         headers: {
           Accept: 'application/json',
-          ...auth,
         },
       });
 
@@ -286,8 +284,7 @@ export const useSubmissions = (): UseSubmissionsReturn => {
     setUpdateError(null);
 
     try {
-      const auth = getAuthHeader();
-      if (!auth?.Authorization) {
+      if (!isAuthenticated) {
         throw new Error('Yetkilendirme bulunamadı');
       }
 
@@ -296,11 +293,10 @@ export const useSubmissions = (): UseSubmissionsReturn => {
       if (typeof body.reviewNotes !== 'undefined') payload.reviewNotes = body.reviewNotes;
 
       const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/submissions/${id}`;
-      const response = await fetch(apiUrl, {
+      const response = await apiFetch(apiUrl, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
-          ...auth,
         },
         body: JSON.stringify(payload),
       });
@@ -341,7 +337,7 @@ export const useSubmissions = (): UseSubmissionsReturn => {
       if (params.type) url.searchParams.set('type', params.type);
       if (params.category) url.searchParams.set('category', params.category);
 
-      const response = await fetch(url.toString(), { headers: getAuthHeader() });
+      const response = await apiFetch(url.toString(), {});
       if (!response.ok) {
         const data = await response.json().catch(() => null);
         return data?.message || 'Yedek indirilemedi.';
@@ -370,9 +366,9 @@ export const useSubmissions = (): UseSubmissionsReturn => {
     expectedCount: number
   ): Promise<Pick<SubmissionResponse, 'success' | 'message'>> => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/submissions/purge`, {
+      const response = await apiFetch(`${process.env.NEXT_PUBLIC_API_URL}/submissions/purge`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', ...getAuthHeader() },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ scope, expectedCount }),
       });
       const data = await response.json().catch(() => null);

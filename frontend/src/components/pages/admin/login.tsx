@@ -31,7 +31,7 @@ export default function AdminLogin() {
   // bir adrese çözebileceği biçimlere (//, /\, görünmez karakter) yönlendirilmez.
   const requestedRedirect = searchParams.get('redirect') ?? '';
   const redirectTo = /^\/admin(\/[\w-]+)*\/?$/.test(requestedRedirect) ? requestedRedirect : '/admin/dashboard';
-  const { login, isAuthenticating, errorMessage, token, getAuthDetail, logout } = useAuth();
+  const { login, isAuthenticating, errorMessage, isAuthenticated, getAuthDetail, logout } = useAuth();
   const [error, setError] = useState<string | null>(
     searchParams.get('yetkisiz') === '1' ? 'Bu hesabın yönetim paneline erişimi yok.' : null,
   );
@@ -55,9 +55,9 @@ export default function AdminLogin() {
     router.push(redirectTo);
   };
 
-  // Eğer token varsa, sayfa açılışında doğrula
+  // Oturum işareti varsa, sayfa açılışında doğrula
   useEffect(() => {
-    if (!token) return;
+    if (!isAuthenticated) return;
     let cancelled = false;
     setIsCheckingAuth(true);
     (async () => {
@@ -74,7 +74,7 @@ export default function AdminLogin() {
     return () => {
       cancelled = true;
     };
-  }, [token, getAuthDetail, logout, router]);
+  }, [isAuthenticated, getAuthDetail, logout, router]);
 
   if (isCheckingAuth) {
     return (

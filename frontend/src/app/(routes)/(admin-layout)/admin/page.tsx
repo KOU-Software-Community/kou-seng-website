@@ -2,19 +2,13 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { hasSession } from '@/hooks/useAuth';
 
 export default function AdminIndexPage() {
     const router = useRouter();
 
     useEffect(() => {
-        let token: string | null = null;
-        try {
-            token = window.localStorage.getItem('auth_token');
-        } catch {
-            // localStorage erişilemez
-        }
-
-        if (token) {
+        if (hasSession()) {
             router.replace('/admin/dashboard');
         } else {
             router.replace('/admin/login');

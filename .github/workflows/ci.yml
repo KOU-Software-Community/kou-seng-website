@@ -65,6 +65,8 @@ jobs:
       # oluşturup giriş yapıyor. KEY en az 32 karakter.
       JWT_SECRET: ci-jwt-secret
       KEY: ci-ilk-admin-anahtari-0123456789abcdef
+      # windows-smoke çerezli yazma isteğinin Origin kontrolünü (CSRF) bununla sınar.
+      CORS_ALLOWED_ORIGINS: http://localhost:3000
 
     steps:
     - uses: actions/checkout@v5

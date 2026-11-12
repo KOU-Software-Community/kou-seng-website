@@ -3,7 +3,7 @@
 import React from 'react';
 import AdminSidebar from '@/components/layout/AdminSidebar';
 import { Sidebar, SidebarInset, SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
-import useAuth, { type AuthUser } from '@/hooks/useAuth';
+import useAuth, { hasSession, type AuthUser } from '@/hooks/useAuth';
 import { usePathname, useRouter } from 'next/navigation';
 import { MailQueueProvider } from '@/contexts/MailQueueContext';
 
@@ -19,15 +19,9 @@ export default function AdminDashboardLayout({ children }: DashboardLayoutProps)
   const [isChecking, setIsChecking] = React.useState(true);
   const [hasStoredToken, setHasStoredToken] = React.useState<boolean | null>(null);
 
-  // İlk yüklemede localStorage'da token var mı bak
+  // İlk yüklemede oturum işareti var mı bak (token httpOnly çerezde)
   React.useEffect(() => {
-    if (typeof window === 'undefined') return;
-    try {
-      const stored = window.localStorage.getItem('auth_token');
-      setHasStoredToken(Boolean(stored));
-    } catch {
-      setHasStoredToken(false);
-    }
+    setHasStoredToken(hasSession());
   }, []);
 
   // Auth doğrulama akışı

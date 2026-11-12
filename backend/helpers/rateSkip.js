@@ -1,12 +1,13 @@
 import jwt from 'jsonwebtoken';
 import User from "../models/User.js";
 import logger from "./logger.js";
-import { issuedBeforePasswordChange } from "../middlewares/authMiddleware.js";
+import { issuedBeforePasswordChange, readToken } from "../middlewares/authMiddleware.js";
 
 
 const rateSkip = async (req) => {
-    if (req.headers['authorization']) {
-        return rateSkipAuth(req.headers['authorization']);
+    const credentials = readToken(req);
+    if (credentials) {
+        return rateSkipAuth(credentials.token);
     }
     return rateSkipIP(req);
 }
@@ -55,20 +56,11 @@ const rateSkipIP = async (req) => {
 
 /**
  * Rate limiter skip function - skips rate limiting for authenticated users
- * @param {string} authHeader - Authorization header value
+ * @param {string} token - Bearer başlığından ya da oturum çerezinden gelen JWT
  * @returns {boolean} - true if user is authenticated (skip rate limiting), false otherwise
  */
-const rateSkipAuth = async (authHeader) => {
+const rateSkipAuth = async (token) => {
     try {
-        if (!authHeader || !authHeader.startsWith('Bearer ')) {
-            return false;
-        }
-
-        const token = authHeader.split(' ')[1];
-        
-        if (!token) {
-            return false;
-        }
 
         // Verify the JWT token
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
